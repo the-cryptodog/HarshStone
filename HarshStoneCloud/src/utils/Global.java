@@ -59,4 +59,10 @@ public class Global {
     //移動量
     public static final int MOVERANGE = 50;
 
+
+    
+    //關卡數量
+    public static final int STAGENUMBER = 50;
+
+
 }

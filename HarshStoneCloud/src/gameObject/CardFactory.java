@@ -64,10 +64,7 @@ public class CardFactory {
         ArrayList<CardData> carddata = new ArrayList<CardData>();
         for(int i = 0; i < str.size();i++){
             
-        
-        
-        }
-        
+        }     
         System.out.print("123");
         System.out.print("789");       
         System.out.print("abc");      

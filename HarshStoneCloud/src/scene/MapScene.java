@@ -7,7 +7,7 @@ package scene;
 
 import Controller.SceneController;
 import gameObject.MapIcon.MapPath;
-import gameObject.MapIcon.StageIcon;
+import gameObject.MapIcon.redCross;
 import io.CommandSolver;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -23,12 +23,16 @@ public class MapScene extends Scene {
 
     private BufferedImage map;
     private BufferedImage cover;
-    private int stage;
+    private redCross[] redCross;
+    private int[] redCrossSetter;
+    private int stage; 
+    
 
     public MapScene(SceneController scenecontroller) {
         super(scenecontroller);
         stage = 3;
         System.out.print("stage=" + stage);
+    
         map = irc.tryGetImage("/resources/Map/map.png");
         cover = irc.tryGetImage("/resources/Map/mapOrigin.png");
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
@@ -43,7 +47,7 @@ public class MapScene extends Scene {
 
                 if (state == CommandSolver.MouseState.CLICKED) {
                     System.out.println("CLick");
-//                    if (socerer .isCollision(e.getX(), e.getY())) {
+                    if (socerer.isCollision(e.getX(), e.getY())) {
                         scenecontroller.changeScene(new MainScene(scenecontroller));
 //                      startPressed = true;
 //                    scenecontroller.changeScene(new MainScene(scenecontroller));
@@ -94,6 +98,9 @@ public class MapScene extends Scene {
                 break;
             case 3:
                 g.drawImage(cover, 982, 0, 1920, 1080, 982, 0, 1920, 1080, null);
+                break;
+            case 4:
+                g.drawImage(cover, 1305, 0, 1920, 1080, 1305, 0, 1920, 1080, null);
                 break;
         }
     }
