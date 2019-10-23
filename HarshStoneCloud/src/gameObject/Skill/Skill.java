@@ -44,8 +44,13 @@ public class Skill extends GameObject{
         
     }
     public boolean getSkillend(){
+        if(skillend == true){
+            skillend = false;
+            return true;
+        }
         return skillend;
     }
+    
     public void setSkillend(boolean skillend){
         this.skillend = skillend;
     }

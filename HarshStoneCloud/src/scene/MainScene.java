@@ -48,8 +48,8 @@ public class MainScene extends Scene {
     private int y1;
     private int xdelta;
     private int ydelta;
-    private 全力迎戰 card1;
-    private 旋風斬 card2;
+    private Card card1;
+    private Card card2;
     private Card card3;
     private boolean cardclicked;
     private Card selectedcard;
@@ -75,13 +75,10 @@ public class MainScene extends Scene {
         cardclicked = false;
         selectedcard = null;
         discardcard = null;
-        card1 = new 全力迎戰(30, 20, 141, 195, "全力迎戰", 3);
-        card2 = new 旋風斬(181, 20, 141, 195, "旋風斬", 1);
-        card3 = new Card(30, 700, 150, 210, "破解系統", 2);
-        card3 = new DamageEffect(card3, 5);
-        
         cardfactory = new CardFactory();
-        
+        card1 = cardfactory.genCard(0);
+        card2 = cardfactory.genCard(1);
+        card3 = cardfactory.genCard(2);
         
         deck = new ArrayList();
         deck.add(card1);
