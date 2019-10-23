@@ -61,6 +61,7 @@ public class MainScene extends Scene {
     private DelayCounter delaycounter;
     private int selectedmonster;
     private Skill skill;
+
     
     private CardFactory cardfactory;
     
@@ -150,6 +151,7 @@ public class MainScene extends Scene {
                                 xdelta = deck.get(i).getDeltaX(e.getX());
                                 ydelta = deck.get(i).getDeltaY(e.getY());
                                 deck.get(i).setClicked(true);
+                                sceneEnd();
                             }
                         }
                     }

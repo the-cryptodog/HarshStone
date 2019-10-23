@@ -49,7 +49,7 @@ public class SelectJobScene extends Scene {
 //                      startPressed = true;
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
                     }
-                    if (socerer .isCollision(e.getX(), e.getY())) {
+                    if (warrior .isCollision(e.getX(), e.getY())) {
                         scenecontroller.changeScene(new  MapScene(scenecontroller));
 //                      startPressed = true;
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
