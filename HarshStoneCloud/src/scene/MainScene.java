@@ -9,6 +9,7 @@ import Controller.ImageResourceController;
 import Controller.SceneController;
 import gameObject.Button.StartButton;
 import gameObject.Card;
+import gameObject.CardFactory;
 import gameObject.Cultist;
 import gameObject.DamageEffect;
 import gameObject.Hero.Hero;
@@ -60,6 +61,9 @@ public class MainScene extends Scene {
     private DelayCounter delaycounter;
     private int selectedmonster;
     private Skill skill;
+    
+    private CardFactory cardfactory;
+    
 
     public MainScene(SceneController scenecontroller) {
         super(scenecontroller);
@@ -72,11 +76,16 @@ public class MainScene extends Scene {
         card2 = new 旋風斬(181, 20, 141, 195, "旋風斬", 1);
         card3 = new Card(30, 700, 150, 210, "破解系統", 2);
         card3 = new DamageEffect(card3, 5);
-
+        
+        cardfactory = new CardFactory();
+        
+        
         deck = new ArrayList();
         deck.add(card1);
         deck.add(card2);
         deck.add(card3);
+        deck.add(cardfactory.genCard(0));
+        
         next = new StartButton(1200, 800, 200, 100, "下一步");
         hero = new Hero(Global.HEROX, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         orc = new Monster(Global.MONSTERX, 50, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 100, 6);

@@ -5,18 +5,29 @@
  */
 package gameObject;
 
+import gameObject.Hero.Hero;
+import gameObject.Monster.Monster;
+
 /**
  *
  * @author frank61003
  */
 public class WeakEffect extends CardEffect{
     private Card card;
-    public WeakEffect(Card card) {
+    protected int weakstate;
+    
+    public WeakEffect(Card card,int weakstate) {
         super(card);
         this.card = card;
+        this.weakstate = weakstate;
     }
     @Override
     public String toString() {
         return card.toString()+ "，造成虛弱";
+    }
+
+    @Override
+    public void action(Hero hero, Monster monster) {
+        System.out.println( monster.name + "獲得虛弱" );
     }
 }

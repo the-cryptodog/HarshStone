@@ -58,5 +58,9 @@ public class Global {
     
     //移動量
     public static final int MOVERANGE = 50;
-
+    
+    
+    //Card 
+    public static final int CARDX = 141;
+    public static final int CARDY = 195;
 }
