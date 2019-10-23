@@ -23,6 +23,7 @@ import io.CommandSolver;
 import io.CommandSolver.MouseCommandListener;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -238,6 +239,8 @@ public class MainScene extends Scene {
         for (int i = 0; i < deck.size(); i++) {
             deck.get(i).paint(g);
         }
+//        Graphics2D g2 = (Graphics2D) g;
+//        g2.drawString("There is no spoon.", 200, 400);
 
     }
 

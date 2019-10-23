@@ -62,6 +62,7 @@ public class Skill extends GameObject{
         }
         if(act == 5){
            skillend = true;
+           act = 0;
         }
         
     }
