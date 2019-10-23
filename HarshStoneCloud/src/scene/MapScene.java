@@ -47,10 +47,11 @@ public class MapScene extends Scene {
 
                 if (state == CommandSolver.MouseState.CLICKED) {
                     System.out.println("CLick");
-                    if (socerer.isCollision(e.getX(), e.getY())) {
-                        scenecontroller.changeScene(new MainScene(scenecontroller));
+//                    if (socerer.isCollision(e.getX(), e.getY())) {
+//                        scenecontroller.changeScene(new MainScene(scenecontroller));
+//                }
 //                      startPressed = true;
-//                    scenecontroller.changeScene(new MainScene(scenecontroller));
+                    scenecontroller.changeScene(new MainScene(scenecontroller));
                 }
 //                    if (socerer .isCollision(e.getX(), e.getY())) {
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));

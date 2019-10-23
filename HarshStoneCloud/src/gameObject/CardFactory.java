@@ -86,7 +86,7 @@ public class CardFactory {
             card = new DefenceEffect(card, Integer.valueOf(temp[3]));
         }
         if(Integer.valueOf(temp[4]) != 0){
-            card = new DefenceEffect(card, Integer.valueOf(temp[4]));
+            card = new WeakEffect(card, Integer.valueOf(temp[4]));
         }
     
         return card;
