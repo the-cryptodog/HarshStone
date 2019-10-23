@@ -60,9 +60,17 @@ public class Global {
     public static final int MOVERANGE = 50;
 
 
+
     
     //關卡數量
     public static final int STAGENUMBER = 50;
 
+
+
+    
+    
+    //Card 
+    public static final int CARDX = 141;
+    public static final int CARDY = 195;
 
 }

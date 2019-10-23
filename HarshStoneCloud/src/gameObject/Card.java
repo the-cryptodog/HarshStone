@@ -34,6 +34,9 @@ public class Card extends GameObject{
 //        image = irc.getInstance().tryGetImage(PathBuilder.getImage(path));
     }
     
+    
+    
+    
     public ImageResourceController getIRC() {
         return irc;
     }

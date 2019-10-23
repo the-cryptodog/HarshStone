@@ -12,6 +12,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import utils.Global;
 
 /**
  *
@@ -24,21 +25,18 @@ public class CardFactory {
         protected int cost;
         protected BufferedImage image;
         protected String path;
-        protected int x;
-        protected int y;
-        protected int height;
-        protected int width;
         protected String name;
+        protected int serialnumber;
+    
+    
     }
     
     private BufferedReader br;
-    private ArrayList<CardData> carddata;
+    private ArrayList<String> carddata;
     
     
     public CardFactory(){
-       
-    
-    
+       carddata = readCardData();
     
     }
     
@@ -60,21 +58,39 @@ public class CardFactory {
         return str;
     }
     
-    public ArrayList<CardData> spiltCardData(ArrayList<String> str){
-        ArrayList<CardData> carddata = new ArrayList<CardData>();
-        for(int i = 0; i < str.size();i++){
-            
-        }     
-        System.out.print("123");
-        System.out.print("789");       
-        System.out.print("abc");      
-        System.out.print("def");  
-        return carddata;
+
+    
+
+//    public ArrayList<CardData> spiltCardData(ArrayList<String> str){
+//        ArrayList<CardData> carddata = new ArrayList<CardData>();
+//        for(int i = 0; i < str.size();i++){
+//            String[] temp = str.get(i).split(",");
+//            
+//        
+//        }
+//        
+//        
+//        return carddata;
+//    }
+
+    
+    
+    //generate card
+    public Card genCard(int serialnumber){
+        String[] temp = carddata.get(serialnumber).split(",");
+        Card card = new Card(0,0,Global.CARDX,Global.CARDY,temp[1],Integer.valueOf(temp[5]));
+        if(Integer.valueOf(temp[2]) != 0){
+            card = new DamageEffect(card, Integer.valueOf(temp[2]));
+        }
+        if(Integer.valueOf(temp[3]) != 0){
+            card = new DefenceEffect(card, Integer.valueOf(temp[3]));
+        }
+        if(Integer.valueOf(temp[4]) != 0){
+            card = new DefenceEffect(card, Integer.valueOf(temp[4]));
+        }
+    
+        return card;
+    
     }
-    
-    
-    
-    
-    
     
 }
