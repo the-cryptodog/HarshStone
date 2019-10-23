@@ -16,26 +16,30 @@ import values.ImagePath;
  * @author User
  */
 public class redCross extends Button {
-    
-    private int x;
-    private int y;
-    protected boolean stagePassed;
+
+    protected boolean isClicked;
     protected BufferedImage redCross;
 
     public redCross(int x, int y, int width, int height, String name) {
         super(x, y, width, height, name);
-        stagePassed = false;
-        this.redCross = irc.getInstance().tryGetImage(PathBuilder.getButton(ImagePath.REDCROSS));
+        isClicked = true;
+        this.redCross = irc.getInstance().tryGetImage(PathBuilder.getMap(ImagePath.REDCROSS));
     }
 
-    public void cordSetter(int x,int y ) {
-        this.x = x;
-        this.y = y;
+    public void setClick() {
+        this.isClicked = true;
     }
 
     @Override
     public void paint(Graphics g) {
-        if(isclicked && stagePassed)
-        g.drawImage(redCross, x, y, width, height, null);
+        if (isClicked) {
+            g.drawImage(redCross, x, y, width, height, null);
+        }
     }
+    @Override
+    public String toString(){
+      String str ="";
+      return str+= x +" "+ y ;
+    }
+    
 }
