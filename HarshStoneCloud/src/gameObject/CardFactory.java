@@ -79,6 +79,7 @@ public class CardFactory {
     public Card genCard(int serialnumber){
         String[] temp = carddata.get(serialnumber).split(",");
         Card card = new Card(0,0,Global.CARDX,Global.CARDY,temp[1],Integer.valueOf(temp[5]));
+         
         if(Integer.valueOf(temp[2]) != 0){
             card = new DamageEffect(card, Integer.valueOf(temp[2]));
         }
@@ -88,7 +89,7 @@ public class CardFactory {
         if(Integer.valueOf(temp[4]) != 0){
             card = new WeakEffect(card, Integer.valueOf(temp[4]));
         }
-    
+       
         return card;
     
     }

@@ -12,6 +12,7 @@ import gameObject.Card;
 import gameObject.CardFactory;
 import gameObject.Cultist;
 import gameObject.DamageEffect;
+import gameObject.DefenceEffect;
 import gameObject.Hero.Hero;
 import gameObject.Monster.Monster;
 import gameObject.Orc;
@@ -85,6 +86,8 @@ public class MainScene extends Scene {
         deck.add(card2);
         deck.add(card3);
         deck.add(cardfactory.genCard(0));
+        
+        deck.add(new DefenceEffect(new DamageEffect(new Card(40, 700, 150, 210, "破解系統", 2),2),3));
         
         next = new StartButton(1200, 800, 200, 100, "下一步");
         hero = new Hero(Global.HEROX, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);

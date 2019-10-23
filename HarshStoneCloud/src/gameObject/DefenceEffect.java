@@ -29,6 +29,7 @@ public class DefenceEffect extends CardEffect{
     
     @Override
     public void action(Hero hero, Monster monster) {
+        card.action(hero, monster);
         System.out.println("獲得防禦力" + defence);
     }
 }

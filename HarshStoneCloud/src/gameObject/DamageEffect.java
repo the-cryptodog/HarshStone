@@ -30,6 +30,7 @@ public class DamageEffect extends CardEffect {
 
     @Override
     public void action(Hero hero, Monster monster) {
+        card.action(hero, monster);
         System.out.println("最初血量" + monster.gethealth());
         monster.sethealth(monster.gethealth() - damage);
         System.out.println("傷害" + damage);

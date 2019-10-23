@@ -11,6 +11,7 @@ import Controller.PathBuilder;
 import gameObject.Hero.Hero;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import values.ImagePath;
 
 /**
@@ -23,14 +24,13 @@ public class Card extends GameObject{
     protected int cost;
     protected BufferedImage image;
     protected String path;
-
+    
     
     public Card(int x, int y, int width, int height, String name, int cost) {
         super(x, y, width, height, name);
         this.cost = cost;
         description= "";
         clicked = false;
-        
 //        image = irc.getInstance().tryGetImage(PathBuilder.getImage(path));
     }
     
@@ -52,7 +52,6 @@ public class Card extends GameObject{
     }
     
     
-    
     public void setClicked(boolean x){
         clicked = x;
     }
@@ -62,6 +61,7 @@ public class Card extends GameObject{
     }
     
     public void action(Hero hero, Monster monster){
+        
     }
     
     public void move(){
@@ -85,7 +85,7 @@ public class Card extends GameObject{
     
     
     public void paint(Graphics g){
-        g.drawImage(irc.getInstance().tryGetImage(PathBuilder.getImage(ImagePath.破解系統)), x, y, width, height, null);
+        g.drawImage(irc.getInstance().tryGetImage(PathBuilder.getImage("/"+name+".png")), x, y, width, height, null);
     
     }
     

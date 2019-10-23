@@ -21,8 +21,6 @@ public abstract class CardEffect extends Card{
     }
     
     public void action(Hero hero, Monster monster){
-        
-    
     
     }
     
