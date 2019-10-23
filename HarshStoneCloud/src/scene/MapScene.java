@@ -29,15 +29,15 @@ public class MapScene extends Scene {
     private ArrayList<redCross> redCrossList;
     private int currentStage;
     private int[][] redCrossSetter = {{435, 505},
-    /*{x座標/y座標} */ {695, 344}, {695, 618},
-    {982, 330}, {982, 520}, {982, 678},
-    {1305, 342}, {1305, 606},
-    {1464, 552}};
+    /*{x座標/y座標} */ {645, 335}, {645, 610},
+    {936, 310}, {936, 500}, {931, 658},
+    {1235, 327}, {1225,596},
+    {1436, 532}};
 
     public MapScene(SceneController scenecontroller) {
         super(scenecontroller);
 
-        currentStage = 4;
+        currentStage = 0;
         System.out.println("stage=" + currentStage);
         redCrossList = new ArrayList<redCross>();
 //        redCrossList.add(new redCross(455,505,50,50,"ddddd"));
@@ -123,7 +123,7 @@ public class MapScene extends Scene {
                 g.drawImage(cover, 982, 0, 1920, 1080, 982, 0, 1920, 1080, null);
                 break;
             case 4:
-                g.drawImage(cover, 1305, 0, 1920, 1080, 1305, 0, 1920, 1080, null);
+                g.drawImage(cover, 1285, 0, 1920, 1080, 1275, 0, 1920, 1080, null);
                 break;
         }
     }
