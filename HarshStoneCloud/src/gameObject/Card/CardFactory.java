@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gameObject;
+package gameObject.Card;
 
+import gameObject.Card.Card;
 import Controller.ImageResourceController;
+import gameObject.DamageEffect;
+import gameObject.DefenceEffect;
+import gameObject.WeakEffect;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;

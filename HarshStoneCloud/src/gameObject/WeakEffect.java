@@ -5,6 +5,8 @@
  */
 package gameObject;
 
+import gameObject.Card.CardEffect;
+import gameObject.Card.Card;
 import gameObject.Hero.Hero;
 import gameObject.Monster.Monster;
 

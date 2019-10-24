@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gameObject;
+package gameObject.Card;
 
 import gameObject.Monster.Monster;
 import Controller.ImageResourceController;
 import Controller.PathBuilder;
+import gameObject.GameObject;
 import gameObject.Hero.Hero;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -31,6 +32,7 @@ public class Card extends GameObject{
         this.cost = cost;
         description= "";
         clicked = false;
+    
          image = irc.getInstance().tryGetImage(PathBuilder.getImage("/"+name+".png"));
     }
     

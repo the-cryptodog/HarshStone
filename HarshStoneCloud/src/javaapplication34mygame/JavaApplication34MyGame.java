@@ -5,7 +5,7 @@
  */
 package javaapplication34mygame;
 
-import gameObject.Card;
+import gameObject.Card.Card;
 import gameObject.DamageEffect;
 import gameObject.DefenceEffect;
 import gameObject.Hero.Hero;

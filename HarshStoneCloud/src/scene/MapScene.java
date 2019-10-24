@@ -127,6 +127,7 @@ public class MapScene extends Scene {
 
     @Override
     public void sceneUpdate() {
+        
     }
 
     @Override

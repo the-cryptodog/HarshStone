@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gameObject;
+package gameObject.Card;
 
+import gameObject.Card.Card;
 import java.util.ArrayList;
 
 /**
@@ -26,6 +27,8 @@ public class CardDeck {
         cards = new ArrayList<Card>();
         cardfactory = new CardFactory();
     }
+    
+    
     
     
     
