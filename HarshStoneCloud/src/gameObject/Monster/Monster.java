@@ -34,7 +34,6 @@ public class Monster extends GameObject{
     protected MonsterHelper monsterhelper;
     protected DelayCounter delaycounter;
     protected int delay;
-    protected Timer timer;
     protected Skill skill;
     protected MonsterState monsterstate;
     protected Hero hero;
@@ -57,14 +56,7 @@ public class Monster extends GameObject{
                 act = ++act % 4; 
             }
         });
-//        timer = new Timer(40, new ActionListener(){
-//
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//               update();
-//            }
-//        });
-//        timer.start();
+
         skill = new Skill(Global.HEROX - Global.SKILLDELTA,Global.HEROY - Global.SKILLDELTA,Global.SKILLWIDTH,Global.SKILLHEIGHT,"ss");
         monsterstate = new MonsterState.MoveLeft();
         
@@ -79,7 +71,7 @@ public class Monster extends GameObject{
     public Monster(int x, int y, int width, int height, String name, int health){
         super(x, y, width, height, name);
         this.health = health;
-        this.act = 5;
+        this.act = 0;
         image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
         
     }

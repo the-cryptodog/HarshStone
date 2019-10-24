@@ -17,8 +17,6 @@ import gameObject.Hero.Hero;
 import gameObject.Monster.Monster;
 import gameObject.Orc;
 import gameObject.Skill.Skill;
-import gameObject.全力迎戰;
-import gameObject.旋風斬;
 import io.CommandSolver;
 import io.CommandSolver.MouseCommandListener;
 import java.awt.Color;
@@ -63,7 +61,12 @@ public class MainScene extends Scene {
     private DelayCounter delaycounter;
     private int selectedmonster;
     private Skill skill;
-
+    private Boolean heroturn;
+    private int crystal;
+    private ArrayList<Card> drawcarddeck;
+    private ArrayList<Card> discarddeck;
+    private ArrayList<Card> handdeck;
+    
     
     private CardFactory cardfactory;
     
@@ -73,6 +76,14 @@ public class MainScene extends Scene {
         xdelta = 0;
         ydelta = 0;
         cardclicked = false;
+        heroturn= true;
+        crystal = 3;
+        drawcarddeck = new ArrayList<Card>();
+        discarddeck = new ArrayList<Card>();
+        handdeck = new ArrayList<Card>();
+        
+        
+        
         selectedcard = null;
         discardcard = null;
         cardfactory = new CardFactory();
@@ -88,7 +99,7 @@ public class MainScene extends Scene {
         
         deck.add(new DefenceEffect(new DamageEffect(new Card(40, 700, 150, 210, "破解系統", 2),2),3));
         
-        next = new StartButton(1200, 800, 200, 100, "下一步");
+        next = new StartButton(1400, 800, 200, 100, "下一步");
         hero = new Hero(Global.HEROX, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         orc = new Monster(Global.MONSTERX, 50, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 100, 6);
         cultist = new Monster(Global.MONSTERX, 300, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 100, 3);
@@ -230,14 +241,19 @@ public class MainScene extends Scene {
 
 //        g.setColor(Color.red);
 //        g.drawRect(800,500,300,25);
-//        float temp1 = (float)cultist.gethealth()/100 * 300;
 //        g.fillRect(800, 500, (int)temp1, 25);
         next.paint(g);
         for (int i = 0; i < deck.size(); i++) {
             deck.get(i).paint(g);
         }
+        
 //        Graphics2D g2 = (Graphics2D) g;
 //        g2.drawString("There is no spoon.", 200, 400);
+        
+        g.setColor(Color.red);
+        for(int i = 0;i<5;i++){
+            g.drawRect(300 + (Global.CARDX+50)*i ,700,Global.CARDX,Global.CARDY);
+        }
 
     }
 

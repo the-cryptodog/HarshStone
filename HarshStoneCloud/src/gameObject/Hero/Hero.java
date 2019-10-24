@@ -6,10 +6,14 @@
 package gameObject.Hero;
 
 import Controller.PathBuilder;
+import gameObject.Card;
+import gameObject.CardDeck;
+import gameObject.CardDeck.WarriorDeck;
 import gameObject.GameObject;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.Timer;
 import utils.DelayCounter;
 import values.ImagePath;
@@ -31,6 +35,9 @@ public class Hero extends GameObject{
     protected DelayCounter delaycounter;
     protected int delay;
     protected Timer timer;
+    protected CardDeck cards;
+    
+    
     public Hero(int x, int y, int width, int height, String name, int health,int act){
         super(x, y, width, height, name);
         this.health = health;
@@ -39,7 +46,7 @@ public class Hero extends GameObject{
         originaly = y;
         moved = false;
         image = irc.tryGetImage(PathBuilder.getHero(ImagePath.ACTOR1));
-        
+        cards = new WarriorDeck();
         herohelper = new HeroHelper(act);
 //        delaycounter = new DelayCounter(20, new DelayCounter.Action() {
 //

@@ -27,7 +27,7 @@ public class Skill extends GameObject{
         image = irc.tryGetImage(PathBuilder.getSkill(ImagePath.SWORD1));
         act = 0;
         skillend = false;
-        delaycounter = new DelayCounter(10, new DelayCounter.Action() {
+        delaycounter = new DelayCounter(5, new DelayCounter.Action() {
 
             @Override
             public void action() {
