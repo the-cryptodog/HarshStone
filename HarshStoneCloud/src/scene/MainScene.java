@@ -109,6 +109,9 @@ public class MainScene extends Scene {
         monsters.add(orc);
         monsters.add(cultist);
         monsters.add(monster);
+        System.out.println(drawcarddeck.toString());
+        System.out.println(handdeck.toString());
+        System.out.println(discarddeck.toString());
         //10/22
         for (Monster monster : monsters) {
             monster.setHero(hero);
@@ -199,27 +202,57 @@ public class MainScene extends Scene {
         for(int i = 0; i < handdeck.getCards().size();i++){
             discarddeck.getCards().add(handdeck.getCards().get(i));
         }
-////        for(int i = 0; i< discarddeck.getCards().size();i++){
-////               handdeck.getCards().remove(0);
-////        }
-//        
-//        if(drawcarddeck.getCards().size() < 5){
-//            for(int i = 0; i< discarddeck.getCards().size();i++){
-//                drawcarddeck.getCards().add(discarddeck.getCards().get(i));
-//            }
+        System.out.println(1);
+        System.out.println(drawcarddeck.toString());
+        System.out.println(handdeck.toString());
+        System.out.println(discarddeck.toString());
+         System.out.println();
+        for(int i = 0; i< 5;i++){
+               handdeck.getCards().remove(0);
+        }
+        System.out.println(2);
+        System.out.println(drawcarddeck.toString());
+        System.out.println(handdeck.toString());
+        System.out.println(discarddeck.toString());
+        System.out.println();
+        if(drawcarddeck.getCards().size() < 5){
+            
+            for(int i = 0; i< discarddeck.getCards().size();i++){
+                drawcarddeck.getCards().add(discarddeck.getCards().get(i));
+            }
+        System.out.println(3);
+        System.out.println(drawcarddeck.toString());
+        System.out.println(handdeck.toString());
+        System.out.println(discarddeck.toString());
+        System.out.println();
 //        //確認每張牌都被刪掉
-//            for(int i = 0; i< discarddeck.getCards().size();i++){
-//                discarddeck.getCards().remove(0);
-//            }
-//        
-//        }
+            for(int i = 0; i< discarddeck.getCards().size();i++){
+                discarddeck.getCards().remove(0);
+            }
+        
+        }
+        System.out.println(4);
+        System.out.println(drawcarddeck.toString());
+        System.out.println(handdeck.toString());
+        System.out.println(discarddeck.toString());
+        System.out.println();
 ////        drawcarddeck.shuffle();
-//        for(int i = 0; i < 5; i++){
-//            handdeck.getCards().add(drawcarddeck.getCards().get(i));
-//        }
-//        for(int i = 0; i < 5; i++){
-//            drawcarddeck.getCards().remove(0);
-//        }
+        for(int i = 0; i < 5; i++){
+            handdeck.getCards().add(drawcarddeck.getCards().get(i));
+        }
+        System.out.println(5);
+        System.out.println(drawcarddeck.toString());
+        System.out.println(handdeck.toString());
+        System.out.println(discarddeck.toString());
+        System.out.println();
+        for(int i = 0; i < 5; i++){
+            drawcarddeck.getCards().remove(0);
+        }
+        System.out.println(6);
+        System.out.println(drawcarddeck.toString());
+        System.out.println(handdeck.toString());
+        System.out.println(discarddeck.toString());
+        System.out.println();
     }
     
     
@@ -239,13 +272,15 @@ public class MainScene extends Scene {
 
     @Override
     public void sceneBegin() {
-        drawcarddeck.shuffle();
         for(int i = 0; i < 5; i++){
             handdeck.getCards().add(drawcarddeck.getCards().get(i));
         }
         for(int i = 0; i < 5; i++){
             drawcarddeck.getCards().remove(0);
         }
+        System.out.println(drawcarddeck.toString());
+        System.out.println(handdeck.toString());
+        System.out.println(discarddeck.toString());
     }
 
     @Override
@@ -271,17 +306,8 @@ public class MainScene extends Scene {
                 }
                 next.setIsClicked(false);
                 drawCard(drawcarddeck,handdeck,discarddeck);
-                for(int i = 0; i < discarddeck.getCards().size();i++){
-                    System.out.println(i + discarddeck.getCards().get(i).toString());
                 
-                }
-                for(int i = 0; i < handdeck.getCards().size();i++){
-                    System.out.println(i + handdeck.getCards().get(i).toString());
-                
-                }
-                
-                
-                
+    
             }
             
         }
