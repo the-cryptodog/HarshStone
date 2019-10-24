@@ -8,7 +8,7 @@ package scene;
 import Controller.ImageResourceController;
 import Controller.SceneController;
 import gameObject.Button.Button;
-import gameObject.Button.StartButton;
+
 import gameObject.Card.Card;
 import gameObject.Card.CardDeck;
 import gameObject.Card.CardFactory;
@@ -54,7 +54,7 @@ public class MainScene extends Scene {
     private boolean cardclicked;
     private Card selectedcard;
     private Card discardcard;
-    private StartButton next;
+    private Button next;
     private Monster orc;
     private Hero hero;
     private Monster cultist;
@@ -97,8 +97,8 @@ public class MainScene extends Scene {
         deck.add(cardfactory.genCard(0));
 
         deck.add(new DefenceEffect(new DamageEffect(new Card(40, 700, 150, 210, "破解系統", 2), 2), 3));
-        back = new Button(1400, 600, 300, 95, "EXIT");
-        next = new StartButton(1400, 800, 200, 100, "button3-1");
+        back = new Button(1400, 600, 160, 80, "EXIT");
+        next = new Button(1400, 800, 160, 80, "ROUNDSTART");
         hero = new Hero(Global.HEROX, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         orc = new Monster(Global.MONSTERX, 50, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 100, 6);
         cultist = new Monster(Global.MONSTERX, 300, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 100, 3);
@@ -199,7 +199,7 @@ public class MainScene extends Scene {
         return deck;
     }
 
-    public StartButton getNext() {
+    public Button getNext() {
         return next;
     }
 

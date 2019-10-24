@@ -17,28 +17,80 @@ import values.ImagePath;
  */
 public class Button extends GameObject {
 
-    protected BufferedImage image;
-    protected boolean isclicked; 
+    public interface ButtonListener {
+
+        public void onClick(int x, int y);
+
+        public void hover(int x, int y);
+
+    }
+
+    private ButtonListener buttonListener;
+
+    protected BufferedImage[] image;
+    protected BufferedImage image2;
+    protected BufferedImage currentImage;
+    protected boolean isclicked;
 
     public Button(int x, int y, int width, int height, String name) {
         super(x, y, width, height, name);
-        this.image = irc.getInstance().tryGetImage(PathBuilder.getButton("/"+name+".png"));
+        image = new BufferedImage[2];
+        
+        image[0] = irc.getInstance().tryGetImage(PathBuilder.getButton("/" + name + ".png"));
+        if (irc.getInstance().tryGetImage(PathBuilder.getButton("/" + name + "2.png")) != null) {
+            System.out.print("dddd");
+            image[1] = irc.getInstance().tryGetImage(PathBuilder.getButton("/" + name + "2.png"));
+        } else {
+            image[1] = irc.getInstance().tryGetImage(PathBuilder.getButton("/" + name + "png"));
+        }
+        currentImage = image[0];
+    }
+
+    public void click(int x, int y) {
+        if (buttonListener == null) {
+            return;
+        }
+        buttonListener.onClick(x, y);
+    }
+
+    public void hover(int x, int y) {
+        if (buttonListener == null) {
+            return;
+        }
+        buttonListener.hover(x, y);
+
+    }
+
+    public void setButtonListener(ButtonListener buttonListener) {
+        this.buttonListener = buttonListener;
     }
 
     public void paint(Graphics g) {
-        g.drawImage(image, x, y, width, height, null);
+        g.drawImage(currentImage, x, y, width, height, null);
 
     }
-        public void setIsClicked(boolean isclicked){
+
+    @Override
+    public boolean isCollision(int x, int y) {
+        if (x < this.x || x > this.x + width) {
+            currentImage = image[0];
+            return false;
+        }
+        if (y < this.y || y > this.y + height) {
+            currentImage = image[0];
+            return false;
+        }
+        currentImage = image[1];
+        return true;
+
+    }
+
+    public void setIsClicked(boolean isclicked) {
         this.isclicked = isclicked;
     }
-    public boolean getIsClicked(){
+
+    public boolean getIsClicked() {
         return isclicked;
     }
 
-    public static class StartButton {
-
-        public StartButton() {
-        }
-    }
 }

@@ -7,6 +7,7 @@ package gameObject.MapIcon;
 
 import Controller.PathBuilder;
 import gameObject.Button.Button;
+import gameObject.GameObject;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -16,10 +17,11 @@ import values.ImagePath;
  *
  * @author User
  */
-public class redCross extends Button {
+public class redCross extends GameObject {
 
     protected BufferedImage redCross;
     ArrayList<Integer> tagList;
+    private boolean isclicked;
 
 
     public redCross(int x, int y, int width, int height, String name) {
@@ -48,7 +50,6 @@ public class redCross extends Button {
         return false;
     }
 
-    @Override
     public void paint(Graphics g) {
         if (isclicked) {
             g.drawImage(redCross, x, y, width, height, null);
