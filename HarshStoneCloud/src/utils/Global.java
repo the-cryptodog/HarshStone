@@ -79,6 +79,9 @@ public class Global {
     //CardDeck
     public static final int CARDDECKWIDTH = (int)(141*1.1);
     public static final int CARDDECKHEIGHT = (int)(195*1.1);
+    public static final int CARDDECKBOTTOM = 700;
+    
+    
     
     //HeroDeck
     public static CardDeck HERODECK;

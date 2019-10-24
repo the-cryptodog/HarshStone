@@ -9,6 +9,7 @@ import Controller.ImageResourceController;
 import Controller.PathBuilder;
 import gameObject.Card.Card;
 import gameObject.GameObject;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -22,13 +23,14 @@ public class CardDeck extends GameObject{
     protected ArrayList<Card> cards;
     protected CardFactory cardfactory;
     protected BufferedImage image;
-    
+    private Font font1;
     
     
     public CardDeck(int x, int y, int width, int height, String name,ArrayList<Card> cards){
         super(x,y,width,height,name);
         this.cards = cards;
         cardfactory = new CardFactory();
+        font1 =new Font("TimesRoman", Font.ITALIC,100);
         image = ImageResourceController.getInstance().tryGetImage(PathBuilder.getImage(ImagePath.CARDBECK));
     }
     
@@ -92,7 +94,8 @@ public class CardDeck extends GameObject{
 //應該要有move
     
     public void paint(Graphics g){
-        
+        g.setFont(font1);
+        g.drawString(cards.size()+"", x+100, y-30);
         g.drawImage(image, x, y, width,height,null);
         
     }
