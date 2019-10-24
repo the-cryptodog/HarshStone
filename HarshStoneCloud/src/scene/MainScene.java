@@ -188,7 +188,7 @@ public class MainScene extends Scene {
                 }
 
                 if (state == CommandSolver.MouseState.DRAGGED) {
-                                        System.out.println("Dragggddddggg");
+                                        System.out.println("Dragggdhhjhjhjhhhdddggg");
 
                     if (selectedcard != null) {
                         selectedcard.setX(e.getX() - xdelta);
