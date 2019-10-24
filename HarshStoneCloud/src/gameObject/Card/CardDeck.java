@@ -77,7 +77,19 @@ public class CardDeck extends GameObject{
         return cards;
     }
     
-    //應該要有move
+    public String toString(){
+        if(cards.size()==0){
+            return "牌堆沒牌";
+        }
+        String str = name+ "\n";
+        for(int i = 0; i < cards.size();i++){
+            str += i+ "." +cards.get(i).getName() + " ";
+        }
+        return str;
+    }
+
+
+//應該要有move
     
     public void paint(Graphics g){
         

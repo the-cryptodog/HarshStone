@@ -80,10 +80,8 @@ public class Card extends GameObject{
             
            
         }
-        
-        
-        
     }
+    
     
     
     public void paint(Graphics g){
