@@ -80,12 +80,12 @@ public class MapScene extends Scene {
 //                    startPressed = false;
 
                 }
-
+//&& redCrossList.get(currentRedCross).checkTag(i)
                 if (state == CommandSolver.MouseState.CLICKED) {
                     System.out.println("CLick");
                     
                     for (int i = 0; i < redCrossList.size(); i++) {
-                        if (redCrossList.get(i).isCollision(e.getX(), e.getY())&& redCrossList.get(currentRedCross).checkTag(i)) {
+                        if (redCrossList.get(i).isCollision(e.getX(), e.getY())) {
                             stagePassed = false;
                             currentRedCross = redCrossList.get(i).getTagList().get(0);
                             redCrossList.get(i).setIsClicked(true);

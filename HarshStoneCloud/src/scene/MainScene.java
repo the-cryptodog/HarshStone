@@ -10,6 +10,7 @@ import Controller.SceneController;
 import gameObject.Button.Button;
 import gameObject.Button.StartButton;
 import gameObject.Card;
+import gameObject.CardDeck;
 import gameObject.CardFactory;
 import gameObject.Cultist;
 import gameObject.DamageEffect;
@@ -64,9 +65,9 @@ public class MainScene extends Scene {
     private Skill skill;
     private Boolean heroturn;
     private int crystal;
-    private ArrayList<Card> drawcarddeck;
-    private ArrayList<Card> discarddeck;
-    private ArrayList<Card> handdeck;
+    private CardDeck drawcarddeck;
+    private CardDeck discarddeck;
+    private CardDeck handdeck;
     private Button back;
     private MapScene mapScene;
     private CardFactory cardfactory;
@@ -79,9 +80,9 @@ public class MainScene extends Scene {
         cardclicked = false;
         heroturn= true;
         crystal = 3;
-        drawcarddeck = new ArrayList<Card>();
-        discarddeck = new ArrayList<Card>();
-        handdeck = new ArrayList<Card>();
+        drawcarddeck = new CardDeck();
+        discarddeck = new CardDeck();
+        handdeck = new CardDeck();
         
         
         

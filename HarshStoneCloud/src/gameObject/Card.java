@@ -24,14 +24,14 @@ public class Card extends GameObject{
     protected int cost;
     protected BufferedImage image;
     protected String path;
-    
+    protected int serialnumber;
     
     public Card(int x, int y, int width, int height, String name, int cost) {
         super(x, y, width, height, name);
         this.cost = cost;
         description= "";
         clicked = false;
-//        image = irc.getInstance().tryGetImage(PathBuilder.getImage(path));
+         image = irc.getInstance().tryGetImage(PathBuilder.getImage("/"+name+".png"));
     }
     
     
@@ -85,7 +85,7 @@ public class Card extends GameObject{
     
     
     public void paint(Graphics g){
-        g.drawImage(irc.getInstance().tryGetImage(PathBuilder.getImage("/"+name+".png")), x, y, width, height, null);
+        g.drawImage(image, x, y, width, height, null);
     
     }
     
