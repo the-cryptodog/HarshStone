@@ -88,7 +88,7 @@ public class CardDeck extends GameObject{
         return str;
     }
 
-
+    
 //應該要有move
     
     public void paint(Graphics g){

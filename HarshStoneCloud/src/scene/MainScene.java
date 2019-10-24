@@ -71,7 +71,8 @@ public class MainScene extends Scene {
     private Button back;
     private MapScene mapScene;
     private CardFactory cardfactory;
-
+    private int cardlimit;
+    
     public MainScene(SceneController scenecontroller, MapScene mapScene) {
         super(scenecontroller);
         xdelta = 0;
@@ -79,6 +80,7 @@ public class MainScene extends Scene {
         cardclicked = false;
         heroturn = true;
         crystal = 3;
+        cardlimit = 5;
 //        drawcarddeck = new CardDeck(1400,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"抽牌推");
        
         discarddeck = new CardDeck(40,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"棄牌推");
@@ -176,11 +178,12 @@ public class MainScene extends Scene {
                     System.out.println("PRESS");
                     if (selectedcard == null) {
                         for (int i = 0; i < deck.size(); i++) {
-                            if (deck.get(i).isCollision(e.getX(), e.getY())) {
-                                selectedcard = deck.get(i);
-                                xdelta = deck.get(i).getDeltaX(e.getX());
-                                ydelta = deck.get(i).getDeltaY(e.getY());
-                                deck.get(i).setClicked(true);
+                            if (handdeck.getCards().get(i).isCollision(e.getX(), e.getY())) {
+                                Card temp = handdeck.getCards().get(i);
+                                selectedcard = temp;
+                                xdelta = temp.getDeltaX(e.getX());
+                                ydelta = temp.getDeltaY(e.getY());
+                                temp.setClicked(true);
                                 sceneEnd();
                             }
                         }
@@ -188,8 +191,6 @@ public class MainScene extends Scene {
                 }
 
                 if (state == CommandSolver.MouseState.DRAGGED) {
-
-                                        System.out.println("Dragggdhhjhjhjhhhdddggg");
 
                     if (selectedcard != null) {
                         selectedcard.setX(e.getX() - xdelta);
@@ -202,7 +203,8 @@ public class MainScene extends Scene {
     }
 
     public void drawCard(CardDeck drawcarddeck,CardDeck handdeck,CardDeck discarddeck) {
-        for(int i = 0; i < handdeck.getCards().size();i++){
+        int temp =  handdeck.getCards().size();
+        for(int i = 0; i < temp; i++){
             discarddeck.getCards().add(handdeck.getCards().get(i));
         }
         System.out.println(1);
@@ -210,7 +212,8 @@ public class MainScene extends Scene {
         System.out.println(handdeck.toString());
         System.out.println(discarddeck.toString());
          System.out.println();
-        for(int i = 0; i< 5;i++){
+        
+        for(int i = 0; i< temp;i++){
                handdeck.getCards().remove(0);
         }
         System.out.println(2);
@@ -219,8 +222,8 @@ public class MainScene extends Scene {
         System.out.println(discarddeck.toString());
         System.out.println();
         if(drawcarddeck.getCards().size() < 5){
-            
-            for(int i = 0; i< discarddeck.getCards().size();i++){
+            temp = discarddeck.getCards().size();
+            for(int i = 0; i< temp;i++){
                 drawcarddeck.getCards().add(discarddeck.getCards().get(i));
             }
         System.out.println(3);
@@ -229,7 +232,8 @@ public class MainScene extends Scene {
         System.out.println(discarddeck.toString());
         System.out.println();
 //        //確認每張牌都被刪掉
-            for(int i = 0; i< discarddeck.getCards().size();i++){
+            
+            for(int i = 0; i< temp; i++){
                 discarddeck.getCards().remove(0);
             }
         
@@ -239,16 +243,18 @@ public class MainScene extends Scene {
         System.out.println(handdeck.toString());
         System.out.println(discarddeck.toString());
         System.out.println();
-////        drawcarddeck.shuffle();
-        for(int i = 0; i < 5; i++){
+        drawcarddeck.shuffle();
+        for(int i = 0; i < cardlimit; i++){
             handdeck.getCards().add(drawcarddeck.getCards().get(i));
         }
+        setDeckPoisition();
+        
         System.out.println(5);
         System.out.println(drawcarddeck.toString());
         System.out.println(handdeck.toString());
         System.out.println(discarddeck.toString());
         System.out.println();
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < cardlimit; i++){
             drawcarddeck.getCards().remove(0);
         }
         System.out.println(6);
@@ -273,14 +279,26 @@ public class MainScene extends Scene {
         return orc;
     }
 
+    public void setDeckPoisition(){
+        for(int i = 0 ; i < cardlimit;i++){
+            handdeck.getCards().get(i).setX(300 + (Global.CARDWIDTH + 50) * i);
+            handdeck.getCards().get(i).setY(700);
+        }
+    
+    }
+    
+    
+    
     @Override
     public void sceneBegin() {
+        drawcarddeck.shuffle();
         for(int i = 0; i < 5; i++){
             handdeck.getCards().add(drawcarddeck.getCards().get(i));
         }
         for(int i = 0; i < 5; i++){
             drawcarddeck.getCards().remove(0);
         }
+        setDeckPoisition();
         System.out.println(drawcarddeck.toString());
         System.out.println(handdeck.toString());
         System.out.println(discarddeck.toString());
@@ -338,12 +356,14 @@ public class MainScene extends Scene {
             deck.get(i).paint(g);
         }
 
-//        Graphics2D g2 = (Graphics2D) g;
-//        g2.drawString("There is no spoon.", 200, 400);
         g.setColor(Color.red);
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < cardlimit; i++) {
             g.drawRect(300 + (Global.CARDWIDTH + 50) * i, 700, Global.CARDWIDTH, Global.CARDHEIGHT);
             
+        }
+        
+        for (int i = 0; i < handdeck.getCards().size(); i++) {
+            handdeck.getCards().get(i).paint(g); 
         }
         
         back.paint(g);
