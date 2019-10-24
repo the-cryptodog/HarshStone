@@ -79,9 +79,17 @@ public class MainScene extends Scene {
         cardclicked = false;
         heroturn = true;
         crystal = 3;
-        drawcarddeck = new CardDeck();
-        discarddeck = new CardDeck();
-        handdeck = new CardDeck();
+        drawcarddeck = new CardDeck(1600,700,Global.CARDX,Global.CARDY,"抽牌推");
+        discarddeck = new CardDeck(1600,700,Global.CARDX,Global.CARDY,"棄牌推");
+        
+        
+        
+        
+        
+        
+        
+        
+        handdeck = new CardDeck(1600,700,Global.CARDX,Global.CARDY,"手牌");
 
         selectedcard = null;
         discardcard = null;

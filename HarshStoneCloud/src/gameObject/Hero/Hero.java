@@ -46,7 +46,7 @@ public class Hero extends GameObject{
         originaly = y;
         moved = false;
         image = irc.tryGetImage(PathBuilder.getHero(ImagePath.ACTOR1));
-        cards = new WarriorDeck();
+        cards = new WarriorDeck(x, y, width, height, name);
         herohelper = new HeroHelper(act);
         System.out.print("GG3:0");
         
@@ -137,7 +137,7 @@ public class Hero extends GameObject{
     
     public void paint(Graphics g){
         
-        herohelper.paint(g, x, y, width, height, ACT[act], direction);
+        herohelper.paint(g, x, y, width, height, ACT[act], direction, health);
         
     }
 }
