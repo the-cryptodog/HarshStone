@@ -7,6 +7,7 @@ package scene;
 
 import Controller.ImageResourceController;
 import Controller.SceneController;
+import gameObject.Button.Button;
 import gameObject.Button.StartButton;
 import gameObject.Card;
 import gameObject.CardFactory;
@@ -66,12 +67,12 @@ public class MainScene extends Scene {
     private ArrayList<Card> drawcarddeck;
     private ArrayList<Card> discarddeck;
     private ArrayList<Card> handdeck;
-    
-    
+    private Button back;
+    private MapScene mapScene;
     private CardFactory cardfactory;
     
 
-    public MainScene(SceneController scenecontroller) {
+    public MainScene(SceneController scenecontroller,MapScene mapScene) {
         super(scenecontroller);
         xdelta = 0;
         ydelta = 0;
@@ -98,8 +99,8 @@ public class MainScene extends Scene {
         deck.add(cardfactory.genCard(0));
         
         deck.add(new DefenceEffect(new DamageEffect(new Card(40, 700, 150, 210, "破解系統", 2),2),3));
-        
-        next = new StartButton(1400, 800, 200, 100, "下一步");
+        back = new Button(1400,600,300,95,"EXIT");
+        next = new StartButton(1400, 800, 200, 100, "button3-1");
         hero = new Hero(Global.HEROX, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         orc = new Monster(Global.MONSTERX, 50, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 100, 6);
         cultist = new Monster(Global.MONSTERX, 300, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 100, 3);
@@ -150,6 +151,11 @@ public class MainScene extends Scene {
                     if (next.isCollision(e.getX(), e.getY())) {
 //                        scenecontroller.changeScene(new SecondScene(scenecontroller));
                         next.setIsClicked(true);
+
+                    }
+                    if (back.isCollision(e.getX(), e.getY())) {
+                        scenecontroller.changeScene(mapScene);
+
 
                     }
 
@@ -254,6 +260,7 @@ public class MainScene extends Scene {
         for(int i = 0;i<5;i++){
             g.drawRect(300 + (Global.CARDX+50)*i ,700,Global.CARDX,Global.CARDY);
         }
+        back.paint(g);
 
     }
 

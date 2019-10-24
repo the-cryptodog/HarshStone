@@ -9,6 +9,7 @@ import Controller.PathBuilder;
 import gameObject.Button.Button;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import values.ImagePath;
 
 /**
@@ -17,29 +18,47 @@ import values.ImagePath;
  */
 public class redCross extends Button {
 
-    protected boolean isClicked;
     protected BufferedImage redCross;
+    ArrayList<Integer> tagList;
+
 
     public redCross(int x, int y, int width, int height, String name) {
         super(x, y, width, height, name);
-        isClicked = true;
-        this.redCross = irc.getInstance().tryGetImage(PathBuilder.getMap(ImagePath.REDCROSS));
+        isclicked = false;
+        tagList = new ArrayList<>();
+        this.redCross = irc.getInstance().tryGetImage(PathBuilder.getMap("/" + name + ".png"));
     }
 
-    public void setClick() {
-        this.isClicked = true;
+    public void setIsClicked(boolean isclicked) {
+        this.isclicked = isclicked;
+    }
+
+    public boolean getIsClicked() {
+        return isclicked;
+    }
+    public ArrayList<Integer> getTagList(){
+        return this.tagList;
+    }
+    public boolean checkTag(int tag){
+        for(int i = 1 ; i <tagList.size(); i++){
+            if(tag == tagList.get(i)){
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public void paint(Graphics g) {
-        if (isClicked) {
+        if (isclicked) {
             g.drawImage(redCross, x, y, width, height, null);
         }
     }
+
     @Override
-    public String toString(){
-      String str ="";
-      return str+= x +" "+ y ;
+    public String toString() {
+        String str = "";
+        return str += x + " " + y;
     }
-    
+
 }

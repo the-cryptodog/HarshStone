@@ -22,7 +22,7 @@ public class Button extends GameObject {
 
     public Button(int x, int y, int width, int height, String name) {
         super(x, y, width, height, name);
-        this.image = irc.getInstance().tryGetImage(PathBuilder.getButton(ImagePath.BUTTON1));
+        this.image = irc.getInstance().tryGetImage(PathBuilder.getButton("/"+name+".png"));
     }
 
     public void paint(Graphics g) {

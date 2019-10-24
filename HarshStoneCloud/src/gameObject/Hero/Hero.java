@@ -49,6 +49,7 @@ public class Hero extends GameObject{
         cards = new WarriorDeck();
         herohelper = new HeroHelper(act);
         System.out.print("GG3:0");
+        
 //        delaycounter = new DelayCounter(20, new DelayCounter.Action() {
 //
 //            @Override

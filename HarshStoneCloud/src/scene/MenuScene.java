@@ -6,11 +6,7 @@
 package scene;
 
 import Controller.SceneController;
-import gameObject.Button.ContinueButton;
-import gameObject.Button.ExitButton;
-import gameObject.Button.NewGameButton;
-import gameObject.Button.StartButton;
-import gameObject.Button.TitleButton;
+import gameObject.Button.Button;
 import io.CommandSolver;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -23,11 +19,11 @@ import java.awt.image.BufferedImage;
 public class MenuScene extends Scene {
 
     private BufferedImage img;
-    private StartButton start;
-    private TitleButton title;
-    private ExitButton exit;
-    private NewGameButton newGameButton;
-    private ContinueButton continueButton;
+    private Button start;
+    private Button title;
+    private Button exit;
+    private Button newGameButton;
+    private Button continueButton;
 
     private boolean startPressed;
 
@@ -38,10 +34,10 @@ public class MenuScene extends Scene {
         startPressed = false;
 
 //        start = new StartButton(690, 300, 200, 100, "開始遊戲");
-        newGameButton = new NewGameButton(690, 380, 300, 95, "開始遊戲");
-        title = new TitleButton(498, 0, 670, 215, "開始遊戲");
-        continueButton = new ContinueButton(690, 450, 300, 95, "繼續");
-        exit = new ExitButton(690,620, 300, 95, "離開");
+        newGameButton = new Button(690, 380, 300, 95, "NEWGAME");
+        title = new Button(498, 0, 670, 215, "TITLE");
+        continueButton = new Button(690, 450, 300, 95, "CONTINUE");
+        exit = new Button(690,620, 300, 95, "EXIT");
         img = irc.tryGetImage("/resources/Background/背景7.jpg");
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
 

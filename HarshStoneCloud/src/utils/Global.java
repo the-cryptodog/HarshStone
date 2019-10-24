@@ -63,6 +63,9 @@ public class Global {
     
     //關卡數量
     public static final int STAGENUMBER = 9;
+    
+    //目前關卡
+    public static int CURRENTSTAGE = 0;
 
 
     

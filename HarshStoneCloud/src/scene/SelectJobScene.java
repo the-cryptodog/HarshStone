@@ -6,7 +6,7 @@
 package scene;
 
 import Controller.SceneController;
-import gameObject.Button.BackButton;
+import gameObject.Button.Button;
 import gameObject.Jobs.Sorcerer;
 import gameObject.Jobs.Warrior;
 import io.CommandSolver;
@@ -23,12 +23,12 @@ public class SelectJobScene extends Scene {
     private BufferedImage img;
     private Sorcerer socerer;
     private Warrior warrior;
-    private BackButton backButton;
+    private Button back;
 
     public SelectJobScene(SceneController scenecontroller) {
         super(scenecontroller);
 
-        backButton = new BackButton(1400, 900, 300, 95, "返回按鈕");
+        back = new Button(1400, 900, 300, 95, "BACK");
         socerer = new Sorcerer(340, 425, 260, 260, "巫師");
         warrior = new Warrior(940, 425, 260, 260, "戰士");
         img = irc.tryGetImage("/resources/Background/背景3.jpg");
@@ -54,7 +54,7 @@ public class SelectJobScene extends Scene {
 //                      startPressed = true;
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
                     }
-                    if ( backButton .isCollision(e.getX(), e.getY())) {
+                    if ( back .isCollision(e.getX(), e.getY())) {
                         scenecontroller.changeScene(new  MenuScene(scenecontroller));
 //                      startPressed = true;
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
@@ -91,7 +91,7 @@ public class SelectJobScene extends Scene {
         g.drawImage(img, 0, 0, 1680, 1050, null);
          socerer.paint(g);
          warrior.paint(g);
-         backButton.paint(g);
+         back.paint(g);
     }
 }
 

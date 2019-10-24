@@ -21,8 +21,9 @@ import values.ImagePath;
  * @author User
  */
 public class MapScene extends Scene {
-
-
+    
+    private final int[] xEdge = {0,495,695,982,1285};
+    private boolean stagePassed;
     private BufferedImage map;
     private BufferedImage cover;
     private redCross[] redCross;
@@ -33,17 +34,37 @@ public class MapScene extends Scene {
     {936, 310}, {936, 500}, {931, 658},
     {1235, 327}, {1225,596},
     {1436, 532}};
+    private int [][] availableRoute ={{4,5},{2,5,8,9},{3,6,8,9}};
+    private int currentRedCross;
+    
+    
 
     public MapScene(SceneController scenecontroller) {
         super(scenecontroller);
-
-        currentStage = 0;
+        
+        stagePassed = false;
+      
         System.out.println("stage=" + currentStage);
         redCrossList = new ArrayList<redCross>();
 //        redCrossList.add(new redCross(455,505,50,50,"ddddd"));
         for (int i = 0; i < redCrossSetter.length; i++) { 
-            redCrossList.add(new redCross(redCrossSetter[i][0], redCrossSetter[i][1], 50, 50, "紅叉"));      
+            redCrossList.add(new redCross(redCrossSetter[i][0], redCrossSetter[i][1], 50, 50, "REDCROSS"));
+            redCrossList.get(i).getTagList().add(i);
         }
+        currentRedCross=0;
+        redCrossList.get(0).getTagList().add(1);
+        redCrossList.get(0).getTagList().add(2);
+
+        redCrossList.get(1).getTagList().add(3);
+        redCrossList.get(1).getTagList().add(4);
+        redCrossList.get(2).getTagList().add(5);
+        redCrossList.get(3).getTagList().add(6);
+        redCrossList.get(4).getTagList().add(7);
+        redCrossList.get(5).getTagList().add(7);
+        redCrossList.get(6).getTagList().add(8);
+        redCrossList.get(7).getTagList().add(8);
+
+        
          System.out.println(redCrossList.get(0).toString());
          System.out.print(redCrossList.get(0) instanceof redCross);
          System.out.print(redCrossList.size());
@@ -62,13 +83,18 @@ public class MapScene extends Scene {
 
                 if (state == CommandSolver.MouseState.CLICKED) {
                     System.out.println("CLick");
+                    
                     for (int i = 0; i < redCrossList.size(); i++) {
-                        if (redCrossList.get(i).isCollision(e.getX(), e.getY())) {
+                        if (redCrossList.get(i).isCollision(e.getX(), e.getY())&& redCrossList.get(currentRedCross).checkTag(i)) {
+                            stagePassed = false;
+                            currentRedCross = redCrossList.get(i).getTagList().get(0);
                             redCrossList.get(i).setIsClicked(true);
+                            scenecontroller.changeScene(new MainScene(scenecontroller,getThis()));
+                            
                         }
                     }
 //                      startPressed = true;
-                    scenecontroller.changeScene(new MainScene(scenecontroller));
+                    
                 }
 //                    if (socerer .isCollision(e.getX(), e.getY())) {
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
@@ -89,9 +115,14 @@ public class MapScene extends Scene {
             }
         };
     }
+    public MapScene getThis(){
+        return this;
+    }
 
     @Override
     public void sceneBegin() {
+        stagePassed = true;
+        Global.CURRENTSTAGE++;
     }
 
     @Override
@@ -105,14 +136,14 @@ public class MapScene extends Scene {
     @Override
     public void paint(Graphics g) {
         g.drawImage(map, 0, 0, 1920, 1080, null);
-        System.out.print(redCrossList.size());
+
         for (int i = 0; i < redCrossList.size(); i++) {
 //                     System.out.print(i);
-//
+            if(stagePassed)
             redCrossList.get(i).paint(g);
         }
 //        redCrossList.get(0).paint(g);
-        switch (currentStage) {
+        switch (Global.CURRENTSTAGE) {
             case 1:
                 g.drawImage(cover, 495, 0, 1920, 1080, 495, 0, 1920, 1080, null);
                 break;
