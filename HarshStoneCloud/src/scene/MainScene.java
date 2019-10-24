@@ -71,36 +71,33 @@ public class MainScene extends Scene {
     private Button back;
     private MapScene mapScene;
     private CardFactory cardfactory;
-    
 
-    public MainScene(SceneController scenecontroller,MapScene mapScene) {
+    public MainScene(SceneController scenecontroller, MapScene mapScene) {
         super(scenecontroller);
         xdelta = 0;
         ydelta = 0;
         cardclicked = false;
-        heroturn= true;
+        heroturn = true;
         crystal = 3;
         drawcarddeck = new CardDeck();
         discarddeck = new CardDeck();
         handdeck = new CardDeck();
-        
-        
-        
+
         selectedcard = null;
         discardcard = null;
         cardfactory = new CardFactory();
         card1 = cardfactory.genCard(0);
         card2 = cardfactory.genCard(1);
         card3 = cardfactory.genCard(2);
-        
+
         deck = new ArrayList();
         deck.add(card1);
         deck.add(card2);
         deck.add(card3);
         deck.add(cardfactory.genCard(0));
-        
-        deck.add(new DefenceEffect(new DamageEffect(new Card(40, 700, 150, 210, "破解系統", 2),2),3));
-        back = new Button(1400,600,300,95,"EXIT");
+
+        deck.add(new DefenceEffect(new DamageEffect(new Card(40, 700, 150, 210, "破解系統", 2), 2), 3));
+        back = new Button(1400, 600, 300, 95, "EXIT");
         next = new StartButton(1400, 800, 200, 100, "button3-1");
         hero = new Hero(Global.HEROX, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         orc = new Monster(Global.MONSTERX, 50, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 100, 6);
@@ -111,11 +108,10 @@ public class MainScene extends Scene {
         monsters.add(cultist);
         monsters.add(monster);
         //10/22
-        for(Monster monster: monsters){
+        for (Monster monster : monsters) {
             monster.setHero(hero);
         }
-        
-        
+
         img = irc.tryGetImage("/resources/Background/背景1.jpg");
         selectedmonster = 0;
 
@@ -157,12 +153,22 @@ public class MainScene extends Scene {
                     if (back.isCollision(e.getX(), e.getY())) {
                         scenecontroller.changeScene(mapScene);
 
-
                     }
+                    if (selectedcard != null) {
+                        for (int i = 0; i < monsters.size(); i++) {
+                            if (monsters.get(i).isCollision(selectedcard)) {
+                                selectedcard.action(hero, monsters.get(i));
+                                discardcard = selectedcard;
+                                break;
+                            }
+                        }
+                    }
+                    selectedcard = null;
 
                 }
 
                 if (state == CommandSolver.MouseState.PRESSED) {
+                    System.out.println("PRESS");
                     if (selectedcard == null) {
                         for (int i = 0; i < deck.size(); i++) {
                             if (deck.get(i).isCollision(e.getX(), e.getY())) {
@@ -177,6 +183,8 @@ public class MainScene extends Scene {
                 }
 
                 if (state == CommandSolver.MouseState.DRAGGED) {
+                                        System.out.println("Dragggggg");
+
                     if (selectedcard != null) {
                         selectedcard.setX(e.getX() - xdelta);
                         selectedcard.setY(e.getY() - ydelta);
@@ -206,29 +214,28 @@ public class MainScene extends Scene {
 
     @Override
     public void sceneUpdate() {
-        for(Monster monster: monsters){
+        for (Monster monster : monsters) {
             monster.update();
         }
-        if(delaycounter.delayupdate() && discardcard != null){
+        if (delaycounter.delayupdate() && discardcard != null) {
             discardcard.move();
         }
-        
-        if(delaycounter.delayupdate() && next.getIsClicked()){
-            for(Monster monster: monsters){
-                if(!monster.getMoved()){ 
+
+        if (delaycounter.delayupdate() && next.getIsClicked()) {
+            for (Monster monster : monsters) {
+                if (!monster.getMoved()) {
                     monster.move();
                     break;
                 }
             }
-            if(monsters.get(monsters.size() - 1).getMoved()){
-               
-                for(Monster monster : monsters){
+            if (monsters.get(monsters.size() - 1).getMoved()) {
+
+                for (Monster monster : monsters) {
                     monster.setMoved(false);
                 }
-                next.setIsClicked(false);               
+                next.setIsClicked(false);
             }
-            
-            
+
         }
     }
 
@@ -253,13 +260,12 @@ public class MainScene extends Scene {
         for (int i = 0; i < deck.size(); i++) {
             deck.get(i).paint(g);
         }
-        
+
 //        Graphics2D g2 = (Graphics2D) g;
 //        g2.drawString("There is no spoon.", 200, 400);
-        
         g.setColor(Color.red);
-        for(int i = 0;i<5;i++){
-            g.drawRect(300 + (Global.CARDX+50)*i ,700,Global.CARDX,Global.CARDY);
+        for (int i = 0; i < 5; i++) {
+            g.drawRect(300 + (Global.CARDX + 50) * i, 700, Global.CARDX, Global.CARDY);
         }
         back.paint(g);
 

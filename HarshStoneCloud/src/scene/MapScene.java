@@ -21,8 +21,8 @@ import values.ImagePath;
  * @author User
  */
 public class MapScene extends Scene {
-    
-    private final int[] xEdge = {0,495,695,982,1285};
+
+    private final int[] xEdge = {0, 495, 695, 982, 1285};
     private boolean stagePassed;
     private BufferedImage map;
     private BufferedImage cover;
@@ -32,26 +32,24 @@ public class MapScene extends Scene {
     private int[][] redCrossSetter = {{435, 505},
     /*{x座標/y座標} */ {645, 335}, {645, 610},
     {936, 310}, {936, 500}, {931, 658},
-    {1235, 327}, {1225,596},
+    {1235, 327}, {1225, 596},
     {1436, 532}};
-    private int [][] availableRoute ={{4,5},{2,5,8,9},{3,6,8,9}};
+    private int[][] availableRoute = {{4, 5}, {2, 5, 8, 9}, {3, 6, 8, 9}};
     private int currentRedCross;
-    
-    
 
     public MapScene(SceneController scenecontroller) {
         super(scenecontroller);
-        
+
         stagePassed = false;
-      
+
         System.out.println("stage=" + currentStage);
         redCrossList = new ArrayList<redCross>();
 //        redCrossList.add(new redCross(455,505,50,50,"ddddd"));
-        for (int i = 0; i < redCrossSetter.length; i++) { 
+        for (int i = 0; i < redCrossSetter.length; i++) {
             redCrossList.add(new redCross(redCrossSetter[i][0], redCrossSetter[i][1], 50, 50, "REDCROSS"));
             redCrossList.get(i).getTagList().add(i);
         }
-        currentRedCross=0;
+        currentRedCross = -1;
         redCrossList.get(0).getTagList().add(1);
         redCrossList.get(0).getTagList().add(2);
 
@@ -64,11 +62,10 @@ public class MapScene extends Scene {
         redCrossList.get(6).getTagList().add(8);
         redCrossList.get(7).getTagList().add(8);
 
-        
-         System.out.println(redCrossList.get(0).toString());
-         System.out.print(redCrossList.get(0) instanceof redCross);
-         System.out.print(redCrossList.size());
-        
+        System.out.println(redCrossList.get(0).toString());
+        System.out.print(redCrossList.get(0) instanceof redCross);
+        System.out.print(redCrossList.size());
+
         map = irc.tryGetImage("/resources/Map/map.png");
         cover = irc.tryGetImage("/resources/Map/mapOrigin.png");
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
@@ -83,18 +80,26 @@ public class MapScene extends Scene {
 //&& redCrossList.get(currentRedCross).checkTag(i)
                 if (state == CommandSolver.MouseState.CLICKED) {
                     System.out.println("CLick");
-                    
+                    System.out.println(redCrossList.get(0).checkTag(0));
+                    if (redCrossList.get(0).isCollision(e.getX(), e.getY())) {
+                        stagePassed = false;
+                        currentRedCross = redCrossList.get(0).getTagList().get(0);
+                        redCrossList.get(0).setIsClicked(true);
+                        scenecontroller.changeScene(new MainScene(scenecontroller, getThis()));
+                    }
                     for (int i = 0; i < redCrossList.size(); i++) {
-                        if (redCrossList.get(i).isCollision(e.getX(), e.getY())) {
+                        if (redCrossList.get(i).isCollision(e.getX(), e.getY())
+                                && redCrossList.get(currentRedCross).checkTag(i)) {
+                            System.out.print("ddddddd");
                             stagePassed = false;
                             currentRedCross = redCrossList.get(i).getTagList().get(0);
                             redCrossList.get(i).setIsClicked(true);
-                            scenecontroller.changeScene(new MainScene(scenecontroller,getThis()));
-                            
+                            scenecontroller.changeScene(new MainScene(scenecontroller, getThis()));
+
                         }
                     }
 //                      startPressed = true;
-                    
+
                 }
 //                    if (socerer .isCollision(e.getX(), e.getY())) {
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
@@ -115,7 +120,8 @@ public class MapScene extends Scene {
             }
         };
     }
-    public MapScene getThis(){
+
+    public MapScene getThis() {
         return this;
     }
 
@@ -139,8 +145,9 @@ public class MapScene extends Scene {
 
         for (int i = 0; i < redCrossList.size(); i++) {
 //                     System.out.print(i);
-            if(stagePassed)
-            redCrossList.get(i).paint(g);
+            if (stagePassed) {
+                redCrossList.get(i).paint(g);
+            }
         }
 //        redCrossList.get(0).paint(g);
         switch (Global.CURRENTSTAGE) {
