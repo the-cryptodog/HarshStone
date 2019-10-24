@@ -5,8 +5,12 @@
  */
 package gameObject.Card;
 
+import Controller.ImageResourceController;
+import Controller.PathBuilder;
 import gameObject.Card.Card;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import values.ImagePath;
 
 /**
  *
@@ -15,15 +19,18 @@ import java.util.ArrayList;
 public class CardDeck {
     protected ArrayList<Card> cards;
     protected CardFactory cardfactory;
+    protected BufferedImage image;
     
     
     
     public CardDeck(ArrayList<Card> cards){
         this.cards = cards;
         cardfactory = new CardFactory();
+        image = ImageResourceController.getInstance().tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
     }
     
     public CardDeck(){
+        
         cards = new ArrayList<Card>();
         cardfactory = new CardFactory();
     }

@@ -57,4 +57,6 @@ public class ImagePath {
     public static final String SKILL_ROOT = "/Skill";
     public static final String SWORD1 = "/Sword1.png";
     
+    public static final String CARDBECK = "/牌背.png";
+    
 }
