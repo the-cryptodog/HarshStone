@@ -31,11 +31,11 @@ public class StageController {
         }
     }
 
-    public int getStage() {
-        return stage;
-    }
-
-    public stageUpdate() {
-
-    }
+//    public int getStage() {
+//        return stage;
+//    }
+//
+//    public stageUpdate() {
+//
+//    }
 }

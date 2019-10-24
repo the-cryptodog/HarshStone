@@ -68,6 +68,7 @@ public class MapScene extends Scene {
 
         map = irc.tryGetImage("/resources/Map/map.png");
         cover = irc.tryGetImage("/resources/Map/mapOrigin.png");
+        
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
 
             @Override

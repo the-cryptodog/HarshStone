@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Timer;
 import utils.DelayCounter;
+import utils.Global;
 import values.ImagePath;
 
 /**
@@ -35,7 +36,7 @@ public class Hero extends GameObject{
     protected DelayCounter delaycounter;
     protected int delay;
     protected Timer timer;
-    protected CardDeck cards;
+    protected CardDeck herodeck;
     
     
     public Hero(int x, int y, int width, int height, String name, int health,int act){
@@ -46,7 +47,9 @@ public class Hero extends GameObject{
         originaly = y;
         moved = false;
         image = irc.tryGetImage(PathBuilder.getHero(ImagePath.ACTOR1));
-        cards = new WarriorDeck();
+//        herodeck = new WarriorDeck(x, y, width, height, name);
+        
+        herodeck = new WarriorDeck(1300,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"牌組");
         herohelper = new HeroHelper(act);
         System.out.print("GG3:0");
         
@@ -76,7 +79,12 @@ public class Hero extends GameObject{
         this.health = health;
         this.act = 5;
         image = irc.tryGetImage(PathBuilder.getHero(ImagePath.ACTOR1));
-        
+        //need to be changed
+        herodeck = new WarriorDeck(1300,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"牌組");
+    }
+    
+    public CardDeck getHeroDeck(){
+        return herodeck;
     }
     
     public int gethealth(){
@@ -137,7 +145,7 @@ public class Hero extends GameObject{
     
     public void paint(Graphics g){
         
-        herohelper.paint(g, x, y, width, height, ACT[act], direction);
+        herohelper.paint(g, x, y, width, height, ACT[act], direction, health);
         
     }
 }

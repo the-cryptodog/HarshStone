@@ -79,9 +79,10 @@ public class MainScene extends Scene {
         cardclicked = false;
         heroturn = true;
         crystal = 3;
-        drawcarddeck = new CardDeck();
-        discarddeck = new CardDeck();
-        handdeck = new CardDeck();
+//        drawcarddeck = new CardDeck(1400,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"抽牌推");
+       
+        discarddeck = new CardDeck(40,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"棄牌推");
+        handdeck = new CardDeck(1600,700,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"手牌");
 
         selectedcard = null;
         discardcard = null;
@@ -96,13 +97,16 @@ public class MainScene extends Scene {
         deck.add(card3);
         deck.add(cardfactory.genCard(0));
 
+
         deck.add(new DefenceEffect(new DamageEffect(new Card(40, 700, 150, 210, "破解系統", 2), 2), 3));
         back = new Button(1400, 600, 160, 80, "EXIT");
         next = new Button(1400, 800, 160, 80, "ROUNDSTART");
+
         hero = new Hero(Global.HEROX, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
-        orc = new Monster(Global.MONSTERX, 50, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 100, 6);
-        cultist = new Monster(Global.MONSTERX, 300, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 100, 3);
-        monster = new Monster(Global.MONSTERX, 500, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 100, 2);
+        drawcarddeck = hero.getHeroDeck();
+        orc = new Monster(Global.MONSTERX, 50, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 30, 6);
+        cultist = new Monster(Global.MONSTERX, 300, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 20, 3);
+        monster = new Monster(Global.MONSTERX, 500, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 17, 2);
         monsters = new ArrayList();
         monsters.add(orc);
         monsters.add(cultist);
@@ -146,9 +150,7 @@ public class MainScene extends Scene {
                 if (state == CommandSolver.MouseState.CLICKED) {
                     System.out.println("clicked");
                     if (next.isCollision(e.getX(), e.getY())) {
-//                        scenecontroller.changeScene(new SecondScene(scenecontroller));
                         next.setIsClicked(true);
-
                     }
                     if (back.isCollision(e.getX(), e.getY())) {
                         scenecontroller.changeScene(mapScene);
@@ -195,6 +197,36 @@ public class MainScene extends Scene {
         };
     }
 
+    public void drawCard(CardDeck drawcarddeck,CardDeck handdeck,CardDeck discarddeck) {
+        for(int i = 0; i < handdeck.getCards().size();i++){
+            discarddeck.getCards().add(handdeck.getCards().get(i));
+        }
+////        for(int i = 0; i< discarddeck.getCards().size();i++){
+////               handdeck.getCards().remove(0);
+////        }
+//        
+//        if(drawcarddeck.getCards().size() < 5){
+//            for(int i = 0; i< discarddeck.getCards().size();i++){
+//                drawcarddeck.getCards().add(discarddeck.getCards().get(i));
+//            }
+//        //確認每張牌都被刪掉
+//            for(int i = 0; i< discarddeck.getCards().size();i++){
+//                discarddeck.getCards().remove(0);
+//            }
+//        
+//        }
+////        drawcarddeck.shuffle();
+//        for(int i = 0; i < 5; i++){
+//            handdeck.getCards().add(drawcarddeck.getCards().get(i));
+//        }
+//        for(int i = 0; i < 5; i++){
+//            drawcarddeck.getCards().remove(0);
+//        }
+    }
+    
+    
+    
+    
     public ArrayList<Card> getDeck() {
         return deck;
     }
@@ -209,7 +241,13 @@ public class MainScene extends Scene {
 
     @Override
     public void sceneBegin() {
-
+        drawcarddeck.shuffle();
+        for(int i = 0; i < 5; i++){
+            handdeck.getCards().add(drawcarddeck.getCards().get(i));
+        }
+        for(int i = 0; i < 5; i++){
+            drawcarddeck.getCards().remove(0);
+        }
     }
 
     @Override
@@ -234,8 +272,20 @@ public class MainScene extends Scene {
                     monster.setMoved(false);
                 }
                 next.setIsClicked(false);
+                drawCard(drawcarddeck,handdeck,discarddeck);
+                for(int i = 0; i < discarddeck.getCards().size();i++){
+                    System.out.println(i + discarddeck.getCards().get(i).toString());
+                
+                }
+                for(int i = 0; i < handdeck.getCards().size();i++){
+                    System.out.println(i + handdeck.getCards().get(i).toString());
+                
+                }
+                
+                
+                
             }
-
+            
         }
     }
 
@@ -265,10 +315,13 @@ public class MainScene extends Scene {
 //        g2.drawString("There is no spoon.", 200, 400);
         g.setColor(Color.red);
         for (int i = 0; i < 5; i++) {
-            g.drawRect(300 + (Global.CARDX + 50) * i, 700, Global.CARDX, Global.CARDY);
+            g.drawRect(300 + (Global.CARDWIDTH + 50) * i, 700, Global.CARDWIDTH, Global.CARDHEIGHT);
+            
         }
+        
         back.paint(g);
-
+        drawcarddeck.paint(g);
+        discarddeck.paint(g);
     }
 
 }

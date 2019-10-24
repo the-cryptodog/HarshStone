@@ -5,27 +5,38 @@
  */
 package gameObject.Card;
 
+import Controller.ImageResourceController;
+import Controller.PathBuilder;
 import gameObject.Card.Card;
+import gameObject.GameObject;
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import values.ImagePath;
 
 /**
  *
  * @author frank61003
  */
-public class CardDeck {
+public class CardDeck extends GameObject{
     protected ArrayList<Card> cards;
     protected CardFactory cardfactory;
+    protected BufferedImage image;
     
     
     
-    public CardDeck(ArrayList<Card> cards){
+    public CardDeck(int x, int y, int width, int height, String name,ArrayList<Card> cards){
+        super(x,y,width,height,name);
         this.cards = cards;
         cardfactory = new CardFactory();
+        image = ImageResourceController.getInstance().tryGetImage(PathBuilder.getImage(ImagePath.CARDBECK));
     }
     
-    public CardDeck(){
+    public CardDeck(int x, int y, int width, int height, String name){
+        super(x,y,width,height,name);
         cards = new ArrayList<Card>();
         cardfactory = new CardFactory();
+        image = ImageResourceController.getInstance().tryGetImage(PathBuilder.getImage(ImagePath.CARDBECK));
     }
     
     
@@ -33,8 +44,8 @@ public class CardDeck {
     
     
     public static class WarriorDeck extends CardDeck{
-        public WarriorDeck(){
-            super();
+        public WarriorDeck(int x, int y, int width, int height, String name){
+            super(x, y, width, height, name);
             for(int i = 0; i < 5;i++){
                 cards.add(cardfactory.genCard(0));            
             }
@@ -67,4 +78,13 @@ public class CardDeck {
     }
     
     //應該要有move
+    
+    public void paint(Graphics g){
+        
+        g.drawImage(image, x, y, width,height,null);
+        
+    }
+    
+    
+    
 }

@@ -68,6 +68,7 @@ public class Button extends GameObject {
     public void paint(Graphics g) {
         g.drawImage(currentImage, x, y, width, height, null);
 
+
     }
 
     @Override
@@ -84,6 +85,9 @@ public class Button extends GameObject {
         return true;
 
     }
+
+
+    
 
     public void setIsClicked(boolean isclicked) {
         this.isclicked = isclicked;
