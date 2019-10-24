@@ -5,6 +5,8 @@
  */
 package utils;
 
+import gameObject.Card.CardDeck;
+
 /**
  *
  * @author frank61003
@@ -70,7 +72,17 @@ public class Global {
 
     
     //Card 
-    public static final int CARDX = 141;
-    public static final int CARDY = 195;
+    public static final int CARDWIDTH = 141;
+    public static final int CARDHEIGHT = 195;
+    
+    
+    //CardDeck
+    public static final int CARDDECKWIDTH = (int)(141*1.1);
+    public static final int CARDDECKHEIGHT = (int)(195*1.1);
+    
+    //HeroDeck
+    public static CardDeck HERODECK;
+    
+    
 
 }

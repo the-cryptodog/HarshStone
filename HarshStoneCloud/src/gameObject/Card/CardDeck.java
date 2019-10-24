@@ -81,7 +81,7 @@ public class CardDeck extends GameObject{
     
     public void paint(Graphics g){
         
-        g.drawImage(image, x, y, null);
+        g.drawImage(image, x, y, width,height,null);
         
     }
     

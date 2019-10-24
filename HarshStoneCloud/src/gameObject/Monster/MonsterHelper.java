@@ -39,7 +39,7 @@ public class MonsterHelper {
     
     }
     
-    public void paint(Graphics g, int x, int y, int width, int height, int act, int direction, int health){
+    public void paint(Graphics g, int x, int y, int width, int height, int act, int direction, int health,int originalhealth){
         if(img == null){
             return;
         }
@@ -49,7 +49,7 @@ public class MonsterHelper {
          g.drawImage(img, x, y, x + width, y + height, dx + act * Global.IMG_X_OFFSET, dy + direction * Global.IMG_Y_OFFSET, dx + 32 + act*Global.IMG_X_OFFSET, dy + 32 + direction * Global.IMG_Y_OFFSET, null);
          g.setColor(Color.red);
             g.drawRect(x - Global.HEALTHX , y+height, width + 2*Global.HEALTHX,25);
-            float temp1 = (float)health/100 * (width + 2 * Global.HEALTHX);
+            float temp1 = (float)health/originalhealth * (width + 2 * Global.HEALTHX);
             g.fillRect(x - Global.HEALTHX , y+height, (int)temp1, 25);    
                 
     

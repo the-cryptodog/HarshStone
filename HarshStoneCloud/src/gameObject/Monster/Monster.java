@@ -29,6 +29,7 @@ public class Monster extends GameObject{
     protected int act;
     protected int originalx;
     protected int originaly;
+    protected int originalhealth;
     protected boolean moved;
     protected boolean useskill;
     protected MonsterHelper monsterhelper;
@@ -40,6 +41,7 @@ public class Monster extends GameObject{
     public Monster(int x, int y, int width, int height, String name, int health,int act){
         super(x, y, width, height, name);
         this.health = health;
+        originalhealth = health;
         direction = 1;
         originalx = x;
         originaly = y;
@@ -156,7 +158,7 @@ public class Monster extends GameObject{
             g.drawImage(image, x, y, width, height, null);
         }
         else{
-            monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health);
+            monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth);
             if(monsterstate instanceof MonsterState.Attack){
                 skill.paint(g);
             }
