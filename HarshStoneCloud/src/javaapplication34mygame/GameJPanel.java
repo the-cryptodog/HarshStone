@@ -7,7 +7,7 @@ package javaapplication34mygame;
 
 import Controller.ImageResourceController;
 import Controller.SceneController;
-import gameObject.Card;
+import gameObject.Card.Card;
 import gameObject.DamageEffect;
 import gameObject.Hero.Hero;
 import io.CommandSolver.CommandWrapper;

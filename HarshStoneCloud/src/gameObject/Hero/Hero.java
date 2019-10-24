@@ -6,9 +6,9 @@
 package gameObject.Hero;
 
 import Controller.PathBuilder;
-import gameObject.Card;
-import gameObject.CardDeck;
-import gameObject.CardDeck.WarriorDeck;
+import gameObject.Card.Card;
+import gameObject.Card.CardDeck;
+import gameObject.Card.CardDeck.WarriorDeck;
 import gameObject.GameObject;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;

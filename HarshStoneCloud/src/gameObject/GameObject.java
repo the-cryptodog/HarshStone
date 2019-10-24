@@ -46,6 +46,22 @@ public abstract class GameObject {
         return x;
     }
     
+    public int getY(){
+        return y;
+    }
+    
+    public int getWidth(){
+        return width;
+    }
+    
+    public int getHeight(){
+        return height;
+    }
+    
+    public String getName(){
+        return name;
+    }
+    
     
     public boolean isCollision(int x, int y){
         if(x < this.x || x > this.x + width){

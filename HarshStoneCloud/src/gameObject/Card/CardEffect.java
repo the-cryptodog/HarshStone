@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gameObject;
+package gameObject.Card;
 
+import gameObject.Card.Card;
 import gameObject.Hero.Hero;
 import gameObject.Monster.Monster;
 
@@ -16,7 +17,7 @@ public abstract class CardEffect extends Card{
     
     protected Card card;
     public CardEffect(Card card) {
-        super(card.x, card.y, card.width, card.height, card.name, card.cost);
+        super(card.getX(), card.getY(), card.getWidth(), card.getHeight(), card.getName(), card.cost);
         this.card = card;  
     }
     
