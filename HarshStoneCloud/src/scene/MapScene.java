@@ -90,7 +90,7 @@ public class MapScene extends Scene {
                     for (int i = 0; i < redCrossList.size(); i++) {
                         if (redCrossList.get(i).isCollision(e.getX(), e.getY())
                                 && redCrossList.get(currentRedCross).checkTag(i)) {
-                            System.out.print("ddddddd4444");
+                            System.out.print("dd4444");
                             stagePassed = false;
                             currentRedCross = redCrossList.get(i).getTagList().get(0);
                             redCrossList.get(i).setIsClicked(true);
