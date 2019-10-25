@@ -67,7 +67,7 @@ public class Global {
     public static final int STAGENUMBER = 9;
     
     //目前關卡
-    public static int CURRENTSTAGE = 0;
+    public static int CURRENTSTAGE = 1;
 
 
     

@@ -64,11 +64,11 @@ public class MapScene extends Scene {
 
         System.out.println(redCrossList.get(0).toString());
         System.out.print(redCrossList.get(0) instanceof redCross);
-        System.out.print(redCrossList.size());
+        System.out.print("Global.CURRENTSTAGE = " + Global.CURRENTSTAGE);
 
         map = irc.tryGetImage("/resources/Map/map.png");
         cover = irc.tryGetImage("/resources/Map/mapOrigin.png");
-        
+
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
 
             @Override
@@ -91,7 +91,6 @@ public class MapScene extends Scene {
                     for (int i = 0; i < redCrossList.size(); i++) {
                         if (redCrossList.get(i).isCollision(e.getX(), e.getY())
                                 && redCrossList.get(currentRedCross).checkTag(i)) {
-                            System.out.print("ddggggg4444");
                             stagePassed = false;
                             currentRedCross = redCrossList.get(i).getTagList().get(0);
                             redCrossList.get(i).setIsClicked(true);
@@ -129,12 +128,12 @@ public class MapScene extends Scene {
     @Override
     public void sceneBegin() {
         stagePassed = true;
-        Global.CURRENTSTAGE++;
+
     }
 
     @Override
     public void sceneUpdate() {
-        
+
     }
 
     @Override

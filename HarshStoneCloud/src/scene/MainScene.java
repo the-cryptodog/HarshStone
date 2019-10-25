@@ -186,6 +186,8 @@ public class MainScene extends Scene {
                         }
                     }
                     if (back.isCollision(e.getX(), e.getY())) {
+                        gameWin = true;                    
+                        Global.CURRENTSTAGE++;
                         scenecontroller.changeScene(mapScene);
 
                     }
@@ -206,7 +208,6 @@ public class MainScene extends Scene {
                     if (exit.isCollision(e.getX(), e.getY())) {
                         gameOver = true;
                         sceneEnd();
-
                     }
                     if (exit2.isCollision(e.getX(), e.getY())) {
                         scenecontroller.changeScene(new MenuScene(scenecontroller));
