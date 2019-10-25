@@ -20,10 +20,6 @@ import java.util.ArrayList;
 public class MenuScene extends Scene {
 
     private BufferedImage img;
-    private Button start;
-    private Button exit;
-    private Button newGameButton;
-    private Button continueButton;
     private ArrayList<Button> buttons;
 
     private boolean startPressed;

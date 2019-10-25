@@ -24,14 +24,18 @@ import gameObject.Monster.MonsterState.DecideMove;
 import gameObject.Skill.Skill;
 import io.CommandSolver;
 import io.CommandSolver.MouseCommandListener;
+import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.Robot;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
@@ -74,11 +78,19 @@ public class MainScene extends Scene {
     private CardFactory cardfactory;
     private int cardlimit;
     private Font font1;
+    private Button exit;
+    private Button exit2;
     private int monsterend;
-    
+    private boolean gameOver;
+    private boolean gameWin;
+    private BufferedImage endImage;
+
     public MainScene(SceneController scenecontroller, MapScene mapScene) {
         super(scenecontroller);
-        font1 =new Font("TimesRoman", Font.BOLD+Font.ITALIC,14);
+        
+        gameWin = false;
+        gameOver = false;
+        font1 = new Font("TimesRoman", Font.BOLD + Font.ITALIC, 14);
         xdelta = 0;
         ydelta = 0;
         cardclicked = false;
@@ -87,15 +99,15 @@ public class MainScene extends Scene {
         cardlimit = 5;
         monsterend = 0;
 //        drawcarddeck = new CardDeck(1400,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"抽牌推");
-       
-        discarddeck = new CardDeck(40,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"棄牌推");
-        handdeck = new CardDeck(1600,700,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"手牌");
+
+        discarddeck = new CardDeck(40, 690, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "棄牌推");
+        handdeck = new CardDeck(1600, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "手牌");
 
         selectedcard = null;
         discardcard = null;
         cardfactory = new CardFactory();
-        
 
+        exit = new Button(1600, 660, 108, 40, "EXIT");
         back = new Button(1600, 730, 108, 40, "BACK");
         next = new Button(1600, 800, 184, 42, "ROUNDSTART");
 
@@ -111,9 +123,7 @@ public class MainScene extends Scene {
         System.out.print(orc.toString());
         System.out.print(cultist.toString());
         System.out.print(monster.toString());
-        
-        
-        
+
         System.out.println(drawcarddeck.toString());
         System.out.println(handdeck.toString());
         System.out.println(discarddeck.toString());
@@ -121,6 +131,8 @@ public class MainScene extends Scene {
             monster.setHero(hero);
         }
 
+//        winImage = irc.tryGetImage("/resources/Background/ENDSCENE.png");
+        endImage = irc.tryGetImage("/resources/Background/ENDSCENE.png");
         img = irc.tryGetImage("/resources/Background/BACKGROUND3.jpg");
         selectedmonster = 0;
 
@@ -146,23 +158,22 @@ public class MainScene extends Scene {
                                 selectedcard.setCardMoveState(new MoveToDiscard());
                                 break;
                             }
-                            if(i == monsters.size()-1){
+                            if (i == monsters.size() - 1) {
                                 selectedcard.setCardMoveState(new MoveBack());
                             }
                         }
                         selectedcard = null;
                     }
-                        
+
                 }
-                    
 
                 if (state == CommandSolver.MouseState.CLICKED) {
                     System.out.println("clicked");
                     if (next.isCollision(e.getX(), e.getY())) {
                         next.setIsClicked(true);
-                    
+
                         int temp = handdeck.getCards().size();
-                        for(int i = 0;i < temp; i++){
+                        for (int i = 0; i < temp; i++) {
                             handdeck.getCards().get(i).setCardMoveState(new EndTurnMove());
                         }
                     }
@@ -177,14 +188,21 @@ public class MainScene extends Scene {
                                 selectedcard.setCardMoveState(new MoveToDiscard());
                                 break;
                             }
-                            if(i == monsters.size()-1){
+                            if (i == monsters.size() - 1) {
                                 selectedcard.setCardMoveState(new MoveBack());
-                            
+
                             }
                         }
                         selectedcard = null;
                     }
+                    if (exit.isCollision(e.getX(), e.getY())) {
+                        gameOver = true;
+                        sceneEnd();
 
+                    }
+                    if (exit2.isCollision(e.getX(), e.getY())) {
+                        scenecontroller.changeScene(new MenuScene(scenecontroller));
+                    }
                 }
 
                 if (state == CommandSolver.MouseState.PRESSED) {
@@ -197,7 +215,7 @@ public class MainScene extends Scene {
                                 xdelta = temp.getDeltaX(e.getX());
                                 ydelta = temp.getDeltaY(e.getY());
                                 temp.setClicked(true);
-                                sceneEnd();
+//                                sceneEnd();
                             }
                         }
                     }
@@ -215,41 +233,41 @@ public class MainScene extends Scene {
         };
     }
 
-    public void drawCard(CardDeck drawcarddeck,CardDeck handdeck,CardDeck discarddeck) {
-        int temp =  handdeck.getCards().size();
-        for(int i = 0; i < temp; i++){
+    public void drawCard(CardDeck drawcarddeck, CardDeck handdeck, CardDeck discarddeck) {
+        int temp = handdeck.getCards().size();
+        for (int i = 0; i < temp; i++) {
             discarddeck.getCards().add(handdeck.getCards().get(i));
         }
         System.out.println(1);
         System.out.println(drawcarddeck.toString());
         System.out.println(handdeck.toString());
         System.out.println(discarddeck.toString());
-         System.out.println();
-        
-        for(int i = 0; i< temp;i++){
-               handdeck.getCards().remove(0);
+        System.out.println();
+
+        for (int i = 0; i < temp; i++) {
+            handdeck.getCards().remove(0);
         }
         System.out.println(2);
         System.out.println(drawcarddeck.toString());
         System.out.println(handdeck.toString());
         System.out.println(discarddeck.toString());
         System.out.println();
-        if(drawcarddeck.getCards().size() < 5){
+        if (drawcarddeck.getCards().size() < 5) {
             temp = discarddeck.getCards().size();
-            for(int i = 0; i< temp;i++){
+            for (int i = 0; i < temp; i++) {
                 drawcarddeck.getCards().add(discarddeck.getCards().get(i));
             }
-        System.out.println(3);
-        System.out.println(drawcarddeck.toString());
-        System.out.println(handdeck.toString());
-        System.out.println(discarddeck.toString());
-        System.out.println();
+            System.out.println(3);
+            System.out.println(drawcarddeck.toString());
+            System.out.println(handdeck.toString());
+            System.out.println(discarddeck.toString());
+            System.out.println();
 //        //確認每張牌都被刪掉
-            
-            for(int i = 0; i< temp; i++){
+
+            for (int i = 0; i < temp; i++) {
                 discarddeck.getCards().remove(0);
             }
-        
+
         }
         System.out.println(4);
         System.out.println(drawcarddeck.toString());
@@ -257,17 +275,17 @@ public class MainScene extends Scene {
         System.out.println(discarddeck.toString());
         System.out.println();
         drawcarddeck.shuffle();
-        for(int i = 0; i < cardlimit; i++){
+        for (int i = 0; i < cardlimit; i++) {
             handdeck.getCards().add(drawcarddeck.getCards().get(i));
         }
         setDeckPoisition();
-        
+
         System.out.println(5);
         System.out.println(drawcarddeck.toString());
         System.out.println(handdeck.toString());
         System.out.println(discarddeck.toString());
         System.out.println();
-        for(int i = 0; i < cardlimit; i++){
+        for (int i = 0; i < cardlimit; i++) {
             drawcarddeck.getCards().remove(0);
         }
         System.out.println(6);
@@ -276,10 +294,7 @@ public class MainScene extends Scene {
         System.out.println(discarddeck.toString());
         System.out.println();
     }
-    
-    
-    
-    
+
     public ArrayList<Card> getDeck() {
         return deck;
     }
@@ -291,9 +306,10 @@ public class MainScene extends Scene {
     public Monster getMonster() {
         return orc;
     }
+
     //同時讓牌變成可動
-    public void setDeckPoisition(){
-        for(int i = 0 ; i < cardlimit;i++){
+    public void setDeckPoisition() {
+        for (int i = 0; i < cardlimit; i++) {
             Card temp = handdeck.getCards().get(i);
             temp.setX(300 + (Global.CARDWIDTH + 50) * i);
             temp.setY(Global.CARDDECKBOTTOM);
@@ -301,46 +317,44 @@ public class MainScene extends Scene {
             temp.setOrginalY(Global.CARDDECKBOTTOM);
             temp.setCardMoveState(new Movable());
         }
-    
+
     }
-    
-    
-    
+
     @Override
     public void sceneBegin() {
         for (Monster monster : monsters) {
-            if(monster.gethealth() <= 0){
+            if (monster.gethealth() <= 0) {
                 monsters.remove(monster);
             }
             monster.move();
         }
-        
+
         drawcarddeck.shuffle();
-        for(int i = 0; i < cardlimit; i++){
+        for (int i = 0; i < cardlimit; i++) {
             handdeck.getCards().add(drawcarddeck.getCards().get(i));
-            Card temp = handdeck.getCards().get(i);    
+            Card temp = handdeck.getCards().get(i);
         }
-        for(int i = 0; i < cardlimit; i++){
+        for (int i = 0; i < cardlimit; i++) {
             drawcarddeck.getCards().remove(0);
         }
         setDeckPoisition();
-        
+
     }
 
     @Override
     public void sceneUpdate() {
         hero.update();
-        if (delaycounter.delayupdate()){
-            for(int i = 0;i < handdeck.getCards().size(); i++){
+        if (delaycounter.delayupdate()) {
+            for (int i = 0; i < handdeck.getCards().size(); i++) {
                 handdeck.getCards().get(i).move();
             }
-            for(int i = 0;i < discarddeck.getCards().size(); i++){
+            for (int i = 0; i < discarddeck.getCards().size(); i++) {
                 discarddeck.getCards().get(i).move();
             }
         }
-        
+
         for (Monster monster : monsters) {
-            if(monster.gethealth() <= 0){
+            if (monster.gethealth() <= 0) {
                 monsters.remove(monster);
             }
             monster.update();
@@ -354,48 +368,55 @@ public class MainScene extends Scene {
                 if (!monster.getMoved()) {
                     monster.move();
                     break;
-                    
+
                 }
-                
-                
+
             }
 //            if (monsters.get(monsters.size() - 1).getMoved()) {
 
-                for (Monster monster : monsters) {
-                    if(monster.getMoved() == false){
-                        monsterend=0;
-                        break;
-                    }
-                    monsterend++;
-                    if(monsterend == monsters.size()){
-                        for(Monster temp : monsters){
-                            temp.setMoved(false); 
-                            temp.setMonsterState(new DecideMove());
-                            temp.move();
-                        }
-                        next.setIsClicked(false);
-                        drawCard(drawcarddeck,handdeck,discarddeck);
-                    }
-                    
+            for (Monster monster : monsters) {
+                if (monster.getMoved() == false) {
+                    monsterend = 0;
+                    break;
                 }
-               
-                
-    
-            
-            
+                monsterend++;
+                if (monsterend == monsters.size()) {
+                    for (Monster temp : monsters) {
+                        temp.setMoved(false);
+                        temp.setMonsterState(new DecideMove());
+                        temp.move();
+                    }
+                    next.setIsClicked(false);
+                    drawCard(drawcarddeck, handdeck, discarddeck);
+                }
+            }
         }
     }
 
     @Override
     public void sceneEnd() {
-
+        
+//        try {
+//            Robot robot = new Robot();
+//            BufferedImage image = robot.createScreenCapture(new Rectangle(1920, 1080));
+//            image = image.getSubimage(0, 0, 1728, 972);
+//            ImageIO.write(image, "png", new File("C:/Users/User/Documents/期中專案/HarshStoneCloud/src/resources/1.png"));
+//            endImage = image;
+//        } catch (AWTException e) {
+//            e.printStackTrace();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//            
+//        }
+        exit2 = new Button(900, 860, 108, 40, "BACK");
     }
 
     @Override
     public void paint(Graphics g) {
         g.setFont(font1);
-        g.drawString("14pt bold & italic times Roman",5,92);
+        g.drawString("14pt bold & italic times Roman", 5, 92);
         g.drawImage(img, 0, 0, 1920, 1080, null);
+
         hero.paint(g);
         for (int i = 0; i < monsters.size(); i++) {
             monsters.get(i).paint(g);
@@ -408,16 +429,26 @@ public class MainScene extends Scene {
         g.setColor(Color.red);
         for (int i = 0; i < cardlimit; i++) {
             g.drawRect(300 + (Global.CARDWIDTH + 50) * i, Global.CARDDECKBOTTOM, Global.CARDWIDTH, Global.CARDHEIGHT);
-            
+
         }
-        
+
         for (int i = 0; i < handdeck.getCards().size(); i++) {
-            handdeck.getCards().get(i).paint(g); 
+            handdeck.getCards().get(i).paint(g);
         }
-        
+
         back.paint(g);
+        exit.paint(g);
         drawcarddeck.paint(g);
         discarddeck.paint(g);
+        if (gameOver) {    
+            g.drawImage(endImage, 0, 0, 1920, 1080, null);
+             exit2.paint(g);
+        }
+//        if (gameWin) {    
+//            g.drawImage(winImage, 0, 0, 1920, 1080, null);
+//             exit2.paint(g);
+//        }
+        
     }
 
 }
