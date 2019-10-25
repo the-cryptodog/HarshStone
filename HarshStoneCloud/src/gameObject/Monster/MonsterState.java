@@ -89,7 +89,7 @@ public interface MonsterState {
         @Override
         public void action(Monster monster, Hero hero) { 
 
-            if(monster.getSkill().getSkillend()){
+            if(monster.getSelfSkill().getSkillend()){
                 hero.sethealth(hero.gethealth() - monster.getAttack() + hero.getDefense());
                 monster.setAttack(0);
                 monster.monsterstate = new MoveRight();

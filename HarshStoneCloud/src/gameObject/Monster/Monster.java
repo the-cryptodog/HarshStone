@@ -10,22 +10,19 @@ import gameObject.GameObject;
 import gameObject.Hero.Hero;
 import gameObject.NumberIcon;
 import gameObject.Skill.Skill;
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.Timer;
 import utils.DelayCounter;
-import utils.Global;
 import values.ImagePath;
 
 /**
  *
  * @author frank61003
  */
-public class Monster extends GameObject{
+public class Monster extends GameObject {
+
     protected int health;
-    private static final int[] ACT = {0,1,2,1};
+    private static final int[] ACT = {0, 1, 2, 1};
+
     protected int direction;
     protected int act;
     protected int originalx;
@@ -38,15 +35,17 @@ public class Monster extends GameObject{
     protected MonsterHelper monsterhelper;
     protected DelayCounter delaycounter;
     protected int delay;
-    protected Skill skill;
     protected MonsterState monsterstate;
     protected Hero hero;
     protected int defense;
     private int attack;
     private NumberIcon number1;
     private NumberIcon number2;
-    
-    public Monster(int x, int y, int width, int height, String name, int health,int act){
+    private int yPosition;
+    private int skillIndex;
+    private Skill selfSkill;
+
+    public Monster(int x, int y, int width, int height, String name, int health, int yPosition, int act, int skillIndex) {
         super(x, y, width, height, name);
         this.health = health;
         originalhealth = health;
@@ -59,98 +58,105 @@ public class Monster extends GameObject{
         useskill = false;
         image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
         recordhealth = false;
-        
-        
-        
-        
-        
+        this.yPosition = yPosition;
+        this.skillIndex = skillIndex;
+
         monsterhelper = new MonsterHelper(act);
         delaycounter = new DelayCounter(10, new DelayCounter.Action() {
 
             @Override
             public void action() {
                 int act = 0;
-                act = ++act % 4; 
+                act = ++act % 4;
             }
         });
 
-        skill = new Skill(Global.HEROX - Global.SKILLDELTA,Global.HEROY - Global.SKILLDELTA,Global.SKILLWIDTH,Global.SKILLHEIGHT,"ss");
         monsterstate = new MonsterState.DecideMove();
-        number1 = new NumberIcon(x+width,y+100,50,100,"",0);
-        number2 = new NumberIcon(x+width+50,y+100,50,100,"",0);
+        number1 = new NumberIcon(x + width, y + 100, 50, 100, "", 0);
+        number2 = new NumberIcon(x + width + 50, y + 100, 50, 100, "", 0);
     }
-    
+
     //10/22
-    public void setHero(Hero hero){
+    public void setHero(Hero hero) {
         this.hero = hero;
     }
-    
-    
-    public Monster(int x, int y, int width, int height, String name, int health){
+
+    public Monster(int x, int y, int width, int height, String name, int health) {
         super(x, y, width, height, name);
         this.health = health;
         this.act = 0;
         image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
-        
+
     }
-    
-    public void recover(){
+
+    public void recover() {
         health = lasthealth;
     }
-    
-    public boolean getRecordHealth(){
+
+    public boolean getRecordHealth() {
         return recordhealth;
     }
-    
-    public void setRecordHealth(boolean recordhealth){
+
+    public void setRecordHealth(boolean recordhealth) {
         this.recordhealth = recordhealth;
     }
-    
-    
-    
-    
-    public int gethealth(){
+
+    public void setSkill(Skill selfskill) {
+        this.selfSkill = selfskill;
+    }
+
+    public int getskillIndex() {
+        return skillIndex;
+    }
+    public Skill getSelfSkill (){
+        return selfSkill;
+    }
+
+    public int gethealth() {
         return health;
     }
-    
-    public void sethealth(int health){
+
+    public void sethealth(int health) {
         this.health = health;
     }
-    
-    public int getDefense(){
+
+    public int getDefense() {
         return defense;
     }
-    
-    public void setDefense(int defense){
+
+    public void setDefense(int defense) {
         this.defense = defense;
     }
-    
-    public int getAttack(){
+
+    public int getAttack() {
         return attack;
     }
-    
-    public void setAttack(int attack){
+
+    public int getYposition() {
+        return yPosition;
+    }
+
+    public void setAttack(int attack) {
         this.attack = attack;
     }
-    
-    public void setMonsterState(MonsterState monsterstate){
+
+    public void setMonsterState(MonsterState monsterstate) {
         this.monsterstate = monsterstate;
     }
-    
-    
-    
-    public void changeDirection(int direction){
+
+    public void changeDirection(int direction) {
         this.direction = direction;
-    } 
-    
-    public void update(){
-        if(delaycounter.delayupdate()){
-        
+    }
+
+    public void update() {
+        if (delaycounter.delayupdate()) {
+
             act = ++act % 4;
-    
+
         }
     }
-    public void move(){
+
+    public void move() {
         int tempx;
 //        if(!moved){
 //            if(direction == 1){    
@@ -184,76 +190,57 @@ public class Monster extends GameObject{
 //            }
 //    
 //        } 
-        if(recordhealth==false){
+        if (recordhealth == false) {
             lasthealth = health;
             recordhealth = false;
         }
-        
+
         monsterstate.action(this, hero);
-        if(attack>0){
+        if (attack > 0) {
             number1.setNumberIcon(attack / 10);
             number2.setNumberIcon(attack % 10);
-            
-        }
-        else if(defense>0){
+
+        } else if (defense > 0) {
             number1.setNumberIcon(defense / 10);
             number2.setNumberIcon(defense % 10);
-           
-            
+
         }
-        
+
     }
-    
-    public void setMoved(boolean moved){
+
+    public void setMoved(boolean moved) {
         this.moved = moved;
     }
-    
-    public boolean getMoved(){
+
+    public boolean getMoved() {
         return moved;
     }
-    
-    public int getDirection(){
+
+    public int getDirection() {
         return direction;
     }
-    
-    
-    public Skill getSkill(){
-        return skill;
+
+    public String toString() {
+        return "攻擊力" + attack + "防禦力" + defense;
+
     }
-    
-    public String toString(){
-    
-        return "攻擊力" + attack +"防禦力"+ defense;
-    
-    }
-    
-    public void paint(Graphics g){
-        if(act == 5){
+
+    public void paint(Graphics g) {
+        if (act == 5) {
             g.drawImage(image, x, y, width, height, null);
-        }
-        else{
+        } else {
             monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth, attack, defense);
             System.out.println(name + toString());
-            number1.setX(x+width);
-            number2.setX(x+width);
+            number1.setX(x + width);
+            number2.setX(x + width);
 //            number1.paint(g);
 //            number2.paint(g);
-            
-            if(monsterstate instanceof MonsterState.Attack){
-                skill.paint(g);
+
+            if (monsterstate instanceof MonsterState.Attack) {
+                selfSkill.paint(g);//畫出攻擊技能
             }
-           
-            
+
         }
-    
+
     }
 }
-    
-    
-    
-    
-    
-    
-    
-    
-

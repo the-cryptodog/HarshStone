@@ -94,8 +94,8 @@ public class CardDeck extends GameObject{
 //應該要有move
     
     public void paint(Graphics g){
-        g.setFont(font1);
-        g.drawString(cards.size()+"", x+100, y-30);
+//        g.setFont(font1);
+//        g.drawString(cards.size()+"", x+100, y-30);
         g.drawImage(image, x, y, width,height,null);
         
     }

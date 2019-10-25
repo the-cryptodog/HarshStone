@@ -81,7 +81,9 @@ public class CardFactory {
     
     //generate card
     public Card genCard(int serialnumber){
+        
         String[] temp = carddata.get(serialnumber).split(",");
+        
         Card card = new Card(0,0,Global.CARDDECKWIDTH,Global.CARDHEIGHT,temp[1],Integer.valueOf(temp[5]));
          
         if(Integer.valueOf(temp[2]) != 0){
@@ -93,6 +95,7 @@ public class CardFactory {
         if(Integer.valueOf(temp[4]) != 0){
             card = new WeakEffect(card, Integer.valueOf(temp[4]));
         }
+        card.setSkill(Integer.valueOf(temp[6]));
        
         return card;
     

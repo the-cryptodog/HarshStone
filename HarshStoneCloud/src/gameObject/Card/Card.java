@@ -11,6 +11,7 @@ import Controller.PathBuilder;
 import gameObject.Card.CardMoveState.MoveStop;
 import gameObject.GameObject;
 import gameObject.Hero.Hero;
+import gameObject.Skill.Skill;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
@@ -31,6 +32,7 @@ public class Card extends GameObject{
     protected int originalx;
     protected int originaly;
     private int defense;
+    private int skillIndex;
     
     public Card(int x, int y, int width, int height, String name, int cost) {
         super(x, y, width, height, name);
@@ -42,23 +44,33 @@ public class Card extends GameObject{
         cardmovestate = new MoveStop();
         image = irc.getInstance().tryGetImage(PathBuilder.getImage("/"+name+".png"));
         defense = 0;
+        
     }
     
     public int getDefense(){
         return defense;
     }
     
-    public void steDefense(int defense){
+    public void setDefense(int defense){
         this.defense = defense;
     
     }
+    public void setSkill(int skillIndex){
+       this.skillIndex = skillIndex;
+    
+    }
+     public int getOrginalX(){
+        return  originalx;
+    }
+    
+    
     
     public void setOrginalX(int originalx){
             this.originalx = originalx;
     }
     
-    public int getOrginalX(){
-        return  originalx;
+    public int getSkilltype(){
+        return skillIndex;
     }
     
     
