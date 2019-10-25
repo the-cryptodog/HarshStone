@@ -12,6 +12,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import utils.Global;
 
 /**
  *
@@ -29,7 +30,7 @@ public class MenuScene extends Scene {
     public MenuScene(SceneController scenecontroller) {
         super(scenecontroller);
         startPressed = false;
-
+        Global.CURRENTSTAGE = 1;
 //        start = new StartButton(690, 300, 200, 100, "開始遊戲");
         buttons = new ArrayList<>();
         buttons.add(new Button(50, 50, 220, 50, "NEWGAME"));
