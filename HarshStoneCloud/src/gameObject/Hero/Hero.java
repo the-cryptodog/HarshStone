@@ -37,12 +37,14 @@ public class Hero extends GameObject{
     protected int delay;
     protected Timer timer;
     protected CardDeck herodeck;
+    private int defense;
     
     
     public Hero(int x, int y, int width, int height, String name, int health,int act){
         super(x, y, width, height, name);
         this.health = health;
         direction = 2;
+        defense = 0;
         originalx = x;
         originaly = y;
         moved = false;
@@ -94,6 +96,20 @@ public class Hero extends GameObject{
     public void sethealth(int health){
         this.health = health;
     }
+    
+    public int getDefense(){
+        return defense;
+    }
+    
+    public void setDefense(int defense){
+        this.defense = defense;
+    }
+    
+    
+    
+    
+    
+    
     
     public void changeDirection(int direction){
         this.direction = direction;

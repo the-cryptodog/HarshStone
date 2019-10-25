@@ -43,8 +43,6 @@ public class ImagePath {
 
 
     public static final String MONSTER_ROOT = "/Monster";
-    public static final String ORC = "/獸人.png";
-    public static final String CULTIST = "/cultist.png";
     public static final String LARGEACIDSLIME = "/largeacidslime.png";
     public static final String MIDDLEACIDSLIME = "/middleacidslime.png";
     public static final String SMALLACIDSLIME = "/smallacidslime.png";
@@ -58,5 +56,10 @@ public class ImagePath {
     public static final String SWORD1 = "/Sword1.png";
     
     public static final String CARDBECK = "/牌背.png";
+    
+    public static final String ICON_ROOT = "/Icon";
+    public static final String ATTACKICON = "/Attack.png";
+    public static final String DEFENSEICON = "/Defense.png";
+    
     
 }

@@ -44,7 +44,7 @@ public class JavaApplication34MyGame {
         jj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jj.setSize(1920, 1080);
         GameJPanel jp = new GameJPanel();
-        commandsolver = new CommandSolver.Builder(Global.MILLISEC_PER_FRAME * 1).enableMouseTrack(jp).gen();
+        commandsolver = new CommandSolver.Builder(Global.MILLISEC_PER_FRAME * 2).enableMouseTrack(jp).gen();
         jj.add(jp);
         commandsolver.start();
         jj.setVisible(true);

@@ -8,6 +8,7 @@ package gameObject.Card;
 import gameObject.Monster.Monster;
 import Controller.ImageResourceController;
 import Controller.PathBuilder;
+import gameObject.Card.CardMoveState.MoveStop;
 import gameObject.GameObject;
 import gameObject.Hero.Hero;
 import java.awt.Graphics;
@@ -26,18 +27,39 @@ public class Card extends GameObject{
     protected BufferedImage image;
     protected String path;
     protected int serialnumber;
+    protected CardMoveState cardmovestate;
+    protected int originalx;
+    protected int originaly;
     
     public Card(int x, int y, int width, int height, String name, int cost) {
         super(x, y, width, height, name);
+        originalx = x;
+        originaly = y;
         this.cost = cost;
         description= "";
         clicked = false;
+        cardmovestate = new MoveStop();
+        image = irc.getInstance().tryGetImage(PathBuilder.getImage("/"+name+".png"));
+    }
     
-         image = irc.getInstance().tryGetImage(PathBuilder.getImage("/"+name+".png"));
+    public void setOrginalX(int originalx){
+            this.originalx = originalx;
+    }
+    
+    public int getOrginalX(){
+        return  originalx;
     }
     
     
+    public void setOrginalY(int originaly){
+            this.originaly = originaly;
+    }
     
+    
+    public int getOrginalY(){
+        return originaly;
+    }
+      
     
     public ImageResourceController getIRC() {
         return irc;
@@ -57,7 +79,27 @@ public class Card extends GameObject{
     public void setClicked(boolean x){
         clicked = x;
     }
-
+    
+    public boolean getUP(){
+        if( y - originaly <0){
+        
+            return true;
+        }
+        return false;
+    }
+    
+    public boolean getLeft(){
+        if( x - originalx <0){
+            return true;
+        }
+        return false;
+    }
+    
+    
+    public void setCardMoveState(CardMoveState cardmovestate){
+        this.cardmovestate = cardmovestate;
+    }
+    
     public boolean getClicked(){
         return clicked;
     }
@@ -67,19 +109,7 @@ public class Card extends GameObject{
     }
     
     public void move(){
-        int deltax = 0;
-        int deltay = 0;
-        if(x > 30 || y < 600){    
- 
-            if(x > 30){
-                x = x - 30;
-            }
-            if(y < 600){
-                y += 30;
-            }
-            
-           
-        }
+        cardmovestate.move(this);
     }
     
     
