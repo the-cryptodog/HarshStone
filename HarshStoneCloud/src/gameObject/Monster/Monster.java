@@ -31,6 +31,8 @@ public class Monster extends GameObject{
     protected int originalx;
     protected int originaly;
     protected int originalhealth;
+    private int lasthealth;
+    private boolean recordhealth;
     protected boolean moved;
     protected boolean useskill;
     protected MonsterHelper monsterhelper;
@@ -166,7 +168,12 @@ public class Monster extends GameObject{
 //                }
 //            }
 //    
-//        }   
+//        } 
+        if(recordhealth==false){
+            lasthealth = health;
+            recordhealth = false;
+        }
+        
         monsterstate.action(this, hero);
         if(attack>0){
             number1.setNumberIcon(attack / 10);
