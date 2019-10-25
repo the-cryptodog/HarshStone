@@ -13,7 +13,7 @@ import gameObject.Card.CardDeck;
  */
 public class Global {
     //刷新時間
-    public static final int FRAME_PER_SECOND = 50;
+    public static final int FRAME_PER_SECOND = 60;
     public static final int MILLISEC_PER_FRAME = 1000 / FRAME_PER_SECOND;
     //畫面更新時間
     public static final int FRAME_LIMIT = 120;

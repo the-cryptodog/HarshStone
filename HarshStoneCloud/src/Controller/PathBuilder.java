@@ -30,10 +30,15 @@ public class PathBuilder {
     public static String getMonster(String path){
         return ImagePath.ROOT + ImagePath.MONSTER_ROOT + path;
     }
-        public static String getHero(String path) {
+    public static String getHero(String path) {
         return ImagePath.ROOT + ImagePath.ACTOR_ROOT + path;
     }
-            public static String getSkill(String path){
+    public static String getSkill(String path){
         return ImagePath.ROOT + ImagePath.SKILL_ROOT + path;
     }
+    
+    public static String getIcon(String path){
+       return ImagePath.ROOT + ImagePath.ICON_ROOT + path;
+    }
+    
 }

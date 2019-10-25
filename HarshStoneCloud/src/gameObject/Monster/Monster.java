@@ -38,6 +38,11 @@ public class Monster extends GameObject{
     protected Skill skill;
     protected MonsterState monsterstate;
     protected Hero hero;
+    protected int defense;
+    private int attack;
+    
+    
+    
     public Monster(int x, int y, int width, int height, String name, int health,int act){
         super(x, y, width, height, name);
         this.health = health;
@@ -45,6 +50,8 @@ public class Monster extends GameObject{
         direction = 1;
         originalx = x;
         originaly = y;
+        defense = 0;
+        attack = 0;
         moved = false;
         useskill = false;
         image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
@@ -60,7 +67,7 @@ public class Monster extends GameObject{
         });
 
         skill = new Skill(Global.HEROX - Global.SKILLDELTA,Global.HEROY - Global.SKILLDELTA,Global.SKILLWIDTH,Global.SKILLHEIGHT,"ss");
-        monsterstate = new MonsterState.MoveLeft();
+        monsterstate = new MonsterState.DecideMove();
         
     }
     
@@ -85,6 +92,28 @@ public class Monster extends GameObject{
     public void sethealth(int health){
         this.health = health;
     }
+    
+    public int getDefense(){
+        return defense;
+    }
+    
+    public void setDefense(int defense){
+        this.defense = defense;
+    }
+    
+    public int getAttack(){
+        return attack;
+    }
+    
+    public void setAttack(int attack){
+        this.attack = attack;
+    }
+    
+    public void setMonsterState(MonsterState monsterstate){
+        this.monsterstate = monsterstate;
+    }
+    
+    
     
     public void changeDirection(int direction){
         this.direction = direction;
@@ -151,14 +180,19 @@ public class Monster extends GameObject{
         return skill;
     }
     
+    public String toString(){
     
+        return "攻擊力" + attack +"防禦力"+ defense;
+    
+    }
     
     public void paint(Graphics g){
         if(act == 5){
             g.drawImage(image, x, y, width, height, null);
         }
         else{
-            monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth);
+            monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth, attack, defense);
+            System.out.println(name + toString());
             if(monsterstate instanceof MonsterState.Attack){
                 skill.paint(g);
             }

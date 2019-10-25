@@ -16,12 +16,11 @@ import gameObject.Card.CardMoveState.EndTurnMove;
 import gameObject.Card.CardMoveState.Movable;
 import gameObject.Card.CardMoveState.MoveBack;
 import gameObject.Card.CardMoveState.MoveToDiscard;
-import gameObject.Cultist;
 import gameObject.DamageEffect;
 import gameObject.DefenceEffect;
 import gameObject.Hero.Hero;
 import gameObject.Monster.Monster;
-import gameObject.Orc;
+import gameObject.Monster.MonsterState.DecideMove;
 import gameObject.Skill.Skill;
 import io.CommandSolver;
 import io.CommandSolver.MouseCommandListener;
@@ -75,6 +74,7 @@ public class MainScene extends Scene {
     private CardFactory cardfactory;
     private int cardlimit;
     private Font font1;
+    private int monsterend;
     
     public MainScene(SceneController scenecontroller, MapScene mapScene) {
         super(scenecontroller);
@@ -85,6 +85,7 @@ public class MainScene extends Scene {
         heroturn = true;
         crystal = 3;
         cardlimit = 5;
+        monsterend = 0;
 //        drawcarddeck = new CardDeck(1400,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"抽牌推");
        
         discarddeck = new CardDeck(40,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"棄牌推");
@@ -100,13 +101,19 @@ public class MainScene extends Scene {
 
         hero = new Hero(Global.HEROX, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         drawcarddeck = hero.getHeroDeck();
-        orc = new Monster(Global.MONSTERX, 50, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 30, 6);
-        cultist = new Monster(Global.MONSTERX, 300, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 20, 3);
-        monster = new Monster(Global.MONSTERX, 500, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人", 17, 2);
+        orc = new Monster(Global.MONSTERX, 50, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人1", 30, 6);
+        cultist = new Monster(Global.MONSTERX, 300, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人2", 20, 3);
+        monster = new Monster(Global.MONSTERX, 500, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人3", 17, 2);
         monsters = new ArrayList();
         monsters.add(orc);
         monsters.add(cultist);
         monsters.add(monster);
+        System.out.print(orc.toString());
+        System.out.print(cultist.toString());
+        System.out.print(monster.toString());
+        
+        
+        
         System.out.println(drawcarddeck.toString());
         System.out.println(handdeck.toString());
         System.out.println(discarddeck.toString());
@@ -302,20 +309,23 @@ public class MainScene extends Scene {
     
     @Override
     public void sceneBegin() {
+        for (Monster monster : monsters) {
+            if(monster.gethealth() <= 0){
+                monsters.remove(monster);
+            }
+            monster.move();
+        }
+        
         drawcarddeck.shuffle();
         for(int i = 0; i < cardlimit; i++){
             handdeck.getCards().add(drawcarddeck.getCards().get(i));
-            Card temp = handdeck.getCards().get(i);
-            
-            
+            Card temp = handdeck.getCards().get(i);    
         }
         for(int i = 0; i < cardlimit; i++){
             drawcarddeck.getCards().remove(0);
         }
         setDeckPoisition();
-        System.out.println(drawcarddeck.toString());
-        System.out.println(handdeck.toString());
-        System.out.println(discarddeck.toString());
+        
     }
 
     @Override
@@ -331,6 +341,9 @@ public class MainScene extends Scene {
         }
         
         for (Monster monster : monsters) {
+            if(monster.gethealth() <= 0){
+                monsters.remove(monster);
+            }
             monster.update();
         }
         if (delaycounter.delayupdate() && discardcard != null) {
@@ -342,19 +355,34 @@ public class MainScene extends Scene {
                 if (!monster.getMoved()) {
                     monster.move();
                     break;
+                    
                 }
+                
+                
             }
-            if (monsters.get(monsters.size() - 1).getMoved()) {
+//            if (monsters.get(monsters.size() - 1).getMoved()) {
 
                 for (Monster monster : monsters) {
-                    monster.setMoved(false);
+                    if(monster.getMoved() == false){
+                        monsterend=0;
+                        break;
+                    }
+                    monsterend++;
+                    if(monsterend == monsters.size()){
+                        for(Monster temp : monsters){
+                            temp.setMoved(false); 
+                            temp.setMonsterState(new DecideMove());
+                            temp.move();
+                        }
+                        next.setIsClicked(false);
+                        drawCard(drawcarddeck,handdeck,discarddeck);
+                    }
+                    
                 }
-                next.setIsClicked(false);
-                
-                drawCard(drawcarddeck,handdeck,discarddeck);
+               
                 
     
-            }
+            
             
         }
     }
