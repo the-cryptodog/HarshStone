@@ -38,7 +38,8 @@ public class Hero extends GameObject{
     protected Timer timer;
     protected CardDeck herodeck;
     private int defense;
-    
+    private int lasthealth;
+    private boolean recordhealth;
     
     public Hero(int x, int y, int width, int height, String name, int health,int act){
         super(x, y, width, height, name);
@@ -77,6 +78,20 @@ public class Hero extends GameObject{
         herodeck = new WarriorDeck(1300,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"牌組");
     }
     
+    public void recover(){
+        health = lasthealth;
+    }
+    
+    public boolean getRecordHealth(){
+        return recordhealth;
+    }
+    
+    public void setRecordHealth(boolean recordhealth){
+        this.recordhealth = recordhealth;
+    }
+    
+    
+    
     public CardDeck getHeroDeck(){
         return herodeck;
     }
@@ -108,31 +123,35 @@ public class Hero extends GameObject{
         }
     }
     public void move(){
-        int tempx;
-        if(!moved){
-            if(direction == 1){    
-                tempx = x - 30;
-                if(tempx <= 180){
-                    x = 180;
-                    direction = 2;
-                }
-                else{
-                    x = tempx;
-                }
-            }
-            else{
-                tempx = x + 30;
-                if(tempx >= originalx){
-                    x = originalx;
-                    direction = 1;
-                    moved = true;
-                }
-                else{
-                    x = tempx;
-                }
-            }
-    
-        }   
+//        int tempx;
+//        if(!moved){
+//            if(direction == 1){    
+//                tempx = x - 30;
+//                if(tempx <= 180){
+//                    x = 180;
+//                    direction = 2;
+//                }
+//                else{
+//                    x = tempx;
+//                }
+//            }
+//            else{
+//                tempx = x + 30;
+//                if(tempx >= originalx){
+//                    x = originalx;
+//                    direction = 1;
+//                    moved = true;
+//                }
+//                else{
+//                    x = tempx;
+//                }
+//            }
+//    
+//        }   
+        if(recordhealth==false){
+            lasthealth = health;
+            recordhealth = false;
+        }
         
     }
     

@@ -30,6 +30,7 @@ public class Card extends GameObject{
     protected CardMoveState cardmovestate;
     protected int originalx;
     protected int originaly;
+    private int defense;
     
     public Card(int x, int y, int width, int height, String name, int cost) {
         super(x, y, width, height, name);
@@ -40,6 +41,16 @@ public class Card extends GameObject{
         clicked = false;
         cardmovestate = new MoveStop();
         image = irc.getInstance().tryGetImage(PathBuilder.getImage("/"+name+".png"));
+        defense = 0;
+    }
+    
+    public int getDefense(){
+        return defense;
+    }
+    
+    public void steDefense(int defense){
+        this.defense = defense;
+    
     }
     
     public void setOrginalX(int originalx){
@@ -98,6 +109,9 @@ public class Card extends GameObject{
     
     public void setCardMoveState(CardMoveState cardmovestate){
         this.cardmovestate = cardmovestate;
+    }
+    public CardMoveState getCardMoveState(){
+        return cardmovestate;
     }
     
     public boolean getClicked(){

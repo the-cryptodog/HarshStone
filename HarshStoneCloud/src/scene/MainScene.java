@@ -113,9 +113,9 @@ public class MainScene extends Scene {
 
         hero = new Hero(Global.HEROX, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         drawcarddeck = hero.getHeroDeck();
-        orc = new Monster(Global.MONSTERX, 50, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人1", 30, 6);
-        cultist = new Monster(Global.MONSTERX, 300, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人2", 20, 3);
-        monster = new Monster(Global.MONSTERX, 500, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人3", 17, 2);
+        orc = new Monster(Global.MONSTERX, 50, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人1", 30, (int)(Math.random()*8));
+        cultist = new Monster(Global.MONSTERX, 300, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人2", 20, (int)(Math.random()*8));
+        monster = new Monster(Global.MONSTERX, 500, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, "獸人3", 17, (int)(Math.random()*8));
         monsters = new ArrayList();
         monsters.add(orc);
         monsters.add(cultist);
@@ -151,15 +151,23 @@ public class MainScene extends Scene {
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
                 if (state == CommandSolver.MouseState.RELEASED) {
                     System.out.println("release");
-                    if (selectedcard != null) {
-                        for (int i = 0; i < monsters.size(); i++) {
-                            if (monsters.get(i).isCollision(selectedcard)) {
-                                selectedcard.action(hero, monsters.get(i));
-                                selectedcard.setCardMoveState(new MoveToDiscard());
-                                break;
-                            }
-                            if (i == monsters.size() - 1) {
-                                selectedcard.setCardMoveState(new MoveBack());
+
+                    if (selectedcard != null ) {
+                        if(selectedcard.getY()<560 && selectedcard.getDefense() > 0){
+                            selectedcard.action(hero, new Monster(0,0,0,0,"",0));
+                            selectedcard.setCardMoveState(new MoveToDiscard());
+                        }
+                        if(!(selectedcard.getCardMoveState() instanceof MoveToDiscard)){
+                            for (int i = 0; i < monsters.size(); i++) {
+                                if (monsters.get(i).isCollision(selectedcard)) {
+                                    selectedcard.action(hero, monsters.get(i));
+                                    selectedcard.setCardMoveState(new MoveToDiscard());
+                                    break;
+                                }
+                                if(i == monsters.size()-1){
+                                    selectedcard.setCardMoveState(new MoveBack());
+                                }
+
                             }
                         }
                         selectedcard = null;

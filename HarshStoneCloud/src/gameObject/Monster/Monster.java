@@ -31,6 +31,8 @@ public class Monster extends GameObject{
     protected int originalx;
     protected int originaly;
     protected int originalhealth;
+    private int lasthealth;
+    private boolean recordhealth;
     protected boolean moved;
     protected boolean useskill;
     protected MonsterHelper monsterhelper;
@@ -56,7 +58,7 @@ public class Monster extends GameObject{
         moved = false;
         useskill = false;
         image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
-        
+        recordhealth = false;
         
         
         
@@ -91,6 +93,21 @@ public class Monster extends GameObject{
         image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
         
     }
+    
+    public void recover(){
+        health = lasthealth;
+    }
+    
+    public boolean getRecordHealth(){
+        return recordhealth;
+    }
+    
+    public void setRecordHealth(boolean recordhealth){
+        this.recordhealth = recordhealth;
+    }
+    
+    
+    
     
     public int gethealth(){
         return health;
@@ -166,7 +183,12 @@ public class Monster extends GameObject{
 //                }
 //            }
 //    
-//        }   
+//        } 
+        if(recordhealth==false){
+            lasthealth = health;
+            recordhealth = false;
+        }
+        
         monsterstate.action(this, hero);
         if(attack>0){
             number1.setNumberIcon(attack / 10);
