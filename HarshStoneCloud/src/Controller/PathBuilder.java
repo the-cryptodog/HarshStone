@@ -41,4 +41,9 @@ public class PathBuilder {
        return ImagePath.ROOT + ImagePath.ICON_ROOT + path;
     }
     
+    public static String getNumber(String path){
+       return ImagePath.ROOT + ImagePath.NUMBER_ROOT + path;
+    }
+    
+    
 }

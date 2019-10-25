@@ -61,5 +61,6 @@ public class ImagePath {
     public static final String ATTACKICON = "/Attack.png";
     public static final String DEFENSEICON = "/Defense.png";
     
-    
+    public static final String NUMBER_ROOT = "/Number";
+    public static final String NUMBER = "/Number.png";
 }

@@ -8,6 +8,7 @@ package gameObject.Monster;
 import Controller.PathBuilder;
 import gameObject.GameObject;
 import gameObject.Hero.Hero;
+import gameObject.NumberIcon;
 import gameObject.Skill.Skill;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -40,8 +41,8 @@ public class Monster extends GameObject{
     protected Hero hero;
     protected int defense;
     private int attack;
-    
-    
+    private NumberIcon number1;
+    private NumberIcon number2;
     
     public Monster(int x, int y, int width, int height, String name, int health,int act){
         super(x, y, width, height, name);
@@ -56,6 +57,11 @@ public class Monster extends GameObject{
         useskill = false;
         image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
         
+        
+        
+        
+        
+        
         monsterhelper = new MonsterHelper(act);
         delaycounter = new DelayCounter(10, new DelayCounter.Action() {
 
@@ -68,7 +74,8 @@ public class Monster extends GameObject{
 
         skill = new Skill(Global.HEROX - Global.SKILLDELTA,Global.HEROY - Global.SKILLDELTA,Global.SKILLWIDTH,Global.SKILLHEIGHT,"ss");
         monsterstate = new MonsterState.DecideMove();
-        
+        number1 = new NumberIcon(x+width,y+100,50,100,"",0);
+        number2 = new NumberIcon(x+width+50,y+100,50,100,"",0);
     }
     
     //10/22
@@ -161,6 +168,15 @@ public class Monster extends GameObject{
 //    
 //        }   
         monsterstate.action(this, hero);
+        if(attack>0){
+            number1.setNumberIcon(attack / 10);
+            number2.setNumberIcon(attack % 10);
+        }
+        else if(defense>0){
+            number1.setNumberIcon(defense / 10);
+            number2.setNumberIcon(defense % 10);
+        }
+        
     }
     
     public void setMoved(boolean moved){
@@ -193,6 +209,9 @@ public class Monster extends GameObject{
         else{
             monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth, attack, defense);
             System.out.println(name + toString());
+            number1.paint(g);
+            number2.paint(g);
+            
             if(monsterstate instanceof MonsterState.Attack){
                 skill.paint(g);
             }
