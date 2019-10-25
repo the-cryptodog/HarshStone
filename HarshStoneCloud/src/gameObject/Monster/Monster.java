@@ -58,7 +58,7 @@ public class Monster extends GameObject{
         moved = false;
         useskill = false;
         image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
-        
+        recordhealth = false;
         
         
         
@@ -93,6 +93,21 @@ public class Monster extends GameObject{
         image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
         
     }
+    
+    public void recover(){
+        health = lasthealth;
+    }
+    
+    public boolean getRecordHealth(){
+        return recordhealth;
+    }
+    
+    public void setRecordHealth(boolean recordhealth){
+        this.recordhealth = recordhealth;
+    }
+    
+    
+    
     
     public int gethealth(){
         return health;
