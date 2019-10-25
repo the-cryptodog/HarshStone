@@ -59,13 +59,13 @@ public class MonsterHelper {
         
         g.drawImage(img, x, y, x + width, y + height, dx + act * Global.IMG_X_OFFSET, dy + direction * Global.IMG_Y_OFFSET, dx + 32 + act*Global.IMG_X_OFFSET, dy + 32 + direction * Global.IMG_Y_OFFSET, null);
         if(attack > 0){
-            g.drawImage(attackicon, x + width, y, 100, 100, null);
+            g.drawImage(attackicon, x + width, y, Global.ICON_X_OFFSET,Global.ICON_Y_OFFSET, null);
             
             
             
         }
         if(defense > 0){
-            g.drawImage(defenseicon, x + width, y, 100, 100, null);
+            g.drawImage(defenseicon, x + width, y, Global.ICON_X_OFFSET, Global.ICON_Y_OFFSET, null);
         }
         
         
