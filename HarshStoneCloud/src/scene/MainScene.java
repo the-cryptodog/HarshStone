@@ -117,12 +117,11 @@ public class MainScene extends Scene {
         System.out.println(drawcarddeck.toString());
         System.out.println(handdeck.toString());
         System.out.println(discarddeck.toString());
-        //10/22
         for (Monster monster : monsters) {
             monster.setHero(hero);
         }
 
-        img = irc.tryGetImage("/resources/Background/背景1.jpg");
+        img = irc.tryGetImage("/resources/Background/BACKGROUND3.jpg");
         selectedmonster = 0;
 
         delaycounter = new DelayCounter(5, new DelayCounter.Action() {
