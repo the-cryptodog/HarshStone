@@ -17,7 +17,7 @@ import values.ImagePath;
  */
 public class NumberIcon extends GameObject{
     protected int number;
-    protected int[] Act = {10,0,1,2,3,4,5,6,7,8};
+    protected int[] Act = {9,0,1,2,3,4,5,6,7,8};
     protected DelayCounter delaycounter;
     
     public NumberIcon(int x, int y, int width, int height, String name, int number){
@@ -35,6 +35,8 @@ public class NumberIcon extends GameObject{
     }
     
     
+    
+    
     public int getNumberIcon(){
         return number;
     }
@@ -45,21 +47,16 @@ public class NumberIcon extends GameObject{
     
     
    
-    public void update(){
-        if(delaycounter.delayupdate()){
-            number = ++number % 6;
-        }
-        
-    }
+    
     
    
     
     public void paint(Graphics g){
-        int dx = Act[number] % 3;
-        int dy = Act[number] / 3;
+        int dx = Act[number] % 5;
+        int dy = Act[number] / 5;
 //        update();
 //        if(skillend == false){
-            g.drawImage(image, x, y, x + width, y + height, dx * Global.NUMBER_X_OFFSET,  dy * Global.NUMBER_Y_OFFSET, dx * Global.NUMBER_X_OFFSET + 213, dy * Global.NUMBER_Y_OFFSET + 214, null);
+            g.drawImage(image, x, y, x + width, y + height, dx * Global.NUMBER_X_OFFSET,  dy * Global.NUMBER_Y_OFFSET, dx * Global.NUMBER_X_OFFSET + 63, dy * Global.NUMBER_Y_OFFSET + 75, null);
 //        }
 //        if(act == 5){
 //           skillend = true;

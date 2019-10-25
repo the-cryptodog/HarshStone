@@ -171,10 +171,13 @@ public class Monster extends GameObject{
         if(attack>0){
             number1.setNumberIcon(attack / 10);
             number2.setNumberIcon(attack % 10);
+            
         }
         else if(defense>0){
             number1.setNumberIcon(defense / 10);
             number2.setNumberIcon(defense % 10);
+           
+            
         }
         
     }
@@ -209,8 +212,10 @@ public class Monster extends GameObject{
         else{
             monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth, attack, defense);
             System.out.println(name + toString());
-            number1.paint(g);
-            number2.paint(g);
+            number1.setX(x+width);
+            number2.setX(x+width);
+//            number1.paint(g);
+//            number2.paint(g);
             
             if(monsterstate instanceof MonsterState.Attack){
                 skill.paint(g);

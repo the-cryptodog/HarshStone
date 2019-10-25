@@ -88,8 +88,8 @@ public class Global {
     
     
     //Numberimage
-    public static final int NUMBER_X_OFFSET = 213;
-    public static final int NUMBER_Y_OFFSET = 214;
+    public static final int NUMBER_X_OFFSET = 63;
+    public static final int NUMBER_Y_OFFSET = 76;
     
 
 }

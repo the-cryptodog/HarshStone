@@ -329,7 +329,7 @@ public class MainScene extends Scene {
 
     @Override
     public void sceneUpdate() {
-        
+        hero.update();
         if (delaycounter.delayupdate()){
             for(int i = 0;i < handdeck.getCards().size(); i++){
                 handdeck.getCards().get(i).move();

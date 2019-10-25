@@ -16,12 +16,12 @@ import gameObject.Monster.Monster;
  */
 public class DefenceEffect extends CardEffect{
     private Card card;
-    protected int defence; 
+    protected int defense; 
     
     public DefenceEffect(Card card, int defence) {
         super(card);
         this.card = super.card;
-        this.defence = defence;
+        this.defense = defense;
     }
     
     @Override
@@ -32,6 +32,8 @@ public class DefenceEffect extends CardEffect{
     @Override
     public void action(Hero hero, Monster monster) {
         card.action(hero, monster);
-        System.out.println("獲得防禦力" + defence);
+        hero.setDefense(hero.getDefense() + defense);
+        
+        System.out.println("獲得防禦力" + defense);
     }
 }

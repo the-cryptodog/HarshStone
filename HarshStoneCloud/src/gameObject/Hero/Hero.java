@@ -53,24 +53,16 @@ public class Hero extends GameObject{
         
         herodeck = new WarriorDeck(1300,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"牌組");
         herohelper = new HeroHelper(act);
-        System.out.print("GG3:0");
         
-//        delaycounter = new DelayCounter(20, new DelayCounter.Action() {
-//
-//            @Override
-//            public void action() {
-//                int act = 0;
-//                act = ++act % 4; 
-//            }
-//        });
-        timer = new Timer(40, new ActionListener(){
+        delaycounter = new DelayCounter(10, new DelayCounter.Action() {
 
             @Override
-            public void actionPerformed(ActionEvent e) {
-               update();
+            public void action() {
+                int act = 0;
+                act = ++act % 4; 
             }
         });
-        timer.start();
+    
         
         
         
@@ -106,18 +98,14 @@ public class Hero extends GameObject{
     }
     
     
-    
-    
-    
-    
-    
     public void changeDirection(int direction){
         this.direction = direction;
     } 
     
     public void update(){
-        act = ++act % 4;
-        
+        if(delaycounter.delayupdate()){
+            act = ++act % 4;
+        }
     }
     public void move(){
         int tempx;
