@@ -42,7 +42,7 @@ public class Global {
     public static final int HEALTHX = 15;
     
     //怪物x位置
-    public static final int MONSTERX = 1000;
+    public static final int MONSTERX = 1400;
     public static final int MONSTERWIDTH = 160;
     public static final int MONSTERHEIGHT = 160;
     
@@ -91,5 +91,8 @@ public class Global {
     public static final int NUMBER_X_OFFSET = 63;
     public static final int NUMBER_Y_OFFSET = 76;
     
-
+    //MonsterStateIcon
+    public static final int ICON_X_OFFSET = 60;
+    public static final int ICON_Y_OFFSET = 60;
+    
 }

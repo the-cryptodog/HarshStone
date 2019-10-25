@@ -15,7 +15,10 @@ public class ImagePath {
     public static final String JOBS_ROOT = "/Jobs";
     
     public static final String Warrior= "/Warrior.png";
+    public static final String Warrior2= "/Warrior2.png";
     public static final String Socerer= "/Socerer.png";
+    public static final String Socerer2= "/Socerer2.png";
+
     
     public static final String 致命打擊 = "/致命打擊.png";
     public static final String 全力迎戰 = "/全力迎戰.png";
@@ -58,9 +61,9 @@ public class ImagePath {
     public static final String CARDBECK = "/牌背.png";
     
     public static final String ICON_ROOT = "/Icon";
-    public static final String ATTACKICON = "/Attack.png";
-    public static final String DEFENSEICON = "/Defense.png";
+    public static final String ATTACKICON = "/attack2.png";
+    public static final String DEFENSEICON = "/Defense2.png";
     
     public static final String NUMBER_ROOT = "/Number";
-    public static final String NUMBER = "/Number.png";
+    public static final String NUMBER = "/Number2.png";
 }

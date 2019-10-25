@@ -96,8 +96,8 @@ public class MainScene extends Scene {
         cardfactory = new CardFactory();
         
 
-        back = new Button(1400, 600, 160, 80, "EXIT");
-        next = new Button(1400, 800, 160, 80, "ROUNDSTART");
+        back = new Button(1600, 730, 108, 40, "BACK");
+        next = new Button(1600, 800, 184, 42, "ROUNDSTART");
 
         hero = new Hero(Global.HEROX, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         drawcarddeck = hero.getHeroDeck();
@@ -395,7 +395,7 @@ public class MainScene extends Scene {
     public void paint(Graphics g) {
         g.setFont(font1);
         g.drawString("14pt bold & italic times Roman",5,92);
-        g.drawImage(img, 0, 0, 1680, 1050, null);
+        g.drawImage(img, 0, 0, 1920, 1080, null);
         hero.paint(g);
         for (int i = 0; i < monsters.size(); i++) {
             monsters.get(i).paint(g);

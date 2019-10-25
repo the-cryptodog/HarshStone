@@ -21,6 +21,9 @@ import java.awt.image.BufferedImage;
 public class SelectJobScene extends Scene {
 
     private BufferedImage img;
+    private BufferedImage socererName;
+    private BufferedImage warriorName;
+
     private Sorcerer socerer;
     private Warrior warrior;
     private Button back;
@@ -28,10 +31,12 @@ public class SelectJobScene extends Scene {
     public SelectJobScene(SceneController scenecontroller) {
         super(scenecontroller);
 
-        back = new Button(1400, 900, 300, 95, "BACK");
-        socerer = new Sorcerer(340, 425, 260, 260, "巫師");
-        warrior = new Warrior(940, 425, 260, 260, "戰士");
-        img = irc.tryGetImage("/resources/Background/背景3.jpg");
+        back = new Button(1800, 1000, 85, 50, "BACK");
+        socerer = new Sorcerer(450, 450, 260, 260, "巫師");
+        warrior = new Warrior(1150, 450, 260, 260, "戰士rfff");
+        socererName = irc.tryGetImage("/resources/Jobs/SOCERERNAME.png");
+        warriorName = irc.tryGetImage("/resources/Jobs/WARRIORNAME.png");
+        img = irc.tryGetImage("/resources/Map/mapOrigin.png");
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
 
             @Override
@@ -63,7 +68,12 @@ public class SelectJobScene extends Scene {
 
                 if (state == CommandSolver.MouseState.PRESSED) {
                     if (socerer .isCollision(e.getX(), e.getY())) {
-
+                        
+                    }
+                }
+                if (state == CommandSolver.MouseState.MOVED) {
+                    if (socerer .isCollision(e.getX(), e.getY())) {
+                        
                     }
                 }
 
@@ -88,10 +98,12 @@ public class SelectJobScene extends Scene {
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(img, 0, 0, 1680, 1050, null);
+        g.drawImage(img, 0, 0, 1920, 1080, null);
          socerer.paint(g);
          warrior.paint(g);
          back.paint(g);
+         g.drawImage(socererName ,480, 400,168,63, null);
+         g.drawImage(warriorName , 1180, 400,193,63, null);
     }
 }
 
