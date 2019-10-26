@@ -183,15 +183,16 @@ public class MainScene extends Scene {
                         if (!(selectedcard.getCardMoveState() instanceof MoveToDiscard)) {
                             for (int i = 0; i < monsters.size(); i++) {
                                 if (monsters.get(i).isCollision(selectedcard)) {
-// 卡排放到怪物上的動畫
+                                    // 卡排放到怪物上的動畫
                                     if (skillboard.skillCheck(selectedcard.getSkilltype())) {
                                         skillboard.getCardSkill(selectedcard.getSkilltype()).setSkillend(false);
                                     } else {
                                         Skill tmp = skillFactory.genSkill(selectedcard.getSkilltype());
                                         skillboard.addCardSkill(tmp, monsters.get(i).getYposition());
                                         tmp.setSkillend(false);
-                                    }
-                                    /*否則就new進技能列*/
+                                    }//檢測MainScene的卡片技能區，如已有實體則使用，如無則新增//
+                                    
+                                    
                                     selectedcard.action(hero, monsters.get(i));
                                     selectedcard.setCardMoveState(new MoveToDiscard());
                                     break;
