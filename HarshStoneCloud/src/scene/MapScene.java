@@ -168,6 +168,7 @@ public class MapScene extends Scene {
                 }
                 g.drawImage(cover, coverx, 0, 1932, 1078, coverx, 0, 1932, 1078, null);
                 break;
+            //原邊界為1285
             case 4:
                 if(coverx <= 1287){    
                     coverx += 2;   

@@ -66,7 +66,7 @@ public class Hero extends GameObject {
                 act = ++act % 4;
             }
         });
-        heroState = new action();
+        heroState = new NoMove();
     }
 
     public Hero(int x, int y, int width, int height, String name, int health) {
@@ -153,11 +153,16 @@ public class Hero extends GameObject {
 //                }
 //            }
 //    
-//        }   
-        if (recordhealth == false) {
-            lasthealth = health;
-            recordhealth = false;
+//        }
+        if (delaycounter.delayupdate()) {
+            heroState.action(this);
         }
+        
+        
+//        if (recordhealth == false) {
+//            lasthealth = health;
+//            recordhealth = false;
+//        }
 
     }
 

@@ -20,11 +20,12 @@ import gameObject.Card.CardMoveState.MoveToHandDeck;
 import gameObject.DamageEffect;
 import gameObject.DefenceEffect;
 import gameObject.Hero.Hero;
+import gameObject.Hero.HeroState.MoveHeroLeave;
+import gameObject.Hero.HeroState.MoveHeroRight;
 import gameObject.Monster.Monster;
 import gameObject.Monster.Monster2;
 import gameObject.Monster.MonsterState;
 import gameObject.Monster.MonsterState.DecideMove;
-import gameObject.Monster.MonsterState.EndMove;
 import gameObject.Skill.Skill;
 import gameObject.Skill.SkillFactory;
 import gameObject.Skill.SkillList;
@@ -122,7 +123,7 @@ public class MainScene extends Scene {
         back = new Button(1600, 730, 108, 40, "BACK");
         next = new Button(1600, 800, 184, 42, "ROUNDSTART");
 
-        hero = new Hero(Global.HEROX, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
+        hero = new Hero(0, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         drawcarddeck = hero.getHeroDeck();
 
         orc = new Monster(Global.MONSTERX, 100 * (1 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
@@ -378,6 +379,8 @@ public class MainScene extends Scene {
 
     @Override
     public void sceneBegin() {
+        hero.setState(new MoveHeroRight());
+        
         for (Monster monster : monsters) {
             if (monster.gethealth() <= 0) {
                 monsters.remove(monster);
@@ -398,7 +401,12 @@ public class MainScene extends Scene {
 
     @Override
     public void sceneUpdate() {
-        hero.update();
+        hero.move();
+        if(hero.getX() > Global.JFRAMEWIDTH){
+            Global.CURRENTSTAGE++;
+            scenecontroller.changeScene(mapScene);
+        }
+        
         if (delaycounter.delayupdate()) {
             for (int i = 0; i < handdeck.getCards().size(); i++) {
                 handdeck.getCards().get(i).move();
@@ -415,8 +423,7 @@ public class MainScene extends Scene {
                 monsters.remove(monsters.get(i));
                 i--;
                 if (monsters.size() == 0) {
-                    Global.CURRENTSTAGE++;
-                    scenecontroller.changeScene(mapScene);
+                    hero.setState(new MoveHeroLeave());
                 }
             }
         }
