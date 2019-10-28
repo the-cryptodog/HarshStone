@@ -365,12 +365,6 @@ public class MainScene extends Scene {
 
     @Override
     public void sceneBegin() {
-        for (Monster monster : monsters) {
-            if (monster.gethealth() <= 0) {
-                monsters.remove(monster);
-            }
-            monster.move();
-        }
 
         drawcarddeck.shuffle();
         for (int i = 0; i < cardlimit; i++) {
@@ -396,13 +390,18 @@ public class MainScene extends Scene {
             }
         }
 
+
+        if (delaycounter.delayupdate() && discardcard != null) {
+            discardcard.move();
+        }
+        //怪物死亡判斷
         for (int i = 0; i < monsters.size(); i++) {
 
             if (monsters.get(i).gethealth() <= 0) {
                 monsters.remove(monsters.get(i));
                 i--;
             }
-            if (monsters.get(0) == null) {
+            if (monsters.size() == 0) {
                 scenecontroller.changeScene(this.mapScene);
             }
 
@@ -410,10 +409,7 @@ public class MainScene extends Scene {
                 monsters.get(i).update();
             }
         }
-        if (delaycounter.delayupdate() && discardcard != null) {
-            discardcard.move();
-        }
-
+        
         if (delaycounter.delayupdate() && next.getIsClicked()) {
             for (Monster monster : monsters) {
                 if (!monster.getMoved()) {
