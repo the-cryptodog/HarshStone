@@ -20,7 +20,9 @@ import gameObject.DamageEffect;
 import gameObject.DefenceEffect;
 import gameObject.Hero.Hero;
 import gameObject.Monster.Monster;
+import gameObject.Monster.MonsterState;
 import gameObject.Monster.MonsterState.DecideMove;
+import gameObject.Monster.MonsterState.EndMove;
 import gameObject.Skill.Skill;
 import gameObject.Skill.SkillFactory;
 import gameObject.Skill.SkillList;
@@ -83,7 +85,7 @@ public class MainScene extends Scene {
     private Font font1;
     private Button exit;
     private Button exit2;
-    private int monsterend;
+    private boolean allmonsterend;
     private boolean gameOver;
     private boolean gameWin;
     private BufferedImage endImage;
@@ -100,9 +102,10 @@ public class MainScene extends Scene {
         heroturn = true;
         crystal = 3;
         cardlimit = 5;
-        monsterend = 0;
+        allmonsterend = false;
         skillboard = new SkillList();
         skillFactory = new SkillFactory();
+        this.mapScene = mapScene;
 
 //        drawcarddeck = new CardDeck(1400,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"抽牌推");
         discarddeck = new CardDeck(40, 690, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "棄牌推");
@@ -397,19 +400,20 @@ public class MainScene extends Scene {
         }
 
         for (int i = 0; i < monsters.size(); i++) {
-
+            
+//            if (monsters.get(i) != null) {
+//                monsters.get(i).update();
+//            }
             if (monsters.get(i).gethealth() <= 0) {
                 monsters.remove(monsters.get(i));
                 i--;
-            }
-            if (monsters.get(0) == null) {
-                scenecontroller.changeScene(this.mapScene);
-            }
-
-            if (monsters.get(i) != null) {
-                monsters.get(i).update();
+                if (monsters.size() == 0) {
+                    Global.CURRENTSTAGE++;
+                    scenecontroller.changeScene(mapScene);
+                }
             }
         }
+        
         if (delaycounter.delayupdate() && discardcard != null) {
             discardcard.move();
         }
@@ -421,27 +425,31 @@ public class MainScene extends Scene {
                     break;
                 }
             }
-//            if (monsters.get(monsters.size() - 1).getMoved()) {
 
             for (Monster monster : monsters) {
-                if (monster.getMoved() == false) {
-                    monsterend = 0;
+                if (!(monster.getMonsterState() instanceof MonsterState.EndMove)) {
+                    monster.move();
+                    allmonsterend = false;
                     break;
                 }
-                monsterend++;
-                if (monsterend == monsters.size()) {
-                    for (Monster temp : monsters) {
-                        temp.setMoved(false);
-                        temp.setMonsterState(new DecideMove());
-                        temp.move();
-                    }
-                    System.out.print("setFalse!!!!!!!!!!!!!!!!");
-                    next.setIsClicked(false);
-                    drawCard(drawcarddeck, handdeck, discarddeck);
+                else{
+                    allmonsterend = true;
                 }
             }
+                
+            if (allmonsterend) {
+                for (Monster temp : monsters) {
+                    temp.setMoved(false);
+                    temp.setMonsterState(new DecideMove());
+                    temp.move();
+                }
+                System.out.print("setFalse!!!!!!!!!!!!!!!!");
+                next.setIsClicked(false);
+                drawCard(drawcarddeck, handdeck, discarddeck);
+                }
+            
+            }
         }
-    }
 
     @Override
     public void sceneEnd() {

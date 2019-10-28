@@ -144,6 +144,11 @@ public class Monster extends GameObject {
         this.monsterstate = monsterstate;
     }
 
+    public MonsterState getMonsterState() {
+        return monsterstate;
+    }
+    
+    
     public void changeDirection(int direction) {
         this.direction = direction;
     }
@@ -156,6 +161,8 @@ public class Monster extends GameObject {
         }
     }
 
+    
+    
     public void move() {
         int tempx;
 //        if(!moved){
@@ -230,9 +237,9 @@ public class Monster extends GameObject {
             g.drawImage(image, x, y, width, height, null);
         } else {
             monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth, attack, defense);
-            System.out.println(name + toString());
             number1.setX(x + width);
             number2.setX(x + width);
+            update();
 //            number1.paint(g);
 //            number2.paint(g);
 
