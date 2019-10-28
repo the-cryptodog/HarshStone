@@ -3,9 +3,31 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/scene/MapScene.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Hero/HeroHelper.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/Controller/ImageResourceController.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Monster/MonsterHelper.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/utils/DelayCounter.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Card/CardEffect.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/scene/MainScene.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Monster/Monster.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Card/Card.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/Controller/PathBuilder.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Card/CardDeck.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/values/ImagePath.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Jobs/JobIcon.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/scene/SelectJobScene.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/GameObject.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Hero/Hero.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/utils/Global.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Card/CardMoveState.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Hero/HeroState.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Jobs/JobIconHelper.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Button/Button.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/javaapplication34mygame/JavaApplication34MyGame.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Monster/MonsterState.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/scene/MenuScene.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/scene/Scene.java</file>
         </group>
     </open-files>
 </project-private>

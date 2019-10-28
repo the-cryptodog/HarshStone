@@ -78,19 +78,20 @@ public interface CardMoveState {
 
         @Override
         public void move(Card card) {
-            int tempx = card.getX() + 30;
-            int tempy = card.getY() + 30;
+
+            int tempx = card.getX()+30;
+            int tempy = card.getY()+30;
             if(tempx <= 1300 || tempy < 700){    
- 
+                
                 if(tempx <= 1300){
                     card.setX(tempx);
                 }
                 else{
                     card.setX(1300);
                 }
-                if(tempy < 700){
-                    card.setY(tempy);
-                }
+                if(tempy < 700){                    
+                    card.setY(tempy); 
+                }              
                 else{
                     card.setY(700);
                 }
@@ -127,9 +128,10 @@ public interface CardMoveState {
 
         @Override
         public void move(Card card) {
-            
+            System.out.print(card.getX());
+            System.out.print(" ++++++++++++++++ ");
+            System.out.print(card.getY());
         }
     }
-    
-    
+   
 }

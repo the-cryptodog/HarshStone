@@ -37,6 +37,7 @@ public class Button extends GameObject {
         image = new BufferedImage[2];
         
         image[0] = irc.getInstance().tryGetImage(PathBuilder.getButton("/" + name + ".png"));
+        
         if (irc.getInstance().tryGetImage(PathBuilder.getButton("/" + name + "2.png")) != null) {
             System.out.print("dddd");
             image[1] = irc.getInstance().tryGetImage(PathBuilder.getButton("/" + name + "2.png"));

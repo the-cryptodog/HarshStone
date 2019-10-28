@@ -232,7 +232,7 @@ public class Monster extends GameObject {
             monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth, attack, defense);
             System.out.println(name + toString());
             number1.setX(x + width);
-            number2.setX(x + width);
+            number2.setX(x +width);
 //            number1.paint(g);
 //            number2.paint(g);
 

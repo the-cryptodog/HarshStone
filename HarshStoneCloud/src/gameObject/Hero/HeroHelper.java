@@ -48,10 +48,11 @@ public class HeroHelper {
         int dy = 128 * (heroposition / 4);
 
         g.drawImage(img, x, y, x + width, y + height, dx + act * Global.IMG_X_OFFSET, dy + direction * Global.IMG_Y_OFFSET, dx + 32 + act * Global.IMG_X_OFFSET, dy + 32 + direction * Global.IMG_Y_OFFSET, null);
+       if(health>0){
         g.setColor(Color.red);
             g.drawRect(x - Global.HEALTHX , y+height, width + 2*Global.HEALTHX,25);
             float temp1 = (float)health/100 * (width + 2 * Global.HEALTHX);
             g.fillRect(x - Global.HEALTHX , y+height, (int)temp1, 25);   
-        
+       }
     }
 }
