@@ -240,6 +240,7 @@ public class Monster extends GameObject {
             number1.setX(x + width);
             number2.setX(x + width);
             update();
+
 //            number1.paint(g);
 //            number2.paint(g);
 

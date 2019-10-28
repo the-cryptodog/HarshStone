@@ -111,8 +111,8 @@ public class MainScene extends Scene {
         this.mapScene = mapScene;
 
 //        drawcarddeck = new CardDeck(1400,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"抽牌推");
-        discarddeck = new CardDeck(40, 690, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "棄牌推");
-        handdeck = new CardDeck(1600, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "手牌");
+        discarddeck = new CardDeck(1300, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "棄牌推");
+        handdeck = new CardDeck(40, 490, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "手牌");
 
         selectedcard = null;
         discardcard = null;
@@ -199,9 +199,7 @@ public class MainScene extends Scene {
                                         Skill tmp = skillFactory.genSkill(selectedcard.getSkilltype());
                                         skillboard.addCardSkill(tmp, monsters.get(i).getYposition());
                                         tmp.setSkillend(false);
-                                    }//檢測MainScene的卡片技能區，如已有實體則使用，如無則新增//
-                                    
-                                    
+                                    }//檢測MainScene的卡片技能區，如已有實體則使用，如無則新增//                                                              
                                     selectedcard.action(hero, monsters.get(i));
                                     selectedcard.setCardMoveState(new MoveToDiscard());
                                     break;
@@ -225,7 +223,6 @@ public class MainScene extends Scene {
                         int temp = handdeck.getCards().size();
                         for (int i = 0; i < temp; i++) {
                             handdeck.getCards().get(i).setCardMoveState(new EndTurnMove());
-
                         }
                     }
                     if (back.isCollision(e.getX(), e.getY())) {
@@ -234,20 +231,20 @@ public class MainScene extends Scene {
                         scenecontroller.changeScene(mapScene);
 
                     }
-                    if (selectedcard != null) {
-                        for (int i = 0; i < monsters.size(); i++) {
-                            if (monsters.get(i).isCollision(selectedcard)) {
-                                selectedcard.action(hero, monsters.get(i));
-                                selectedcard.setCardMoveState(new MoveToDiscard());
-                                break;
-                            }
-                            if (i == monsters.size() - 1) {
-                                selectedcard.setCardMoveState(new MoveBack());
-
-                            }
-                        }
-                        selectedcard = null;
-                    }
+//                    if (selectedcard != null) {
+//                        for (int i = 0; i < monsters.size(); i++) {
+//                            if (monsters.get(i).isCollision(selectedcard)) {
+//                                selectedcard.action(hero, monsters.get(i));
+//                                selectedcard.setCardMoveState(new MoveToDiscard());
+//                                break;
+//                            }
+//                            if (i == monsters.size() - 1) {
+//                                selectedcard.setCardMoveState(new MoveBack());
+//
+//                            }
+//                        }
+//                        selectedcard = null;
+//                    }
                     if (exit.isCollision(e.getX(), e.getY())) {
                         gameOver = true;
                         sceneEnd();
@@ -274,10 +271,11 @@ public class MainScene extends Scene {
                 }
 
                 if (state == CommandSolver.MouseState.DRAGGED) {
-
                     if (selectedcard != null) {
                         selectedcard.setX(e.getX() - xdelta);
                         selectedcard.setY(e.getY() - ydelta);
+                        System.out.print(selectedcard.getX());
+                        System.out.print(selectedcard.getY());
                     }
                 }
             }

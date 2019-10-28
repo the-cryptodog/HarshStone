@@ -10,6 +10,7 @@ import gameObject.Card.Card;
 import gameObject.Card.CardDeck;
 import gameObject.Card.CardDeck.WarriorDeck;
 import gameObject.GameObject;
+import gameObject.Hero.HeroState.*;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,10 +24,10 @@ import values.ImagePath;
  *
  * @author frank61003
  */
-public class Hero extends GameObject{
+public class Hero extends GameObject {
 
     protected int health;
-    private static final int[] ACT = {0,1,2,1};
+    private static final int[] ACT = {0, 1, 2, 1};
     protected int direction;
     protected int act;
     protected int originalx;
@@ -40,8 +41,10 @@ public class Hero extends GameObject{
     private int defense;
     private int lasthealth;
     private boolean recordhealth;
-    
-    public Hero(int x, int y, int width, int height, String name, int health,int act){
+    private HeroState heroState;
+
+    public Hero(int x, int y, int width, int height, String name, int health, int act) {
+
         super(x, y, width, height, name);
         this.health = health;
         direction = 2;
@@ -51,78 +54,81 @@ public class Hero extends GameObject{
         moved = false;
         image = irc.tryGetImage(PathBuilder.getHero(ImagePath.ACTOR1));
 //        herodeck = new WarriorDeck(x, y, width, height, name);
-        
-        herodeck = new WarriorDeck(1300,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"牌組");
+
+        herodeck = new WarriorDeck(1300, 690, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "牌組");
         herohelper = new HeroHelper(act);
-        
+
         delaycounter = new DelayCounter(10, new DelayCounter.Action() {
 
             @Override
             public void action() {
                 int act = 0;
-                act = ++act % 4; 
+                act = ++act % 4;
             }
         });
-    
-        
-        
-        
+        heroState = new action();
     }
-    
-    public Hero(int x, int y, int width, int height, String name, int health){
+
+    public Hero(int x, int y, int width, int height, String name, int health) {
         super(x, y, width, height, name);
         this.health = health;
         this.act = 5;
         image = irc.tryGetImage(PathBuilder.getHero(ImagePath.ACTOR1));
         //need to be changed
-        herodeck = new WarriorDeck(1300,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"牌組");
+        herodeck = new WarriorDeck(1300, 690, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "牌組");
     }
-    
-    public void recover(){
+
+    public void recover() {
         health = lasthealth;
     }
-    
-    public boolean getRecordHealth(){
+
+    public boolean getRecordHealth() {
         return recordhealth;
     }
-    
-    public void setRecordHealth(boolean recordhealth){
+
+    public void setState(HeroState heroState) {
+        this.heroState = heroState;
+    }
+
+    public HeroState getState() {
+        return heroState;
+    }
+
+    public void setRecordHealth(boolean recordhealth) {
         this.recordhealth = recordhealth;
     }
-    
-    
-    
-    public CardDeck getHeroDeck(){
+
+    public CardDeck getHeroDeck() {
         return herodeck;
     }
-    
-    public int gethealth(){
+
+    public int gethealth() {
         return health;
     }
-    
-    public void sethealth(int health){
+
+    public void sethealth(int health) {
         this.health = health;
     }
-    
-    public int getDefense(){
+
+    public int getDefense() {
         return defense;
     }
-    
-    public void setDefense(int defense){
+
+    public void setDefense(int defense) {
         this.defense = defense;
     }
-    
-    
-    public void changeDirection(int direction){
+
+    public void changeDirection(int direction) {
         this.direction = direction;
-    } 
-    
-    public void update(){
-        if(delaycounter.delayupdate()){
+    }
+
+    public void update() {
+        if (delaycounter.delayupdate()) {
             act = ++act % 4;
         }
     }
-    public void move(){
+
+    public void move() {
 //        int tempx;
 //        if(!moved){
 //            if(direction == 1){    
@@ -148,27 +154,23 @@ public class Hero extends GameObject{
 //            }
 //    
 //        }   
-        if(recordhealth==false){
+        if (recordhealth == false) {
             lasthealth = health;
             recordhealth = false;
         }
-        
+
     }
-    
-    public void setMoved(boolean moved){
+
+    public void setMoved(boolean moved) {
         this.moved = moved;
     }
-    
-    public boolean getMoved(){
+
+    public boolean getMoved() {
         return moved;
     }
-    
-    
-    
-    
-    public void paint(Graphics g){
-        
+
+    public void paint(Graphics g) {
         herohelper.paint(g, x, y, width, height, ACT[act], direction, health);
-        
+        update();
     }
 }

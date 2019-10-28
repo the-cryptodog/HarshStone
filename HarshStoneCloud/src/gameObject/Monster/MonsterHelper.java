@@ -30,8 +30,7 @@ public class MonsterHelper {
         monsterposition = monster % 8;
         attackicon = ImageResourceController.getInstance().tryGetImage(PathBuilder.getIcon(ImagePath.ATTACKICON));
         defenseicon = ImageResourceController.getInstance().tryGetImage(PathBuilder.getIcon(ImagePath.DEFENSEICON));
-        
-       
+
         
     }
     
@@ -60,9 +59,7 @@ public class MonsterHelper {
         g.drawImage(img, x, y, x + width, y + height, dx + act * Global.IMG_X_OFFSET, dy + direction * Global.IMG_Y_OFFSET, dx + 32 + act*Global.IMG_X_OFFSET, dy + 32 + direction * Global.IMG_Y_OFFSET, null);
         if(attack > 0){
             g.drawImage(attackicon, x + width, y, Global.ICON_X_OFFSET,Global.ICON_Y_OFFSET, null);
-            
-            
-            
+
         }
         if(defense > 0){
             g.drawImage(defenseicon, x + width, y, Global.ICON_X_OFFSET, Global.ICON_Y_OFFSET, null);
