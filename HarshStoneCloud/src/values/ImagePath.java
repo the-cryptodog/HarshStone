@@ -46,12 +46,10 @@ public class ImagePath {
 
 
     public static final String MONSTER_ROOT = "/Monster";
-    public static final String LARGEACIDSLIME = "/largeacidslime.png";
-    public static final String MIDDLEACIDSLIME = "/middleacidslime.png";
-    public static final String SMALLACIDSLIME = "/smallacidslime.png";
     public static final String MONSTER1 = "/Monster1.png";
     public static final String MONSTER2 = "/Monster2.png";
-   
+    public static final String Demon = "/Demon.png";
+    
     public static final String ACTOR_ROOT = "/Actor";
     public static final String ACTOR1 = "/Actor1.png";
     

@@ -21,6 +21,7 @@ import gameObject.DamageEffect;
 import gameObject.DefenceEffect;
 import gameObject.Hero.Hero;
 import gameObject.Monster.Monster;
+import gameObject.Monster.Monster2;
 import gameObject.Monster.MonsterState;
 import gameObject.Monster.MonsterState.DecideMove;
 import gameObject.Monster.MonsterState.EndMove;
@@ -70,7 +71,8 @@ public class MainScene extends Scene {
     private Monster orc;
     private Hero hero;
     private Monster cultist;
-    private Monster monster;
+    private Monster monster1;
+    private Monster2 dedmon;
     private Timer timer;
     private DelayCounter delaycounter;
     private int selectedmonster;
@@ -127,13 +129,16 @@ public class MainScene extends Scene {
                 "獸人1", 30, 1, (int) (Math.random() * 8), (int) (Math.random() * 8)); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
         cultist = new Monster(Global.MONSTERX, 100 * (2 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                 "獸人2", 20, 2, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第二隻怪物\
-        monster = new Monster(Global.MONSTERX, 100 * (3 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
+        monster1 = new Monster(Global.MONSTERX, 100 * (3 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                 "獸人3", 17, 3, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第三隻怪物\
+        dedmon = new Monster2(Global.MONSTERX, 100 * (4 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
+                "獸人3", 17, 3, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第三隻怪物\
+
 
         monsters = new ArrayList();
         monsters.add(orc);
         monsters.add(cultist);
-        monsters.add(monster);
+        monsters.add(monster1);
 
         //下段可用迴圈新增(此段為將技能新增至怪物技能列(總數3))  (技能由技能工廠產生)
         for (int i = 0; i < monsters.size(); i++) {
@@ -149,7 +154,7 @@ public class MainScene extends Scene {
 
         System.out.print(orc.toString());
         System.out.print(cultist.toString());
-        System.out.print(monster.toString());
+        System.out.print(monster1.toString());
 
         System.out.println(drawcarddeck.toString());
         System.out.println(handdeck.toString());
@@ -449,9 +454,7 @@ public class MainScene extends Scene {
                 }
                 next.setIsClicked(false);
                 drawCard(drawcarddeck, handdeck, discarddeck);
-                
-                
-                
+               
             }
             
         }
@@ -496,7 +499,7 @@ public class MainScene extends Scene {
 
         }
 
-        for (int i = 0; i <skillboard.getCardSkillList().size(); i++) {
+        for (int i = 0; i < skillboard.getCardSkillList().size(); i++) {
             skillboard.getCardSkillList().get(i).paint(g);
         }
         for (int i = 0; i < handdeck.getCards().size(); i++) {
