@@ -6,7 +6,6 @@
 package gameObject.Monster;
 
 import Controller.PathBuilder;
-import gameObject.GameObject;
 import gameObject.Hero.Hero;
 import gameObject.NumberIcon;
 import gameObject.Skill.Skill;
@@ -18,8 +17,7 @@ import values.ImagePath;
  *
  * @author frank61003
  */
-public class Monster extends GameObject {
-
+public class Monster2 extends Monster{
     protected int health;
     private static final int[] ACT = {0, 1, 2, 1};
 
@@ -45,18 +43,12 @@ public class Monster extends GameObject {
     private int skillIndex;
     private Skill selfSkill;
 
-    public Monster(int x, int y, int width, int height, String name, int health, int yPosition, int act, int skillIndex) {
-        super(x, y, width, height, name);
-        this.health = health;
-        originalhealth = health;
-        direction = 1;
-        originalx = x;
-        originaly = y;
-        defense = 0;
-        attack = 0;
-        moved = false;
-        useskill = false;
-        image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
+    public Monster2(int x, int y, int width, int height, String name, int health, int yPosition, int act, int skillIndex) {
+        super(x, y, width, height, name, health, yPosition, act, skillIndex);
+    
+
+    
+        image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.Demon));
         recordhealth = false;
         this.yPosition = yPosition;
         this.skillIndex = skillIndex;
@@ -79,14 +71,6 @@ public class Monster extends GameObject {
     //10/22
     public void setHero(Hero hero) {
         this.hero = hero;
-    }
-
-    public Monster(int x, int y, int width, int height, String name, int health) {
-        super(x, y, width, height, name);
-        this.health = health;
-        this.act = 0;
-        image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
-
     }
 
     public void recover() {
@@ -240,7 +224,6 @@ public class Monster extends GameObject {
             number1.setX(x + width);
             number2.setX(x + width);
             update();
-
 //            number1.paint(g);
 //            number2.paint(g);
 
@@ -252,3 +235,5 @@ public class Monster extends GameObject {
 
     }
 }
+
+

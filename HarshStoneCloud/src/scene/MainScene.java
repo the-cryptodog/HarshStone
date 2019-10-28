@@ -16,11 +16,15 @@ import gameObject.Card.CardMoveState.EndTurnMove;
 import gameObject.Card.CardMoveState.Movable;
 import gameObject.Card.CardMoveState.MoveBack;
 import gameObject.Card.CardMoveState.MoveToDiscard;
+import gameObject.Card.CardMoveState.MoveToHandDeck;
 import gameObject.DamageEffect;
 import gameObject.DefenceEffect;
 import gameObject.Hero.Hero;
 import gameObject.Monster.Monster;
+import gameObject.Monster.Monster2;
+import gameObject.Monster.MonsterState;
 import gameObject.Monster.MonsterState.DecideMove;
+import gameObject.Monster.MonsterState.EndMove;
 import gameObject.Skill.Skill;
 import gameObject.Skill.SkillFactory;
 import gameObject.Skill.SkillList;
@@ -67,7 +71,8 @@ public class MainScene extends Scene {
     private Monster orc;
     private Hero hero;
     private Monster cultist;
-    private Monster monster;
+    private Monster monster1;
+    private Monster2 dedmon;
     private Timer timer;
     private DelayCounter delaycounter;
     private int selectedmonster;
@@ -83,7 +88,7 @@ public class MainScene extends Scene {
     private Font font1;
     private Button exit;
     private Button exit2;
-    private int monsterend;
+    private boolean allmonsterend;
     private boolean gameOver;
     private boolean gameWin;
     private BufferedImage endImage;
@@ -100,9 +105,10 @@ public class MainScene extends Scene {
         heroturn = true;
         crystal = 3;
         cardlimit = 5;
-        monsterend = 0;
+        allmonsterend = false;
         skillboard = new SkillList();
         skillFactory = new SkillFactory();
+        this.mapScene = mapScene;
 
 //        drawcarddeck = new CardDeck(1400,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"抽牌推");
         discarddeck = new CardDeck(1300, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "棄牌推");
@@ -123,13 +129,16 @@ public class MainScene extends Scene {
                 "獸人1", 30, 1, (int) (Math.random() * 8), (int) (Math.random() * 8)); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
         cultist = new Monster(Global.MONSTERX, 100 * (2 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                 "獸人2", 20, 2, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第二隻怪物\
-        monster = new Monster(Global.MONSTERX, 100 * (3 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
+        monster1 = new Monster(Global.MONSTERX, 100 * (3 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                 "獸人3", 17, 3, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第三隻怪物\
+        dedmon = new Monster2(Global.MONSTERX, 100 * (4 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
+                "獸人3", 17, 3, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第三隻怪物\
+
 
         monsters = new ArrayList();
         monsters.add(orc);
         monsters.add(cultist);
-        monsters.add(monster);
+        monsters.add(monster1);
 
         //下段可用迴圈新增(此段為將技能新增至怪物技能列(總數3))  (技能由技能工廠產生)
         for (int i = 0; i < monsters.size(); i++) {
@@ -145,7 +154,7 @@ public class MainScene extends Scene {
 
         System.out.print(orc.toString());
         System.out.print(cultist.toString());
-        System.out.print(monster.toString());
+        System.out.print(monster1.toString());
 
         System.out.println(drawcarddeck.toString());
         System.out.println(handdeck.toString());
@@ -352,12 +361,18 @@ public class MainScene extends Scene {
     public void setDeckPoisition() {
         for (int i = 0; i < cardlimit; i++) {
             Card temp = handdeck.getCards().get(i);
-            temp.setX(300 + (Global.CARDWIDTH + 50) * i);
+//            temp.setX(300 + (Global.CARDWIDTH + 50) * i);
+//            temp.setY(Global.CARDDECKBOTTOM);
+//            temp.setOrginalX(300 + (Global.CARDWIDTH + 50) * i);
+//            temp.setOrginalY(Global.CARDDECKBOTTOM);
+//            temp.setCardMoveState(new Movable());
+            temp.setX(0);
             temp.setY(Global.CARDDECKBOTTOM);
             temp.setOrginalX(300 + (Global.CARDWIDTH + 50) * i);
             temp.setOrginalY(Global.CARDDECKBOTTOM);
-            temp.setCardMoveState(new Movable());
-        }
+            temp.setHandDeckPoisition(i+1);
+            temp.setCardMoveState(new MoveToHandDeck());
+        }  
 
     }
 
@@ -373,7 +388,6 @@ public class MainScene extends Scene {
         drawcarddeck.shuffle();
         for (int i = 0; i < cardlimit; i++) {
             handdeck.getCards().add(drawcarddeck.getCards().get(i));
-            Card temp = handdeck.getCards().get(i);
         }
         for (int i = 0; i < cardlimit; i++) {
             drawcarddeck.getCards().remove(0);
@@ -395,19 +409,18 @@ public class MainScene extends Scene {
         }
 
         for (int i = 0; i < monsters.size(); i++) {
+            
 
             if (monsters.get(i).gethealth() <= 0) {
                 monsters.remove(monsters.get(i));
                 i--;
-            }
-            if (monsters.get(0) == null) {
-                scenecontroller.changeScene(this.mapScene);
-            }
-
-            if (monsters.get(i) != null) {
-                monsters.get(i).update();
+                if (monsters.size() == 0) {
+                    Global.CURRENTSTAGE++;
+                    scenecontroller.changeScene(mapScene);
+                }
             }
         }
+        
         if (delaycounter.delayupdate() && discardcard != null) {
             discardcard.move();
         }
@@ -419,25 +432,29 @@ public class MainScene extends Scene {
                     break;
                 }
             }
-//            if (monsters.get(monsters.size() - 1).getMoved()) {
 
             for (Monster monster : monsters) {
-                if (monster.getMoved() == false) {
-                    monsterend = 0;
+                if (!(monster.getMonsterState() instanceof MonsterState.EndMove)) {
+                    monster.move();
+                    allmonsterend = false;
                     break;
                 }
-                monsterend++;
-                if (monsterend == monsters.size()) {
-                    for (Monster temp : monsters) {
-                        temp.setMoved(false);
-                        temp.setMonsterState(new DecideMove());
-                        temp.move();
-                    }
-                    System.out.print("setFalse!!!!!!!!!!!!!!!!");
-                    next.setIsClicked(false);
-                    drawCard(drawcarddeck, handdeck, discarddeck);
+                else{
+                    allmonsterend = true;
                 }
             }
+                
+            if (allmonsterend) {
+                for (Monster temp : monsters) {
+                    temp.setMoved(false);
+                    temp.setMonsterState(new DecideMove());
+                    temp.move();
+                }
+                next.setIsClicked(false);
+                drawCard(drawcarddeck, handdeck, discarddeck);
+               
+            }
+            
         }
     }
 
@@ -480,7 +497,7 @@ public class MainScene extends Scene {
 
         }
 
-        for (int i = 0; i <skillboard.getCardSkillList().size(); i++) {
+        for (int i = 0; i < skillboard.getCardSkillList().size(); i++) {
             skillboard.getCardSkillList().get(i).paint(g);
         }
         for (int i = 0; i < handdeck.getCards().size(); i++) {

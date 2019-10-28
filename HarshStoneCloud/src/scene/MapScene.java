@@ -36,12 +36,13 @@ public class MapScene extends Scene {
     {1436, 532}};
     private int[][] availableRoute = {{4, 5}, {2, 5, 8, 9}, {3, 6, 8, 9}};
     private int currentRedCross;
+    private int coverx;
 
     public MapScene(SceneController scenecontroller) {
         super(scenecontroller);
 
         stagePassed = false;
-
+        coverx = 495;
         System.out.println("stage=" + currentStage);
         redCrossList = new ArrayList<redCross>();
 //        redCrossList.add(new redCross(455,505,50,50,"ddddd"));
@@ -142,7 +143,7 @@ public class MapScene extends Scene {
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(map, 0, 0, 1920, 1080, null);
+        g.drawImage(map, 0, 0, 1932, 1078, null);
 
         for (int i = 0; i < redCrossList.size(); i++) {
 //                     System.out.print(i);
@@ -153,16 +154,31 @@ public class MapScene extends Scene {
 //        redCrossList.get(0).paint(g);
         switch (Global.CURRENTSTAGE) {
             case 1:
-                g.drawImage(cover, 495, 0, 1920, 1080, 495, 0, 1920, 1080, null);
+                g.drawImage(cover, 495, 0, 1932, 1078, 495, 0, 1932, 1078, null);
                 break;
             case 2:
-                g.drawImage(cover, 695, 0, 1920, 1080, 695, 0, 1920, 1080, null);
-                break;
+                if(coverx <= 695){    
+                    coverx += 2;   
+                }
+            g.drawImage(cover, coverx, 0, 1932, 1078, coverx, 0, 1932, 1078, null);
+            break;
             case 3:
-                g.drawImage(cover, 982, 0, 1920, 1080, 982, 0, 1920, 1080, null);
+                if(coverx <= 982){    
+                    coverx += 2;   
+                }
+                g.drawImage(cover, coverx, 0, 1932, 1078, coverx, 0, 1932, 1078, null);
                 break;
             case 4:
-                g.drawImage(cover, 1285, 0, 1920, 1080, 1275, 0, 1920, 1080, null);
+                if(coverx <= 1287){    
+                    coverx += 2;   
+                }
+                g.drawImage(cover, coverx, 0, 1932, 1078, coverx, 0, 1932, 1078, null);
+                break;
+            case 5:
+                if(coverx <= 1685){    
+                    coverx += 2;   
+                }
+                g.drawImage(cover, coverx, 0, 1932, 1078, coverx, 0, 1932, 1078, null);
                 break;
         }
     }
