@@ -39,7 +39,7 @@ public class Global {
 
     public static final int ANIMATION_DELAY = FRAME_PER_SECOND / 15;
 
-//血條偏移量
+    //血條偏移量
     public static final int HEALTHX = 15;
 
     //怪物x位置
@@ -61,6 +61,7 @@ public class Global {
 
     //移動量
     public static final int MOVERANGE = 50;
+    public static final int HEROMOVERANGE = 40;
 
     //關卡數量
     public static final int STAGENUMBER = 9;
@@ -89,7 +90,6 @@ public class Global {
     public static final int ICON_Y_OFFSET = 60;
     
     //怪物總數
-    
      public static final int MONSTERNUM = 3;
 
 
@@ -117,4 +117,10 @@ public class Global {
     public static final int SKILLACT9= 30;
     public static final int SKILLACT10 = 20;
 
+    //背景圖長寬
+    public static final int JFRAMEWIDTH = 1920;
+    public static final int JFRAMEHEIGHT = 1080;
+    
+    
+    
 }
