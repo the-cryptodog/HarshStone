@@ -16,6 +16,7 @@ import gameObject.Card.CardMoveState.EndTurnMove;
 import gameObject.Card.CardMoveState.Movable;
 import gameObject.Card.CardMoveState.MoveBack;
 import gameObject.Card.CardMoveState.MoveToDiscard;
+import gameObject.Card.CardMoveState.MoveToHandDeck;
 import gameObject.DamageEffect;
 import gameObject.DefenceEffect;
 import gameObject.Hero.Hero;
@@ -357,12 +358,18 @@ public class MainScene extends Scene {
     public void setDeckPoisition() {
         for (int i = 0; i < cardlimit; i++) {
             Card temp = handdeck.getCards().get(i);
-            temp.setX(300 + (Global.CARDWIDTH + 50) * i);
+//            temp.setX(300 + (Global.CARDWIDTH + 50) * i);
+//            temp.setY(Global.CARDDECKBOTTOM);
+//            temp.setOrginalX(300 + (Global.CARDWIDTH + 50) * i);
+//            temp.setOrginalY(Global.CARDDECKBOTTOM);
+//            temp.setCardMoveState(new Movable());
+            temp.setX(0);
             temp.setY(Global.CARDDECKBOTTOM);
             temp.setOrginalX(300 + (Global.CARDWIDTH + 50) * i);
             temp.setOrginalY(Global.CARDDECKBOTTOM);
-            temp.setCardMoveState(new Movable());
-        }
+            temp.setHandDeckPoisition(i+1);
+            temp.setCardMoveState(new MoveToHandDeck());
+        }  
 
     }
 
@@ -378,7 +385,6 @@ public class MainScene extends Scene {
         drawcarddeck.shuffle();
         for (int i = 0; i < cardlimit; i++) {
             handdeck.getCards().add(drawcarddeck.getCards().get(i));
-            Card temp = handdeck.getCards().get(i);
         }
         for (int i = 0; i < cardlimit; i++) {
             drawcarddeck.getCards().remove(0);
@@ -401,9 +407,7 @@ public class MainScene extends Scene {
 
         for (int i = 0; i < monsters.size(); i++) {
             
-//            if (monsters.get(i) != null) {
-//                monsters.get(i).update();
-//            }
+
             if (monsters.get(i).gethealth() <= 0) {
                 monsters.remove(monsters.get(i));
                 i--;
@@ -443,13 +447,15 @@ public class MainScene extends Scene {
                     temp.setMonsterState(new DecideMove());
                     temp.move();
                 }
-                System.out.print("setFalse!!!!!!!!!!!!!!!!");
                 next.setIsClicked(false);
                 drawCard(drawcarddeck, handdeck, discarddeck);
-                }
-            
+                
+                
+                
             }
+            
         }
+    }
 
     @Override
     public void sceneEnd() {

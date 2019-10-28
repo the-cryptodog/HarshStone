@@ -35,14 +35,14 @@ public class DamageEffect extends CardEffect {
         card.action(hero, monster);
         System.out.println("最初血量" + monster.gethealth());
         int temp =  monster.getDefense() - damage;
-        monster.sethealth(monster.gethealth() - damage + monster.getDefense());
+       //怪物護甲還有剩,血量不用動
         if(temp>0){
             monster.setDefense(temp);
         }else{
             monster.setDefense(0);
+            monster.sethealth(monster.gethealth() + temp);
         }
         
-       
         System.out.println("傷害" + damage);
         System.out.println("剩餘血量" + monster.gethealth() + " " + monster.gethealth() / (float) 100);
 

@@ -5,6 +5,8 @@
  */
 package gameObject.Card;
 
+import utils.Global;
+
 /**
  *
  * @author frank61003
@@ -78,9 +80,11 @@ public interface CardMoveState {
 
         @Override
         public void move(Card card) {
+            int x = card.getX();
+            int y = card.getY();
             int tempx = card.getX() + 30;
             int tempy = card.getY() + 30;
-            if(tempx <= 1300 || tempy < 700){    
+            if(x <= 1300 || y < 700){    
  
                 if(tempx <= 1300){
                     card.setX(tempx);
@@ -103,7 +107,27 @@ public interface CardMoveState {
         }
     }
     
-    
+    public class MoveToHandDeck implements CardMoveState{
+
+
+        @Override
+        public void move(Card card) {
+            int x = card.getX();
+            int tempx = card.getX() + 30;
+            int limit = 300 + (Global.CARDWIDTH + 50) * (card.getHandDeckPoisition() - 1);
+            
+            
+            if(x <= limit){    
+ 
+                if(tempx <= limit){
+                    card.setX(tempx);
+                }
+                else{
+                    card.setX(limit);
+                }  
+            }
+        }
+    }
     
     
     public class EndTurnMove implements CardMoveState{
@@ -123,7 +147,6 @@ public interface CardMoveState {
     }
     
     public class MoveStop implements CardMoveState{
-
 
         @Override
         public void move(Card card) {

@@ -33,6 +33,7 @@ public class Card extends GameObject{
     protected int originaly;
     private int defense;
     private int skillIndex;
+    private int handdeckpoisition;
     
     public Card(int x, int y, int width, int height, String name, int cost) {
         super(x, y, width, height, name);
@@ -44,7 +45,8 @@ public class Card extends GameObject{
         cardmovestate = new MoveStop();
         image = irc.getInstance().tryGetImage(PathBuilder.getImage("/"+name+".png"));
         defense = 0;
-        
+        //1~5為手牌位置
+        handdeckpoisition = 0;
     }
     
     public int getDefense(){
@@ -83,6 +85,14 @@ public class Card extends GameObject{
         return originaly;
     }
       
+    
+    public void setHandDeckPoisition(int handdeckpoisition){
+        this.handdeckpoisition = handdeckpoisition;
+    }
+    
+    public int getHandDeckPoisition(){
+        return handdeckpoisition;
+    }
     
     public ImageResourceController getIRC() {
         return irc;

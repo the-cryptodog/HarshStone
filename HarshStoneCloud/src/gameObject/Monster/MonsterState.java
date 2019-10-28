@@ -90,9 +90,16 @@ public interface MonsterState {
         public void action(Monster monster, Hero hero) { 
 
             if(monster.getSelfSkill().getSkillend()){
-                hero.sethealth(hero.gethealth() - monster.getAttack() + hero.getDefense());
-                monster.setAttack(0);
-                monster.monsterstate = new MoveRight();
+                int temp =  hero.getDefense() - monster.getAttack();
+                //人物護甲還有剩,血量不用動
+                if(temp > 0){
+                    hero.setDefense(temp);
+                }else{
+                    hero.sethealth(hero.gethealth() + temp);
+                    hero.setDefense(0);
+                    monster.setAttack(0);
+                    monster.monsterstate = new MoveRight();
+                }    
             }    
        }
     }
@@ -111,7 +118,6 @@ public interface MonsterState {
 
         @Override
         public void action(Monster monster, Hero hero) { 
-            
 
         }
     }
