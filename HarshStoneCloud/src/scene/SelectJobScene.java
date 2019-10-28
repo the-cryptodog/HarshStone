@@ -134,11 +134,14 @@ public class SelectJobScene extends Scene {
             job1.getState().action(job1);
             job2.move();
         }
+        if(job1.getX()>1920)
+                       scenecontroller.changeScene(new MapScene(scenecontroller));
 
     }
 
     @Override
     public void sceneEnd() {
+
     }
 
     @Override
@@ -173,6 +176,7 @@ public class SelectJobScene extends Scene {
         }
         back.paint(g);
 
+        job1.paint(g);
         job2.paint(g);
     }
 }
