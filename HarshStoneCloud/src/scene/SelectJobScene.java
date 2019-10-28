@@ -7,7 +7,6 @@ package scene;
 
 import Controller.SceneController;
 import gameObject.Button.Button;
-import gameObject.Hero.Hero;
 import gameObject.Jobs.Sorcerer;
 import gameObject.Jobs.Warrior;
 import io.CommandSolver;
@@ -24,20 +23,19 @@ public class SelectJobScene extends Scene {
     private BufferedImage img;
     private BufferedImage socererName;
     private BufferedImage warriorName;
-    private Hero hero;
 
-    private Button socerer;
-    private Button warrior;
+    private Sorcerer socerer;
+    private Warrior warrior;
     private Button back;
 
     public SelectJobScene(SceneController scenecontroller) {
         super(scenecontroller);
 
         back = new Button(1800, 1000, 85, 50, "BACK");
-        socerer = new Button(450, 450, 260, 260, "巫師");
-        warrior = new Button(1150, 450, 260, 260, "戰士");
-        socererName = irc.tryGetImage("/resources/Jobs/JOB1.png");
-        warriorName = irc.tryGetImage("/resources/Jobs/JOB2.png");
+        socerer = new Sorcerer(450, 450, 260, 260, "巫師");
+        warrior = new Warrior(1150, 450, 260, 260, "戰士rfff");
+        socererName = irc.tryGetImage("/resources/Jobs/SOCERERNAME.png");
+        warriorName = irc.tryGetImage("/resources/Jobs/WARRIORNAME.png");
         img = irc.tryGetImage("/resources/Map/mapOrigin.png");
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
 
