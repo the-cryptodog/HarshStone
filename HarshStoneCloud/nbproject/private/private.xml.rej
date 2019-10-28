@@ -1,0 +1,27 @@
+diff a/HarshStoneCloud/nbproject/private/private.xml b/HarshStoneCloud/nbproject/private/private.xml	(rejected hunks)
+@@ -4,16 +4,18 @@
+     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+         <group>
+             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/scene/MapScene.java</file>
+-            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/GameObject.java</file>
+-            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/javaapplication34mygame/GameJPanel.java</file>
++            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Skill/SkillList.java</file>
++            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Monster/MonsterHelper.java</file>
++            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Card/CardFactory.java</file>
++            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Skill/Skill2.java</file>
++            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Skill/Skill.java</file>
++            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Skill/SkillFactory.java</file>
+             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/scene/MainScene.java</file>
+-            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Button/Button.java</file>
+-            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/Controller/ImageResourceController.java</file>
+-            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/javaapplication34mygame/JavaApplication34MyGame.java</file>
++            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Monster/Monster.java</file>
++            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Card/Card.java</file>
+             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Card/CardDeck.java</file>
++            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Monster/MonsterState.java</file>
+             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/values/ImagePath.java</file>
+-            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/scene/MenuScene.java</file>
+-            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/MapIcon/redCross.java</file>
+         </group>
+     </open-files>
+ </project-private>
