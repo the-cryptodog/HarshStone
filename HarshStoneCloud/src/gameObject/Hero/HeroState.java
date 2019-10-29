@@ -17,7 +17,7 @@ public interface HeroState {
 
     public void action(Hero hero);
 
-    public class job1Selected implements HeroState {
+    public class jobSelected implements HeroState {
 
         @Override
         public void action(Hero hero) {
@@ -29,12 +29,24 @@ public interface HeroState {
         }
     }
 
-    public class job2Selected implements HeroState {
+    public class beginTalk implements HeroState {
 
-        @Override
+          @Override
         public void action(Hero hero) {
-            hero.setX(hero.getX() - 20);
-        }
+            if (hero.getX() > 1440) {
+                hero.setX(hero.getX() - 10);
+            }
+        }   
+    }
+    public class talkEnd implements HeroState {
+
+          @Override
+        public void action(Hero hero) {
+            if (hero.getX() < 2080) {
+                 hero.changeDirection(Global.RIGHT);
+                hero.setX(hero.getX() + 10);
+            }
+        } 
     }
 
     public class NoMove implements HeroState {

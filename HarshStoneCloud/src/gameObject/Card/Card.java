@@ -61,6 +61,9 @@ public class Card extends GameObject{
        this.skillIndex = skillIndex;
     
     }
+
+    
+    
      public int getOrginalX(){
         return  originalx;
     }

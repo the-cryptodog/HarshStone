@@ -32,10 +32,9 @@ public class SkillList {
         monsterSkillList.add(skill);
     }
     
-    public void addCardSkill(Skill skill,int yPosition) { 
+    public void addCardSkill(Skill skill) { 
         // 卡片的技能光影集合,共三有十種技能光影 ;
         skill.setX(Global.MONSTERX);
-        skill.setY(100*((yPosition)*2-1));
         cardSkillList.add(skill);
     }
 
