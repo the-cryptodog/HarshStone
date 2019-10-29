@@ -6,6 +6,7 @@
 package scene;
 
 import Controller.ImageResourceController;
+import Controller.PathBuilder;
 import Controller.SceneController;
 import gameObject.Button.Button;
 
@@ -26,6 +27,7 @@ import gameObject.Monster.Monster;
 import gameObject.Monster.Monster2;
 import gameObject.Monster.MonsterState;
 import gameObject.Monster.MonsterState.DecideMove;
+import gameObject.NumberIcon;
 import gameObject.Skill.Skill;
 import gameObject.Skill.SkillFactory;
 import gameObject.Skill.SkillList;
@@ -49,6 +51,7 @@ import javax.imageio.ImageIO;
 import javax.swing.Timer;
 import utils.DelayCounter;
 import utils.Global;
+import values.ImagePath;
 
 /**
  *
@@ -93,10 +96,14 @@ public class MainScene extends Scene {
     private boolean gameOver;
     private boolean gameWin;
     private BufferedImage endImage;
+//    private NumberIcon crystalnumber;
+    private BufferedImage number;
+    
 
     public MainScene(SceneController scenecontroller, MapScene mapScene) {
         super(scenecontroller);
-
+//        System.out.println(PathBuilder.getNumber(ImagePath.NUMBER2));
+//        number = ImageResourceController.getInstance().tryGetImage("/resources/Number/Number2.png");
         gameWin = false;
         gameOver = false;
         font1 = new Font("TimesRoman", Font.BOLD + Font.ITALIC, 14);
@@ -109,6 +116,7 @@ public class MainScene extends Scene {
         allmonsterend = false;
         skillboard = new SkillList();
         skillFactory = new SkillFactory();
+//        crystalnumber = new NumberIcon(200,200,100,100,"3",4);
         this.mapScene = mapScene;
 
 //        drawcarddeck = new CardDeck(1400,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"抽牌推");
@@ -185,12 +193,18 @@ public class MainScene extends Scene {
                 if (state == CommandSolver.MouseState.RELEASED) {
                     System.out.println("release");
 
-                    if (selectedcard != null) {
-                        if (selectedcard.getY() < 560 && selectedcard.getDefense() > 0) {
+                    if (selectedcard != null){ 
+                        //水晶不夠無法施放
+                        if(crystal-selectedcard.getCost() < 0) {
+                            selectedcard.setCardMoveState(new MoveBack());
+                        }
+                        
+                        else if (selectedcard.getY() < 560 && selectedcard.getDefense() > 0) {
                             selectedcard.action(hero, new Monster(0, 0, 0, 0, "", 0));
                             selectedcard.setCardMoveState(new MoveToDiscard());
+                            crystal -= selectedcard.getCost();
                         }
-                        if (!(selectedcard.getCardMoveState() instanceof MoveToDiscard)) {
+                        else if (!(selectedcard.getCardMoveState() instanceof MoveToDiscard)) {
                             for (int i = 0; i < monsters.size(); i++) {
                                 if (monsters.get(i).isCollision(selectedcard)) {
                                     // 卡排放到怪物上的動畫
@@ -203,17 +217,16 @@ public class MainScene extends Scene {
                                     }//檢測MainScene的卡片技能區，如已有實體則使用，如無則新增//                                                              
                                     selectedcard.action(hero, monsters.get(i));
                                     selectedcard.setCardMoveState(new MoveToDiscard());
+                                    crystal -= selectedcard.getCost();
                                     break;
                                 }
                                 if (i == monsters.size() - 1) {
                                     selectedcard.setCardMoveState(new MoveBack());
                                 }
-
                             }
                         }
                         selectedcard = null;
                     }
-
                 }
 
                 if (state == CommandSolver.MouseState.CLICKED) {
@@ -232,20 +245,6 @@ public class MainScene extends Scene {
                         scenecontroller.changeScene(mapScene);
 
                     }
-//                    if (selectedcard != null) {
-//                        for (int i = 0; i < monsters.size(); i++) {
-//                            if (monsters.get(i).isCollision(selectedcard)) {
-//                                selectedcard.action(hero, monsters.get(i));
-//                                selectedcard.setCardMoveState(new MoveToDiscard());
-//                                break;
-//                            }
-//                            if (i == monsters.size() - 1) {
-//                                selectedcard.setCardMoveState(new MoveBack());
-//
-//                            }
-//                        }
-//                        selectedcard = null;
-//                    }
                     if (exit.isCollision(e.getX(), e.getY())) {
                         gameOver = true;
                         sceneEnd();
@@ -459,7 +458,7 @@ public class MainScene extends Scene {
                 }
                 next.setIsClicked(false);
                 drawCard(drawcarddeck, handdeck, discarddeck);
-               
+                crystal = 3;
             }
             
         }
@@ -520,7 +519,8 @@ public class MainScene extends Scene {
             g.drawImage(endImage, 0, 0, 1920, 1080, null);
             exit2.paint(g);
         }
-        
+//        crystalnumber.paint(g);
+//            g.drawImage(number, 200, 200, 300, 300, null);
 //        if (gameWin) {    
 //            g.drawImage(winImage, 0, 0, 1920, 1080, null);
 //             exit2.paint(g);

@@ -86,6 +86,11 @@ public class Card extends GameObject{
     }
       
     
+    public int getCost(){
+        return cost;
+    }
+    
+    
     public void setHandDeckPoisition(int handdeckpoisition){
         this.handdeckpoisition = handdeckpoisition;
     }
