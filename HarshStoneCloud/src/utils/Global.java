@@ -90,7 +90,7 @@ public class Global {
 
     //Numberimage
     public static final int NUMBER_X_OFFSET = 63;
-    public static final int NUMBER_Y_OFFSET = 76;
+    public static final int NUMBER_Y_OFFSET = 70;
 
     //MonsterStateIcon
     public static final int ICON_X_OFFSET = 60;
