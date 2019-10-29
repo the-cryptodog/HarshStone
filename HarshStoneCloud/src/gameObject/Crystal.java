@@ -23,7 +23,7 @@ public class Crystal extends GameObject{
     public Crystal(int x, int y, int width, int height, String name){
         super(x, y, width, height, name);
         image = ImageResourceController.getInstance().tryGetImage("/resources/Number/Number1.png");
-//        System.out.println(PathBuilder.getIcon(ImagePath.CRYSTALICON));
+
 //        image = irc.tryGetImage(PathBuilder.getIcon(ImagePath.CRYSTALICON));
         delaycounter = new DelayCounter(10, new DelayCounter.Action() {
 
