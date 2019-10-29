@@ -154,12 +154,12 @@ public class SelectJobScene extends Scene {
             job1.move();
             job2.move();
         }
-        if (job1.getX() < 307) {
-            scenecontroller.changeScene(new MapScene(scenecontroller));
-        }
-        if (job2.getX() < 307) {
-            scenecontroller.changeScene(new MapScene(scenecontroller));
-        }
+//        if (job1.getX() < 307) {
+//            scenecontroller.changeScene(new MapScene(scenecontroller));
+//        }
+//        if (job2.getX() < 307) {
+//            scenecontroller.changeScene(new MapScene(scenecontroller));
+//        }
 
     }
 
