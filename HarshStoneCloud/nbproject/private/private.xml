@@ -7,7 +7,6 @@
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Hero/HeroHelper.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/Controller/ImageResourceController.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Monster/MonsterHelper.java</file>
-            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/utils/DelayCounter.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Card/CardEffect.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/scene/MainScene.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Monster/Monster.java</file>
@@ -16,11 +15,17 @@
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Card/CardDeck.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/values/ImagePath.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Jobs/JobIcon.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/MapIcon/redCross.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/scene/SelectJobScene.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/GameObject.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Hero/Hero.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/scene/SecondScene.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Skill/SkillList.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Skill/Skill.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/utils/Global.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Skill/SkillFactory.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Card/CardMoveState.java</file>
+            <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/io/CommandSolver.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Hero/HeroState.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Jobs/JobIconHelper.java</file>
             <file>file:/C:/Users/User/Documents/期中專案/HarshStoneCloud/src/gameObject/Button/Button.java</file>
