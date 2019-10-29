@@ -68,7 +68,14 @@ public class Global {
 
     //目前關卡
     public static int CURRENTSTAGE = 1;
-
+    
+    //過關判定
+    public static boolean STAGE1CLEAR = false;
+    public static boolean STAGE2CLEAR = false;
+    public static boolean STAGE3CLEAR = false;
+    public static boolean STAGE4CLEAR = false;
+    public static boolean STAGE5CLEAR = false;
+ 
     //Card 
     public static final int CARDWIDTH = 141;
     public static final int CARDHEIGHT = 195;
