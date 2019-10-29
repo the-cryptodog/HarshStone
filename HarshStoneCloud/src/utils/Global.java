@@ -89,8 +89,8 @@ public class Global {
     public static CardDeck HERODECK;
 
     //Numberimage
-    public static final int NUMBER_X_OFFSET = 63;
-    public static final int NUMBER_Y_OFFSET = 70;
+    public static final int NUMBER_X_OFFSET = 110;
+    public static final int NUMBER_Y_OFFSET = 130;
 
     //MonsterStateIcon
     public static final int ICON_X_OFFSET = 60;

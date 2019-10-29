@@ -22,7 +22,7 @@ public class MenuScene extends Scene {
 
     private BufferedImage img;
     private ArrayList<Button> buttons;
-
+    private SelectJobSceneState menuscenestate;
     private boolean startPressed;
 
     //開始遊戲(進入選角畫面)
