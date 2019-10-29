@@ -18,6 +18,7 @@ import gameObject.Card.CardMoveState.Movable;
 import gameObject.Card.CardMoveState.MoveBack;
 import gameObject.Card.CardMoveState.MoveToDiscard;
 import gameObject.Card.CardMoveState.MoveToHandDeck;
+import gameObject.Crystal;
 import gameObject.DamageEffect;
 import gameObject.DefenceEffect;
 import gameObject.Hero.Hero;
@@ -99,7 +100,7 @@ public class MainScene extends Scene {
 //    private NumberIcon crystalnumber;
     private BufferedImage number;
     
-
+  
     public MainScene(SceneController scenecontroller, MapScene mapScene) {
         super(scenecontroller);
 //        System.out.println(PathBuilder.getNumber(ImagePath.NUMBER2));
@@ -131,13 +132,13 @@ public class MainScene extends Scene {
         back = new Button(1600, 730, 108, 40, "BACK");
         next = new Button(1600, 800, 184, 42, "ROUNDSTART");
 
-        hero = new Hero(0, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
+        hero = new Hero(-70, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         drawcarddeck = hero.getHeroDeck();
 
         orc = new Monster(Global.MONSTERX, 100 * (1 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
-                "獸人1", 30, 1, (int) (Math.random() * 8), (int) (Math.random() * 8)); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
+                "獸人1", 14, 1, (int) (Math.random() * 8), (int) (Math.random() * 8)); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
         cultist = new Monster(Global.MONSTERX, 100 * (2 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
-                "獸人2", 20, 2, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第二隻怪物\
+                "獸人2", 10, 2, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第二隻怪物\
         monster1 = new Monster(Global.MONSTERX, 100 * (3 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                 "獸人3", 17, 3, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第三隻怪物\
         dedmon = new Monster2(Global.MONSTERX, 100 * (4 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
@@ -526,7 +527,7 @@ public class MainScene extends Scene {
 //            g.drawImage(winImage, 0, 0, 1920, 1080, null);
 //             exit2.paint(g);
 //        }
-
+      
 
     }
 

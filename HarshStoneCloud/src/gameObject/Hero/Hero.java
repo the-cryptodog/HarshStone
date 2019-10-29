@@ -175,7 +175,8 @@ public class Hero extends GameObject {
     }
 
     public void paint(Graphics g) {
-        herohelper.paint(g, x, y, width, height, ACT[act], direction, health);
         update();
+        herohelper.paint(g, x, y, width, height, ACT[act], direction, health);
+        
     }
 }

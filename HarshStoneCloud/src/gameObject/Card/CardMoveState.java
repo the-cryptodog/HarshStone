@@ -70,7 +70,10 @@ public interface CardMoveState {
                     card.setY(card.getOrginalY());
                 }
             
-            }    
+            }
+            if(card.getX() == card.getOrginalX() && card.getY() == card.getOrginalY()){
+                card.setCardMoveState(new MoveStop());
+            }
         }
     }
     
@@ -151,9 +154,9 @@ public interface CardMoveState {
 
         @Override
         public void move(Card card) {
-            System.out.print(card.getX());
-            System.out.print(" ++++++++++++++++ ");
-            System.out.print(card.getY());
+//            System.out.print(card.getX());
+//            System.out.print(" ++++++++++++++++ ");
+//            System.out.print(card.getY());
         }
     }
    
