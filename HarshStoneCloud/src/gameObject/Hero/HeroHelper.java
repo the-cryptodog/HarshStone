@@ -7,6 +7,7 @@ package gameObject.Hero;
 
 import Controller.ImageResourceController;
 import Controller.PathBuilder;
+import gameObject.Crystal;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -21,10 +22,13 @@ public class HeroHelper {
 
     private BufferedImage img;
     private int heroposition;
-
+    private Crystal crystal;
+    
+    
     public HeroHelper(int hero) {
         img = getHero(hero);
         heroposition = hero % 8;
+        crystal = new Crystal(0,0,48,48,"");
     }
 
     private BufferedImage getHero(int hero) {
@@ -48,11 +52,15 @@ public class HeroHelper {
         int dy = 128 * (heroposition / 4);
 
         g.drawImage(img, x, y, x + width, y + height, dx + act * Global.IMG_X_OFFSET, dy + direction * Global.IMG_Y_OFFSET, dx + 32 + act * Global.IMG_X_OFFSET, dy + 32 + direction * Global.IMG_Y_OFFSET, null);
-       if(health>0){
-        g.setColor(Color.red);
+        if(health>0){
+            g.setColor(Color.red);
             g.drawRect(x - Global.HEALTHX , y+height, width + 2*Global.HEALTHX,25);
             float temp1 = (float)health/100 * (width + 2 * Global.HEALTHX);
             g.fillRect(x - Global.HEALTHX , y+height, (int)temp1, 25);   
-       }
+            crystal.setX(x);
+            crystal.setY(y - 55);
+            crystal.paint(g);
+        }
+        
     }
 }
