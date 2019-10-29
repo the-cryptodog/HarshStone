@@ -15,6 +15,7 @@ import gameObject.Hero.HeroState.job2Selected;
 import gameObject.Jobs.JobIcon;
 
 import io.CommandSolver;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -28,10 +29,12 @@ import utils.Global;
 public class SelectJobScene extends Scene {
 
     private BufferedImage img;
+    private BufferedImage tmpIma;
     private BufferedImage job1Screen1;
     private BufferedImage job1Screen2;
     private BufferedImage job2Screen1;
     private BufferedImage job2Screen2;
+    private BufferedImage storyImg;
     private DelayCounter delaycounter;
     private int sx1, sy1, sx2, sy2;
 
@@ -42,7 +45,9 @@ public class SelectJobScene extends Scene {
     private Button job2screen;
     int upY = 430;
     int downY = 250;
-    boolean jobSelected;
+    private boolean jobSelected;
+    private boolean storyBegin;
+    private boolean storyEnd;
 
     public SelectJobScene(SceneController scenecontroller) {
         super(scenecontroller);
@@ -81,8 +86,7 @@ public class SelectJobScene extends Scene {
 
         img = irc.tryGetImage("/resources/Map/mapOrigin.png");
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
-
-            @Override
+   
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
                 if (state == CommandSolver.MouseState.RELEASED) {
                     System.out.println("release");
@@ -93,10 +97,14 @@ public class SelectJobScene extends Scene {
                 if (state == CommandSolver.MouseState.CLICKED) {
                     System.out.println("CLick");
                     if (job1screen.isCollision(e.getX(), e.getY())) {
+//                        changePix(img);
+//                        img=tmpIma;
                         job1screen.setIsClicked(true);
                         job1.setState(new job1Selected());
-                        job1.changeDirection(Global.RIGHT);
+                        job1.changeDirection(Global.LEFT);
                         jobSelected = true;
+                       storyBegin = true;
+
 
 //                        scenecontroller.changeScene(new MapScene(scenecontroller));
 //                      startPressed = true;
@@ -146,12 +154,12 @@ public class SelectJobScene extends Scene {
             job1.move();
             job2.move();
         }
-        if (job1.getX() > 2048) {
-            scenecontroller.changeScene(new MapScene(scenecontroller));
-        }
-        if (job2.getX() < -128) {
-            scenecontroller.changeScene(new MapScene(scenecontroller));
-        }
+//        if (job1.getX() > 307) {
+//            scenecontroller.changeScene(new MapScene(scenecontroller));
+//        }
+//        if (job2.getX() > 307) {
+//            scenecontroller.changeScene(new MapScene(scenecontroller));
+//        }
 
     }
 
@@ -159,11 +167,39 @@ public class SelectJobScene extends Scene {
     public void sceneEnd() {
 
     }
+    
+    public void changePix(BufferedImage sourceImage){          
+                tmpIma=new BufferedImage(sourceImage.getWidth(),sourceImage.getHeight(),BufferedImage.TYPE_INT_RGB);
+                for(int i=0;i<sourceImage.getWidth();i++){
+                        for(int j=0;j<sourceImage.getHeight();j++){
+                                Color color=new Color(sourceImage.getRGB(i,j));
+                                int tmp=(color.getRed()+color.getGreen()+color.getBlue())/3;
+                                Color tmpcol=new Color(tmp,tmp,tmp);
+                                tmpIma.setRGB(i,j,tmpcol.getRGB());
+                        }
+                }
+        }
+    
+//    private BufferedImage grayProcess(BufferedImage sourceImage){
+//    int width = sourceImage.getWidth();
+//    int height = sourceImage.getHeight();
+//    BufferedImage grayImage = new BufferedImage(width, height, BufferedImage.TYPE_BYTE_GRAY);
+//    for(int i= 0 ; i < width ; i++){  
+//            for(int j = 0 ; j < height; j++){  
+//                int rgb = sourceImage.getRGB(i, j);  
+//                grayImage.setRGB(i, j, rgb);  
+//        }  
+//    } 
+//    return grayImage;
+    
 
     @Override
     public void paint(Graphics g) {
+   
+        g.drawImage(tmpIma, 1920, 1080, null);
+        
         g.drawImage(img, 0, 0, 1920, 1080, sx1, sy1, sx2, sy2, null);
-        if (jobSelected) {
+        if (jobSelected & storyEnd) {
             if (sx1 > 0 & sy1 > 0 || sx2 < 1920 & sy2 < 1080) {
                 sx1 -= Global.XSPEED;
                 sy1 -= Global.YSPEED;
@@ -203,8 +239,9 @@ public class SelectJobScene extends Scene {
         }
         back.paint(g);
 //        
-        if(!job1screen.getIsClicked())
+        if(!job1screen.getIsClicked()){
         job2.paint(g);
+        }
         if(!job2screen.getIsClicked())
         job1.paint(g);
     }

@@ -488,7 +488,6 @@ public class MainScene extends Scene {
 //        g.setFont(font1);
 //        g.drawString("14pt bold & italic times Roman", 5, 92);
         g.drawImage(img, 0, 0, 1920, 1080, null);
-
         hero.paint(g);
         for (int i = 0; i < monsters.size(); i++) {
             monsters.get(i).paint(g);

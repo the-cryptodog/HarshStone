@@ -6,6 +6,7 @@
 package gameObject.Hero;
 
 import gameObject.Monster.MonsterState;
+import scene.MapScene;
 import utils.Global;
 
 /**
@@ -20,14 +21,19 @@ public interface HeroState {
 
         @Override
         public void action(Hero hero) {
-            hero.setX(hero.getX() + 20);
+            if (hero.getX() > 307) {
+                hero.changeDirection(Global.LEFT);
+                hero.setX(hero.getX() - 10);
+            }else
+            hero.changeDirection(Global.RIGHT);
         }
     }
+
     public class job2Selected implements HeroState {
 
         @Override
         public void action(Hero hero) {
-            hero.setX(hero.getX() -20);
+            hero.setX(hero.getX() - 20);
         }
     }
 
@@ -35,43 +41,38 @@ public interface HeroState {
 
         @Override
         public void action(Hero hero) {
-            
+
         }
     }
-    
+
     public class MoveHeroRight implements HeroState {
 
         @Override
         public void action(Hero hero) {
             int tempx;
-            
+
             tempx = hero.getX() + Global.HEROMOVERANGE;
             hero.direction = 2;
-            if(tempx >= Global.HEROX ){
-                hero.setX( Global.HEROX);    
+            if (tempx >= Global.HEROX) {
+                hero.setX(Global.HEROX);
                 hero.setState(new NoMove());
-            }
-            else{
+            } else {
                 hero.setX(tempx);
             }
         }
     }
-    
+
     public class MoveHeroLeave implements HeroState {
 
         @Override
         public void action(Hero hero) {
             int tempx;
-            
+
             tempx = hero.getX() + Global.HEROMOVERANGE;
-            if(hero.getX() <= Global.JWIDTH ){
+            if (hero.getX() <= Global.JWIDTH) {
                 hero.setX(tempx);
             }
         }
     }
-    
-    
-    
-    
-    
+
 }

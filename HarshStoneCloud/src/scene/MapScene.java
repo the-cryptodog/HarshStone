@@ -88,18 +88,19 @@ public class MapScene extends Scene {
                 if (state == CommandSolver.MouseState.CLICKED) {
                     System.out.println("CLick");
                     System.out.println(redCrossList.get(0).checkTag(0));
-                    if (redCrossList.get(0).isCollision(e.getX(), e.getY())) {
-                        stagePassed = false;
+                    if (redCrossList.get(0).isCollision(e.getX(), e.getY())&&Global.CURRENTSTAGE<2) {                    
                         currentRedCross = redCrossList.get(0).getTagList().get(0);
                         redCrossList.get(0).setIsClicked(true);
+                        stagePassed = false;
                         scenecontroller.changeScene(new MainScene(scenecontroller, getThis()));
                     }
                     for (int i = 0; i < redCrossList.size(); i++) {
                         if (redCrossList.get(i).isCollision(e.getX(), e.getY())
                                 && redCrossList.get(currentRedCross).checkTag(i)) {
-                            stagePassed = false;
+
                             currentRedCross = redCrossList.get(i).getTagList().get(0);
                             redCrossList.get(i).setIsClicked(true);
+                             stagePassed = false;
                             scenecontroller.changeScene(new MainScene(scenecontroller, getThis()));
 
                         }
@@ -133,6 +134,7 @@ public class MapScene extends Scene {
 
     @Override
     public void sceneBegin() {
+//        if(Global.CURRENTSTAGE>0)
         stagePassed = true;
 
     }
