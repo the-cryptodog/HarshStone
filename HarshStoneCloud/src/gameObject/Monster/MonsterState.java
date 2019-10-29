@@ -45,10 +45,10 @@ public interface MonsterState {
         @Override
         public void action(Monster monster, Hero hero) { 
             int tempx;
-            
+
             tempx = monster.getX() - Global.MOVERANGE;
             monster.direction = 1;
-            if(tempx <= Global.HEROX +Global.HEROWIDTH + 2 * Global.HEALTHX){
+            if(tempx <= Global.HEROX +Global.HEROWIDTH + 2 * Global.HEALTHX){                  
                 monster.setX( Global.HEROX + Global.HEROWIDTH +2 * Global.HEALTHX);    
                 monster.monsterstate = new Attack();
             }

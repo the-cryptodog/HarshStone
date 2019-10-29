@@ -402,7 +402,7 @@ public class MainScene extends Scene {
     @Override
     public void sceneUpdate() {
         hero.move();
-        if(hero.getX() > Global.JFRAMEWIDTH){
+        if(hero.getX() > Global.JWIDTH){
             Global.CURRENTSTAGE++;
             scenecontroller.changeScene(mapScene);
         }

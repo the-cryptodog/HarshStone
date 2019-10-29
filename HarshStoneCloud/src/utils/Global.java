@@ -118,9 +118,19 @@ public class Global {
     public static final int SKILLACT10 = 20;
 
     //背景圖長寬
-    public static final int JFRAMEWIDTH = 1920;
-    public static final int JFRAMEHEIGHT = 1080;
+    public static final int JWIDTH = 1920;
+    public static final int JHEIGHT = 1080;
+    
+    //背景轉場常數
+    public static final int XSPEED = 16;
+    public static final int YSPEED = 9;
+    
+    //j箭頭跳動常數
+    public static final int ARROWSPEED = 10;
+
+
+
     
     
-    
+
 }

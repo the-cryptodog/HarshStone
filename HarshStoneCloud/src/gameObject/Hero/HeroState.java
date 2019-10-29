@@ -16,11 +16,18 @@ public interface HeroState {
 
     public void action(Hero hero);
 
-    public class jobSelected implements HeroState {
+    public class job1Selected implements HeroState {
 
         @Override
         public void action(Hero hero) {
             hero.setX(hero.getX() + 20);
+        }
+    }
+    public class job2Selected implements HeroState {
+
+        @Override
+        public void action(Hero hero) {
+            hero.setX(hero.getX() -20);
         }
     }
 
@@ -57,7 +64,7 @@ public interface HeroState {
             int tempx;
             
             tempx = hero.getX() + Global.HEROMOVERANGE;
-            if(hero.getX() <= Global.JFRAMEWIDTH ){
+            if(hero.getX() <= Global.JWIDTH ){
                 hero.setX(tempx);
             }
         }

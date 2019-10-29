@@ -26,6 +26,7 @@ public class MapScene extends Scene {
     private boolean stagePassed;
     private BufferedImage map;
     private BufferedImage cover;
+    private BufferedImage pointer;
     private redCross[] redCross;
     private ArrayList<redCross> redCrossList;
     private int currentStage;
@@ -37,10 +38,13 @@ public class MapScene extends Scene {
     private int[][] availableRoute = {{4, 5}, {2, 5, 8, 9}, {3, 6, 8, 9}};
     private int currentRedCross;
     private int coverx;
+//    private int y;
+//    private int speed;
 
     public MapScene(SceneController scenecontroller) {
         super(scenecontroller);
-
+//        y=400;
+//        y=speed=10;
         stagePassed = false;
         coverx = 495;
         System.out.println("stage=" + currentStage);
@@ -69,6 +73,7 @@ public class MapScene extends Scene {
 
         map = irc.tryGetImage("/resources/Map/map.png");
         cover = irc.tryGetImage("/resources/Map/mapOrigin.png");
+        pointer = irc.tryGetImage("/resources/Map/POINTER.png");
 
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
 
@@ -143,6 +148,7 @@ public class MapScene extends Scene {
 
     @Override
     public void paint(Graphics g) {
+
         g.drawImage(map, 0, 0, 1932, 1078, null);
 
         for (int i = 0; i < redCrossList.size(); i++) {
@@ -151,33 +157,41 @@ public class MapScene extends Scene {
                 redCrossList.get(i).paint(g);
             }
         }
+//        if (y > 500 || y < 400) {
+//                speed = (-1) * speed;
+//            }
+//        if (Global.CURRENTSTAGE == 1) {                    
+//            y += speed;
+//            g.drawImage(pointer, 435, y, 50, 50, null);
+//       
+//        }
 //        redCrossList.get(0).paint(g);
         switch (Global.CURRENTSTAGE) {
             case 1:
                 g.drawImage(cover, 495, 0, 1932, 1078, 495, 0, 1932, 1078, null);
                 break;
             case 2:
-                if(coverx <= 695){    
-                    coverx += 2;   
+                if (coverx <= 695) {
+                    coverx += 2;
                 }
-            g.drawImage(cover, coverx, 0, 1932, 1078, coverx, 0, 1932, 1078, null);
-            break;
+                g.drawImage(cover, coverx, 0, 1932, 1078, coverx, 0, 1932, 1078, null);
+                break;
             case 3:
-                if(coverx <= 982){    
-                    coverx += 2;   
+                if (coverx <= 982) {
+                    coverx += 2;
                 }
                 g.drawImage(cover, coverx, 0, 1932, 1078, coverx, 0, 1932, 1078, null);
                 break;
             //原邊界為1285
             case 4:
-                if(coverx <= 1287){    
-                    coverx += 2;   
+                if (coverx <= 1287) {
+                    coverx += 2;
                 }
                 g.drawImage(cover, coverx, 0, 1932, 1078, coverx, 0, 1932, 1078, null);
                 break;
             case 5:
-                if(coverx <= 1685){    
-                    coverx += 2;   
+                if (coverx <= 1685) {
+                    coverx += 2;
                 }
                 g.drawImage(cover, coverx, 0, 1932, 1078, coverx, 0, 1932, 1078, null);
                 break;
