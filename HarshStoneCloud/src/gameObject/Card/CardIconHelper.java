@@ -34,20 +34,24 @@ public class CardIconHelper{
     public CardIconHelper(Card card) {
         digitX = card.getX() + (Global.CARDWIDTH / 2);
         digitY = card.getY() + (Global.CARDHEIGHT / 2);
-        digit = new NumberIcon(digitX, digitY, 35, 70, "個位數", 0);
-        tenDigit = new NumberIcon(digitX - 40, digitY, 35, 70, "十位數", 0);
+        digit = new NumberIcon(digitX, digitY, 55, 65, "個位數", 0);
+        tenDigit = new NumberIcon(digitX - 40, digitY, 55, 65, "十位數", 1);
         sword = ImageResourceController.getInstance().tryGetImage("/resources/Icon/attack2.png");
         shield = ImageResourceController.getInstance().tryGetImage("/resources/Icon/Defense2.png");
     }
 
     public void paint(Graphics g, int x, int y, int width, int height, int attack, int defense) {
-        digit.setX(x+25);
-        digit.setY(y+130);
-        tenDigit.setX(x+25);
+        if(attack >9 || defense>9){
+        tenDigit.setX(x+55);
         tenDigit.setY(y+130);
-        
-        digit.paint(g);
         tenDigit.paint(g);
-        g.drawImage(sword, x+25, y+130, null)    ;
+        }
+        
+        digit.setX(x+80);
+        digit.setY(y+110);
+        digit.paint(g);
+
+        g.drawImage(sword, x+5, y+100, null)    ;
+        g.drawImage(shield, x+5, y+100, null)    ;
     }
 }
