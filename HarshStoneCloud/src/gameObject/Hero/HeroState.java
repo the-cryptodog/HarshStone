@@ -24,29 +24,52 @@ public interface HeroState {
             if (hero.getX() > 307) {
                 hero.changeDirection(Global.LEFT);
                 hero.setX(hero.getX() - 10);
-            }else
-            hero.changeDirection(Global.RIGHT);
+            } else {
+                hero.changeDirection(Global.RIGHT);
+            }
         }
     }
 
     public class beginTalk implements HeroState {
 
-          @Override
+        @Override
         public void action(Hero hero) {
             if (hero.getX() > 1440) {
-                hero.setX(hero.getX() - 10);
+                hero.setX(hero.getX() - 20);
             }
-        }   
+        }
     }
+
     public class talkEnd implements HeroState {
 
-          @Override
+        @Override
         public void action(Hero hero) {
             if (hero.getX() < 2080) {
-                 hero.changeDirection(Global.RIGHT);
+                hero.changeDirection(Global.RIGHT);
                 hero.setX(hero.getX() + 10);
             }
-        } 
+        }
+    }
+
+    public class goToMap implements HeroState {
+
+        @Override
+        public void action(Hero hero) {
+            hero.changeDirection(Global.RIGHT);
+            if (hero.getHeight() > 0) {
+                hero.setHeight(hero.getHeight() - 2);
+                hero.setWidth(hero.getWidth() - 2);
+
+                if (hero.getX() < 440) {
+                    hero.setX(hero.getX() + 4);
+                }else{
+                              hero.changeDirection(Global.UP);
+                }
+                if (hero.getY() < 545) {
+                    hero.setY(hero.getY() + 4);
+                }
+            }
+        }
     }
 
     public class NoMove implements HeroState {

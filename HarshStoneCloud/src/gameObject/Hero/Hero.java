@@ -121,6 +121,13 @@ public class Hero extends GameObject {
     public void changeDirection(int direction) {
         this.direction = direction;
     }
+    public void setWidth(int width) {
+        this.width = width;
+    }
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
 
     public void update() {
         if (delaycounter.delayupdate()) {
