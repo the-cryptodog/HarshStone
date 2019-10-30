@@ -208,6 +208,7 @@ public class MainScene extends Scene {
                             for (int i = 0; i < monsters.size(); i++) {
                                 if (monsters.get(i).isCollision(selectedcard)) {
                                     // 卡排放到怪物上的動畫
+                                    Monster temp1 = monsters.get(i);
                                     if (skillboard.skillCheck(selectedcard.getSkilltype())) {
                                         skillboard.getCardSkill(selectedcard.getSkilltype()).setY(monsters.get(i).getY());
                                         skillboard.getCardSkill(selectedcard.getSkilltype()).setSkillend(false);
@@ -217,7 +218,8 @@ public class MainScene extends Scene {
                                         tmp.setY(monsters.get(i).getY());
                                         tmp.setSkillend(false);
                                     }//檢測MainScene的卡片技能區，如已有實體則使用，如無則新增//                                                              
-                                    selectedcard.action(hero, monsters.get(i));
+                                    selectedcard.action(hero, temp1);
+                                    temp1.updateNumberIcon();
                                     selectedcard.setCardMoveState(new MoveToDiscard());
                                     crystal.setNumberIcon(temp - selectedcard.getCost());
                                     break;
@@ -434,12 +436,12 @@ public class MainScene extends Scene {
         }
 
         if (delaycounter.delayupdate() && next.getIsClicked()) {
-            for (Monster monster : monsters) {
-                if (!monster.getMoved()) {
-                    monster.move();
-                    break;
-                }
-            }
+//            for (Monster monster : monsters) {
+//                if (!monster.getMoved()) {
+//                    monster.move();
+//                    break;
+//                }
+//            }
 
             for (Monster monster : monsters) {
                 if (!(monster.getMonsterState() instanceof MonsterState.EndMove)) {
