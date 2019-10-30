@@ -91,7 +91,6 @@ public class MainScene extends Scene {
     private int cardlimit;
     private Font font1;
     private Button exit;
-    private Button exit2;
     private boolean allmonsterend;
     private boolean gameOver;
     private boolean gameWin;
@@ -250,8 +249,8 @@ public class MainScene extends Scene {
 
                     }
                     if (exit.isCollision(e.getX(), e.getY())) {
-                        gameOver = true;
-                        sceneEnd();
+//                        gameOver = true;
+                        scenecontroller.changeScene(new EndScene(scenecontroller));
                     }
 //                    if (exit2.isCollision(e.getX(), e.getY())) {
 //                        scenecontroller.changeScene(new MenuScene(scenecontroller));
@@ -404,6 +403,7 @@ public class MainScene extends Scene {
 
     @Override
     public void sceneUpdate() {
+
         hero.move();
         if(hero.getX() > Global.JWIDTH){
             Global.CURRENTSTAGE++;
@@ -483,7 +483,9 @@ public class MainScene extends Scene {
 //            e.printStackTrace();
 //            
 //        }
-        exit2 = new Button(900, 860, 108, 40, "BACK");
+         
+            
+        
     }
 
     @Override
@@ -518,10 +520,7 @@ public class MainScene extends Scene {
         drawcarddeck.paint(g);
         discarddeck.paint(g);
 
-        if (gameOver) {
-            g.drawImage(endImage, 0, 0, 1920, 1080, null);
-            exit2.paint(g);
-        }
+   
         crystal.paint(g);
 //            g.drawImage(number, 200, 200, 300, 300, null);
 //        if (gameWin) {    

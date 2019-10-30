@@ -87,8 +87,8 @@ public interface SelectJobSceneState {
             Hero heroSelected = scene.getHeroSelected();
 
             if (heroSelected.getHeight() > 0) {
-                heroSelected.setHeight(heroSelected.getHeight() - 2);
-                heroSelected.setWidth(heroSelected.getWidth() - 2);
+                heroSelected.setHeight(heroSelected.getHeight() - 3);
+                heroSelected.setWidth(heroSelected.getWidth() - 3);
                 if (heroSelected.getX() < 440) {
                     heroSelected.setX(heroSelected.getX() + 4);
                 } else {
