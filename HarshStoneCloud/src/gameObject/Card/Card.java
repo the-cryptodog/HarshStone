@@ -11,6 +11,7 @@ import Controller.PathBuilder;
 import gameObject.Card.CardMoveState.MoveStop;
 import gameObject.GameObject;
 import gameObject.Hero.Hero;
+import gameObject.NumberIcon;
 import gameObject.Skill.Skill;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
@@ -22,6 +23,7 @@ import values.ImagePath;
  * @author frank61003
  */
 public class Card extends GameObject{
+    
     protected String description;
     protected boolean clicked;
     protected int cost;
@@ -32,8 +34,10 @@ public class Card extends GameObject{
     protected int originalx;
     protected int originaly;
     private int defense;
+    private int attack;
     private int skillIndex;
     private int handdeckpoisition;
+
     
     public Card(int x, int y, int width, int height, String name, int cost) {
         super(x, y, width, height, name);
@@ -45,10 +49,22 @@ public class Card extends GameObject{
         cardmovestate = new MoveStop();
         image = irc.getInstance().tryGetImage(PathBuilder.getImage("/"+name+".png"));
         defense = 0;
+        attack = 0;
         //1~5為手牌位置
         handdeckpoisition = 0;
+        
+
+        
     }
     
+    public int getAttack(){
+        return attack;
+    }
+    
+    public void setAttack(int attack){
+        this.attack = attack;
+    
+    }
     public int getDefense(){
         return defense;
     }

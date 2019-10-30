@@ -55,7 +55,9 @@ public class NumberIcon extends GameObject{
         
 //        update();
 //        if(skillend == false){
-            g.drawImage(image, x, y, x + width, y + height, dx * Global.NUMBER_X_OFFSET,  dy * Global.NUMBER_Y_OFFSET, dx * Global.NUMBER_X_OFFSET + 110, dy * Global.NUMBER_Y_OFFSET + 130, null);
+            g.drawImage(image, x, y, x + width, y + height, 
+                    dx * Global.NUMBER_X_OFFSET,  dy * Global.NUMBER_Y_OFFSET,
+                    dx * Global.NUMBER_X_OFFSET + 110, dy * Global.NUMBER_Y_OFFSET + 130, null);
 //        }
 //        if(act == 5){
 //           skillend = true;

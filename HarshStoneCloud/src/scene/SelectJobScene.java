@@ -164,8 +164,7 @@ public class SelectJobScene extends Scene {
 //                      startPressed = true;
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
                     }
-                    if (jobSelected & next.isCollision(e.getX(), e.getY())) {
-                        storyEnd = true;               
+                    if (jobSelected & next.isCollision(e.getX(), e.getY())) {            
                         selectjobscenestate = new talkEnd();
 //                      startPressed = true;
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
@@ -190,6 +189,9 @@ public class SelectJobScene extends Scene {
     }
     public Hero getHeroSelected(){
         return heroSelected;
+    }
+    public void setStoryEnd(boolean storyEnd){
+       this.storyEnd = storyEnd;
     }
     
     public Hero[] getHeros(){
@@ -221,11 +223,11 @@ public class SelectJobScene extends Scene {
             selectjobscenestate.action(this);
 
         }
-         if (npc.getX() == Global.NPCX & storyEnd ) { //npc往回走出螢幕
+         if (storyEnd ) { //npc往回走出螢幕
+             if(heroSelected.getWidth()<50){
             scenecontroller.changeScene(new MapScene(scenecontroller));
-
+             }
         }
-
     }
 
     @Override
@@ -268,11 +270,9 @@ public class SelectJobScene extends Scene {
         if (!jobSelected) {
             job1screen.paint(g);
             job2screen.paint(g);
-
         }
         else
         {
-
             if (job1screen.getIsClicked()) {
                 g.drawImage(job1Screen1, 350, upY , 391, 322, null);
                 g.drawImage(job1Screen2, 350, downY, 390, 184, null);

@@ -68,23 +68,34 @@ public interface SelectJobSceneState {
         @Override
         public void action(SelectJobScene scene) {
             Hero npc = scene.getHeros()[2];
-            if (npc.getX() < 2080) {
+            if (npc.getX() < 2000) {
                 npc.changeDirection(Global.RIGHT);
                 npc.setX(npc.getX() + 10);
                 Hero job = scene.getHeroSelected();
                 job.changeDirection(Global.RIGHT);
-                if (job.getHeight() > 0) {
-                    System.out.print("ddddddd");
-                    job.setHeight(job.getHeight() - 2);
-                    job.setWidth(job.getWidth() - 2);
-                    if (job.getX() < 440) {
-                        job.setX(job.getX() + 4);
-                    } else {
-                        job.changeDirection(Global.UP);
-                    }
-                    if (job.getY() < 545) {
-                        job.setY(job.getY() + 4);
-                    }
+            }else{
+             scene.setStoryEnd(true);
+             scene.setSelectJobSceneState(new goToMap());
+            }
+        }
+    }
+
+    public class goToMap implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+            Hero heroSelected = scene.getHeroSelected();
+
+            if (heroSelected.getHeight() > 0) {
+                heroSelected.setHeight(heroSelected.getHeight() - 2);
+                heroSelected.setWidth(heroSelected.getWidth() - 2);
+                if (heroSelected.getX() < 440) {
+                    heroSelected.setX(heroSelected.getX() + 4);
+                } else {
+                    heroSelected.changeDirection(Global.UP);
+                }
+                if (heroSelected.getY() < 540) {
+                    heroSelected.setY(heroSelected.getY() + 5);
                 }
             }
         }
