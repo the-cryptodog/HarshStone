@@ -198,7 +198,6 @@ public class SelectJobScene extends Scene {
 
     @Override
     public void sceneUpdate() {
-<<<<<<< HEAD
 
 //        if (jobSelected & !storyEnd) {//所選角色往回走就定位開啟對話
 //            if(heroSelected.getX()<307){
