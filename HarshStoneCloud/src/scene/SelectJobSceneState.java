@@ -6,6 +6,7 @@
 package scene;
 
 import gameObject.Hero.Hero;
+import gameObject.Hero.HeroState;
 import utils.Global;
 
 /**
@@ -13,96 +14,120 @@ import utils.Global;
  * @author frank61003
  */
 public interface SelectJobSceneState {
-    
+
     public void action(SelectJobScene scene);
-    
-    public class normal implements SelectJobSceneState{
+
+    public class normal implements SelectJobSceneState {
 
         @Override
         public void action(SelectJobScene scene) {
-            
+
+        }
+    }
+
+    public class selectJob implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+            Hero heroSelected = scene.getHeroSelected();
+
+            if (heroSelected.getX() > 320) {
+                heroSelected.changeDirection(Global.LEFT);
+                heroSelected.setX(heroSelected.getX() - 10);
+            } else {
+                heroSelected.changeDirection(Global.RIGHT);
+            }
+
+            if (scene.upY < 1400 || scene.downY > -430) {
+                scene.upY += 30;
+                scene.downY -= 30;
+            }
+            Hero npc = scene.getHeros()[2];
+            if (npc.getX() > 1440) {
+                npc.setX(npc.getX() - 10);
+            } else {
+                scene.setSelectJobSceneState(new beginTalk1());
+            }
         }
     }
     
-    
-    
-    
-    public class selectJob1 implements SelectJobSceneState{
-
-        @Override
-        public void action(SelectJobScene scene) {
-            Hero job1 = scene.getHeros()[0];
-            if(scene.getHeros()[1] != null){
-                scene.getHeros()[1] = null;
-            }
-            if (job1.getX() > 307) {
-                job1.changeDirection(Global.LEFT);
-                job1.setX(job1.getX() - 10);
-            }else{
-                job1.changeDirection(Global.RIGHT);
-            }
-            if (scene.upY < 1400 || scene.downY > -430) {
-                    scene.upY += 30;
-                    scene.downY -= 30;
-            }
-            Hero npc = scene.getNpc();
-            if (npc.getX() > 1440) {
-                npc.setX(npc.getX() - 10);
-            }
-            else{
-                scene.setSelectJobSceneState(new beginTalk1());
-            }
-            
-            
-            
-            
-            
-        }
-    }   
     //1跟2似乎一樣
-    public class selectJob2 implements SelectJobSceneState{
+//    public class selectJob2 implements SelectJobSceneState{
+//
+//        @Override
+//        public void action(SelectJobScene scene) {
+//            Hero job2 = scene.getHeros()[1];
+//            if(scene.getHeros()[0] != null){
+//                scene.getHeros()[0] = null;
+//            }
+//            if (job2.getX() > 307) {
+//                job2.changeDirection(Global.LEFT);
+//                job2.setX(job2.getX() - 10);
+//            }else{
+//                job2.changeDirection(Global.RIGHT);
+//            }
+//            if (scene.upY < 1400 || scene.downY > -430) {
+//                    scene.upY += 30;
+//                    scene.downY -= 30;
+//            }
+//            Hero npc = scene.getHeros()[2];
+//            if (npc.getX() > 1440) {
+//                npc.setX(npc.getX() - 10);
+//            }
+//            else{
+//                scene.setSelectJobSceneState(new beginTalk1());
+//            }
+//            
+//        }
+//    }   
+
+    public class beginTalk1 implements SelectJobSceneState {
 
         @Override
         public void action(SelectJobScene scene) {
-            Hero job2 = scene.getHeros()[1];
-            if(scene.getHeros()[0] != null){
-                scene.getHeros()[0] = null;
-            }
-            if (job2.getX() > 307) {
-                job2.changeDirection(Global.LEFT);
-                job2.setX(job2.getX() - 10);
-            }else{
-                job2.changeDirection(Global.RIGHT);
-            }
-            if (scene.upY < 1400 || scene.downY > -430) {
-                    scene.upY += 30;
-                    scene.downY -= 30;
-            }
-            Hero npc = scene.getNpc();
+            Hero npc = scene.getHeros()[2];
             if (npc.getX() > 1440) {
-                npc.setX(npc.getX() - 10);
-            }
-            else{
-                scene.setSelectJobSceneState(new beginTalk1());
+                npc.setX(npc.getX() - 20);
             }
             
         }
-    }   
-    
-    public class beginTalk1 implements SelectJobSceneState{
+    }
+
+    public class talkEnd implements SelectJobSceneState {
 
         @Override
         public void action(SelectJobScene scene) {
-            
-            
+            Hero npc = scene.getHeros()[2];
+            if (npc.getX() < 2080) {
+                npc.changeDirection(Global.RIGHT);
+                npc.setX(npc.getX() + 10);
+//            }else
+//            scene.setSelectJobSceneState(new goToMap());
+//        }
+//    }
+
+//    public class goToMap implements SelectJobSceneState {
+//
+//        @Override
+//        public void action(SelectJobScene scene) {
+            Hero job = scene.getHeroSelected();
+            job.changeDirection(Global.RIGHT);
+            if (job.getHeight() > 0) {
+                System.out.print("ddddddd");
+                job.setHeight(job.getHeight() - 2);
+                job.setWidth(job.getWidth() - 2);
+
+                if (job.getX() < 440) {
+                    job.setX(job.getX() + 4);
+                } else {
+                    job.changeDirection(Global.UP);
+                }
+                if (job.getY() < 545) {
+                    job.setY(job.getY() + 4);
+                }
+            }
         }
-    }   
-    
-    
-    
-    
-    
-    
-    
-    
+    }
 }
+}
+
