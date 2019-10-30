@@ -22,8 +22,11 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import scene.SelectJobSceneState.beginTalk1;
 import scene.SelectJobSceneState.normal;
 import scene.SelectJobSceneState.selectJob1;
+import scene.SelectJobSceneState.selectJob2;
 import utils.DelayCounter;
 import utils.Global;
 
@@ -62,6 +65,7 @@ public class SelectJobScene extends Scene {
     private boolean storyBegin;
     private boolean storyEnd;
     private SelectJobSceneState selectjobscenestate;
+    private Hero[] heros;
     
 
     public SelectJobScene(SceneController scenecontroller) {
@@ -78,9 +82,17 @@ public class SelectJobScene extends Scene {
 
 //        actor = new Actor(450, 0, 128, 128, 0, "巫師");
 //        actor2 = new Actor(1150, 0, 128, 128, 0, "戰士");
+
         job1 = new Hero(Global.JOB1X, Global.JOBY, 128, 128, "Actor1", 0, 0);
         job2 = new Hero(Global.JOB2X,  Global.JOBY, 128, 128, "Actor1", 0, 7);
         npc = new Hero(Global.NPCX,  Global.JOBY, 128, 128, "Actor1", 0, 4);
+        
+        heros = new Hero[3];
+        heros[0] = job1;
+        heros[1] = job2;
+        heros[2] = npc;
+        
+
 
         job1.changeDirection(Global.DOWN);
         job2.changeDirection(Global.DOWN);
@@ -147,6 +159,13 @@ public class SelectJobScene extends Scene {
 //                      startPressed = true;
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
                     }
+
+                    if (job2.isCollision(e.getX(), e.getY())) {
+                        job2screen.setIsClicked(true);
+                        selectjobscenestate = new selectJob2();
+//                         job2.setState(new jobSelected());
+//                        job2.changeDirection(Global.LEFT);
+                        
                     if (job2screen.isCollision(e.getX(), e.getY())& !storyBegin) {
 //                        changePix(img);
 //                        img=tmpIma;
@@ -155,6 +174,7 @@ public class SelectJobScene extends Scene {
                         job2.changeDirection(Global.LEFT);
                         heroSelected = job2;
                         storyBegin=true;
+
                         jobSelected = true;
                         
 //                      startPressed = true;
@@ -199,7 +219,19 @@ public class SelectJobScene extends Scene {
         return job2;
     }
     
+    public Hero getNpc(){
+        return npc;
+    }
     
+    public Hero[] getHeros(){
+        return heros;
+    }
+    
+    
+    
+    public void setSelectJobSceneState(SelectJobSceneState selectjobscenestate){
+        this.selectjobscenestate = selectjobscenestate;
+    }
     
     
     
@@ -209,6 +241,7 @@ public class SelectJobScene extends Scene {
 
     @Override
     public void sceneUpdate() {
+
         if (jobSelected & !storyEnd) {//所選角色往回走就定位開啟對話
             if(heroSelected.getX()<307){
             npc.setState(new beginTalk());
@@ -216,7 +249,8 @@ public class SelectJobScene extends Scene {
         }
         if (delaycounter.delayupdate()) {
 //            job1.getState().action(job1);
-            job2.getState().action(job2);
+//            job2.getState().action(job2);
+
 
             npc.getState().action(npc);
             job1.move();
@@ -227,6 +261,7 @@ public class SelectJobScene extends Scene {
         }
          if (npc.getX() == Global.NPCX & storyEnd ) { //npc往回走出螢幕
             scenecontroller.changeScene(new MapScene(scenecontroller));
+
 
         }
 //        if (job1.getX() < 307) {
@@ -273,7 +308,9 @@ public class SelectJobScene extends Scene {
 //        g.drawImage(storyImg3, 1920, 1080, null);
 //        g.drawImage(tmpIma, 1920, 1080, null);
         g.drawImage(img, 0, 0, 1920, 1080, sx1, sy1, sx2, sy2, null);
+
         if (jobSelected & !storyEnd) {
+
             g.drawImage(DARKEN3, 0, 0, 1920, 1080, null);
         }
 
@@ -299,20 +336,13 @@ public class SelectJobScene extends Scene {
         {
 
             if (job1screen.getIsClicked()) {
-                
-                    g.drawImage(job1Screen1, 350, upY, 391, 322, null);
-                    g.drawImage(job1Screen2, 350, downY, 390, 184, null);
+                g.drawImage(job1Screen1, 350, upY , 391, 322, null);
+                g.drawImage(job1Screen2, 350, downY, 390, 184, null);
                 
             }
             if (job2screen.getIsClicked()) {
-                System.out.print("英雄被點擊");
-
-                if (upY < 1400 || downY > -430) {
-                    upY += 30;
-                    downY -= 30;
-                    g.drawImage(job2Screen1, 1150, upY, 391, 322, null);
-                    g.drawImage(job2Screen2, 1150, downY, 390, 184, null);
-                }
+                g.drawImage(job2Screen1, 1150, upY, 391, 322, null);
+                g.drawImage(job2Screen2, 1150, downY, 390, 184, null);                
             }
 //        }else {
 //            job1screen.paint(g);
@@ -320,17 +350,24 @@ public class SelectJobScene extends Scene {
         }
         back.paint(g);
 //        
-        if (!job1screen.getIsClicked()) {
-            job2.paint(g);
+//        if(!job1screen.getIsClicked()){
+//            job2.paint(g);
+//        }
+//        if(!job2screen.getIsClicked()){
+//            job1.paint(g);
+//        }
+//        npc.paint(g);
+        
+        for(Hero temp : heros){
+            if(temp != null){
+                temp.paint(g);
+            }
         }
-        if (!job2screen.getIsClicked()) {
-            job1.paint(g);
-        }
- 
-        npc.paint(g);
+        
+        
+        if(selectjobscenestate instanceof beginTalk1){
+            g.drawImage(talkchart, 720, 390, null);
 
-        if (npc.getX() == 1440) {
-            g.drawImage(talkchart, 720, 190, null);
             next.paint(g);
         }
     }
