@@ -118,7 +118,7 @@ public interface MonsterState {
 
         @Override
         public void action(Monster monster, Hero hero) { 
-
+            
         }
     }
      

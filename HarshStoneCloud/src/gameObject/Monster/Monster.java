@@ -38,9 +38,9 @@ public class Monster extends GameObject {
     protected MonsterState monsterstate;
     protected Hero hero;
     protected int defense;
-    private int attack;
-    private NumberIcon number1;
-    private NumberIcon number2;
+    protected int attack;
+    protected NumberIcon number1;
+    protected NumberIcon number2;
     private int yPosition;
     private int skillIndex;
     private Skill selfSkill;
@@ -72,8 +72,8 @@ public class Monster extends GameObject {
         });
 
         monsterstate = new MonsterState.DecideMove();
-        number1 = new NumberIcon(x + width, y + 100, 50, 100, "", 0);
-        number2 = new NumberIcon(x + width + 50, y + 100, 50, 100, "", 0);
+        number1 = new NumberIcon(x + width, y + 100, 50, 50, "", 0);
+        number2 = new NumberIcon(x + width + 40, y + 100, 50, 50, "", 0);
     }
 
     //10/22
@@ -226,7 +226,15 @@ public class Monster extends GameObject {
     public int getDirection() {
         return direction;
     }
-
+    //怪物受到傷害更新護甲
+    public void updateNumberIcon() {  
+        if(attack == 0){
+            number1.setNumber(defense / 10);
+            number2.setNumber(defense % 10);
+        }
+    }
+    
+    
     public String toString() {
         return "攻擊力" + attack + "防禦力" + defense;
 
@@ -238,17 +246,15 @@ public class Monster extends GameObject {
         } else {
             monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth, attack, defense);
             number1.setX(x + width);
-            number2.setX(x + width);
-            update();
-
-//            number1.paint(g);
-//            number2.paint(g);
+            number2.setX(x + width + 40);
+            number1.paint(g);
+            number2.paint(g);
 
             if (monsterstate instanceof MonsterState.Attack) {
                 selfSkill.paint(g);//畫出攻擊技能
             }
 
         }
-
+    update();
     }
 }
