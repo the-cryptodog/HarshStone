@@ -1,0 +1,30 @@
+diff a/HarshStoneCloud/src/scene/SelectJobScene.java b/HarshStoneCloud/src/scene/SelectJobScene.java	(rejected hunks)
+@@ -8,20 +8,22 @@
+ import Controller.SceneController;
+ import gameObject.Button.Button;
+ import gameObject.Hero.Hero;
++import gameObject.Hero.HeroState;
++import gameObject.Hero.HeroState.beginTalk;
++import gameObject.Hero.HeroState.goToMap;
+ 
++import gameObject.Hero.HeroState.jobSelected;
++import gameObject.Hero.HeroState.talkEnd;
++
++import gameObject.Jobs.JobIcon;
+ 
+ import io.CommandSolver;
+ import java.awt.Color;
+ import java.awt.Graphics;
+ import java.awt.event.MouseEvent;
+ import java.awt.image.BufferedImage;
+-import java.util.ArrayList;
+-import scene.SelectJobSceneState.beginTalk1;
+-
+ import scene.SelectJobSceneState.normal;
+-import scene.SelectJobSceneState.selectJob;
+-import scene.SelectJobSceneState.talkEnd;
+-
++import scene.SelectJobSceneState.selectJob1;
+ import utils.DelayCounter;
+ import utils.Global;
+ 
