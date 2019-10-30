@@ -232,6 +232,10 @@ public class Monster extends GameObject {
             number1.setNumber(defense / 10);
             number2.setNumber(defense % 10);
         }
+        else{
+            number1.setNumber(attack / 10);
+            number2.setNumber(attack % 10);
+        }
     }
     
     

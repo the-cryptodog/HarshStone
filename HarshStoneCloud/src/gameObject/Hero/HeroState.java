@@ -17,28 +17,6 @@ public interface HeroState {
 
     public void action(Hero hero);
 
-//    public class jobSelected implements HeroState {
-//
-//        @Override
-//        public void action(Hero hero) {
-//            if (hero.getX() > 307) {
-//                hero.changeDirection(Global.LEFT);
-//                hero.setX(hero.getX() - 10);
-//            } else {
-//                hero.changeDirection(Global.RIGHT);
-//            }
-//        }
-//    }
-
-//    public class beginTalk implements HeroState {
-//
-//        @Override
-//        public void action(Hero hero) {
-//            if (hero.getX() > 1440) {
-//                hero.setX(hero.getX() - 20);
-//            }
-//        }
-//    }
 
 //    public class talkEnd implements HeroState {
 //
@@ -106,6 +84,7 @@ public interface HeroState {
             tempx = hero.getX() + Global.HEROMOVERANGE;
             if (hero.getX() <= Global.JWIDTH) {
                 hero.setX(tempx);
+                hero.setState(new MoveHeroRight());
             }
         }
     }
