@@ -165,7 +165,7 @@ public class SelectJobScene extends Scene {
                         selectjobscenestate = new selectJob2();
 //                         job2.setState(new jobSelected());
 //                        job2.changeDirection(Global.LEFT);
-                        
+                    }
                     if (job2screen.isCollision(e.getX(), e.getY())& !storyBegin) {
 //                        changePix(img);
 //                        img=tmpIma;
