@@ -211,11 +211,11 @@ public class SelectJobScene extends Scene {
     @Override
     public void sceneUpdate() {
 
-        if (jobSelected & !storyEnd) {//所選角色往回走就定位開啟對話
-            if(heroSelected.getX()<307){
-                  selectjobscenestate= new beginTalk1();
-            }
-        }
+//        if (jobSelected & !storyEnd) {//所選角色往回走就定位開啟對話
+//            if(heroSelected.getX()<307){
+//                  selectjobscenestate= new beginTalk1();
+//            }
+//        }
         if (delaycounter.delayupdate()) {
 
             selectjobscenestate.action(this);
@@ -264,9 +264,6 @@ public class SelectJobScene extends Scene {
                 System.out.println(sx1 + " " + sy1 + " " + sx2 + " " + sy2 + " ");
             }
         }
-//        if(storyBegin){
-//            heroSelected.paint(g);
-//        }
 
         if (!jobSelected) {
             job1screen.paint(g);
