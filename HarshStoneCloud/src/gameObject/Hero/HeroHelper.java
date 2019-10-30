@@ -22,13 +22,11 @@ public class HeroHelper {
 
     private BufferedImage img;
     private int heroposition;
-    private Crystal crystal;
     
     
     public HeroHelper(int hero) {
         img = getHero(hero);
         heroposition = hero % 8;
-        crystal = new Crystal(0,0,48,48,"");
     }
 
     private BufferedImage getHero(int hero) {
@@ -56,10 +54,7 @@ public class HeroHelper {
             g.setColor(Color.red);
             g.drawRect(x - Global.HEALTHX , y+height, width + 2*Global.HEALTHX,25);
             float temp1 = (float)health/100 * (width + 2 * Global.HEALTHX);
-            g.fillRect(x - Global.HEALTHX , y+height, (int)temp1, 25);   
-            crystal.setX(x);
-            crystal.setY(y - 55);
-            crystal.paint(g);
+            g.fillRect(x - Global.HEALTHX , y+height, (int)temp1, 25);
         }
         
     }

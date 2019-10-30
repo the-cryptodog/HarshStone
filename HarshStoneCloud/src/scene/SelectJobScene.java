@@ -22,6 +22,8 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import scene.SelectJobSceneState.normal;
+import scene.SelectJobSceneState.selectJob1;
 import utils.DelayCounter;
 import utils.Global;
 
@@ -59,10 +61,18 @@ public class SelectJobScene extends Scene {
     private boolean jobSelected;
     private boolean storyBegin;
     private boolean storyEnd;
+    private SelectJobSceneState selectjobscenestate;
+    
 
     public SelectJobScene(SceneController scenecontroller) {
         super(scenecontroller);
+
         storyEnd = false;
+
+
+        selectjobscenestate = new normal();
+        storyEnd= false;
+
         jobSelected = false;
         back = new Button(1800, 1000, 85, 50, "BACK");
 
@@ -120,13 +130,18 @@ public class SelectJobScene extends Scene {
 //                        changePix(img);
 //                        img=tmpIma;
                         job1screen.setIsClicked(true);
-                        job1.setState(new jobSelected());
-                        job1.changeDirection(Global.LEFT);
-                        heroSelected = job1;
-                        storyBegin=true;
-                        jobSelected = true;
 
+//                        job1.setState(new job1Selected());
+                        heroSelected = job1;
+                        jobSelected = true;
+                        storyBegin = true;
+                        selectjobscenestate = new selectJob1();
+
+                        
+        
 //                       storyEnd=true;
+
+
 //
 //                        scenecontroller.changeScene(new MapScene(scenecontroller));
 //                      startPressed = true;
@@ -176,6 +191,18 @@ public class SelectJobScene extends Scene {
         };
     }
 
+    public Hero getJob1(){
+        return job1;
+    }
+    
+    public Hero getJob2(){
+        return job2;
+    }
+    
+    
+    
+    
+    
     @Override
     public void sceneBegin() {
     }
@@ -188,16 +215,19 @@ public class SelectJobScene extends Scene {
             }
         }
         if (delaycounter.delayupdate()) {
-            job1.getState().action(job1);
+//            job1.getState().action(job1);
             job2.getState().action(job2);
+
             npc.getState().action(npc);
             job1.move();
             job2.move();
             npc.move();
+		selectjobscenestate.action(this);
 
         }
          if (npc.getX() == Global.NPCX & storyEnd ) { //npc往回走出螢幕
             scenecontroller.changeScene(new MapScene(scenecontroller));
+
         }
 //        if (job1.getX() < 307) {
 //            scenecontroller.changeScene(new MapScene(scenecontroller));
@@ -263,14 +293,16 @@ public class SelectJobScene extends Scene {
         if (!jobSelected) {
             job1screen.paint(g);
             job2screen.paint(g);
-        } else {
+
+        }
+        else
+        {
+
             if (job1screen.getIsClicked()) {
-                if (upY < 1400 || downY > -430) {
-                    upY += 30;
-                    downY -= 30;
+                
                     g.drawImage(job1Screen1, 350, upY, 391, 322, null);
                     g.drawImage(job1Screen2, 350, downY, 390, 184, null);
-                }
+                
             }
             if (job2screen.getIsClicked()) {
                 System.out.print("英雄被點擊");

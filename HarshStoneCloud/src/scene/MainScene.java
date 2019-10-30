@@ -82,7 +82,6 @@ public class MainScene extends Scene {
     private DelayCounter delaycounter;
     private int selectedmonster;
     private Boolean heroturn;
-    private int crystal;
     private CardDeck drawcarddeck;
     private CardDeck discarddeck;
     private CardDeck handdeck;
@@ -97,14 +96,15 @@ public class MainScene extends Scene {
     private boolean gameOver;
     private boolean gameWin;
     private BufferedImage endImage;
-//    private NumberIcon crystalnumber;
-    private BufferedImage number;
+    private Crystal crystal;
+    
     
   
     public MainScene(SceneController scenecontroller, MapScene mapScene) {
         super(scenecontroller);
 //        System.out.println(PathBuilder.getNumber(ImagePath.NUMBER2));
 //        number = ImageResourceController.getInstance().tryGetImage("/resources/Number/Number2.png");
+        crystal = new Crystal(240,600,80,80,"tt");
         gameWin = false;
         gameOver = false;
         font1 = new Font("TimesRoman", Font.BOLD + Font.ITALIC, 14);
@@ -112,12 +112,10 @@ public class MainScene extends Scene {
         ydelta = 0;
         cardclicked = false;
         heroturn = true;
-        crystal = 3;
         cardlimit = 5;
         allmonsterend = false;
         skillboard = new SkillList();
         skillFactory = new SkillFactory();
-//        crystalnumber = new NumberIcon(200,200,100,100,"3",4);
         this.mapScene = mapScene;
 
 //        drawcarddeck = new CardDeck(1400,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"抽牌推");
@@ -196,14 +194,15 @@ public class MainScene extends Scene {
 
                     if (selectedcard != null){ 
                         //水晶不夠無法施放
-                        if(crystal-selectedcard.getCost() < 0) {
+                        int temp = crystal.getNumberIcon().getNumber();
+                        if(temp - selectedcard.getCost() < 0) {
                             selectedcard.setCardMoveState(new MoveBack());
                         }
                         
                         else if (selectedcard.getY() < 560 && selectedcard.getDefense() > 0) {
                             selectedcard.action(hero, new Monster(0, 0, 0, 0, "", 0));
                             selectedcard.setCardMoveState(new MoveToDiscard());
-                            crystal -= selectedcard.getCost();
+                            crystal.setNumberIcon(temp - selectedcard.getCost());
                         }
                         else if (!(selectedcard.getCardMoveState() instanceof MoveToDiscard)) {
                             for (int i = 0; i < monsters.size(); i++) {
@@ -220,7 +219,7 @@ public class MainScene extends Scene {
                                     }//檢測MainScene的卡片技能區，如已有實體則使用，如無則新增//                                                              
                                     selectedcard.action(hero, monsters.get(i));
                                     selectedcard.setCardMoveState(new MoveToDiscard());
-                                    crystal -= selectedcard.getCost();
+                                    crystal.setNumberIcon(temp - selectedcard.getCost());
                                     break;
                                 }
                                 if (i == monsters.size() - 1) {
@@ -461,7 +460,7 @@ public class MainScene extends Scene {
                 }
                 next.setIsClicked(false);
                 drawCard(drawcarddeck, handdeck, discarddeck);
-                crystal = 3;
+                crystal.setNumberIcon(3);
             }
             
         }
@@ -521,7 +520,7 @@ public class MainScene extends Scene {
             g.drawImage(endImage, 0, 0, 1920, 1080, null);
             exit2.paint(g);
         }
-//        crystalnumber.paint(g);
+        crystal.paint(g);
 //            g.drawImage(number, 200, 200, 300, 300, null);
 //        if (gameWin) {    
 //            g.drawImage(winImage, 0, 0, 1920, 1080, null);

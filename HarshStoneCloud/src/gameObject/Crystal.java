@@ -19,12 +19,12 @@ import values.ImagePath;
 public class Crystal extends GameObject{
 //  protected int[] Act = {0,1,2,3,4,5};
     protected DelayCounter delaycounter;
+    protected NumberIcon numbericon;
     
     public Crystal(int x, int y, int width, int height, String name){
         super(x, y, width, height, name);
-        image = ImageResourceController.getInstance().tryGetImage("/resources/Number/Number1.png");
-
-//        image = irc.tryGetImage(PathBuilder.getIcon(ImagePath.CRYSTALICON));
+        image = irc.tryGetImage(PathBuilder.getIcon(ImagePath.CRYSTALICON));
+        numbericon = new NumberIcon(x + width+20, y,width,height,name,3);
         delaycounter = new DelayCounter(10, new DelayCounter.Action() {
 
             @Override
@@ -35,14 +35,20 @@ public class Crystal extends GameObject{
         });
     }   
    
+    public void setNumberIcon(int number){
+        this.numbericon.setNumber(number);
+    }
     
- 
+    public NumberIcon getNumberIcon(){
+        return numbericon;
+    }
     
     
     
     public void paint(Graphics g){
 
         g.drawImage(image, x, y, width, height, null);
+        numbericon.paint(g);   
     }
         
         

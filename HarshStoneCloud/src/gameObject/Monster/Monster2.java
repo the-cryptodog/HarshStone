@@ -188,12 +188,12 @@ public class Monster2 extends Monster{
 
         monsterstate.action(this, hero);
         if (attack > 0) {
-            number1.setNumberIcon(attack / 10);
-            number2.setNumberIcon(attack % 10);
+            number1.setNumber(attack / 10);
+            number2.setNumber(attack % 10);
 
         } else if (defense > 0) {
-            number1.setNumberIcon(defense / 10);
-            number2.setNumberIcon(defense % 10);
+            number1.setNumber(defense / 10);
+            number2.setNumber(defense % 10);
 
         }
 
