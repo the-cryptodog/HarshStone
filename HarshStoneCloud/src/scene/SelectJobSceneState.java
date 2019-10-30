@@ -13,6 +13,7 @@ import utils.Global;
  * @author frank61003
  */
 public interface SelectJobSceneState {
+    
     public void action(SelectJobScene scene);
     
     public class normal implements SelectJobSceneState{
