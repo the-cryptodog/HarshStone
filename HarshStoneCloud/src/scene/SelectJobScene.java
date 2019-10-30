@@ -21,6 +21,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import scene.SelectJobSceneState.beginTalk1;
 import scene.SelectJobSceneState.normal;
 import scene.SelectJobSceneState.selectJob1;
 import scene.SelectJobSceneState.selectJob2;
@@ -205,6 +206,13 @@ public class SelectJobScene extends Scene {
     }
     
     
+    
+    public void setSelectJobSceneState(SelectJobSceneState selectjobscenestate){
+        this.selectjobscenestate = selectjobscenestate;
+    }
+    
+    
+    
     @Override
     public void sceneBegin() {
     }
@@ -326,7 +334,7 @@ public class SelectJobScene extends Scene {
         }
         
         
-        if(npc.getX() == 1440){
+        if(selectjobscenestate instanceof beginTalk1){
             g.drawImage(talkchart, 720, 390, null);
             next.paint(g);
         }

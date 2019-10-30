@@ -48,7 +48,14 @@ public interface SelectJobSceneState {
             if (npc.getX() > 1440) {
                 npc.setX(npc.getX() - 10);
             }
-    
+            else{
+                scene.setSelectJobSceneState(new beginTalk1());
+            }
+            
+            
+            
+            
+            
         }
     }   
     //1跟2似乎一樣
@@ -74,12 +81,21 @@ public interface SelectJobSceneState {
             if (npc.getX() > 1440) {
                 npc.setX(npc.getX() - 10);
             }
-            
+            else{
+                scene.setSelectJobSceneState(new beginTalk1());
+            }
             
         }
     }   
     
-    
+    public class beginTalk1 implements SelectJobSceneState{
+
+        @Override
+        public void action(SelectJobScene scene) {
+            
+            
+        }
+    }   
     
     
     
