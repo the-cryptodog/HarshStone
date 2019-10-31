@@ -44,8 +44,8 @@ public class Global {
 
     //怪物x位置
     public static final int MONSTERX = 1400;
-    public static final int MONSTERY = 100;
-    public static final int MONSTERY2 = 300;
+    public static final int MONSTERY = 20;
+    public static final int MONSTERY2 = 260;
     public static final int MONSTERY3 = 500;
     public static final int MONSTERWIDTH = 160;
     public static final int MONSTERHEIGHT = 160;

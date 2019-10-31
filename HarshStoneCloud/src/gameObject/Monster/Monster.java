@@ -98,6 +98,16 @@ public class Monster extends GameObject {
         image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
 
     }
+    @Override
+        public boolean isCollision(GameObject gameobject){
+        if(gameobject.getX() + gameobject.getWidth()< this.x-30 || gameobject.getX() > this.x + width){
+            return false;
+        }
+         if(gameobject.getY() + gameobject.getHeight() < this.y+30 || gameobject.getY() > this.y + height-30){
+            return false;
+        }
+        return true;
+    }
 
     public void recover() {
         health = lasthealth;

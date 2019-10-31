@@ -25,7 +25,7 @@ import gameObject.Hero.Hero;
 import gameObject.Hero.HeroState.MoveHeroLeave;
 import gameObject.Hero.HeroState.MoveHeroRight;
 import gameObject.Monster.Monster;
-import gameObject.Monster.Monster2;
+
 import gameObject.Monster.MonsterState;
 import gameObject.Monster.MonsterState.DecideMove;
 import gameObject.Monster.Poison;
@@ -78,7 +78,6 @@ public class MainScene extends Scene {
     private Hero hero;
     private Monster cultist;
     private Monster monster1;
-    private Monster2 dedmon;
     private Timer timer;
     private DelayCounter delaycounter;
     private int selectedmonster;
@@ -96,17 +95,19 @@ public class MainScene extends Scene {
     private boolean gameOver;
     private boolean gameWin;
     private BufferedImage endImage;
+    private BufferedImage columns[];
+    private BufferedImage column1;
+    private BufferedImage column2;
+    private BufferedImage column3;
     private Crystal crystal;
     private Poison ttt;
-    
-    
-  
+
     public MainScene(SceneController scenecontroller, MapScene mapScene) {
         super(scenecontroller);
 //        System.out.println(PathBuilder.getNumber(ImagePath.NUMBER2));
 //        number = ImageResourceController.getInstance().tryGetImage("/resources/Number/Number2.png");
-        ttt = new Poison(40,40,48,48,"",5);
-        crystal = new Crystal(240,600,80,80,"tt");
+        ttt = new Poison(40, 40, 48, 48, "", 5);
+        crystal = new Crystal(240, 600, 80, 80, "tt");
         gameWin = false;
         gameOver = false;
         font1 = new Font("TimesRoman", Font.BOLD + Font.ITALIC, 14);
@@ -119,7 +120,7 @@ public class MainScene extends Scene {
         skillboard = new SkillList();
         skillFactory = new SkillFactory();
         this.mapScene = mapScene;
-
+        columns = new BufferedImage[3];
 //        drawcarddeck = new CardDeck(1400,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"抽牌推");
         discarddeck = new CardDeck(1300, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "棄牌推");
         handdeck = new CardDeck(40, 490, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "手牌");
@@ -135,15 +136,12 @@ public class MainScene extends Scene {
         hero = new Hero(-70, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         drawcarddeck = hero.getHeroDeck();
 
-        orc = new Monster(Global.MONSTERX, 100 * (1 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
+        orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                 "獸人1", 14, 1, (int) (Math.random() * 8), (int) (Math.random() * 8)); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
-        cultist = new Monster(Global.MONSTERX, 100 * (2 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
+        cultist = new Monster(Global.MONSTERX,  Global.MONSTERY2, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                 "獸人2", 10, 2, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第二隻怪物\
-        monster1 = new Monster(Global.MONSTERX, 100 * (3 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
+        monster1 = new Monster(Global.MONSTERX,  Global.MONSTERY3, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                 "獸人3", 17, 3, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第三隻怪物\
-        dedmon = new Monster2(Global.MONSTERX, 100 * (4 * 2 - 1), Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
-                "獸人3", 17, 3, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第三隻怪物\
-
 
         monsters = new ArrayList();
         monsters.add(orc);
@@ -173,7 +171,13 @@ public class MainScene extends Scene {
             monster.setHero(hero);
         }
 
-//        winImage = irc.tryGetImage("/resources/Background/ENDSCENE.png");
+        column1 = irc.tryGetImage("/resources/Monster/COLUMN.png");
+        column2 = irc.tryGetImage("/resources/Monster/COLUMN.png");
+        column3 = irc.tryGetImage("/resources/Monster/COLUMN.png");
+        columns[0] = column1;
+        columns[1] = column2;
+        columns[2] = column3;
+
         endImage = irc.tryGetImage("/resources/Background/ENDSCENE.png");
         img = irc.tryGetImage("/resources/Background/BACKGROUND3.jpg");
         selectedmonster = 0;
@@ -191,23 +195,21 @@ public class MainScene extends Scene {
 
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
-                 if(state != null){
-                     System.out.println(state);
-                 }
+                if (state != null) {
+                    System.out.println(state);
+                }
                 if (state == CommandSolver.MouseState.RELEASED) {
-       
-                    if (selectedcard != null){ 
+
+                    if (selectedcard != null) {
                         //水晶不夠無法施放
                         int temp = crystal.getNumberIcon().getNumber();
-                        if(temp - selectedcard.getCost() < 0) {
+                        if (temp - selectedcard.getCost() < 0) {
                             selectedcard.setCardMoveState(new MoveBack());
-                        }
-                        
-//                        else if (selectedcard.getY() < 560 && selectedcard.getDefense() > 0) {
-//                            selectedcard.action(hero, new Monster(0, 0, 0, 0, "", 0));
-//                            selectedcard.setCardMoveState(new MoveToDiscard());
-//                            crystal.setNumberIcon(temp - selectedcard.getCost());
-//                        }
+                        } //                        else if (selectedcard.getY() < 560 && selectedcard.getDefense() > 0) {
+                        //                            selectedcard.action(hero, new Monster(0, 0, 0, 0, "", 0));
+                        //                            selectedcard.setCardMoveState(new MoveToDiscard());
+                        //                            crystal.setNumberIcon(temp - selectedcard.getCost());
+                        //                        }
                         else if (!(selectedcard.getCardMoveState() instanceof MoveToDiscard)) {
                             for (int i = 0; i < monsters.size(); i++) {
                                 System.out.println(selectedcard.toString());
@@ -271,7 +273,7 @@ public class MainScene extends Scene {
                             if (handdeck.getCards().get(i).isCollision(e.getX(), e.getY())) {
                                 Card temp = handdeck.getCards().get(i);
                                 selectedcard = temp;
-            
+
                                 xdelta = temp.getDeltaX(e.getX());
                                 ydelta = temp.getDeltaY(e.getY());
                                 temp.setClicked(true);
@@ -283,6 +285,7 @@ public class MainScene extends Scene {
 
                 if (state == CommandSolver.MouseState.DRAGGED) {
                     if (selectedcard != null) {
+
                         selectedcard.setX(e.getX() - xdelta);
                         selectedcard.setY(e.getY() - ydelta);
                         System.out.print(selectedcard.getX());
@@ -293,35 +296,35 @@ public class MainScene extends Scene {
 
         };
     }
+
     //抽n張卡
     public void drawCard(CardDeck drawcarddeck, CardDeck handdeck, CardDeck discarddeck, int number) {
         int temp = discarddeck.getCards().size();
-        
-        
+
         if (drawcarddeck.getCards().size() < 5) {
             for (int i = 0; i < temp; i++) {
                 drawcarddeck.getCards().add(discarddeck.getCards().get(i));
             }
-            
+
 //        //確認每張牌都被刪掉
             for (int i = 0; i < temp; i++) {
                 discarddeck.getCards().remove(0);
             }
 
         }
-        
+
         drawcarddeck.shuffle();
         for (int i = 0; i < number; i++) {
             handdeck.getCards().add(drawcarddeck.getCards().get(i));
         }
         setDeckPoisition();
 
-        
         for (int i = 0; i < number; i++) {
             drawcarddeck.getCards().remove(0);
         }
-        
+
     }
+
     //棄n張卡
     public void discardCard(CardDeck drawcarddeck, CardDeck handdeck, CardDeck discarddeck, int number) {
         for (int i = 0; i < number; i++) {
@@ -331,11 +334,9 @@ public class MainScene extends Scene {
         for (int i = 0; i < number; i++) {
             handdeck.getCards().remove(0);
         }
-    
+
     }
-    
-    
-    
+
     public ArrayList<Card> getDeck() {
         return deck;
     }
@@ -361,16 +362,16 @@ public class MainScene extends Scene {
             temp.setY(Global.CARDDECKBOTTOM);
             temp.setOrginalX(300 + (Global.CARDWIDTH + 100) * i);
             temp.setOrginalY(Global.CARDDECKBOTTOM);
-            temp.setHandDeckPoisition(i+1);
+            temp.setHandDeckPoisition(i + 1);
             temp.setCardMoveState(new MoveToHandDeck());
-        }  
+        }
 
     }
 
     @Override
     public void sceneBegin() {
         hero.setState(new MoveHeroRight());
-        
+
         for (Monster monster : monsters) {
             if (monster.gethealth() <= 0) {
                 monsters.remove(monster);
@@ -392,12 +393,16 @@ public class MainScene extends Scene {
     @Override
     public void sceneUpdate() {
 
+        if (hero.gethealth() < 0) {
+            scenecontroller.changeScene(new EndScene(scenecontroller));
+        }
+
         hero.move();
-        if(hero.getX() > Global.JWIDTH){
+        if (hero.getX() > Global.JWIDTH) {
             Global.CURRENTSTAGE++;
             scenecontroller.changeScene(mapScene);
         }
-        
+
         if (delaycounter.delayupdate()) {
             for (int i = 0; i < handdeck.getCards().size(); i++) {
                 handdeck.getCards().get(i).move();
@@ -408,7 +413,6 @@ public class MainScene extends Scene {
         }
 
         for (int i = 0; i < monsters.size(); i++) {
-            
 
             if (monsters.get(i).gethealth() <= 0) {
                 monsters.remove(monsters.get(i));
@@ -418,7 +422,7 @@ public class MainScene extends Scene {
                 }
             }
         }
-        
+
         if (delaycounter.delayupdate() && discardcard != null) {
             discardcard.move();
         }
@@ -436,12 +440,11 @@ public class MainScene extends Scene {
                     monster.move();
                     allmonsterend = false;
                     break;
-                }
-                else{
+                } else {
                     allmonsterend = true;
                 }
             }
-                
+
             if (allmonsterend) {
                 for (Monster temp : monsters) {
                     temp.setMoved(false);
@@ -449,11 +452,11 @@ public class MainScene extends Scene {
                     temp.move();
                 }
                 next.setIsClicked(false);
-                discardCard(drawcarddeck, handdeck, discarddeck,5);
-                drawCard(drawcarddeck, handdeck, discarddeck,5);
+                discardCard(drawcarddeck, handdeck, discarddeck, 5);
+                drawCard(drawcarddeck, handdeck, discarddeck, 5);
                 crystal.setNumberIcon(3);
             }
-            
+
         }
     }
 
@@ -472,13 +475,11 @@ public class MainScene extends Scene {
 //            e.printStackTrace();
 //            
 //        }
-         
-            
-        
     }
 
     @Override
     public void paint(Graphics g) {
+
 //        g.setFont(font1);
 //        g.drawString("14pt bold & italic times Roman", 5, 92);
         g.drawImage(img, 0, 0, 1920, 1080, null);
@@ -509,7 +510,6 @@ public class MainScene extends Scene {
         drawcarddeck.paint(g);
         discarddeck.paint(g);
 
-   
         crystal.paint(g);
 //            g.drawImage(number, 200, 200, 300, 300, null);
 //        if (gameWin) {    
@@ -517,6 +517,15 @@ public class MainScene extends Scene {
 //             exit2.paint(g);
 //        }
         ttt.paint(g);
+        
+        for (int i = 0; i < monsters.size(); i++) {
+            if (selectedcard != null) {
+                if (selectedcard.isCollision(monsters.get(i))) {
+                    g.drawImage(columns[i], monsters.get(i).getX(), monsters.get(i).getY(), null);
+                    break;
+                }
+            }
+        }
 
     }
 
