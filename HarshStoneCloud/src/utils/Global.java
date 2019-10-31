@@ -145,6 +145,13 @@ public class Global {
     
     //j箭頭跳動常數
     public static final int ARROWSPEED = 10;
+    
+    
+    //卡片數值X常數
+    public static final int DIGIT1X= 15;
+     public static final int DIGIT2X= 40;
+     public static final int DIGIT3X= 80;
+     public static final int DIGIT4X= 115;
 
 
 

@@ -10,6 +10,7 @@ import Controller.ImageResourceController;
 import gameObject.DamageEffect;
 import gameObject.DefenceEffect;
 import gameObject.FrozenEffect;
+import gameObject.HealEffect;
 import gameObject.PoisonEffect;
 import gameObject.WeakEffect;
 import java.awt.image.BufferedImage;
@@ -103,13 +104,23 @@ public class CardFactory {
         if(Integer.valueOf(temp[8]) != 0){
             card = new FrozenEffect(card, Integer.valueOf(temp[8]));
         }
+        if(Integer.valueOf(temp[9]) != 0){
+            card = new HealEffect(card, Integer.valueOf(temp[9]));
+        }
         card.setAttack(Integer.valueOf(temp[4]));
         card.setDefense(Integer.valueOf(temp[5]));
         card.setWeak(Integer.valueOf(temp[6]));
         card.setPoision(Integer.valueOf(temp[7]));
         card.setFrozen(Integer.valueOf(temp[8]));
+        card.setHeal(Integer.valueOf(temp[9]));
+        
+        card.setCardIconHelper(new CardIconHelper(card));
+
+        System.out.println("攻擊力!!!!為 = " +temp[4]);
+        System.out.println("攻擊力為 = " + card.getAttack());
+
         return card;
-    
+       
     }
     
 }
