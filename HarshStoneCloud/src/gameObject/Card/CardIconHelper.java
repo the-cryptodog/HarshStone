@@ -96,7 +96,7 @@ public class CardIconHelper {
 
         System.out.println("技能種類有" + twoEffect.size() + "種");
         System.out.print("技能1傷害" +atr.get(0));
-        System.out.print("技能2傷害" +atr.get(1));
+
 
         digitX = card.getX() + (Global.CARDWIDTH / 2);
         digitY = card.getY() + (Global.CARDHEIGHT / 2);
