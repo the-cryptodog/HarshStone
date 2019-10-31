@@ -45,8 +45,12 @@ public class WeakEffect extends CardEffect{
             for(int i = 0; i < temp; i++){
                 if(monster.getMonsterAbnormalStates().get(i) instanceof Weak){
                     temp1 = monster.getMonsterAbnormalStates().get(i);
-                    temp1.setContinueTurn(temp1.getContinueTurn() + weakstate);
-                    monster.setPoison(temp1.getContinueTurn() + weakstate);
+                    int temp2 = temp1.getContinueTurn()+ weakstate;
+                    if(temp2 > 9){
+                        temp2 = 9;
+                    }
+                    temp1.setContinueTurn(temp2);
+                    monster.setPoison(temp2);
                     break;
                 }
             }

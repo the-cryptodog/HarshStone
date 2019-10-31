@@ -24,7 +24,17 @@ public class Frozen extends MonsterAbnormalState{
         
         @Override
         public void action(Monster monster, Hero hero) {
-            
+            monster.setAttack(0);
+            monster.setDefense(0);
+            if(continueturn > 1){
+                monster.monsterstate = new MonsterState.EndMove();
+            }
+            else{
+                monster.monsterstate = new MonsterState.MoveLeft();
+                monster.attack = (int)(Math.random() * 10 + 5);
+            }
+            continueturn--;
+            monster.setFrozen(continueturn);
         }
     
         public void paint(Graphics g){

@@ -30,6 +30,7 @@ public class Poison extends MonsterAbnormalState{
             monster.setPoison(continueturn);
         }
     
+        
         public void paint(Graphics g){
             numbericon.setX(x+width);
             numbericon.setY(y);

@@ -45,8 +45,12 @@ public class PoisonEffect extends CardEffect{
             for(int i = 0; i < temp; i++){
                 if(monster.getMonsterAbnormalStates().get(i) instanceof Poison){
                     temp1 = monster.getMonsterAbnormalStates().get(i);
-                    temp1.setContinueTurn(temp1.getContinueTurn() + poisonstate);
-                    monster.setPoison(temp1.getContinueTurn() + poisonstate);
+                    int temp2 = temp1.getContinueTurn() + poisonstate;
+                    if(temp > 9){
+                        temp2 = 9;
+                    }
+                    temp1.setContinueTurn(temp2);
+                    monster.setPoison(temp2);
                 }
             }
         
