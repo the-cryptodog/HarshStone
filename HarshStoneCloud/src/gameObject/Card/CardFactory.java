@@ -84,19 +84,26 @@ public class CardFactory {
         
         String[] temp = carddata.get(serialnumber).split(",");
         
-        Card card = new Card(0,0,Global.CARDDECKWIDTH,Global.CARDHEIGHT,temp[1],Integer.valueOf(temp[5]));
-         
-        if(Integer.valueOf(temp[2]) != 0){
-      
-            card = new DamageEffect(card, Integer.valueOf(temp[2]));
-        }
-        if(Integer.valueOf(temp[3]) != 0){
-            card = new DefenceEffect(card, Integer.valueOf(temp[3]));
-        }
+        Card card = new Card(0,0,Global.CARDDECKWIDTH,Global.CARDHEIGHT,temp[1],Integer.valueOf(temp[3]));
+        card.setSkill(Integer.valueOf(temp[2]));
         if(Integer.valueOf(temp[4]) != 0){
-            card = new WeakEffect(card, Integer.valueOf(temp[4]));
+      
+            card = new DamageEffect(card, Integer.valueOf(temp[4]));
         }
-        card.setSkill(Integer.valueOf(temp[6]));
+        if(Integer.valueOf(temp[5]) != 0){
+            card = new DefenceEffect(card, Integer.valueOf(temp[5]));
+        }
+        if(Integer.valueOf(temp[6]) != 0){
+            card = new WeakEffect(card, Integer.valueOf(temp[6]));
+        }
+        if(Integer.valueOf(temp[7]) != 0){
+            card = new WeakEffect(card, Integer.valueOf(temp[7]));
+        }
+        if(Integer.valueOf(temp[8]) != 0){
+            card = new WeakEffect(card, Integer.valueOf(temp[8]));
+        }
+        
+        
        
         return card;
     

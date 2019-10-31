@@ -28,6 +28,7 @@ import gameObject.Monster.Monster;
 import gameObject.Monster.Monster2;
 import gameObject.Monster.MonsterState;
 import gameObject.Monster.MonsterState.DecideMove;
+import gameObject.Monster.Poison;
 import gameObject.NumberIcon;
 import gameObject.Skill.Skill;
 import gameObject.Skill.SkillFactory;
@@ -96,6 +97,7 @@ public class MainScene extends Scene {
     private boolean gameWin;
     private BufferedImage endImage;
     private Crystal crystal;
+    private Poison ttt;
     
     
   
@@ -103,6 +105,7 @@ public class MainScene extends Scene {
         super(scenecontroller);
 //        System.out.println(PathBuilder.getNumber(ImagePath.NUMBER2));
 //        number = ImageResourceController.getInstance().tryGetImage("/resources/Number/Number2.png");
+        ttt = new Poison(40,40,48,48,"",5);
         crystal = new Crystal(240,600,80,80,"tt");
         gameWin = false;
         gameOver = false;
@@ -527,7 +530,7 @@ public class MainScene extends Scene {
 //            g.drawImage(winImage, 0, 0, 1920, 1080, null);
 //             exit2.paint(g);
 //        }
-      
+        ttt.paint(g);
 
     }
 
