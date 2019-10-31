@@ -129,9 +129,9 @@ public class MainScene extends Scene {
         discardcard = null;
         cardfactory = new CardFactory();
 
-        exit = new Button(1600, 660, 108, 40, "EXIT");
-        back = new Button(1600, 730, 108, 40, "BACK");
-        next = new Button(1600, 800, 184, 42, "ROUNDSTART");
+        exit = new Button(1700, 460, 108, 40, "EXIT");
+        back = new Button(1700, 520, 108, 40, "BACK");
+        next = new Button(1700, 580, 184, 42, "ROUNDSTART");
 
         hero = new Hero(-70, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         drawcarddeck = hero.getHeroDeck();
