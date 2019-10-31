@@ -38,6 +38,7 @@ public class Card extends GameObject{
     private int weak;
     private int frozen;
     private int poison;
+    private int heal;
     private int skillIndex;
     private int handdeckpoisition;
     private CardIconHelper cardIconHelper;
@@ -56,10 +57,16 @@ public class Card extends GameObject{
         attack = 0;
         //1~5為手牌位置
         handdeckpoisition = 0;
-//        cardIconHelper= new CardIconHelper(this);
+
         weak = 0;
         frozen = 0;
         poison = 0;
+        heal = 0;
+       
+    }
+    
+    public void setCardIconHelper(CardIconHelper cardIconHelper){
+        this.cardIconHelper = cardIconHelper;
     }
     
     public int getAttack(){
@@ -105,6 +112,14 @@ public class Card extends GameObject{
     
     public int getFrozen(){
         return frozen;
+    }
+    
+    public void setHeal(int frozen){
+        this.frozen = frozen;
+    }
+    
+    public int getHeal(){
+        return heal;
     }
     
     
@@ -204,7 +219,9 @@ public class Card extends GameObject{
     
     public void paint(Graphics g){
         g.drawImage(image, x, y, width, height, null);
-//        cardIconHelper.paint(g, this.x, this.y, width, height, attack, defense);
+
+        cardIconHelper.paint(g, x, y, width, height);
+
     }
     
     
