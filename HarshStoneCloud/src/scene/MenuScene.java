@@ -50,9 +50,13 @@ public class MenuScene extends Scene {
                     System.out.println("CLick");
                     if (buttons.get(0).isCollision(e.getX(), e.getY())) {
                         scenecontroller.changeScene(new SelectJobScene(scenecontroller));
-//                      startPressed = true;
-//                        scenecontroller.changeScene(new MainScene(scenecontroller));
                     }
+                    if (buttons.get(1).isCollision(e.getX(), e.getY())) {
+                        scenecontroller.changeScene(new MainScene(scenecontroller,new MapScene(scenecontroller)));
+//上面兩行為測試用，按CONTINUE可以直接進入戰鬥
+
+                    }
+                    
                 }
 
                 if (state == CommandSolver.MouseState.PRESSED) {

@@ -23,7 +23,7 @@ public class NumberIcon extends GameObject{
     public NumberIcon(int x, int y, int width, int height, String name, int number){
         super(x, y, width, height, name);
 //        image = irc.tryGetImage(PathBuilder.getNumber(ImagePath.NUMBER));
-        image = irc.tryGetImage("/resources/Number/Number3.png");
+        image = irc.tryGetImage("/resources/Number/Number4.png");
         this.number = number;
         delaycounter = new DelayCounter(6, new DelayCounter.Action() {
 
