@@ -8,7 +8,10 @@ package gameObject;
 import gameObject.Card.Card;
 import gameObject.Card.CardEffect;
 import gameObject.Hero.Hero;
+import gameObject.Monster.Frozen;
 import gameObject.Monster.Monster;
+import gameObject.Monster.MonsterAbnormalState;
+import gameObject.Monster.Poison;
 
 /**
  *
@@ -32,6 +35,23 @@ public class FrozenEffect extends CardEffect{
     public void action(Hero hero, Monster monster) {
         card.action(hero, monster);
         System.out.println( monster.name + "獲得冰凍" );
+        if(monster.getFrozen() == 0){
+            monster.getMonsterAbnormalStates().add(new Frozen(0,0,40,40,"",frozenstate));
+            monster.setPoison(frozenstate);
+        }
+        else{
+            int temp = monster.getMonsterAbnormalStates().size();
+            MonsterAbnormalState temp1;
+            for(int i = 0; i < temp; i++){
+                if(monster.getMonsterAbnormalStates().get(i) instanceof Frozen){
+                    temp1 = monster.getMonsterAbnormalStates().get(i);
+                    temp1.setContinueTurn(temp1.getContinueTurn() + frozenstate);
+                    monster.setPoison(temp1.getContinueTurn() + frozenstate);
+                    break;
+                }
+            
+            }
+        }
     }
 }
     

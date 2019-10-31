@@ -13,12 +13,12 @@ import java.awt.Graphics;
  *
  * @author frank61003
  */
-public class Frozen extends MonsterAbnormalState{
+public class Weak extends MonsterAbnormalState{
 
         
-        public Frozen(int x,int y, int width, int height, String name,int continueturn){
+        public Weak(int x,int y, int width, int height, String name,int continueturn){
             super(x,y,width,height,name,continueturn);
-            image = irc.tryGetImage("/resources/Icon/Frozen1.png");
+            image = irc.tryGetImage("/resources/Icon/Weak1.png");
             numbericon = new NumberIcon(x+width,y,width,height," ",continueturn);
         }
         
