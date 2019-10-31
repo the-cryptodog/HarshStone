@@ -48,24 +48,12 @@ public class CardDeck extends GameObject{
     public static class WarriorDeck extends CardDeck{
         public WarriorDeck(int x, int y, int width, int height, String name){
             super(x, y, width, height, name);
-            for(int i = 0; i < 2;i++){
+            for(int i = 0; i < 7;i++){
                 cards.add(cardfactory.genCard(0));            
             }
-            for(int i = 0; i < 2;i++){
+            for(int i = 0; i < 7;i++){
                 cards.add(cardfactory.genCard(1));            
             }
-            for(int i = 0; i < 2;i++){
-                cards.add(cardfactory.genCard(2));            
-            } 
-            for(int i = 0; i < 3;i++){
-                cards.add(cardfactory.genCard(3));            
-            } 
-            for(int i = 0; i < 3;i++){
-                cards.add(cardfactory.genCard(4));            
-            } 
-            for(int i = 0; i < 2;i++){
-                cards.add(cardfactory.genCard(5));            
-            } 
         }  
     }
     

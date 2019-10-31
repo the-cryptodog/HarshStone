@@ -86,15 +86,21 @@ public class Global {
     public static boolean STAGE3CLEAR = false;
     public static boolean STAGE4CLEAR = false;
     public static boolean STAGE5CLEAR = false;
+    
+    //Card largenIndex
+    public static final float LARGEN = 1.3f;
+    
  
     //Card 
-    public static final int CARDWIDTH = 141;
-    public static final int CARDHEIGHT = 195;
+    public static final int CARDWIDTH = (int)(141*LARGEN);
+    public static final int CARDHEIGHT =(int)(195*LARGEN);
 
     //CardDeck
-    public static final int CARDDECKWIDTH = (int) (141 * 1.1);
-    public static final int CARDDECKHEIGHT = (int) (195 * 1.1);
+    public static final int CARDDECKWIDTH = (int) (141 * 1.3);
+    public static final int CARDDECKHEIGHT = (int) (195 * 1.3);
     public static final int CARDDECKBOTTOM = 700;
+    
+
 
     //HeroDeck
     public static CardDeck HERODECK;
@@ -148,10 +154,10 @@ public class Global {
     
     
     //卡片數值X常數
-    public static final int DIGIT1X= 15;
-     public static final int DIGIT2X= 40;
-     public static final int DIGIT3X= 80;
-     public static final int DIGIT4X= 115;
+    public static final int DIGIT1X=( CARDWIDTH/4-CARDWIDTH/5);
+     public static final int DIGIT2X= ( CARDWIDTH/4);
+     public static final int DIGIT3X= (( CARDWIDTH/4)*3-CARDWIDTH/5);
+     public static final int DIGIT4X= (( CARDWIDTH/4)*3);
 
 
 
