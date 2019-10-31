@@ -21,6 +21,7 @@ import values.ImagePath;
  */
 public class CardIconHelper {
 
+
     private NumberIcon digit;
     private NumberIcon digit2;
     private NumberIcon tenDigit;
@@ -225,4 +226,5 @@ public class CardIconHelper {
             }
         }
     }
+
 }

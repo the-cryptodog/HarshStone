@@ -49,7 +49,7 @@ public class MonsterHelper {
     
     }
     
-    public void paint(Graphics g, int x, int y, int width, int height, int act, int direction, int health,int originalhealth,int attack, int defense, ArrayList<MonsterAbnormalState> monsterabnormalstates){
+    public void paint(Graphics g, int x, int y, int width, int height, int act, int direction, int health,int originalhealth,int attack, int defense, ArrayList<MonsterAbnormalState> monsterabnormalstates,int poison){
         if(img == null){
             return;
         }
@@ -66,12 +66,17 @@ public class MonsterHelper {
             g.drawImage(defenseicon, x + width, y, Global.ICON_X_OFFSET, Global.ICON_Y_OFFSET, null);
         }
         
-         int temp = monsterabnormalstates.size();
-            for(int i = 0; i<temp; i++){
+        int temp = monsterabnormalstates.size();
+            for(int i = 0; i < temp; i++){
                 monsterabnormalstates.get(i).setX(x - Global.HEALTHX+ i*64 );
                 monsterabnormalstates.get(i).setY(y + height+25);
                 monsterabnormalstates.get(i).paint(g);
             }
+//        if(poison!=0){
+//            monsterabnormalstates.get(0).setX(x - Global.HEALTHX+ 0*64 );
+//            monsterabnormalstates.get(0).setY(y + height+25);
+//            monsterabnormalstates.get(0).paint(g);
+//        }
 
         
         

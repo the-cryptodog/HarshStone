@@ -13,10 +13,10 @@ import java.awt.Graphics;
  *
  * @author frank61003
  */
-public class Poison extends MonsterAbnormalState{
+public class Frozen extends MonsterAbnormalState{
 
         
-        public Poison(int x,int y, int width, int height, String name,int continueturn){
+        public Frozen(int x,int y, int width, int height, String name,int continueturn){
             super(x,y,width,height,name,continueturn);
             image = irc.tryGetImage("/resources/Icon/Poison.png");
             numbericon = new NumberIcon(x+width,y,width,height," ",continueturn);
@@ -36,5 +36,3 @@ public class Poison extends MonsterAbnormalState{
         }
     
 }
-    
-
