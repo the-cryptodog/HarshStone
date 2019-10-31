@@ -22,9 +22,12 @@ public class Poison extends MonsterAbnormalState{
             numbericon = new NumberIcon(x+width,y,width,height," ",continueturn);
         }
         
+    //0可能有問題
         @Override
         public void action(Monster monster, Hero hero) {
-            
+            monster.health -= continueturn;
+            continueturn--;
+            monster.setPoison(continueturn);
         }
     
         public void paint(Graphics g){

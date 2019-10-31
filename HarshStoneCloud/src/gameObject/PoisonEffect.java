@@ -36,7 +36,7 @@ public class PoisonEffect extends CardEffect{
     public void action(Hero hero, Monster monster) {
         card.action(hero, monster);
         if(monster.getPoison() == 0){
-            monster.getMonsterAbnormalStates().add(new Poison(0,0,40,40,"",poisonstate));
+            monster.getMonsterAbnormalStates().add(new Poison(0,0, 32, 32,"",poisonstate));
             monster.setPoison(poisonstate);
         }
         else{
@@ -47,10 +47,7 @@ public class PoisonEffect extends CardEffect{
                     temp1 = monster.getMonsterAbnormalStates().get(i);
                     temp1.setContinueTurn(temp1.getContinueTurn() + poisonstate);
                     monster.setPoison(temp1.getContinueTurn() + poisonstate);
-                
                 }
-            
-            
             }
         
         
