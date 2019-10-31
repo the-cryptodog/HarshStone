@@ -56,8 +56,7 @@ public class CardIconHelper {
 
 
 
-        for (int i = 0; i < atr.size(); i++) {
-            
+        for (int i = 0; i < atr.size(); i++) {      
             if (atr.get(i) != 0) {
                 switch (i) {
                     case 0:

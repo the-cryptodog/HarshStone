@@ -90,7 +90,7 @@ public class Card extends GameObject{
     
     }
 
-    public void setPoision(int poision){
+    public void setPoison(int poison){
         this.poison =poison;
     }
     

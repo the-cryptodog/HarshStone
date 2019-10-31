@@ -110,7 +110,7 @@ public class CardFactory {
         card.setAttack(Integer.valueOf(temp[4]));
         card.setDefense(Integer.valueOf(temp[5]));
         card.setWeak(Integer.valueOf(temp[6]));
-        card.setPoision(Integer.valueOf(temp[7]));
+        card.setPoison(Integer.valueOf(temp[7]));
         card.setFrozen(Integer.valueOf(temp[8]));
         card.setHeal(Integer.valueOf(temp[9]));
         
@@ -118,6 +118,12 @@ public class CardFactory {
 
         System.out.println("攻擊力!!!!為 = " +temp[4]);
         System.out.println("攻擊力為 = " + card.getAttack());
+        System.out.println("防禦力為 = " + card.getAttack());
+        System.out.println("虛弱為 = " + card.getWeak());
+        System.out.println("中毒為 = " + card.getPoison());
+        System.out.println("冰凍為 = " + card.getFrozen());
+        System.out.println("治療為 = " + card.getHeal());
+        
 
         return card;
        
