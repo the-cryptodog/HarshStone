@@ -203,11 +203,11 @@ public class MainScene extends Scene {
                             selectedcard.setCardMoveState(new MoveBack());
                         }
                         
-                        else if (selectedcard.getY() < 560 && selectedcard.getDefense() > 0) {
-                            selectedcard.action(hero, new Monster(0, 0, 0, 0, "", 0));
-                            selectedcard.setCardMoveState(new MoveToDiscard());
-                            crystal.setNumberIcon(temp - selectedcard.getCost());
-                        }
+//                        else if (selectedcard.getY() < 560 && selectedcard.getDefense() > 0) {
+//                            selectedcard.action(hero, new Monster(0, 0, 0, 0, "", 0));
+//                            selectedcard.setCardMoveState(new MoveToDiscard());
+//                            crystal.setNumberIcon(temp - selectedcard.getCost());
+//                        }
                         else if (!(selectedcard.getCardMoveState() instanceof MoveToDiscard)) {
                             for (int i = 0; i < monsters.size(); i++) {
                                 System.out.println(selectedcard.toString());
