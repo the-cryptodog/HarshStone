@@ -36,8 +36,8 @@ public class FrozenEffect extends CardEffect{
         card.action(hero, monster);
         System.out.println( monster.name + "獲得冰凍" );
         if(monster.getFrozen() == 0){
-            monster.getMonsterAbnormalStates().add(new Frozen(0,0,40,40,"",frozenstate));
-            monster.setPoison(frozenstate);
+            monster.getMonsterAbnormalStates().add(new Frozen(0,0,32,32,"",frozenstate));
+            monster.setFrozen(frozenstate);
         }
         else{
             int temp = monster.getMonsterAbnormalStates().size();

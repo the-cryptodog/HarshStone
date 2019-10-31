@@ -36,7 +36,7 @@ public class WeakEffect extends CardEffect{
         card.action(hero, monster);
         monster.setAttack((int)(monster.getAttack()*0.75));
         if(monster.getWeak() == 0){
-            monster.getMonsterAbnormalStates().add(new Weak(0,0,40,40,"",weakstate));
+            monster.getMonsterAbnormalStates().add(new Weak(0,0,32,32,"",weakstate));
             monster.setWeak(weakstate);
         }
         else{
