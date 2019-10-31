@@ -114,7 +114,7 @@ public interface MonsterState {
        }
     }
      
-     public class EndMove implements MonsterState{
+    public class EndMove implements MonsterState{
 
         @Override
         public void action(Monster monster, Hero hero) { 

@@ -11,6 +11,7 @@ import gameObject.Monster.MonsterState.MoveLeft;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import utils.Global;
 import values.ImagePath;
 
@@ -48,7 +49,7 @@ public class MonsterHelper {
     
     }
     
-    public void paint(Graphics g, int x, int y, int width, int height, int act, int direction, int health,int originalhealth,int attack, int defense){
+    public void paint(Graphics g, int x, int y, int width, int height, int act, int direction, int health,int originalhealth,int attack, int defense, ArrayList<MonsterAbnormalState> monsterabnormalstates){
         if(img == null){
             return;
         }
@@ -65,8 +66,13 @@ public class MonsterHelper {
             g.drawImage(defenseicon, x + width, y, Global.ICON_X_OFFSET, Global.ICON_Y_OFFSET, null);
         }
         
-        
-        
+         int temp = monsterabnormalstates.size();
+            for(int i = 0; i<temp; i++){
+                monsterabnormalstates.get(i).setX(x - Global.HEALTHX+ i*64 );
+                monsterabnormalstates.get(i).setY(y + height+25);
+                monsterabnormalstates.get(i).paint(g);
+            }
+
         
         
         g.setColor(Color.red);
