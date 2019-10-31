@@ -211,6 +211,7 @@ public class MainScene extends Scene {
                         else if (!(selectedcard.getCardMoveState() instanceof MoveToDiscard)) {
                             for (int i = 0; i < monsters.size(); i++) {
                                 if (monsters.get(i).isCollision(selectedcard)) {
+                                    System.out.print(selectedcard.toString());
                                     // 卡排放到怪物上的動畫
                                     Monster temp1 = monsters.get(i);
                                     if (skillboard.skillCheck(selectedcard.getSkilltype())) {
