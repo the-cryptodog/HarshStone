@@ -63,30 +63,31 @@ public interface HeroState {
         @Override
         public void action(Hero hero) {
             int tempx;
-
+            
             tempx = hero.getX() + Global.HEROMOVERANGE;
             hero.direction = 2;
-            if (tempx >= Global.HEROX) {
-                hero.setX(Global.HEROX);
+            if(tempx >= Global.HEROX ){
+                hero.setX( Global.HEROX);    
                 hero.setState(new NoMove());
-            } else {
+            }
+            else{
                 hero.setX(tempx);
             }
         }
     }
-
+    
     public class MoveHeroLeave implements HeroState {
 
         @Override
         public void action(Hero hero) {
             int tempx;
-
+            
             tempx = hero.getX() + Global.HEROMOVERANGE;
-            if (hero.getX() <= Global.JWIDTH) {
+            if(hero.getX() <= Global.JWIDTH ){
                 hero.setX(tempx);
-                hero.setState(new MoveHeroRight());
             }
         }
     }
-
+    
+    
 }
