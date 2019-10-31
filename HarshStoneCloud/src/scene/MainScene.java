@@ -191,9 +191,11 @@ public class MainScene extends Scene {
 
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
+                 if(state != null){
+                     System.out.println(state);
+                 }
                 if (state == CommandSolver.MouseState.RELEASED) {
-                    System.out.println("release");
-
+       
                     if (selectedcard != null){ 
                         //水晶不夠無法施放
                         int temp = crystal.getNumberIcon().getNumber();
