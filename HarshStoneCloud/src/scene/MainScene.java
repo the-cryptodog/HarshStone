@@ -358,7 +358,7 @@ public class MainScene extends Scene {
 //            temp.setOrginalX(300 + (Global.CARDWIDTH + 50) * i);
 //            temp.setOrginalY(Global.CARDDECKBOTTOM);
 //            temp.setCardMoveState(new Movable());
-            temp.setX(300 + (Global.CARDWIDTH + 100) * i);
+            temp.setX(0);
             temp.setY(Global.CARDDECKBOTTOM);
             temp.setOrginalX(300 + (Global.CARDWIDTH + 100) * i);
             temp.setOrginalY(Global.CARDDECKBOTTOM);
