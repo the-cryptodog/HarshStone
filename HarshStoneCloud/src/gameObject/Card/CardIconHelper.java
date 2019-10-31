@@ -41,17 +41,25 @@ public class CardIconHelper{
     }
 
     public void paint(Graphics g, int x, int y, int width, int height, int attack, int defense) {
+   
         if(attack >9 || defense>9){
-        tenDigit.setX(x+55);
+        tenDigit.setX(x+5);
         tenDigit.setY(y+130);
         tenDigit.paint(g);
         }
         
-        digit.setX(x+80);
-        digit.setY(y+110);
+        digit.setX(x+70);
+        digit.setY(y+115);
         digit.paint(g);
-
-        g.drawImage(sword, x+5, y+100, null)    ;
-        g.drawImage(shield, x+5, y+100, null)    ;
+        if(attack==0){
+        g.drawImage(shield, x+30, y+125, 50,50,null)    ;
+        }
+        if(defense==0){
+        g.drawImage(sword, x+30, y+125,50,50, null)    ;
+        }
+        if(attack !=0 && defense !=0){
+            g.drawImage(shield, x+30, y+125, 50,50,null)    ;
+            g.drawImage(sword, x+30, y+125,50,50, null)    ;
+        } 
     }
 }
