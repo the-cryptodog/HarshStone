@@ -42,12 +42,12 @@ public interface MonsterState {
             for(int i = 0;i < size; i++){
                 temp1.get(i).action(monster, hero);
             }
-//            for(int i = 0;i < temp1.size(); i++){
-//                if(temp1.get(i).getContinueTurn() == 0){
-//                    temp1.remove(i);
-//                    i--;
-//                }
-//            }
+            for(int i = 0;i < temp1.size(); i++){
+                if(temp1.get(i).getContinueTurn() == 0){
+                    temp1.remove(i);
+                    i--;
+                }
+            }
         }
     }
     

@@ -45,8 +45,12 @@ public class FrozenEffect extends CardEffect{
             for(int i = 0; i < temp; i++){
                 if(monster.getMonsterAbnormalStates().get(i) instanceof Frozen){
                     temp1 = monster.getMonsterAbnormalStates().get(i);
-                    temp1.setContinueTurn(temp1.getContinueTurn() + frozenstate);
-                    monster.setPoison(temp1.getContinueTurn() + frozenstate);
+                    int temp2 = temp1.getContinueTurn() + frozenstate;
+                    if(temp2 > 9){
+                        temp2 = 9;
+                    }
+                    temp1.setContinueTurn(temp2);
+                    monster.setPoison(temp2);
                     break;
                 }
             
