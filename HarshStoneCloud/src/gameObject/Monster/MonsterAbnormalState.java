@@ -5,16 +5,20 @@
  */
 package gameObject.Monster;
 
+import gameObject.GameObject;
 import gameObject.Hero.Hero;
+import gameObject.NumberIcon;
 
 /**
  *
  * @author frank61003
  */
-public class MonsterAbnormalState {
-    private int continueturn;
+public class MonsterAbnormalState extends GameObject{
+    protected int continueturn;
+    protected NumberIcon numbericon;
     
-    public MonsterAbnormalState(int continueturn){
+    public MonsterAbnormalState(int x,int y, int width, int height, String name,int continueturn){
+        super(x, y, width, height, name);
         this.continueturn = continueturn;
     }
     
@@ -22,8 +26,6 @@ public class MonsterAbnormalState {
         return continueturn;
     
     }
-    
-    
     
     
     public void action(Monster monster, Hero hero){
@@ -34,25 +36,20 @@ public class MonsterAbnormalState {
     
     
     
-    public class Frozen extends MonsterAbnormalState{
-
-        
-        public Frozen(int continueturn){
-            super(continueturn);
-        
-        }
-        
-        
-        
-        
-        @Override
-        public void action(Monster monster, Hero hero) {
-            
-        }
-    
-    
-    }
-    
+//    public class Frozen extends MonsterAbnormalState{
+//
+//        
+//        public Frozen(int continueturn){
+//            super(continueturn);
+//        }
+//        
+//        @Override
+//        public void action(Monster monster, Hero hero) {
+//            
+//        }
+//    
+//    
+//    }
     
     
     

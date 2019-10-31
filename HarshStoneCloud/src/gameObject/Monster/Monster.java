@@ -11,6 +11,7 @@ import gameObject.Hero.Hero;
 import gameObject.NumberIcon;
 import gameObject.Skill.Skill;
 import java.awt.Graphics;
+import java.util.ArrayList;
 import utils.DelayCounter;
 import values.ImagePath;
 
@@ -44,6 +45,7 @@ public class Monster extends GameObject {
     private int yPosition;
     private int skillIndex;
     private Skill selfSkill;
+    private ArrayList<MonsterAbnormalState> monsterabnormalstates;
 
     public Monster(int x, int y, int width, int height, String name, int health, int yPosition, int act, int skillIndex) {
         super(x, y, width, height, name);
@@ -60,7 +62,7 @@ public class Monster extends GameObject {
         recordhealth = false;
         this.yPosition = yPosition;
         this.skillIndex = skillIndex;
-
+        monsterabnormalstates = new ArrayList<MonsterAbnormalState>();
         monsterhelper = new MonsterHelper(act);
         delaycounter = new DelayCounter(10, new DelayCounter.Action() {
 
@@ -148,6 +150,10 @@ public class Monster extends GameObject {
         return monsterstate;
     }
     
+    
+    public ArrayList<MonsterAbnormalState> getMonsterAbnormalStates() {
+        return monsterabnormalstates;
+    }
     
     public void changeDirection(int direction) {
         this.direction = direction;
