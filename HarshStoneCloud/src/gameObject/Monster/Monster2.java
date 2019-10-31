@@ -216,24 +216,24 @@ public class Monster2 extends Monster{
 
     }
 
-    public void paint(Graphics g) {
-        if (act == 5) {
-            g.drawImage(image, x, y, width, height, null);
-        } else {
-            monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth, attack, defense);
-            number1.setX(x + width);
-            number2.setX(x + width);
-            update();
-//            number1.paint(g);
-//            number2.paint(g);
-
-            if (monsterstate instanceof MonsterState.Attack) {
-                selfSkill.paint(g);//畫出攻擊技能
-            }
-
-        }
-
-    }
+//    public void paint(Graphics g) {
+//        if (act == 5) {
+//            g.drawImage(image, x, y, width, height, null);
+//        } else {
+//            monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth, attack, defense,);
+//            number1.setX(x + width);
+//            number2.setX(x + width);
+//            update();
+////            number1.paint(g);
+////            number2.paint(g);
+//
+//            if (monsterstate instanceof MonsterState.Attack) {
+//                selfSkill.paint(g);//畫出攻擊技能
+//            }
+//
+//        }
+//
+//    }
 }
 
 

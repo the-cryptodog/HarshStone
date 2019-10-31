@@ -8,6 +8,7 @@ package gameObject.Monster;
 import gameObject.GameObject;
 import gameObject.Hero.Hero;
 import gameObject.NumberIcon;
+import java.awt.Graphics;
 
 /**
  *
@@ -35,7 +36,11 @@ public class MonsterAbnormalState extends GameObject{
     }
     
     
-    
+    public void paint(Graphics g){
+
+            g.drawImage(image, x, y, width, height, null);
+            numbericon.paint(g);
+        } 
 //    public class Frozen extends MonsterAbnormalState{
 //
 //        
