@@ -150,8 +150,8 @@ public class Monster extends GameObject {
         this.attack = attack;
     }
 
-    public void setPoision(int poision){
-        this.poison =poison;
+    public void setPoison(int poison){
+        this.poison = poison;
     }
     
     public int getPoison(){
@@ -289,7 +289,7 @@ public class Monster extends GameObject {
         if (act == 5) {
             g.drawImage(image, x, y, width, height, null);
         } else {
-            monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth, attack, defense, monsterabnormalstates);
+            monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth, attack, defense, monsterabnormalstates, poison);
             number1.setX(x + width);
             number2.setX(x + width + 40);
             number1.paint(g);
@@ -298,7 +298,6 @@ public class Monster extends GameObject {
             if (monsterstate instanceof MonsterState.Attack) {
                 selfSkill.paint(g);//畫出攻擊技能
             }
-            System.out.println(name + " "+ poison);
         }
     update();
     }

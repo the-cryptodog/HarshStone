@@ -56,7 +56,7 @@ public class Card extends GameObject{
         attack = 0;
         //1~5為手牌位置
         handdeckpoisition = 0;
-        cardIconHelper= new CardIconHelper(this);
+//        cardIconHelper= new CardIconHelper(this);
         weak = 0;
         frozen = 0;
         poison = 0;
@@ -204,7 +204,7 @@ public class Card extends GameObject{
     
     public void paint(Graphics g){
         g.drawImage(image, x, y, width, height, null);
-        cardIconHelper.paint(g, this.x, this.y, width, height, attack, defense);
+//        cardIconHelper.paint(g, this.x, this.y, width, height, attack, defense);
     }
     
     

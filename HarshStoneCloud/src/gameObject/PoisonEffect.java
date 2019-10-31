@@ -35,9 +35,31 @@ public class PoisonEffect extends CardEffect{
     @Override
     public void action(Hero hero, Monster monster) {
         card.action(hero, monster);
-        //monster.getMonsterAbnormalStates().add(new Poison(0,0,0,0,"",poisonstate));
-        monster.setPoision(poisonstate);
-        System.out.println( monster.name + "獲得中毒" + poisonstate);
+        if(monster.getPoison() == 0){
+            monster.getMonsterAbnormalStates().add(new Poison(0,0,40,40,"",poisonstate));
+            monster.setPoison(poisonstate);
+        }
+        else{
+            int temp = monster.getMonsterAbnormalStates().size();
+            MonsterAbnormalState temp1;
+            for(int i = 0; i < temp; i++){
+                if(monster.getMonsterAbnormalStates().get(i) instanceof Poison){
+                    temp1 = monster.getMonsterAbnormalStates().get(i);
+                    temp1.setContinueTurn(temp1.getContinueTurn() + poisonstate);
+                    monster.setPoison(temp1.getContinueTurn() + poisonstate);
+                
+                }
+            
+            
+            }
+        
+        
+        }
+        System.out.println(monster.getMonsterAbnormalStates().size());
+        System.out.println(monster.getMonsterAbnormalStates().get(0).name);
+        
+        System.out.println( monster.name + "獲得中毒" + poisonstate+"/"+monster.getPoison());
+        
     }
 
 }
