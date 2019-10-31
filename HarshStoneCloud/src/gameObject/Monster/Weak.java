@@ -24,7 +24,9 @@ public class Weak extends MonsterAbnormalState{
         
         @Override
         public void action(Monster monster, Hero hero) {
-            
+            monster.attack = continueturn;
+            continueturn--;
+            monster.setPoison(continueturn);
         }
     
         public void paint(Graphics g){

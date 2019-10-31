@@ -6,6 +6,7 @@
 package gameObject.Monster;
 
 import gameObject.Hero.Hero;
+import java.util.ArrayList;
 import utils.Global;
 
 /**
@@ -23,6 +24,8 @@ public interface MonsterState {
             monster.setDefense(0);
             int temp;
             temp = (int)(Math.random()*10);
+            ArrayList<MonsterAbnormalState> temp1 = monster.getMonsterAbnormalStates();
+            int size = temp1.size();
             
             if(temp >= 4){
                 temp = (int)(Math.random() * 10 + 5);
@@ -35,7 +38,16 @@ public interface MonsterState {
                 monster.moved = true;
                 monster.monsterstate = new EndMove();
             }
-
+            
+            for(int i = 0;i < size; i++){
+                temp1.get(i).action(monster, hero);
+            }
+            for(int i = 0;i < size; i++){
+                if(temp1.get(i).getContinueTurn() == 0 && temp1.get(i) != null){
+                    temp1.remove(i);
+                    i--;
+                }
+            }
         }
     }
     
