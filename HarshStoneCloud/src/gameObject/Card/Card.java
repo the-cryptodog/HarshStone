@@ -35,6 +35,9 @@ public class Card extends GameObject{
     protected int originaly;
     private int defense;
     private int attack;
+    private int weak;
+    private int frozen;
+    private int poison;
     private int skillIndex;
     private int handdeckpoisition;
     private CardIconHelper cardIconHelper;
@@ -54,8 +57,9 @@ public class Card extends GameObject{
         //1~5為手牌位置
         handdeckpoisition = 0;
         cardIconHelper= new CardIconHelper(this);
-
-        
+        weak = 0;
+        frozen = 0;
+        poison = 0;
     }
     
     public int getAttack(){
@@ -79,6 +83,29 @@ public class Card extends GameObject{
     
     }
 
+    public void setPoision(int poision){
+        this.poison =poison;
+    }
+    
+    public int getPoison(){
+        return poison;
+    }
+    
+    
+    public void setWeak(int weak){
+        this.weak = weak;
+    }
+    
+    public int getWeak(){
+        return weak;
+    }
+    public void setFrozen(int frozen){
+        this.frozen = frozen;
+    }
+    
+    public int getFrozen(){
+        return frozen;
+    }
     
     
      public int getOrginalX(){

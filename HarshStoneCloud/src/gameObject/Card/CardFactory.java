@@ -9,6 +9,8 @@ import gameObject.Card.Card;
 import Controller.ImageResourceController;
 import gameObject.DamageEffect;
 import gameObject.DefenceEffect;
+import gameObject.FrozenEffect;
+import gameObject.PoisonEffect;
 import gameObject.WeakEffect;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
@@ -96,14 +98,16 @@ public class CardFactory {
             card = new WeakEffect(card, Integer.valueOf(temp[6]));
         }
         if(Integer.valueOf(temp[7]) != 0){
-            card = new WeakEffect(card, Integer.valueOf(temp[7]));
+            card = new PoisonEffect(card, Integer.valueOf(temp[7]));
         }
         if(Integer.valueOf(temp[8]) != 0){
-            card = new WeakEffect(card, Integer.valueOf(temp[8]));
+            card = new FrozenEffect(card, Integer.valueOf(temp[8]));
         }
-        
-        
-       
+        card.setAttack(Integer.valueOf(temp[4]));
+        card.setDefense(Integer.valueOf(temp[5]));
+        card.setWeak(Integer.valueOf(temp[6]));
+        card.setPoision(Integer.valueOf(temp[7]));
+        card.setFrozen(Integer.valueOf(temp[8]));
         return card;
     
     }

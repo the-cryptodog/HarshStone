@@ -210,6 +210,7 @@ public class MainScene extends Scene {
                         }
                         else if (!(selectedcard.getCardMoveState() instanceof MoveToDiscard)) {
                             for (int i = 0; i < monsters.size(); i++) {
+                                System.out.println(selectedcard.toString());
                                 if (monsters.get(i).isCollision(selectedcard)) {
                                     System.out.print(selectedcard.toString());
                                     // 卡排放到怪物上的動畫
@@ -292,69 +293,49 @@ public class MainScene extends Scene {
 
         };
     }
-
-    public void drawCard(CardDeck drawcarddeck, CardDeck handdeck, CardDeck discarddeck) {
-        int temp = handdeck.getCards().size();
-        for (int i = 0; i < temp; i++) {
-            discarddeck.getCards().add(handdeck.getCards().get(i));
-        }
-        System.out.println(1);
-        System.out.println(drawcarddeck.toString());
-        System.out.println(handdeck.toString());
-        System.out.println(discarddeck.toString());
-        System.out.println();
-
-        for (int i = 0; i < temp; i++) {
-            handdeck.getCards().remove(0);
-        }
-        System.out.println(2);
-        System.out.println(drawcarddeck.toString());
-        System.out.println(handdeck.toString());
-        System.out.println(discarddeck.toString());
-        System.out.println();
+    //抽n張卡
+    public void drawCard(CardDeck drawcarddeck, CardDeck handdeck, CardDeck discarddeck, int number) {
+        int temp = discarddeck.getCards().size();
+        
+        
         if (drawcarddeck.getCards().size() < 5) {
-            temp = discarddeck.getCards().size();
             for (int i = 0; i < temp; i++) {
                 drawcarddeck.getCards().add(discarddeck.getCards().get(i));
             }
-            System.out.println(3);
-            System.out.println(drawcarddeck.toString());
-            System.out.println(handdeck.toString());
-            System.out.println(discarddeck.toString());
-            System.out.println();
+            
 //        //確認每張牌都被刪掉
-
             for (int i = 0; i < temp; i++) {
                 discarddeck.getCards().remove(0);
             }
 
         }
-        System.out.println(4);
-        System.out.println(drawcarddeck.toString());
-        System.out.println(handdeck.toString());
-        System.out.println(discarddeck.toString());
-        System.out.println();
+        
         drawcarddeck.shuffle();
-        for (int i = 0; i < cardlimit; i++) {
+        for (int i = 0; i < number; i++) {
             handdeck.getCards().add(drawcarddeck.getCards().get(i));
         }
         setDeckPoisition();
 
-        System.out.println(5);
-        System.out.println(drawcarddeck.toString());
-        System.out.println(handdeck.toString());
-        System.out.println(discarddeck.toString());
-        System.out.println();
-        for (int i = 0; i < cardlimit; i++) {
+        
+        for (int i = 0; i < number; i++) {
             drawcarddeck.getCards().remove(0);
         }
-        System.out.println(6);
-        System.out.println(drawcarddeck.toString());
-        System.out.println(handdeck.toString());
-        System.out.println(discarddeck.toString());
-        System.out.println();
+        
     }
+    //棄n張卡
+    public void discardCard(CardDeck drawcarddeck, CardDeck handdeck, CardDeck discarddeck, int number) {
+        for (int i = 0; i < number; i++) {
+            discarddeck.getCards().add(handdeck.getCards().get(i));
+        }
 
+        for (int i = 0; i < number; i++) {
+            handdeck.getCards().remove(0);
+        }
+    
+    }
+    
+    
+    
     public ArrayList<Card> getDeck() {
         return deck;
     }
@@ -376,9 +357,9 @@ public class MainScene extends Scene {
 //            temp.setOrginalX(300 + (Global.CARDWIDTH + 50) * i);
 //            temp.setOrginalY(Global.CARDDECKBOTTOM);
 //            temp.setCardMoveState(new Movable());
-            temp.setX(0);
+            temp.setX(300 + (Global.CARDWIDTH + 100) * i);
             temp.setY(Global.CARDDECKBOTTOM);
-            temp.setOrginalX(300 + (Global.CARDWIDTH + 50) * i);
+            temp.setOrginalX(300 + (Global.CARDWIDTH + 100) * i);
             temp.setOrginalY(Global.CARDDECKBOTTOM);
             temp.setHandDeckPoisition(i+1);
             temp.setCardMoveState(new MoveToHandDeck());
@@ -468,7 +449,8 @@ public class MainScene extends Scene {
                     temp.move();
                 }
                 next.setIsClicked(false);
-                drawCard(drawcarddeck, handdeck, discarddeck);
+                discardCard(drawcarddeck, handdeck, discarddeck,5);
+                drawCard(drawcarddeck, handdeck, discarddeck,5);
                 crystal.setNumberIcon(3);
             }
             
