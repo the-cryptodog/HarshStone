@@ -29,7 +29,10 @@ public class Frozen extends MonsterAbnormalState{
             if(continueturn > 1){
                 monster.monsterstate = new MonsterState.EndMove();
             }
-            
+            else{
+                monster.monsterstate = new MonsterState.MoveLeft();
+                monster.attack = (int)(Math.random() * 10 + 5);
+            }
             continueturn--;
             monster.setFrozen(continueturn);
         }

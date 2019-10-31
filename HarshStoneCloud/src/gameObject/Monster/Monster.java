@@ -302,6 +302,7 @@ public class Monster extends GameObject {
             monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth, attack, defense, monsterabnormalstates, poison);
             number1.setX(x + width);
             number2.setX(x + width + 40);
+            updateNumberIcon();
             if(number1.getNumber() != 0 || number2.getNumber() != 0){
                 number1.paint(g);
                 number2.paint(g);
