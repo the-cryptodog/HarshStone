@@ -91,7 +91,7 @@ public class Card extends GameObject{
     }
 
     public void setPoison(int poison){
-        this.poison =poison;
+        this.poison = poison;
     }
     
     public int getPoison(){

@@ -21,7 +21,6 @@ import values.ImagePath;
  */
 public class CardIconHelper {
 
-
     private NumberIcon digit;
     private NumberIcon digit2;
     private NumberIcon tenDigit;
@@ -35,6 +34,7 @@ public class CardIconHelper {
     private BufferedImage heal;
     private ArrayList<BufferedImage> twoEffect;
     private ArrayList<Integer> atr;
+    private int[] digitDeal;
     int digitX;
     int digitY;
 
@@ -46,28 +46,27 @@ public class CardIconHelper {
 
         twoEffect = new ArrayList<>();
         atr = new ArrayList<>();
-        
-        
+
         atr.add(card.getAttack());
         atr.add(card.getDefense());
         atr.add(card.getWeak());
-        atr.add(card.getFrozen());
         atr.add(card.getPoison());
+        atr.add(card.getFrozen());
         atr.add(card.getHeal());
 
-           sword = ImageResourceController.getInstance().tryGetImage("/resources/Icon/attack2.png");
+        sword = ImageResourceController.getInstance().tryGetImage("/resources/Icon/attack2.png");
         shield = ImageResourceController.getInstance().tryGetImage("/resources/Icon/Defense2.png");
         weak = ImageResourceController.getInstance().tryGetImage("/resources/Icon/Weak2.png");
         frozen = ImageResourceController.getInstance().tryGetImage("/resources/Icon/Frozen2.png");
         poison = ImageResourceController.getInstance().tryGetImage("/resources/Icon/Poison2.png");
         heal = ImageResourceController.getInstance().tryGetImage("/resources/Icon/Heal2.png");
 
-        for (int i = 0; i < atr.size(); i++) {      
+        for (int i = 0; i < atr.size(); i++) {
             if (atr.get(i) != 0) {
                 switch (i) {
                     case 0:
                         twoEffect.add(sword);
-                          System.out.println("新增成功");
+                        System.out.println("新增成功");
                         break;
                     case 1:
                         twoEffect.add(shield);
@@ -76,20 +75,28 @@ public class CardIconHelper {
                         twoEffect.add(weak);
                         break;
                     case 3:
-                        twoEffect.add(frozen);
+                        twoEffect.add(poison);
                         break;
                     case 4:
-                        twoEffect.add(poison);
+                        twoEffect.add(frozen);
                         break;
                     case 5:
                         twoEffect.add(heal);
                 }
             }
         }
-        
-          System.out.println("技能種類有"+ twoEffect.size()+"種");   
-          System.out.print(twoEffect.get(0));
-         
+
+        for (int i = 0;  i < atr.size(); i++) {
+            if (atr.get(i) == 0) {
+                atr.remove(i);
+                i--;
+            }
+        }
+     
+
+        System.out.println("技能種類有" + twoEffect.size() + "種");
+        System.out.print("技能1傷害" +atr.get(0));
+        System.out.print("技能2傷害" +atr.get(1));
 
         digitX = card.getX() + (Global.CARDWIDTH / 2);
         digitY = card.getY() + (Global.CARDHEIGHT / 2);
@@ -101,133 +108,135 @@ public class CardIconHelper {
         tenDigit = new NumberIcon(digitX - 40, digitY, 55, 65, "十位數", 1);
         tenDigit2 = new NumberIcon(digitX - 40, digitY, 55, 65, "十位數", 1);
 
-       
-
     }
 
     public void paint(Graphics g, int x, int y, int width, int height) {
-  
+
         if (twoEffect.size() < 2) { //單效果
-            g.drawImage(twoEffect.get(0), x+Global.DIGIT1X+20, y +(int)(125*Global.LARGEN),
-                    (int)(50*Global.LARGEN)-10,
-                    (int)(50*Global.LARGEN)-10, null);
+            g.drawImage(twoEffect.get(0), x + Global.DIGIT1X + 25, y + (int) (125 * Global.LARGEN),
+                    (int) (50 * Global.LARGEN) - 10,
+                    (int) (50 * Global.LARGEN) - 10, null);
             if (atr.get(0) < 10) {
-                digit.setX(x+ Global.DIGIT3X);
-                digit.setY(y + (Global.CARDHEIGHT / 2)+38);
+                digit.setX(x + Global.DIGIT3X);
+                digit.setY(y + (Global.CARDHEIGHT / 2) + 38);
                 digit.setNumber(atr.get(0));
                 digit.paint(g);
             } else {
-                digit.setX(x+ Global.DIGIT4X-20);
-                digit.setY(y + (Global.CARDHEIGHT / 2)+38);
+                digit.setX(x + Global.DIGIT4X - 20);
+                digit.setY(y + (Global.CARDHEIGHT / 2) + 38);
                 digit.setNumber(atr.get(0) % 10);
-                tenDigit3.setX(x+ Global.DIGIT3X-20);
-                tenDigit3.setY(y + (Global.CARDHEIGHT / 2)+38);
+                tenDigit3.setX(x + Global.DIGIT3X - 20);
+                tenDigit3.setY(y + (Global.CARDHEIGHT / 2) + 38);
 
-                tenDigit3.setNumber(atr.get(0) / 10);      
-                 digit.paint(g);
+                tenDigit3.setNumber(atr.get(0) / 10);
+                digit.paint(g);
                 tenDigit3.paint(g);
             }
         }
         if (twoEffect.size() >= 2) {//雙效果的情形 
-            g.drawImage(twoEffect.get(0), x + 23, y + 125, 26, 26, null);
-            g.drawImage(twoEffect.get(1), x + 80, y + 125, 26, 26, null);
-            
+            g.drawImage(twoEffect.get(0), x + 43, y + 150,
+                    (int) (26 * Global.LARGEN) - 5,
+                    (int) (26 * Global.LARGEN) - 5, null);
+            g.drawImage(twoEffect.get(1), x + 113, y + 150,
+                    (int) (26 * Global.LARGEN) - 5,
+                    (int) (26 * Global.LARGEN) - 5, null);
+
             if (atr.get(0) < 10 && atr.get(1) < 10) { //單單
-                digit.setNumber(atr.get(0));           //個位數
-                digit.setX(x + Global.DIGIT2X);
-                digit.setY(y + (Global.CARDHEIGHT / 2)+40);
-                digit.setWidth(33);
-                digit.setHeight(39);
+                digit.setNumber(atr.get(0));           
+                digit.setX(x + Global.DIGIT2X - 10);
+                digit.setY(y + (Global.CARDHEIGHT / 2) + 50);
+                digit.setWidth(44);
+                digit.setHeight(52);
                 digit.paint(g);
 //=--------------------------------------------------------------------
                 digit2.setNumber(atr.get(1));
-                digit2.setX(x + Global.DIGIT4X);
-                digit2.setY( y + (Global.CARDHEIGHT / 2)+40);
-                digit2.setWidth(33);
-                digit2.setHeight(39);
+                digit2.setX(x + Global.DIGIT4X - 30);
+                digit2.setY(y + (Global.CARDHEIGHT / 2) + 50);
+                digit2.setWidth(44);
+                digit2.setHeight(52);
                 digit2.paint(g);
 
             }
             if (atr.get(0) < 10 && atr.get(1) >= 10) { //單雙           
 
                 digit.setNumber(atr.get(0));           //個位數
-                digit.setX(x + Global.DIGIT1X);
-                digit.setY(y + (Global.CARDHEIGHT / 2));
-                digit.setWidth(33);
-                digit.setHeight(39);
+                digit.setX(x + Global.DIGIT2X - 10);
+                digit.setY(y + (Global.CARDHEIGHT / 2) + 50);
+                digit.setWidth(44);
+                digit.setHeight(52);
                 digit.paint(g);
 
                 //=--------------------------------------------------------------------    //單雙            
-                tenDigit2.setNumber(atr.get(0) / 10);
-                tenDigit2.setX(x + Global.DIGIT2X);
-                tenDigit2.setY(y + (Global.CARDHEIGHT / 2));
-                tenDigit2.setWidth(22);
-                tenDigit2.setHeight(26);
+                tenDigit2.setNumber(atr.get(1) / 10);
+                tenDigit2.setX(x + Global.DIGIT3X - 15);
+                tenDigit2.setY(y + (Global.CARDHEIGHT / 2) + 50);
+                tenDigit2.setWidth(44);
+                tenDigit2.setHeight(52);
                 tenDigit2.paint(g);
                 //=-------------------------------------------------------------------- //單雙         
 
-                digit2.setNumber(atr.get(0) % 10);
-                digit2.setX(x + Global.DIGIT3X);
-                digit2.setY(y + (Global.CARDHEIGHT / 2));
-                digit2.setWidth(22);
-                digit2.setHeight(26);
+                digit2.setNumber(atr.get(1) % 10);
+                digit2.setX(x + Global.DIGIT4X - 18);
+                digit2.setY(y + (Global.CARDHEIGHT / 2) + 50);
+                digit2.setWidth(44);
+                digit2.setHeight(52);
                 digit2.paint(g);
 
             }
 
-            if (atr.get(0) < 10 && atr.get(1) >= 10) { //雙單
+            if (atr.get(0) >= 10 && atr.get(1) < 10) { //雙單
 
                 tenDigit.setNumber(atr.get(0) / 10);
-                tenDigit.setX(x + Global.DIGIT1X);
-                tenDigit.setY(y + (Global.CARDHEIGHT / 2));
-                tenDigit.setWidth(22);
-                tenDigit.setHeight(26);
+                tenDigit.setX(x + Global.DIGIT1X + 10);
+                tenDigit.setY(y + (Global.CARDHEIGHT / 2) + 50);
+                tenDigit.setWidth(44);
+                tenDigit.setHeight(52);
                 tenDigit.paint(g);
                 //=--------------------------------------------------------------------    //雙單
                 digit.setNumber(atr.get(0) % 10);           //個位數
-                digit.setX(x + Global.DIGIT2X);
-                digit.setY(y + (Global.CARDHEIGHT / 2));
-                digit.setWidth(22);
-                digit.setHeight(26);
+                digit.setX(x + Global.DIGIT2X + 5);
+                digit.setY(y + (Global.CARDHEIGHT / 2) + 50);
+                digit.setWidth(44);
+                digit.setHeight(52);
                 digit.paint(g);
                 //=-------------------------------------------------------------------- //雙單
-                digit2.setNumber(atr.get(0) % 10);
-                digit2.setX(x + Global.DIGIT4X);
-                digit2.setY(y + (Global.CARDHEIGHT / 2));
-                digit2.setWidth(33);
-                digit2.setHeight(39);
+                digit2.setNumber(atr.get(1) % 10);
+                digit2.setX(x + Global.DIGIT4X - 30);
+                digit2.setY(y + (Global.CARDHEIGHT / 2) + 50);
+                digit2.setWidth(44);
+                digit2.setHeight(52);
                 digit2.paint(g);
 
             }
-            if (atr.get(0) < 10 && atr.get(1) >= 10) { //雙雙
+            if (atr.get(0) >= 10 && atr.get(1) >= 10) { //雙雙
 
                 tenDigit.setNumber(atr.get(0) / 10);
-                tenDigit.setX(x + Global.DIGIT1X);
-                tenDigit.setY(y + (Global.CARDHEIGHT / 2));
-                tenDigit.setWidth(22);
-                tenDigit.setHeight(26);
+                tenDigit.setX(x + Global.DIGIT1X + 10);
+                tenDigit.setY(y + (Global.CARDHEIGHT / 2) + 50);
+                tenDigit.setWidth(44);
+                tenDigit.setHeight(52);
                 tenDigit.paint(g);
                 //=--------------------------------------------------------------------    //雙雙
                 digit.setNumber(atr.get(0) % 10);           //個位數
-                digit.setX(x + Global.DIGIT2X);
-                digit.setY(y + (Global.CARDHEIGHT / 2));
-                digit.setWidth(22);
-                digit.setHeight(26);
+                digit.setX(x + Global.DIGIT2X + 5);
+                digit.setY(y + (Global.CARDHEIGHT / 2) + 50);
+                digit.setWidth(44);
+                digit.setHeight(52);
                 digit.paint(g);
                 //=--------------------------------------------------------------------    //雙雙
                 tenDigit2.setNumber(atr.get(1) / 10);
-                tenDigit2.setX(x + Global.DIGIT3X);
-                tenDigit2.setY(y + (Global.CARDHEIGHT / 2));
-                tenDigit2.setWidth(22);
-                tenDigit2.setHeight(26);
+                tenDigit2.setX(x + Global.DIGIT3X - 10);
+                tenDigit2.setY(y + (Global.CARDHEIGHT / 2) + 50);
+                tenDigit2.setWidth(44);
+                tenDigit2.setHeight(52);
                 tenDigit2.paint(g);
 
                 //=-------------------------------------------------------------------- //雙雙
                 digit2.setNumber(atr.get(1) % 10);
-                digit2.setX(x + Global.DIGIT4X);
-                digit2.setY(y + (Global.CARDHEIGHT / 2));
-                digit2.setWidth(22);
-                digit2.setHeight(26);
+                digit2.setX(x + Global.DIGIT4X - 13);
+                digit2.setY(y + (Global.CARDHEIGHT / 2) + 50);
+                digit2.setWidth(44);
+                digit2.setHeight(52);
                 digit2.paint(g);
 
             }
