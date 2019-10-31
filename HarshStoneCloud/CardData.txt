@@ -1,5 +1,5 @@
-0,ColdSnap,5,1,7,0,0,0,0,0
-1,PerfectedStrike,6,1,6,0,0,1,0,0
+0,ColdSnap,5,1,17,0,0,0,0,0
+1,PerfectedStrike,6,1,6,0,0,11,0,0
 2,Strike_B,6,2,5,0,0,2,0,0
 3,Strike_G,3,1,4,0,0,1,0,0
 4,Strike_G,4,1,0,0,2,0,2,0

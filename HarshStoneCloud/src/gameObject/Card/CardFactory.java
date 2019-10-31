@@ -87,7 +87,7 @@ public class CardFactory {
         
         String[] temp = carddata.get(serialnumber).split(",");
         
-        Card card = new Card(0,0,Global.CARDDECKWIDTH,Global.CARDHEIGHT,temp[1],Integer.valueOf(temp[3]));
+        Card card = new Card(0,0,Global.CARDWIDTH,Global.CARDHEIGHT,temp[1],Integer.valueOf(temp[3]));
         card.setSkill(Integer.valueOf(temp[2]));
         if(Integer.valueOf(temp[4]) != 0){
             card = new DamageEffect(card, Integer.valueOf(temp[4]));
@@ -116,9 +116,9 @@ public class CardFactory {
         
         card.setCardIconHelper(new CardIconHelper(card));
 
-        System.out.println("攻擊力!!!!為 = " +temp[4]);
+
         System.out.println("攻擊力為 = " + card.getAttack());
-        System.out.println("防禦力為 = " + card.getAttack());
+        System.out.println("防禦力為 = " + card.getDefense());
         System.out.println("虛弱為 = " + card.getWeak());
         System.out.println("中毒為 = " + card.getPoison());
         System.out.println("冰凍為 = " + card.getFrozen());

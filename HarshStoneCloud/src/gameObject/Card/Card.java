@@ -114,8 +114,8 @@ public class Card extends GameObject{
         return frozen;
     }
     
-    public void setHeal(int frozen){
-        this.frozen = frozen;
+    public void setHeal(int heal){
+        this.heal = heal;
     }
     
     public int getHeal(){
