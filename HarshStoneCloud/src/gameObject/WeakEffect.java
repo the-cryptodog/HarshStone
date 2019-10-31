@@ -30,6 +30,7 @@ public class WeakEffect extends CardEffect{
 
     @Override
     public void action(Hero hero, Monster monster) {
+        card.action(hero, monster);
         monster.setAttack((int)(monster.getAttack()*0.75));
         System.out.println( monster.name + "獲得虛弱" );
     }

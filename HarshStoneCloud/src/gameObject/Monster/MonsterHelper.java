@@ -67,7 +67,7 @@ public class MonsterHelper {
         }
         
          int temp = monsterabnormalstates.size();
-            for(int i = 0; i<temp; i++){
+            for(int i = 0; i < temp; i++){
                 monsterabnormalstates.get(i).setX(x - Global.HEALTHX+ i*64 );
                 monsterabnormalstates.get(i).setY(y + height+25);
                 monsterabnormalstates.get(i).paint(g);

@@ -30,7 +30,7 @@ public class FrozenEffect extends CardEffect{
 
     @Override
     public void action(Hero hero, Monster monster) {
-        monster.setAttack((int)(monster.getAttack()*0.75));
+        card.action(hero, monster);
         System.out.println( monster.name + "獲得冰凍" );
     }
 }

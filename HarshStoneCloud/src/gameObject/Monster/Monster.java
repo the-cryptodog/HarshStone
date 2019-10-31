@@ -46,7 +46,11 @@ public class Monster extends GameObject {
     private int skillIndex;
     private Skill selfSkill;
     private ArrayList<MonsterAbnormalState> monsterabnormalstates;
-
+    private int weak;
+    private int frozen;
+    private int poison;
+    
+    
     public Monster(int x, int y, int width, int height, String name, int health, int yPosition, int act, int skillIndex) {
         super(x, y, width, height, name);
         this.health = health;
@@ -56,6 +60,9 @@ public class Monster extends GameObject {
         originaly = y;
         defense = 0;
         attack = 0;
+        weak = 0;
+        frozen = 0;
+        poison = 0;
         moved = false;
         useskill = false;
         image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
@@ -63,6 +70,7 @@ public class Monster extends GameObject {
         this.yPosition = yPosition;
         this.skillIndex = skillIndex;
         monsterabnormalstates = new ArrayList<MonsterAbnormalState>();
+//        monsterabnormalstates.add(new Poison(0,0,30,30,"",poison));
         monsterhelper = new MonsterHelper(act);
         delaycounter = new DelayCounter(10, new DelayCounter.Action() {
 
@@ -142,6 +150,29 @@ public class Monster extends GameObject {
         this.attack = attack;
     }
 
+    public void setPoision(int poision){
+        this.poison =poison;
+    }
+    
+    public int getPoison(){
+        return poison;
+    }
+   
+    public void setWeak(int weak){
+        this.weak = weak;
+    }
+    
+    public int getWeak(){
+        return weak;
+    }
+    public void setFrozen(int frozen){
+        this.frozen = frozen;
+    }
+    
+    public int getFrozen(){
+        return frozen;
+    }
+    
     public void setMonsterState(MonsterState monsterstate) {
         this.monsterstate = monsterstate;
     }
@@ -154,17 +185,21 @@ public class Monster extends GameObject {
     public ArrayList<MonsterAbnormalState> getMonsterAbnormalStates() {
         return monsterabnormalstates;
     }
-    
+      
     public void changeDirection(int direction) {
         this.direction = direction;
     }
 
     public void update() {
         if (delaycounter.delayupdate()) {
-
             act = ++act % 4;
-
         }
+        
+//        if(poison != 0){
+//            monsterabnormalstates.add(new Poison(0,0,30,30,"",poison));
+//        }
+        
+
     }
 
     
@@ -254,17 +289,16 @@ public class Monster extends GameObject {
         if (act == 5) {
             g.drawImage(image, x, y, width, height, null);
         } else {
-            monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth, attack, defense,monsterabnormalstates);
+            monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth, attack, defense, monsterabnormalstates);
             number1.setX(x + width);
             number2.setX(x + width + 40);
             number1.paint(g);
             number2.paint(g);
 
-           
             if (monsterstate instanceof MonsterState.Attack) {
                 selfSkill.paint(g);//畫出攻擊技能
             }
-
+            System.out.println(name + " "+ poison);
         }
     update();
     }

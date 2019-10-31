@@ -28,6 +28,11 @@ public class MonsterAbnormalState extends GameObject{
     
     }
     
+    public void setContinueTurn(int continueturn){
+        this.continueturn = continueturn;
+    
+    }
+    
     
     public void action(Monster monster, Hero hero){
     

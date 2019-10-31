@@ -28,7 +28,9 @@ public class Poison extends MonsterAbnormalState{
         }
     
         public void paint(Graphics g){
-
+            numbericon.setX(x+width);
+            numbericon.setY(y);
+            numbericon.setNumber(this.continueturn);
             g.drawImage(image, x, y, width, height, null);
             numbericon.paint(g);
         }
