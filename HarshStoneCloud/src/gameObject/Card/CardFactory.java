@@ -89,7 +89,6 @@ public class CardFactory {
         Card card = new Card(0,0,Global.CARDDECKWIDTH,Global.CARDHEIGHT,temp[1],Integer.valueOf(temp[3]));
         card.setSkill(Integer.valueOf(temp[2]));
         if(Integer.valueOf(temp[4]) != 0){
-      
             card = new DamageEffect(card, Integer.valueOf(temp[4]));
         }
         if(Integer.valueOf(temp[5]) != 0){

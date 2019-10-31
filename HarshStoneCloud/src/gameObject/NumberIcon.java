@@ -42,6 +42,12 @@ public class NumberIcon extends GameObject{
         return number;
     }
     
+    public void setWidth(int width){
+        this.width= width;
+    }
+    public void setHeight(int height){
+        this.height=height;
+    }
     public void setNumber(int number){
          this.number = number;
     }

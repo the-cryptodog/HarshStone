@@ -293,6 +293,7 @@ public class CommandSolver extends Thread {
             if(currentState == MouseState.RELEASED && state == MouseState.MOVED){
                 return;
             }
+    
             currentState = state;
             
         }

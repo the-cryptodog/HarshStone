@@ -212,6 +212,7 @@ public class MainScene extends Scene {
                             for (int i = 0; i < monsters.size(); i++) {
                                 System.out.println(selectedcard.toString());
                                 if (monsters.get(i).isCollision(selectedcard)) {
+                                    System.out.print(selectedcard.toString());
                                     // 卡排放到怪物上的動畫
                                     Monster temp1 = monsters.get(i);
                                     if (skillboard.skillCheck(selectedcard.getSkilltype())) {
@@ -270,6 +271,7 @@ public class MainScene extends Scene {
                             if (handdeck.getCards().get(i).isCollision(e.getX(), e.getY())) {
                                 Card temp = handdeck.getCards().get(i);
                                 selectedcard = temp;
+            
                                 xdelta = temp.getDeltaX(e.getX());
                                 ydelta = temp.getDeltaY(e.getY());
                                 temp.setClicked(true);
