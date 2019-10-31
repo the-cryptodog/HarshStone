@@ -270,6 +270,7 @@ public class MainScene extends Scene {
                             if (handdeck.getCards().get(i).isCollision(e.getX(), e.getY())) {
                                 Card temp = handdeck.getCards().get(i);
                                 selectedcard = temp;
+            
                                 xdelta = temp.getDeltaX(e.getX());
                                 ydelta = temp.getDeltaY(e.getY());
                                 temp.setClicked(true);
