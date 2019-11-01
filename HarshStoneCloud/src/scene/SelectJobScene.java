@@ -239,12 +239,9 @@ public class SelectJobScene extends Scene {
             selectjobscenestate.action(this);
 
         }
-<<<<<<< HEAD
-         if (storyEnd) { //npc往回走出螢幕
-=======
-         if (storyEnd ) { //npc往回走出螢幕
 
->>>>>>> 904aa96fe469aac6cf7959c87a01e0cfbdb54aca
+
+         if (storyEnd ) { //npc往回走出螢幕
              if(heroSelected.getWidth()<50){
                Global.hero = heroSelected;
                Global.hero.sethealth(100);

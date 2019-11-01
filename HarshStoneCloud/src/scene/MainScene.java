@@ -62,6 +62,7 @@ import values.ImagePath;
 public class MainScene extends Scene {
 
     private ArrayList<Card> deck;
+    private ArrayList<Monster> lastturnmonsters;
     private ArrayList<Monster> monsters;
     private SkillList skillboard; // 技能板
     private SkillFactory skillFactory;
@@ -76,6 +77,7 @@ public class MainScene extends Scene {
     private Monster orc;
     private Monster cultist;
     private Monster monster1;
+    private Monster monster4;
     private Timer timer;
     private DelayCounter delaycounter;
     private int selectedmonster;
@@ -153,7 +155,8 @@ public class MainScene extends Scene {
                 "獸人2", 10, 2, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第二隻怪物\
         monster1 = new Monster(Global.MONSTERX,  Global.MONSTERY3, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                 "獸人3", 17, 3, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第三隻怪物\
-
+        
+        lastturnmonsters = new ArrayList();
         monsters = new ArrayList();
         monsters.add(orc);
         monsters.add(cultist);
@@ -272,6 +275,23 @@ public class MainScene extends Scene {
 //                        gameOver = true;
                         scenecontroller.changeScene(new EndScene(scenecontroller));
                     }
+                    
+                    if (backtothefuture.isCollision(e.getX(), e.getY())) {
+                        for(int i = 0;i < monsters.size();i++){
+                            Monster clone = monsters.get(i).clone();
+                            clone.setX(monsters.get(i).getX()-250);
+                            monsters.add(clone);
+                        }
+                        
+                        
+                        
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
 //                    if (exit2.isCollision(e.getX(), e.getY())) {
 //                        scenecontroller.changeScene(new MenuScene(scenecontroller));
 //                    }
