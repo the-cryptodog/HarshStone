@@ -100,13 +100,11 @@ public class MainScene extends Scene {
     private BufferedImage column2;
     private BufferedImage column3;
     private Crystal crystal;
-    private Poison ttt;
 
     public MainScene(SceneController scenecontroller, MapScene mapScene) {
         super(scenecontroller);
 //        System.out.println(PathBuilder.getNumber(ImagePath.NUMBER2));
 //        number = ImageResourceController.getInstance().tryGetImage("/resources/Number/Number2.png");
-        ttt = new Poison(40, 40, 48, 48, "", 5);
         crystal = new Crystal(240, 600, 80, 80, "tt");
         gameWin = false;
         gameOver = false;
@@ -121,6 +119,14 @@ public class MainScene extends Scene {
         skillFactory = new SkillFactory();
         this.mapScene = mapScene;
         columns = new BufferedImage[3];
+        //測試用暫時留著
+        hero = new Hero(-70, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
+        hero = mapScene.getHero();
+        hero.setX(-70);
+        hero.setY(Global.HEROY);
+        hero.setWidth(Global.HEROWIDTH);
+        hero.setHeight(Global.HEROXHEIGHT);
+        drawcarddeck = hero.getHeroDeck();
 //        drawcarddeck = new CardDeck(1400,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"抽牌推");
         discarddeck = new CardDeck(1300, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "棄牌推");
         handdeck = new CardDeck(40, 490, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "手牌");
@@ -133,8 +139,7 @@ public class MainScene extends Scene {
         back = new Button(1600, 730, 108, 40, "BACK");
         next = new Button(1600, 800, 184, 42, "ROUNDSTART");
 
-        hero = new Hero(-70, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
-        drawcarddeck = hero.getHeroDeck();
+        
 
         orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                 "獸人1", 14, 1, (int) (Math.random() * 8), (int) (Math.random() * 8)); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
@@ -398,7 +403,19 @@ public class MainScene extends Scene {
         }
 
         hero.move();
+        //把牌組整理好帶回map
         if (hero.getX() > Global.JWIDTH) {
+            int temp = handdeck.getCards().size();
+            discardCard(drawcarddeck, handdeck, discarddeck, temp);
+            temp = discarddeck.getCards().size();
+            for(int i = 0; i < temp; i++){
+                drawcarddeck.getCards().add(discarddeck.getCards().get(i));
+            }
+            for(int i = 0; i < temp; i++){
+                discarddeck.getCards().remove(0);
+            }
+            hero.setHeroDeck(drawcarddeck);
+            
             Global.CURRENTSTAGE++;
             scenecontroller.changeScene(mapScene);
         }
@@ -516,7 +533,6 @@ public class MainScene extends Scene {
 //            g.drawImage(winImage, 0, 0, 1920, 1080, null);
 //             exit2.paint(g);
 //        }
-        ttt.paint(g);
         
         for (int i = 0; i < monsters.size(); i++) {
             if (selectedcard != null) {

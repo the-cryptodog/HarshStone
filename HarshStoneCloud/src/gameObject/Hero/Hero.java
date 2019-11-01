@@ -102,6 +102,11 @@ public class Hero extends GameObject {
         return herodeck;
     }
 
+    public void setHeroDeck(CardDeck herodeck) {
+        this.herodeck = herodeck;
+    }
+    
+    
     public int gethealth() {
         return health;
     }
