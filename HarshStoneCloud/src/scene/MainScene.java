@@ -75,7 +75,6 @@ public class MainScene extends Scene {
     private Card discardcard;
     private Button next;
     private Monster orc;
-    private Hero hero;
     private Monster cultist;
     private Monster monster1;
     private Timer timer;
@@ -100,6 +99,9 @@ public class MainScene extends Scene {
     private BufferedImage column2;
     private BufferedImage column3;
     private Crystal crystal;
+    private Poison ttt;
+    private Hero hero;
+
 
     public MainScene(SceneController scenecontroller, MapScene mapScene) {
         super(scenecontroller);
@@ -135,11 +137,18 @@ public class MainScene extends Scene {
         discardcard = null;
         cardfactory = new CardFactory();
 
-        exit = new Button(1600, 660, 108, 40, "EXIT");
-        back = new Button(1600, 730, 108, 40, "BACK");
-        next = new Button(1600, 800, 184, 42, "ROUNDSTART");
-
+        exit = new Button(1700, 460, 108, 40, "EXIT");
+        back = new Button(1700, 520, 108, 40, "BACK");
+        next = new Button(1700, 580, 184, 42, "ROUNDSTART");
         
+        Global.hero.setX(-70); 
+        Global.hero.setY(Global.HEROY);
+        Global.hero.setWidth(Global.HEROWIDTH);
+        Global.hero.setHeight(Global.HEROXHEIGHT);
+      
+        hero=Global.hero;
+        drawcarddeck = hero.getHeroDeck();
+
 
         orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                 "獸人1", 14, 1, (int) (Math.random() * 8), (int) (Math.random() * 8)); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選

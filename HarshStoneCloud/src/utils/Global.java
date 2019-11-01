@@ -6,6 +6,7 @@
 package utils;
 
 import gameObject.Card.CardDeck;
+import gameObject.Hero.Hero;
 
 /**
  *
@@ -62,7 +63,8 @@ public class Global {
     public static final int JOBY = 370;
     public static final int NPCX = 2080;
 
-
+    //主角
+    public static  Hero hero;
 
     //動畫位置參數
     public static final int SKILLWIDTH = 192;

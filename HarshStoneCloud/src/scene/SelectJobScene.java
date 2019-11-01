@@ -240,11 +240,11 @@ public class SelectJobScene extends Scene {
 
         }
          if (storyEnd ) { //npc往回走出螢幕
-            if(heroSelected.getWidth()<50){
-                MapScene temp = new MapScene(scenecontroller);
-                heroSelected.sethealth(100);
-                temp.setHero(heroSelected);
-                scenecontroller.changeScene(temp);
+
+             if(heroSelected.getWidth()<50){
+               Global.hero = heroSelected;
+               Global.hero.sethealth(100);
+              scenecontroller.changeScene(new MapScene(scenecontroller));           
              }
         }
     }
