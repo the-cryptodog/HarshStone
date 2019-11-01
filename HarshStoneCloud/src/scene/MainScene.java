@@ -75,7 +75,6 @@ public class MainScene extends Scene {
     private Card discardcard;
     private Button next;
     private Monster orc;
-    private Hero hero;
     private Monster cultist;
     private Monster monster1;
     private Timer timer;
@@ -101,6 +100,7 @@ public class MainScene extends Scene {
     private BufferedImage column3;
     private Crystal crystal;
     private Poison ttt;
+    private Hero hero;
 
     public MainScene(SceneController scenecontroller, MapScene mapScene) {
         super(scenecontroller);
@@ -132,8 +132,15 @@ public class MainScene extends Scene {
         exit = new Button(1700, 460, 108, 40, "EXIT");
         back = new Button(1700, 520, 108, 40, "BACK");
         next = new Button(1700, 580, 184, 42, "ROUNDSTART");
+        
+        Global.hero.setX(-70); 
+        Global.hero.setY(Global.HEROY);
+        Global.hero.setWidth(Global.HEROWIDTH);
+        Global.hero.setHeight(Global.HEROXHEIGHT);
+      
+        hero=Global.hero;
+        
 
-        hero = new Hero(-70, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         drawcarddeck = hero.getHeroDeck();
 
         orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
