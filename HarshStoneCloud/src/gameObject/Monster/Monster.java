@@ -134,6 +134,14 @@ public class Monster extends GameObject implements Cloneable{
         return selfSkill;
     }
 
+    public int getOriginalHealth() {
+        return originalhealth;
+    }
+
+    public void setOriginalHealth(int originalhealth) {
+        this.originalhealth = originalhealth;
+    }
+        
     public int gethealth() {
         return health;
     }
@@ -217,10 +225,11 @@ public class Monster extends GameObject implements Cloneable{
     
     public Monster clone() {
     
-    Monster clone = new Monster(x, y, width, height, name, health, yPosition, actnumber, skillIndex);
+        Monster clone = new Monster(x, y, width, height, name, health, yPosition, actnumber, skillIndex);
         clone.attack = this.attack;
         clone.defense = this.defense;
         clone.hero = hero;
+        clone.originalhealth = this.originalhealth;
         if (defense > 0){
             clone.monsterstate = new MonsterState.EndMove();
         }
