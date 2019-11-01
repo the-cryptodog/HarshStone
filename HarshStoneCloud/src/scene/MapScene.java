@@ -138,9 +138,9 @@ public class MapScene extends Scene {
         this.hero = hero;
     }
     
-    public Hero getHero(){
-        return hero;
-    }
+//    public Hero getHero(){
+//        return hero;
+//    }
     
     
     @Override

@@ -72,8 +72,7 @@ public class MainScene extends Scene {
     private int ydelta;
     private boolean cardclicked;
     private Card selectedcard;
-    private Card discardcard;
-    private Button next;
+    private Card discardcard; 
     private Monster orc;
     private Monster cultist;
     private Monster monster1;
@@ -85,11 +84,13 @@ public class MainScene extends Scene {
     private CardDeck discarddeck;
     private CardDeck handdeck;
     private Button back;
+    private Button next;
+    private Button exit;
+    private Button backtothefuture;
     private MapScene mapScene;
     private CardFactory cardfactory;
     private int cardlimit;
-    private Font font1;
-    private Button exit;
+    private Font font1; 
     private boolean allmonsterend;
     private boolean gameOver;
     private boolean gameWin;
@@ -123,11 +124,6 @@ public class MainScene extends Scene {
         columns = new BufferedImage[3];
         //測試用暫時留著
         hero = new Hero(-70, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
-        hero = mapScene.getHero();
-        hero.setX(-70);
-        hero.setY(Global.HEROY);
-        hero.setWidth(Global.HEROWIDTH);
-        hero.setHeight(Global.HEROXHEIGHT);
         drawcarddeck = hero.getHeroDeck();
 //        drawcarddeck = new CardDeck(1400,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"抽牌推");
         discarddeck = new CardDeck(1300, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "棄牌推");
@@ -140,13 +136,14 @@ public class MainScene extends Scene {
         exit = new Button(1700, 460, 108, 40, "EXIT");
         back = new Button(1700, 520, 108, 40, "BACK");
         next = new Button(1700, 580, 184, 42, "ROUNDSTART");
+        backtothefuture = new Button(1700, 650, 184, 42, "ROUNDSTART");
         
         Global.hero.setX(-70); 
         Global.hero.setY(Global.HEROY);
         Global.hero.setWidth(Global.HEROWIDTH);
         Global.hero.setHeight(Global.HEROXHEIGHT);
       
-        hero=Global.hero;
+        hero = Global.hero;
         drawcarddeck = hero.getHeroDeck();
 
 
@@ -385,7 +382,6 @@ public class MainScene extends Scene {
     @Override
     public void sceneBegin() {
         hero.setState(new MoveHeroRight());
-
         for (Monster monster : monsters) {
             if (monster.gethealth() <= 0) {
                 monsters.remove(monster);
@@ -501,6 +497,29 @@ public class MainScene extends Scene {
 //            e.printStackTrace();
 //            
 //        }
+//        if (hero.getX() > Global.JWIDTH) {
+//            int temp = handdeck.getCards().size();
+//            discardCard(drawcarddeck, handdeck, discarddeck, temp);
+//            temp = discarddeck.getCards().size();
+//            for(int i = 0; i < temp; i++){
+//                drawcarddeck.getCards().add(discarddeck.getCards().get(i));
+//            }
+//            for(int i = 0; i < temp; i++){
+//                discarddeck.getCards().remove(0);
+//            }
+//            hero.setHeroDeck(drawcarddeck);
+//            
+//            Global.CURRENTSTAGE++;
+//            scenecontroller.changeScene(mapScene);
+//        }
+        
+        
+        
+        
+        
+        
+        
+        
     }
 
     @Override
@@ -533,6 +552,7 @@ public class MainScene extends Scene {
 
         back.paint(g);
         exit.paint(g);
+        backtothefuture.paint(g);
         drawcarddeck.paint(g);
         discarddeck.paint(g);
 
