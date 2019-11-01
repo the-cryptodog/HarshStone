@@ -48,6 +48,22 @@ public class CardFactory {
     }
     
     
+    public ArrayList<String> readRareCardData(){
+        ArrayList<String> str = new ArrayList<String>();
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("RareCardData.txt"));
+            
+            while(br.ready()){
+                str.add(br.readLine());
+            }
+            br.close();
+        } catch (FileNotFoundException ex) {
+            
+        } catch (IOException ex) {
+//            Logger.getLogger(JavaApplication40Filemanage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return str;
+    }
     public ArrayList<String> readCardData(){
         ArrayList<String> str = new ArrayList<String>();
         try {

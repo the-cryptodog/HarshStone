@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import utils.Global;
 import values.ImagePath;
 
+
 /**
  *
  * @author User
@@ -40,6 +41,7 @@ public class MapScene extends Scene {
     private int currentRedCross;
     private int coverx;
     private Hero hero;
+    private Scene incidence;
 //    private int y;
 //    private int speed;
 

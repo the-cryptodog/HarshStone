@@ -44,6 +44,9 @@ public class PathBuilder {
     public static String getNumber(String path){
        return ImagePath.ROOT + ImagePath.NUMBER_ROOT + path;
     }
+    public static String getIncidence(String path){
+       return ImagePath.ROOT + ImagePath.INCIDENCE_ROOT + path;
+    }
     
     
 }

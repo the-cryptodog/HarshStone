@@ -1,5 +1,5 @@
-
 package scene;
+
 import Controller.SceneController;
 import gameObject.Button.Button;
 import gameObject.Hero.Hero;
@@ -58,33 +58,28 @@ public class SelectJobScene extends Scene {
     private boolean storyEnd;
     private SelectJobSceneState selectjobscenestate;
     private Hero[] heros;
-    
 
     public SelectJobScene(SceneController scenecontroller) {
         super(scenecontroller);
 
         storyEnd = false;
 
-
         selectjobscenestate = new normal();
-        storyEnd= false;
+        storyEnd = false;
 
         jobSelected = false;
         back = new Button(1800, 1000, 85, 50, "BACK");
 
 //        actor = new Actor(450, 0, 128, 128, 0, "巫師");
 //        actor2 = new Actor(1150, 0, 128, 128, 0, "戰士");
-
         job1 = new Hero(Global.JOB1X, Global.JOBY, 128, 128, "Actor1", 0, 0);
-        job2 = new Hero(Global.JOB2X,  Global.JOBY, 128, 128, "Actor1", 0, 7);
-        npc = new Hero(Global.NPCX,  Global.JOBY, 128, 128, "Actor1", 0, 4);
-        
+        job2 = new Hero(Global.JOB2X, Global.JOBY, 128, 128, "Actor1", 0, 7);
+        npc = new Hero(Global.NPCX, Global.JOBY, 128, 128, "Actor1", 0, 4);
+
         heros = new Hero[3];
         heros[0] = job1;
         heros[1] = job2;
         heros[2] = npc;
-        
-
 
         job1.changeDirection(Global.DOWN);
         job2.changeDirection(Global.DOWN);
@@ -131,29 +126,28 @@ public class SelectJobScene extends Scene {
 
                 if (state == CommandSolver.MouseState.CLICKED) {
                     System.out.println("CLick");
-                    if (job1screen.isCollision(e.getX(), e.getY())& !storyBegin) {
+                    if (job1screen.isCollision(e.getX(), e.getY()) & !storyBegin) {
 
                         job1screen.setIsClicked(true);
                         heroSelected = job1;
-                        heros[1]=null;
+                        heros[1] = null;
                         jobSelected = true;
                         storyBegin = true;
                         selectjobscenestate = new selectJob();
-
 
 //                        scenecontroller.changeScene(new MapScene(scenecontroller));
 //                      startPressed = true;
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
                     }
-                    if (job2screen.isCollision(e.getX(), e.getY())& !storyBegin) {
+                    if (job2screen.isCollision(e.getX(), e.getY()) & !storyBegin) {
 
                         job2screen.setIsClicked(true);
                         heroSelected = job2;
                         selectjobscenestate = new selectJob();
-                        heros[0]=null;
-                        storyBegin=true;
+                        heros[0] = null;
+                        storyBegin = true;
                         jobSelected = true;
-                        
+
 //                      startPressed = true;
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
                     }
@@ -162,29 +156,20 @@ public class SelectJobScene extends Scene {
 //                      startPressed = true;
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
                     }
-                    if (jobSelected & next.isCollision(e.getX(), e.getY())) {            
+                    if (jobSelected & next.isCollision(e.getX(), e.getY())) {
                         selectjobscenestate = new talkEnd();
 //                      startPressed = true;
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
                     }
-                    if (selectjobscenestate instanceof beginTalk1){
+                    if (selectjobscenestate instanceof beginTalk1) {
                         selectjobscenestate = new beginTalk2();
-                    
                     }
-                    
-                    
-                    if (selectjobscenestate instanceof beginTalk2){
+
+                    if (selectjobscenestate instanceof beginTalk2) {
                         selectjobscenestate = new beginTalk3();
-                    
+
                     }
-                    
-                    
-                    
-                    
-                    
-                    
-                    
-                    
+
                 }
 
                 if (state == CommandSolver.MouseState.PRESSED) {
@@ -203,25 +188,23 @@ public class SelectJobScene extends Scene {
             }
         };
     }
-    public Hero getHeroSelected(){
+
+    public Hero getHeroSelected() {
         return heroSelected;
     }
-    public void setStoryEnd(boolean storyEnd){
-       this.storyEnd = storyEnd;
+
+    public void setStoryEnd(boolean storyEnd) {
+        this.storyEnd = storyEnd;
     }
-    
-    public Hero[] getHeros(){
+
+    public Hero[] getHeros() {
         return heros;
     }
-    
-    
-    
-    public void setSelectJobSceneState(SelectJobSceneState selectjobscenestate){
+
+    public void setSelectJobSceneState(SelectJobSceneState selectjobscenestate) {
         this.selectjobscenestate = selectjobscenestate;
     }
-    
-    
-    
+
     @Override
     public void sceneBegin() {
     }
@@ -235,21 +218,14 @@ public class SelectJobScene extends Scene {
 //            }
 //        }
         if (delaycounter.delayupdate()) {
-
             selectjobscenestate.action(this);
-
         }
-<<<<<<< HEAD
-         if (storyEnd) { //npc往回走出螢幕
-=======
-         if (storyEnd ) { //npc往回走出螢幕
-
->>>>>>> 904aa96fe469aac6cf7959c87a01e0cfbdb54aca
-             if(heroSelected.getWidth()<50){
-               Global.hero = heroSelected;
-               Global.hero.sethealth(100);
-              scenecontroller.changeScene(new MapScene(scenecontroller));           
-             }
+        if (storyEnd) { //npc往回走出螢幕
+            if (heroSelected.getWidth() < 50) {
+                Global.hero = heroSelected;
+                scenecontroller.changeScene(new MapScene(scenecontroller));
+                Global.hero.sethealth(100);
+            }
         }
     }
 
@@ -293,52 +269,35 @@ public class SelectJobScene extends Scene {
         if (!jobSelected) {
             job1screen.paint(g);
             job2screen.paint(g);
-        }
-        else
-        {
+        } else {
             if (job1screen.getIsClicked()) {
-                g.drawImage(job1Screen1, 350, upY , 391, 322, null);
+                g.drawImage(job1Screen1, 350, upY, 391, 322, null);
                 g.drawImage(job1Screen2, 350, downY, 390, 184, null);
-                
+
             }
             if (job2screen.getIsClicked()) {
                 g.drawImage(job2Screen1, 1150, upY, 391, 322, null);
-                g.drawImage(job2Screen2, 1150, downY, 390, 184, null);                
+                g.drawImage(job2Screen2, 1150, downY, 390, 184, null);
             }
-//        }else {
-//            job1screen.paint(g);
-//            job2screen.paint(g);
+
         }
         back.paint(g);
-//        
-//        if(!job1screen.getIsClicked()){
-//            job2.paint(g);
-//        }
-//        if(!job2screen.getIsClicked()){
-//            job1.paint(g);
-//        }
-//        npc.paint(g);
-        
-        for(Hero temp : heros){
-            if(temp != null){
+
+        for (Hero temp : heros) {
+            if (temp != null) {
                 temp.paint(g);
             }
         }
-        
-        
-        if(selectjobscenestate instanceof beginTalk1){
-            g.drawImage(talkchart1, 1000, 190,400,400, null);
+
+        if (selectjobscenestate instanceof beginTalk1) {
+            g.drawImage(talkchart1, 1000, 190, 400, 400, null);
             next.paint(g);
         }
-        
-         if(selectjobscenestate instanceof beginTalk2){
-            g.drawImage(talkchart2, 720, 190, 400,400, null);
+
+        if (selectjobscenestate instanceof beginTalk2) {
+            g.drawImage(talkchart2, 720, 190, 400, 400, null);
             next.paint(g);
-        
-        
-        
-        
-        
+
         }
     }
 }

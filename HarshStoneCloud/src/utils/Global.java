@@ -92,7 +92,6 @@ public class Global {
     //Card largenIndex
     public static final float LARGEN = 1.3f;
     
- 
     //Card 
     public static final int CARDWIDTH = (int)(141*LARGEN);
     public static final int CARDHEIGHT =(int)(195*LARGEN);
@@ -102,7 +101,12 @@ public class Global {
     public static final int CARDDECKHEIGHT = (int) (195 * 1.3);
     public static final int CARDDECKBOTTOM = 700;
     
-
+    //RareCard
+    public static final int AWARDCARDX1 =300;
+    public static final int AWARDCARDX2 = 750;
+    public static final int AWARDCARDX3 = 1200;
+    public static final int AWARDCARDY = (int) (141 * 1.3);
+  
 
     //HeroDeck
     public static CardDeck HERODECK;

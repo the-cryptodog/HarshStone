@@ -30,7 +30,7 @@ public class EndScene extends Scene{
           super(scenecontroller);
           img = irc.tryGetImage("/resources/Background/ENDSCENE.png");
           backToMenu = new Button(900, 860, 108, 40, "BACK");
-           mousecommandlistener = new CommandSolver.MouseCommandListener(){
+          mousecommandlistener = new CommandSolver.MouseCommandListener(){
 
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {

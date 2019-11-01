@@ -20,7 +20,6 @@ public class Button extends GameObject {
     public interface ButtonListener {
 
         public void onClick(int x, int y);
-
         public void hover(int x, int y);
 
     }

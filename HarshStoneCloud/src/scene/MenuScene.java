@@ -6,6 +6,7 @@
 package scene;
 
 import Controller.SceneController;
+import PopOutWindow.Incidence;
 import gameObject.Button.Button;
 import io.CommandSolver;
 import java.awt.Graphics;
@@ -13,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import utils.Global;
+
 
 /**
  *
@@ -24,6 +26,7 @@ public class MenuScene extends Scene {
     private ArrayList<Button> buttons;
     private SelectJobSceneState menuscenestate;
     private boolean startPressed;
+    private Incidence incidence;
 
     //開始遊戲(進入選角畫面)
     //結束遊戲(關閉視窗)
@@ -37,6 +40,9 @@ public class MenuScene extends Scene {
         buttons.add(new Button(50, 110, 220, 50, "CONTINUE"));
         buttons.add(new Button(50, 170, 85, 50, "EXIT"));
         img = irc.tryGetImage("/resources/Background/MENU.png");
+
+        
+        
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
@@ -52,10 +58,15 @@ public class MenuScene extends Scene {
                         scenecontroller.changeScene(new SelectJobScene(scenecontroller));
                     }
                     if (buttons.get(1).isCollision(e.getX(), e.getY())) {
-                        scenecontroller.changeScene(new MainScene(scenecontroller,new MapScene(scenecontroller)));
+                               incidence = new Incidence(384, 216, 1152, 648, "AWARD");
+                               incidence.setCommandListener(mousecommandlistener);
+                            if (incidence.getButton().isCollision(e.getX(), e.getY())) {
+                               incidence = null;
+                    }
+                    }
 //上面兩行為測試用，按CONTINUE可以直接進入戰鬥
 
-                    }
+                    
                     
                 }
 
@@ -108,12 +119,8 @@ public class MenuScene extends Scene {
         for (int i = 0; i < buttons.size(); i++) {
             buttons.get(i).paint(g);
         }
-
-//        if (!startPressed) {
-//            start.paintUnpressed(g);
-//        } else {
-//            start.paintPressed(g);
-//        }
+        if(incidence!=null){
+            incidence.paint(g);
+        }
     }
-
 }

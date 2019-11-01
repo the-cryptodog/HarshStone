@@ -54,7 +54,6 @@ public interface HeroState {
 
         @Override
         public void action(Hero hero) {
-
         }
     }
 
@@ -88,6 +87,5 @@ public interface HeroState {
             }
         }
     }
-    
-    
+
 }
