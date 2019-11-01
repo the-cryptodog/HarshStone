@@ -62,6 +62,7 @@ import values.ImagePath;
 public class MainScene extends Scene {
 
     private ArrayList<Card> deck;
+    private ArrayList<Monster> turnstartmonsters;
     private ArrayList<Monster> monsters;
     private SkillList skillboard; // 技能板
     private SkillFactory skillFactory;
@@ -76,6 +77,7 @@ public class MainScene extends Scene {
     private Monster orc;
     private Monster cultist;
     private Monster monster1;
+    private Monster monster4;
     private Timer timer;
     private DelayCounter delaycounter;
     private int selectedmonster;
@@ -94,6 +96,7 @@ public class MainScene extends Scene {
     private boolean allmonsterend;
     private boolean gameOver;
     private boolean gameWin;
+    private boolean useheroskill;
     private BufferedImage endImage;
     private BufferedImage columns[];
     private BufferedImage column1;
@@ -118,6 +121,7 @@ public class MainScene extends Scene {
         heroturn = true;
         cardlimit = 5;
         allmonsterend = false;
+        useheroskill = false;
         skillboard = new SkillList();
         skillFactory = new SkillFactory();
         this.mapScene = mapScene;
@@ -153,7 +157,8 @@ public class MainScene extends Scene {
                 "獸人2", 10, 2, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第二隻怪物\
         monster1 = new Monster(Global.MONSTERX,  Global.MONSTERY3, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                 "獸人3", 17, 3, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第三隻怪物\
-
+        
+        turnstartmonsters = new ArrayList();
         monsters = new ArrayList();
         monsters.add(orc);
         monsters.add(cultist);
@@ -272,6 +277,17 @@ public class MainScene extends Scene {
 //                        gameOver = true;
                         scenecontroller.changeScene(new EndScene(scenecontroller));
                     }
+                    
+                    if (backtothefuture.isCollision(e.getX(), e.getY()) && useheroskill == false) {
+                        useheroskill = true;
+                        transformTurnStartMonsters();
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
 //                    if (exit2.isCollision(e.getX(), e.getY())) {
 //                        scenecontroller.changeScene(new MenuScene(scenecontroller));
 //                    }
@@ -359,7 +375,46 @@ public class MainScene extends Scene {
     public Monster getMonster() {
         return orc;
     }
-
+    
+    //複製回合開始怪物的陣列
+    public void copyTurnStartMonsters(){
+        int temp1 = monsters.size();
+        for(int i = 0;i < temp1; i++){
+            Monster temp2 = monsters.get(i);
+            System.out.print("第"+i+"隻怪血量"+ temp2.gethealth());
+            Monster clone = temp2.clone();
+            System.out.print("複製怪血量"+ clone.gethealth());
+            clone.setSkill(temp2.getSelfSkill());
+//            clone.setX(monsters.get(i).getX());
+            turnstartmonsters.add(clone);
+        }
+    }
+    //把複製的怪物陣列轉到monsters
+    public void transformTurnStartMonsters(){
+        int temp1 = monsters.size();
+        int temp2 = turnstartmonsters.size();
+        
+        for(int i = 0;i < temp1; i++){
+            monsters.remove(0);
+        }
+        for(int i = 0;i < temp2;i++){
+            monsters.add(turnstartmonsters.get(i));
+        }
+    }
+    //移除複製的怪物陣列
+    public void removeTurnStartMonsters(){
+        int temp = turnstartmonsters.size();
+        for(int i = 0;i < temp;i++){
+            turnstartmonsters.remove(0);
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     //同時讓牌變成可動
     public void setDeckPoisition() {
         for (int i = 0; i < cardlimit; i++) {
@@ -397,7 +452,8 @@ public class MainScene extends Scene {
             drawcarddeck.getCards().remove(0);
         }
         setDeckPoisition();
-
+        removeTurnStartMonsters();
+        copyTurnStartMonsters();
     }
 
     @Override
@@ -474,6 +530,10 @@ public class MainScene extends Scene {
                     temp.move();
                 }
                 next.setIsClicked(false);
+                if(!useheroskill){
+                    removeTurnStartMonsters();
+                    copyTurnStartMonsters();
+                }
                 discardCard(drawcarddeck, handdeck, discarddeck, 5);
                 drawCard(drawcarddeck, handdeck, discarddeck, 5);
                 crystal.setNumberIcon(3);
@@ -563,14 +623,14 @@ public class MainScene extends Scene {
 //             exit2.paint(g);
 //        }
         
-        for (int i = 0; i < monsters.size(); i++) {
-            if (selectedcard != null) {
-                if (selectedcard.isCollision(monsters.get(i))) {
-                    g.drawImage(columns[i], monsters.get(i).getX(), monsters.get(i).getY(), null);
-                    break;
-                }
-            }
-        }
+//        for (int i = 0; i < monsters.size(); i++) {
+//            if (selectedcard != null) {
+//                if (selectedcard.isCollision(monsters.get(i))) {
+//                    g.drawImage(columns[i], monsters.get(i).getX(), monsters.get(i).getY(), null);
+//                    break;
+//                }
+//            }
+//        }
     
     }
 }

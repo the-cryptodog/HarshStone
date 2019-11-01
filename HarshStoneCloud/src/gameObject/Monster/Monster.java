@@ -19,7 +19,7 @@ import values.ImagePath;
  *
  * @author frank61003
  */
-public class Monster extends GameObject {
+public class Monster extends GameObject implements Cloneable{
 
     protected int health;
     private static final int[] ACT = {0, 1, 2, 1};
@@ -49,9 +49,10 @@ public class Monster extends GameObject {
     private int weak;
     private int frozen;
     private int poison;
+    private int actnumber;
     
     
-    public Monster(int x, int y, int width, int height, String name, int health, int yPosition, int act, int skillIndex) {
+    public Monster(int x, int y, int width, int height, String name, int health, int yPosition, int actnumber, int skillIndex) {
         super(x, y, width, height, name);
         this.health = health;
         originalhealth = health;
@@ -65,13 +66,14 @@ public class Monster extends GameObject {
         poison = 0;
         moved = false;
         useskill = false;
+        this.actnumber = actnumber;
         image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
         recordhealth = false;
         this.yPosition = yPosition;
         this.skillIndex = skillIndex;
         monsterabnormalstates = new ArrayList<MonsterAbnormalState>();
 //        monsterabnormalstates.add(new Poison(0,0,30,30,"",poison));
-        monsterhelper = new MonsterHelper(act);
+        monsterhelper = new MonsterHelper(actnumber);
         delaycounter = new DelayCounter(10, new DelayCounter.Action() {
 
             @Override
@@ -132,6 +134,14 @@ public class Monster extends GameObject {
         return selfSkill;
     }
 
+    public int getOriginalHealth() {
+        return originalhealth;
+    }
+
+    public void setOriginalHealth(int originalhealth) {
+        this.originalhealth = originalhealth;
+    }
+        
     public int gethealth() {
         return health;
     }
@@ -211,9 +221,45 @@ public class Monster extends GameObject {
         
 
     }
-
     
     
+    public Monster clone() {
+    
+        Monster clone = new Monster(x, y, width, height, name, health, yPosition, actnumber, skillIndex);
+        clone.attack = this.attack;
+        clone.defense = this.defense;
+        clone.hero = hero;
+        clone.originalhealth = this.originalhealth;
+        if (defense > 0){
+            clone.monsterstate = new MonsterState.EndMove();
+        }
+        if(attack > 0){
+            clone.monsterstate = new MonsterState.MoveLeft();
+        }
+        for(int i = 0;i < this.monsterabnormalstates.size();i++){
+            MonsterAbnormalState temp = this.monsterabnormalstates.get(i);
+            if(temp instanceof Poison){
+                clone.monsterabnormalstates.add(new Poison(0,0,32,32," ",temp.continueturn));
+            }
+            else if(temp instanceof Frozen){
+                clone.monsterabnormalstates.add(new Frozen(0,0,32,32," ",temp.continueturn));
+            }
+            else if(temp instanceof Weak){
+                clone.monsterabnormalstates.add(new Weak(0,0,32,32," ",temp.continueturn));
+            }
+        
+        
+        }
+            
+            
+    
+    
+    
+        
+    
+    
+        return clone;
+    }
     public void move() {
         int tempx;
 //        if(!moved){

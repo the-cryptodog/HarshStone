@@ -119,8 +119,8 @@ public interface CardMoveState {
             int x = card.getX();
             int tempx = card.getX() + 30;
             int limit = 300 + (Global.CARDWIDTH + 100) * (card.getHandDeckPoisition() - 1);
-            System.out.println("1." + card.originalx);
-            System.out.println("2." + 300 + (Global.CARDWIDTH + 100) * (card.getHandDeckPoisition() - 1));
+//            System.out.println("1." + card.originalx);
+//            System.out.println("2." + 300 + (Global.CARDWIDTH + 100) * (card.getHandDeckPoisition() - 1));
             
             if(x <= limit){    
  

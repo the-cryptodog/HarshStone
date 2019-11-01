@@ -226,6 +226,10 @@ public class SelectJobScene extends Scene {
                 scenecontroller.changeScene(new MapScene(scenecontroller));
                 Global.hero.sethealth(100);
             }
+
+
+
+
         }
     }
 
