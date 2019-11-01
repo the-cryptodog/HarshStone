@@ -6,6 +6,7 @@
 package scene;
 
 import Controller.SceneController;
+import gameObject.Hero.Hero;
 import gameObject.MapIcon.MapPath;
 import gameObject.MapIcon.redCross;
 import io.CommandSolver;
@@ -38,6 +39,7 @@ public class MapScene extends Scene {
     private int[][] availableRoute = {{4, 5}, {2, 5, 8, 9}, {3, 6, 8, 9}};
     private int currentRedCross;
     private int coverx;
+    private Hero hero;
 //    private int y;
 //    private int speed;
 
@@ -132,6 +134,15 @@ public class MapScene extends Scene {
         return this;
     }
 
+    public void setHero(Hero hero){
+        this.hero = hero;
+    }
+    
+//    public Hero getHero(){
+//        return hero;
+//    }
+    
+    
     @Override
     public void sceneBegin() {
 //        if(Global.CURRENTSTAGE>0)

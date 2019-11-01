@@ -13,6 +13,8 @@ import scene.MenuScene;
 import scene.Scene;
 import scene.SelectJobSceneState;
 import scene.SelectJobSceneState.beginTalk1;
+import scene.SelectJobSceneState.beginTalk2;
+import scene.SelectJobSceneState.beginTalk3;
 import scene.SelectJobSceneState.normal;
 import scene.SelectJobSceneState.selectJob;
 import scene.SelectJobSceneState.talkEnd;
@@ -35,7 +37,8 @@ public class SelectJobScene extends Scene {
     private BufferedImage DARKEN2;
     private BufferedImage DARKEN3;
     private BufferedImage DARKEN4;
-    private BufferedImage talkchart;
+    private BufferedImage talkchart1;
+    private BufferedImage talkchart2;
     private DelayCounter delaycounter;
     private DelayCounter delayForEffect;
     private int sx1, sy1, sx2, sy2;
@@ -114,7 +117,8 @@ public class SelectJobScene extends Scene {
         DARKEN2 = irc.tryGetImage("/resources/Incidence/DARKEN2.png");
         DARKEN3 = irc.tryGetImage("/resources/Incidence/DARKEN3.png");
         DARKEN4 = irc.tryGetImage("/resources/Incidence/DARKEN4.png");
-        talkchart = irc.tryGetImage("/resources/Incidence/TALKCHART.png");
+        talkchart1 = irc.tryGetImage("/resources/Incidence/TALKCHART3.png");
+        talkchart2 = irc.tryGetImage("/resources/Incidence/TALKCHART4.png");
         img = irc.tryGetImage("/resources/Map/mapOrigin.png");
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
 
@@ -163,6 +167,24 @@ public class SelectJobScene extends Scene {
 //                      startPressed = true;
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
                     }
+                    if (selectjobscenestate instanceof beginTalk1){
+                        selectjobscenestate = new beginTalk2();
+                    
+                    }
+                    
+                    
+                    if (selectjobscenestate instanceof beginTalk2){
+                        selectjobscenestate = new beginTalk3();
+                    
+                    }
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
                 }
 
                 if (state == CommandSolver.MouseState.PRESSED) {
@@ -217,7 +239,12 @@ public class SelectJobScene extends Scene {
             selectjobscenestate.action(this);
 
         }
+<<<<<<< HEAD
          if (storyEnd) { //npc往回走出螢幕
+=======
+         if (storyEnd ) { //npc往回走出螢幕
+
+>>>>>>> 904aa96fe469aac6cf7959c87a01e0cfbdb54aca
              if(heroSelected.getWidth()<50){
                Global.hero = heroSelected;
                Global.hero.sethealth(100);
@@ -300,9 +327,18 @@ public class SelectJobScene extends Scene {
         
         
         if(selectjobscenestate instanceof beginTalk1){
-            g.drawImage(talkchart, 720, 190, null);
-
+            g.drawImage(talkchart1, 1000, 190,400,400, null);
             next.paint(g);
+        }
+        
+         if(selectjobscenestate instanceof beginTalk2){
+            g.drawImage(talkchart2, 720, 190, 400,400, null);
+            next.paint(g);
+        
+        
+        
+        
+        
         }
     }
 }

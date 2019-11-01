@@ -59,9 +59,34 @@ public interface SelectJobSceneState {
             if (npc.getX() > 1440) {
                 npc.setX(npc.getX() - 20);
             }
+            if(npc.getX() <= 1440){
+                scene.setSelectJobSceneState(new beginTalk2());
+            
+            }
+        }
+    }
+    
+    public class beginTalk2 implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+            
+            
 
         }
     }
+    
+    public class beginTalk3 implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+           
+
+        }
+    }
+    
+    
+    
 
     public class talkEnd implements SelectJobSceneState {
 
