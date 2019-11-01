@@ -26,7 +26,6 @@ public class Button extends GameObject {
     }
 
     private ButtonListener buttonListener;
-
     protected BufferedImage[] image;
     protected BufferedImage image2;
     protected BufferedImage currentImage;

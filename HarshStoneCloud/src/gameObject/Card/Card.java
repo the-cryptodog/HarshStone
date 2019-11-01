@@ -42,6 +42,8 @@ public class Card extends GameObject{
     private int skillIndex;
     private int handdeckpoisition;
     private CardIconHelper cardIconHelper;
+    
+  
 
     
     public Card(int x, int y, int width, int height, String name, int cost) {

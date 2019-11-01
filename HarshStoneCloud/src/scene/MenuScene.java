@@ -79,7 +79,8 @@ public class MenuScene extends Scene {
                 if (state == CommandSolver.MouseState.MOVED) {
                     for (int i = 0; i < buttons.size(); i++) {
                         if (buttons.get(i).isCollision(e.getX(), e.getY())) {
-                            buttons.get(i).hover(e.getX(), e.getY());
+//                            System.out.println("hover!!!!!!!");
+//                            buttons.get(i).hover(e.getX(), e.getY());
                         }
                     }
                 }
