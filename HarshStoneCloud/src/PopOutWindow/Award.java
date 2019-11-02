@@ -60,7 +60,7 @@ public class Award extends GameObject {
                 }
                 for (int i = 0; i < 3; i++) {
                     awards.add(rareCardFactory.genCard(rareCardIndex[i]));
-                    awards.get(i).setX();
+//                    awards.get(i).setX();
                 }
 
         }

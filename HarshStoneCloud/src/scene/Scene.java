@@ -5,6 +5,7 @@
  */
 package scene;
 
+import Controller.AudioResourceController;
 import Controller.ImageResourceController;
 import Controller.SceneController;
 import java.awt.Graphics;
@@ -24,6 +25,7 @@ public abstract class Scene{
     protected CommandSolver.MouseCommandListener mousecommandlistener;
     protected SceneController scenecontroller;
     protected ImageResourceController irc;
+    protected AudioResourceController arc;
     public abstract void sceneBegin();
     public abstract void sceneUpdate();
     public abstract void sceneEnd();
@@ -37,6 +39,8 @@ public abstract class Scene{
      
         this.scenecontroller = scenecontroller;
         irc = ImageResourceController.getInstance();
+        arc = AudioResourceController.getInstance();
+        
     }
     
     

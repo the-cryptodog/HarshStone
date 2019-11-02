@@ -47,6 +47,8 @@ public class PathBuilder {
     public static String getIncidence(String path){
        return ImagePath.ROOT + ImagePath.INCIDENCE_ROOT + path;
     }
-    
+    public static String getAudio(String path){
+       return ImagePath.ROOT + ImagePath.AUDIO_ROOT + path;
+    }
     
 }

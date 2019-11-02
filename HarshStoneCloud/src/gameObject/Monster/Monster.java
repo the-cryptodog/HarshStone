@@ -230,6 +230,17 @@ public class Monster extends GameObject implements Cloneable{
         clone.defense = this.defense;
         clone.hero = hero;
         clone.originalhealth = this.originalhealth;
+        clone.weak = this.weak;
+        clone.frozen = this.frozen;
+        clone.poison = this.poison;
+        
+        
+        
+        
+        
+        
+        
+        
         if (defense > 0){
             clone.monsterstate = new MonsterState.EndMove();
         }

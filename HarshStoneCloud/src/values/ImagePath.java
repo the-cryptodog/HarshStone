@@ -71,4 +71,11 @@ public class ImagePath {
     
     
     public static final String INCIDENCE_ROOT = "/Incidence";
+    
+    
+    public static final String AUDIO_ROOT = "/Audio";
+    public static final String VILIFIED = "/Vilified.wav";
+    
+    
+    
 }
