@@ -64,7 +64,7 @@ public class Global {
     public static final int NPCX = 2080;
 
     //主角
-    public static  Hero  hero;
+    public static Hero hero;
 
     //動畫位置參數
     public static final int SKILLWIDTH = 192;

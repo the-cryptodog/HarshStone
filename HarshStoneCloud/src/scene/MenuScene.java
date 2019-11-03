@@ -10,12 +10,16 @@ import Controller.PathBuilder;
 import Controller.SceneController;
 import PopOutWindow.Incidence;
 import gameObject.Button.Button;
+import gameObject.Hero.Hero;
 import io.CommandSolver;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -76,6 +80,7 @@ public class MenuScene extends Scene {
         buttons.add(new Button(50, 50, 220, 50, "NEWGAME"));
         buttons.add(new Button(50, 110, 220, 50, "CONTINUE"));
         buttons.add(new Button(50, 170, 85, 50, "EXIT"));
+        buttons.add(new Button(50, 230, 220, 50, "CONTINUE"));
         img = irc.tryGetImage("/resources/Background/MENU.png");
 
         
@@ -98,12 +103,37 @@ public class MenuScene extends Scene {
                     if (buttons.get(1).isCollision(e.getX(), e.getY())) {
                                incidence = new Incidence(384, 216, 1152, 648, "AWARD");
                                incidence.setCommandListener(mousecommandlistener);
-                            if (incidence.getButton().isCollision(e.getX(), e.getY())) {
-                               incidence = null;
-                    }
+                        if (incidence.getButton().isCollision(e.getX(), e.getY())) {
+                           incidence = null;
+                        }
                     }
 //上面兩行為測試用，按CONTINUE可以直接進入戰鬥
-
+                    if(buttons.get(3).isCollision(e.getX(),e.getY())){
+                        FileInputStream fis;
+                        try{
+                            fis = new FileInputStream("Hero.ser");
+                            ObjectInputStream ois = new ObjectInputStream(fis);
+                            Hero herosaved = (Hero)ois.readObject();
+                            fis.close();
+                            ois.close();
+                            MapScene save = new MapScene(scenecontroller);
+                            Global.hero = herosaved;
+                            scenecontroller.changeScene(save);
+                        }catch(FileNotFoundException ex){
+                            System.out.println("1");        
+                            ex.printStackTrace();
+                        } catch (IOException ex) {
+                            System.out.println("2");
+                            ex.printStackTrace();
+                        } catch (ClassNotFoundException ex) {
+                            System.out.println("3");
+                            ex.printStackTrace();
+                        }
+                        
+                    
+                    
+                    
+                    }
                     
                     
                 }

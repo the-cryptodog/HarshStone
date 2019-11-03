@@ -5,11 +5,13 @@
  */
 package utils;
 
+import java.io.Serializable;
+
 /**
  *
  * @author frank61003
  */
-public class DelayCounter {
+public class DelayCounter implements Serializable{
     
     public interface Action{
         public void action();

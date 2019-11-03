@@ -7,6 +7,7 @@ package Controller;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
 
@@ -14,8 +15,8 @@ import javax.imageio.ImageIO;
  *
  * @author frank61003
  */
-public class ImageResourceController {
-    private static class KeyPair{
+public class ImageResourceController implements Serializable{
+    private static class KeyPair implements Serializable{
         private String path;
         private BufferedImage image;
     

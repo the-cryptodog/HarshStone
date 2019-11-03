@@ -9,12 +9,13 @@ package gameObject;
 
 import Controller.ImageResourceController;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 /**
  *
  * @author frank61003
  */
-public abstract class GameObject {
+public abstract class GameObject implements Serializable{
     
     protected int x;
     protected int y;
