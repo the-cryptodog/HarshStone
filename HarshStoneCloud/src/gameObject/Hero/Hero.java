@@ -36,7 +36,7 @@ public class Hero extends GameObject {
     protected HeroHelper herohelper;
     protected DelayCounter delaycounter;
     protected int delay;
-    protected Timer timer;
+//    protected Timer timer;
     protected CardDeck herodeck;
     private int defense;
     private int lasthealth;
