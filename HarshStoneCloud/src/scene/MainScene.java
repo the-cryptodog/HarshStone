@@ -130,7 +130,7 @@ public class MainScene extends Scene {
         hero = new Hero(-70, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         drawcarddeck = hero.getHeroDeck();
 //        drawcarddeck = new CardDeck(1400,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"抽牌推");
-        discarddeck = new CardDeck(1300, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "棄牌推");
+        discarddeck = new CardDeck(1640, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "棄牌推");
         handdeck = new CardDeck(40, 490, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "手牌");
 
         selectedcard = null;
@@ -142,12 +142,14 @@ public class MainScene extends Scene {
         next = new Button(1700, 580, 184, 42, "ROUNDSTART");
         backtothefuture = new Button(1700, 650, 184, 42, "ROUNDSTART");
         
+        
+        hero = Global.hero;
         Global.hero.setX(-70); 
         Global.hero.setY(Global.HEROY);
         Global.hero.setWidth(Global.HEROWIDTH);
         Global.hero.setHeight(Global.HEROXHEIGHT);
-      
-        hero = Global.hero;
+        
+        
         drawcarddeck = hero.getHeroDeck();
 
 
@@ -280,6 +282,8 @@ public class MainScene extends Scene {
                     
                     if (backtothefuture.isCollision(e.getX(), e.getY()) && useheroskill == false) {
                         useheroskill = true;
+                        crystal.getNumberIcon().setNumber(3);
+                        
                         transformTurnStartMonsters();
                     }
                     

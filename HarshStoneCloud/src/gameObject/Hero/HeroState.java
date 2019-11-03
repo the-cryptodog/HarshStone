@@ -6,6 +6,7 @@
 package gameObject.Hero;
 
 import gameObject.Monster.MonsterState;
+import java.io.Serializable;
 import scene.MapScene;
 import utils.Global;
 
@@ -50,14 +51,14 @@ public interface HeroState {
 //        }
 //    }
 
-    public class NoMove implements HeroState {
+    public class NoMove implements HeroState, Serializable{
 
         @Override
         public void action(Hero hero) {
         }
     }
 
-    public class MoveHeroRight implements HeroState {
+    public class MoveHeroRight implements HeroState, Serializable {
 
         @Override
         public void action(Hero hero) {
@@ -75,7 +76,7 @@ public interface HeroState {
         }
     }
     
-    public class MoveHeroLeave implements HeroState {
+    public class MoveHeroLeave implements HeroState, Serializable {
 
         @Override
         public void action(Hero hero) {

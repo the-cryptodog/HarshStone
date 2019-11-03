@@ -12,6 +12,7 @@ import gameObject.GameObject;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import java.util.ArrayList;
 import values.ImagePath;
 
@@ -19,18 +20,16 @@ import values.ImagePath;
  *
  * @author frank61003
  */
-public class CardDeck extends GameObject{
+public class CardDeck extends GameObject implements Serializable{
     protected ArrayList<Card> cards;
     protected CardFactory cardfactory;
     protected BufferedImage image;
-    private Font font1;
     
     
     public CardDeck(int x, int y, int width, int height, String name,ArrayList<Card> cards){
         super(x,y,width,height,name);
         this.cards = cards;
         cardfactory = new CardFactory();
-        font1 =new Font("TimesRoman", Font.ITALIC,100);
         image = ImageResourceController.getInstance().tryGetImage(PathBuilder.getImage(ImagePath.CARDBECK));
     }
     

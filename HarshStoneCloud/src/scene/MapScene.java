@@ -6,6 +6,7 @@
 package scene;
 
 import Controller.SceneController;
+import gameObject.Button.Button;
 import gameObject.Hero.Hero;
 import gameObject.MapIcon.MapPath;
 import gameObject.MapIcon.redCross;
@@ -13,6 +14,10 @@ import io.CommandSolver;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import utils.Global;
 import values.ImagePath;
@@ -42,6 +47,7 @@ public class MapScene extends Scene {
     private int coverx;
     private Hero hero;
     private Scene incidence;
+    private Button save;
 //    private int y;
 //    private int speed;
 
@@ -70,7 +76,7 @@ public class MapScene extends Scene {
         redCrossList.get(5).getTagList().add(7);
         redCrossList.get(6).getTagList().add(8);
         redCrossList.get(7).getTagList().add(8);
-
+        save = new Button(50, 230, 220, 50, "CONTINUE");
         System.out.println(redCrossList.get(0).toString());
         System.out.print(redCrossList.get(0) instanceof redCross);
         System.out.print("Global.CURRENTSTAGE = " + Global.CURRENTSTAGE);
@@ -109,7 +115,29 @@ public class MapScene extends Scene {
 
                         }
                     }
-//                      startPressed = true;
+                    
+                    if(save.isCollision(e.getX(), e.getY())){
+                         FileOutputStream fos;
+                        try{
+                            fos = new FileOutputStream("Hero.ser");
+                            ObjectOutputStream oos = new ObjectOutputStream(fos);
+                            oos.writeObject(hero);
+                            fos.close();
+                            oos.close();
+                        }catch(FileNotFoundException ex){
+                            System.out.println("1");
+                            ex.printStackTrace();
+                        }catch(IOException ex){
+                            System.out.println("2");
+                            ex.printStackTrace();
+                            
+                        }
+                    
+                    
+                    
+                    }
+                    
+
 
                 }
 //                    if (socerer .isCollision(e.getX(), e.getY())) {
@@ -165,7 +193,7 @@ public class MapScene extends Scene {
     public void paint(Graphics g) {
 
         g.drawImage(map, 0, 0, 1932, 1078, null);
-
+        save.paint(g);
         for (int i = 0; i < redCrossList.size(); i++) {
 //                     System.out.print(i);
             if (stagePassed) {

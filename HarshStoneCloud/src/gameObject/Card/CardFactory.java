@@ -18,6 +18,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.ArrayList;
 import utils.Global;
 
@@ -26,7 +27,7 @@ import utils.Global;
  * @author frank61003
  */
 //為何不能靜態
-public class CardFactory {
+public class CardFactory implements Serializable{
     private class CardData{
         protected String description;
         protected int cost;

@@ -14,6 +14,7 @@ import gameObject.Hero.HeroState.*;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.Timer;
 import utils.DelayCounter;
@@ -24,7 +25,7 @@ import values.ImagePath;
  *
  * @author frank61003
  */
-public class Hero extends GameObject {
+public class Hero extends GameObject implements Serializable{
 
     protected int health;
     private static final int[] ACT = {0, 1, 2, 1};
@@ -36,7 +37,6 @@ public class Hero extends GameObject {
     protected HeroHelper herohelper;
     protected DelayCounter delaycounter;
     protected int delay;
-//    protected Timer timer;
     protected CardDeck herodeck;
     private int defense;
     private int lasthealth;
@@ -55,7 +55,7 @@ public class Hero extends GameObject {
         image = irc.tryGetImage(PathBuilder.getHero(ImagePath.ACTOR1));
 //        herodeck = new WarriorDeck(x, y, width, height, name);
 
-        herodeck = new WarriorDeck(1300, 690, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "牌組");
+        herodeck = new WarriorDeck(40, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "牌組");
         herohelper = new HeroHelper(act);
 
         delaycounter = new DelayCounter(10, new DelayCounter.Action() {
@@ -75,7 +75,7 @@ public class Hero extends GameObject {
         this.act = 5;
         image = irc.tryGetImage(PathBuilder.getHero(ImagePath.ACTOR1));
         //need to be changed
-        herodeck = new WarriorDeck(1300, 690, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "牌組");
+        herodeck = new WarriorDeck(400, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "牌組");
     }
 
     public void recover() {

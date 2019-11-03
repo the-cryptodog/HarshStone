@@ -11,6 +11,7 @@ import gameObject.Crystal;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 import utils.Global;
 import values.ImagePath;
 
@@ -18,7 +19,7 @@ import values.ImagePath;
  *
  * @author frank61003
  */
-public class HeroHelper {
+public class HeroHelper implements Serializable{
 
     private BufferedImage img;
     private int heroposition;
