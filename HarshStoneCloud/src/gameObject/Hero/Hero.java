@@ -14,10 +14,14 @@ import gameObject.Hero.HeroState.*;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
 import utils.DelayCounter;
 import utils.Global;
 import values.ImagePath;
@@ -117,19 +121,40 @@ public class Hero extends GameObject implements Serializable{
     public void saveHeroRecord(){
         
         try{
-                BufferedWriter bw = new BufferedWriter(new FileWriter("HeroRecord.txt"));
-                bw.write("" + health);
-                bw.newLine();
-                bw.write("" + actor);
-                bw.flush();
-                bw.close();
+            BufferedWriter bw = new BufferedWriter(new FileWriter("HeroRecord.txt"));
+            bw.write("" + health);
+            bw.newLine();
+            bw.write("" + actor);
+            bw.newLine();
+            bw.write("" + Global.CURRENTSTAGE);
+            bw.flush();
+            bw.close();
         }   
         catch(IOException ex){
             ex.printStackTrace();
         }
     }
     
-    
+    public static Hero loadHeroRecord(){
+        ArrayList<String> str = new ArrayList<String>();
+        try{
+            BufferedReader br = new BufferedReader(new FileReader("HeroRecord.txt"));
+            str.add(br.readLine());
+           
+         while(br.ready()){
+                str.add(br.readLine());
+            }
+            br.close();
+        } catch (FileNotFoundException ex) {
+            //Logger.getLogger(JavaApplication40Filemanage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+//            Logger.getLogger(JavaApplication40Filemanage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Hero temp = new Hero(Global.JOB1X, Global.JOBY, 128, 128, "Actor1", Integer.valueOf(str.get(0)), Integer.valueOf(str.get(1)));
+        Global.CURRENTSTAGE = Integer.valueOf(str.get(2));
+        return temp;
+        
+    }
     
     
     public int gethealth() {

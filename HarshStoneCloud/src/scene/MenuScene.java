@@ -10,14 +10,17 @@ import Controller.PathBuilder;
 import Controller.SceneController;
 import PopUpWindow.Incidence;
 import gameObject.Button.Button;
+import gameObject.Card.CardDeckRecord;
 import gameObject.Hero.Hero;
 import io.CommandSolver;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.MalformedURLException;
@@ -95,27 +98,13 @@ public class MenuScene extends Scene {
                         }
                     }
 //上面兩行為測試用，按CONTINUE可以直接進入戰鬥
-                    if (buttons.get(3).isCollision(e.getX(), e.getY())) {
-                        FileInputStream fis;
-                        try {
-                            fis = new FileInputStream("Hero.ser");
-                            ObjectInputStream ois = new ObjectInputStream(fis);
-                            Hero herosaved = (Hero) ois.readObject();
-                            fis.close();
-                            ois.close();
-                            MapScene save = new MapScene(scenecontroller);
-                            Global.hero = herosaved;
-                            scenecontroller.changeScene(save);
-                        } catch (FileNotFoundException ex) {
-                            System.out.println("1");
-                            ex.printStackTrace();
-                        } catch (IOException ex) {
-                            System.out.println("2");
-                            ex.printStackTrace();
-                        } catch (ClassNotFoundException ex) {
-                            System.out.println("3");
-                            ex.printStackTrace();
-                        }
+
+                    if(buttons.get(3).isCollision(e.getX(),e.getY())){
+                        Global.hero = Hero.loadHeroRecord();
+                        CardDeckRecord temp = new CardDeckRecord();
+                        Global.hero.setHeroDeck(temp.getCardDeck());
+                        scenecontroller.changeScene(new MapScene(scenecontroller));
+                    
 
                     }
 

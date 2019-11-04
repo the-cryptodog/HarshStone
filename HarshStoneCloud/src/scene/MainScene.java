@@ -131,8 +131,15 @@ public class MainScene extends Scene {
         this.mapScene = mapScene;
         columns = new BufferedImage[3];
 
+      
+        hero = Global.hero;
+        Global.hero.setX(-70); 
+        Global.hero.setY(Global.HEROY);
+        Global.hero.setWidth(Global.HEROWIDTH);
+        Global.hero.setHeight(Global.HEROXHEIGHT);
+
         //測試用暫時留著
-        hero = new Hero(-70, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
+//        hero = new Hero(-70, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         drawcarddeck = hero.getHeroDeck();
 //        drawcarddeck = new CardDeck(1400,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"抽牌推");
         discarddeck = new CardDeck(Global.DISCARDDECKX, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "棄牌推");
@@ -147,6 +154,7 @@ public class MainScene extends Scene {
         next = new Button(1700, 580, 184, 42, "ROUNDSTART");
         backtothefuture = new Button(1700, 650, 184, 42, "ROUNDSTART");
 
+
         hero = Global.hero;
         Global.hero.setX(-70);
         Global.hero.setY(Global.HEROY);
@@ -155,6 +163,7 @@ public class MainScene extends Scene {
 
         drawcarddeck = hero.getHeroDeck();
         heroawards = new Award(150, 90, 1770, 990, "AWARD");
+
 
         orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                 "獸人1", 14, 1, (int) (Math.random() * 8), (int) (Math.random() * 8)); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
@@ -486,8 +495,8 @@ public class MainScene extends Scene {
         }
 
         hero.move();
-        //把牌組整理好帶回map
-        if (hero.getX() > Global.JWIDTH) {
+        //把牌組整理好帶回map 判斷條件原為人物往右走出畫面(hero.getX() > Global.JWIDTH)
+        if (monsters.size() == 0) {
             int temp = handdeck.getCards().size();
             discardCard(drawcarddeck, handdeck, discarddeck, temp);
             temp = discarddeck.getCards().size();
@@ -565,7 +574,10 @@ public class MainScene extends Scene {
                     copyTurnStartMonsters();
                 }
                 discardCard(drawcarddeck, handdeck, discarddeck, 5);
+                System.out.println();    
+                System.out.println("棄牌堆"+discarddeck.getCards().size()+"張牌,抽牌堆" + drawcarddeck.getCards().size()+"張牌,手牌堆"+handdeck.getCards().size()+"張牌");    
                 drawCard(drawcarddeck, handdeck, discarddeck, 5);
+                System.out.println("棄牌堆"+discarddeck.getCards().size()+"張牌,抽牌堆" + drawcarddeck.getCards().size()+"張牌,手牌堆"+handdeck.getCards().size()+"張牌");  
                 crystal.setNumberIcon(3);
             }
 

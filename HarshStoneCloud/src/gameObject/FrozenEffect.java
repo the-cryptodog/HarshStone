@@ -11,6 +11,7 @@ import gameObject.Hero.Hero;
 import gameObject.Monster.Frozen;
 import gameObject.Monster.Monster;
 import gameObject.Monster.MonsterAbnormalState;
+import gameObject.Monster.MonsterState.EndMove;
 import gameObject.Monster.Poison;
 
 /**
@@ -38,6 +39,7 @@ public class FrozenEffect extends CardEffect{
         if(monster.getFrozen() == 0){
             monster.getMonsterAbnormalStates().add(new Frozen(0,0,32,32,"",frozenstate));
             monster.setFrozen(frozenstate);
+            monster.setMonsterState(new EndMove());
         }
         else{
             int temp = monster.getMonsterAbnormalStates().size();
@@ -50,7 +52,8 @@ public class FrozenEffect extends CardEffect{
                         temp2 = 9;
                     }
                     temp1.setContinueTurn(temp2);
-                    monster.setPoison(temp2);
+                    monster.setFrozen(temp2);
+                    monster.setMonsterState(new EndMove());
                     break;
                 }
             
