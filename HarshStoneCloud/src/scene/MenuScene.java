@@ -8,7 +8,7 @@ package scene;
 import Controller.AudioResourceController;
 import Controller.PathBuilder;
 import Controller.SceneController;
-import PopOutWindow.Incidence;
+import PopUpWindow.Incidence;
 import gameObject.Button.Button;
 import gameObject.Hero.Hero;
 import io.CommandSolver;

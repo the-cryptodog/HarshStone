@@ -39,6 +39,7 @@ public class SelectJobScene extends Scene {
     private BufferedImage DARKEN4;
     private BufferedImage talkchart1;
     private BufferedImage talkchart2;
+    private BufferedImage talkchart3;
     private DelayCounter delaycounter;
     private DelayCounter delayForEffect;
     private int sx1, sy1, sx2, sy2;
@@ -51,8 +52,8 @@ public class SelectJobScene extends Scene {
     private Hero heroSelected;
     private Button job1screen;
     private Button job2screen;
-    int upY = 430;
-    int downY = 250;
+     int upY ;
+    int downY;
     private boolean jobSelected;
     private boolean storyBegin;
     private boolean storyEnd;
@@ -61,16 +62,16 @@ public class SelectJobScene extends Scene {
 
     public SelectJobScene(SceneController scenecontroller) {
         super(scenecontroller);
-
-        storyEnd = false;
-
+        
+        upY = 430;
+        downY = 250;
         selectjobscenestate = new normal();
         storyEnd = false;
 
         jobSelected = false;
         back = new Button(1800, 1000, 85, 50, "BACK");
         next = new Button(750, 550, 220, 50, "CONTINUE");
-        
+
 //        actor = new Actor(450, 0, 128, 128, 0, "巫師");
 //        actor2 = new Actor(1150, 0, 128, 128, 0, "戰士");
         job1 = new Hero(Global.JOB1X, Global.JOBY, 128, 128, "Actor1", 0, 0);
@@ -93,7 +94,6 @@ public class SelectJobScene extends Scene {
 
         job1screen = new Button(350, 250, 391, 506, "JOB1SCREEN");
         job2screen = new Button(1150, 250, 391, 506, "JOB2SCREEN");
-        
 
         sx1 = 480;
         sy1 = 270;
@@ -113,8 +113,11 @@ public class SelectJobScene extends Scene {
         DARKEN2 = irc.tryGetImage("/resources/Incidence/DARKEN2.png");
         DARKEN3 = irc.tryGetImage("/resources/Incidence/DARKEN3.png");
         DARKEN4 = irc.tryGetImage("/resources/Incidence/DARKEN4.png");
-        talkchart1 = irc.tryGetImage("/resources/Incidence/TALKCHART3.png");
-        talkchart2 = irc.tryGetImage("/resources/Incidence/TALKCHART4.png");
+        
+        talkchart1 = irc.tryGetImage("/resources/Incidence/TALK1.png");
+        talkchart2 = irc.tryGetImage("/resources/Incidence/TALK2.png");
+        talkchart3 = irc.tryGetImage("/resources/Incidence/TALK3.png");
+        
         img = irc.tryGetImage("/resources/Map/mapOrigin.png");
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
 
@@ -144,10 +147,10 @@ public class SelectJobScene extends Scene {
 
                         job2screen.setIsClicked(true);
                         heroSelected = job2;
-                        selectjobscenestate = new selectJob();
                         heros[0] = null;
                         storyBegin = true;
                         jobSelected = true;
+                        selectjobscenestate = new selectJob();
 
 //                      startPressed = true;
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
@@ -157,41 +160,46 @@ public class SelectJobScene extends Scene {
 //                      startPressed = true;
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
                     }
-
+                    
                     if (jobSelected & next.isCollision(e.getX(), e.getY())) {
                         if (selectjobscenestate instanceof beginTalk1) {
+                            System.out.print("事件1發生!!!");
                             selectjobscenestate = new beginTalk2();
+                            return;
                         }
-                        if (selectjobscenestate instanceof beginTalk2) {
-                            selectjobscenestate = new beginTalk3();
-                        }
-                        if (selectjobscenestate instanceof beginTalk3) {
-                            selectjobscenestate = new talkEnd();
-                        }
-
-
-                        
                     }
-
+                    if (jobSelected & next.isCollision(e.getX(), e.getY())) {
+                        if (selectjobscenestate instanceof beginTalk2) {
+                            System.out.print("事件2發生!!!");
+                            selectjobscenestate = new beginTalk3();
+                            return;
+                        }
+                    }
+                    if (jobSelected & next.isCollision(e.getX(), e.getY())) {
+                        if (selectjobscenestate instanceof beginTalk3) {
+                            System.out.print("事件3發生!!!");
+                            selectjobscenestate = new talkEnd();
+                            return;
+                        }
+                    }
+                }
 
                 if (state == CommandSolver.MouseState.PRESSED) {
                     if (job1.isCollision(e.getX(), e.getY())) {
 
-                        }
-                    }
-                    if (state == CommandSolver.MouseState.MOVED) {
-                        if (job2.isCollision(e.getX(), e.getY())) {
-
-                        }
-                    }
-
-                    if (state == CommandSolver.MouseState.DRAGGED) {
                     }
                 }
+                if (state == CommandSolver.MouseState.MOVED) {
+                    if (job2.isCollision(e.getX(), e.getY())) {
+
+                    }
+                }
+
+                if (state == CommandSolver.MouseState.DRAGGED) {
+                }
             }
-        };}
-    
-                
+        };
+    }
 
     public Hero getHeroSelected() {
         return heroSelected;
@@ -230,7 +238,6 @@ public class SelectJobScene extends Scene {
                 scenecontroller.changeScene(new MapScene(scenecontroller));
                 Global.hero.sethealth(100);
             }
-
         }
     }
 
@@ -295,14 +302,17 @@ public class SelectJobScene extends Scene {
         }
 
         if (selectjobscenestate instanceof beginTalk1) {
-            g.drawImage(talkchart1, 1000, 190, 400, 400, null);
+            g.drawImage(talkchart1, 1000, 150, 337, 245, null);
             next.paint(g);
         }
 
         if (selectjobscenestate instanceof beginTalk2) {
-            g.drawImage(talkchart2, 720, 190, 400, 400, null);
+            g.drawImage(talkchart2, 620, 150, 337, 245, null);
             next.paint(g);
-
+        }
+        if (selectjobscenestate instanceof beginTalk3) {
+            g.drawImage(talkchart3, 1000, 150, 337, 245, null);
+            next.paint(g);
         }
     }
 }

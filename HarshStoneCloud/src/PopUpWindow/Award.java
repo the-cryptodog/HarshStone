@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PopOutWindow;
+package PopUpWindow;
 
 import Controller.PathBuilder;
 import gameObject.Card.Card;
@@ -36,34 +36,44 @@ public class Award extends GameObject {
         rareCardFactory.readRareCardData();
         rareCardIndex = new int[3];
         count = 0;
-
+        System.out.print("目前關卡="+Global.CURRENTSTAGE+")");
+        
         switch (Global.CURRENTSTAGE) {
-
             case 1:
                 for (int i = 0; i < 3; i++) {
-                    rareCardIndex[count] = i;
+                    rareCardIndex[count++] = i;
                     break;
                 }
             case 2:
                 for (int i = 3; i < 6; i++) {
-                    rareCardIndex[count] = i;
+                    rareCardIndex[count++] = i;
                     break;
                 }
             case 3:
                 for (int i = 6; i < 9; i++) {
-                    rareCardIndex[count] = i;
+                    rareCardIndex[count++] = i;
                     break;
                 }
             case 4:
                 for (int i = 9; i < 12; i++) {
-                    rareCardIndex[count] = i;
+                    System.out.println("count = "+count);
+                    System.out.println("長度 = "+rareCardIndex.length);
+                    rareCardIndex[0] = i;
+                    break;
                 }
-                for (int i = 0; i < 3; i++) {
-                    awards.add(rareCardFactory.genCard(rareCardIndex[i]));
-//                    awards.get(i).setX();
-                }
-
+                
         }
+        for (int i = 0; i < 3; i++) {
+            System.out.print(awards.size());
+            awards.add(rareCardFactory.genCard(rareCardIndex[i],true));
+            awards.get(i).setX(300+(i*600));
+            awards.get(i).setY(540);
+
+            awards.get(i).setY(540);
+//                    awards.get(i).setX();
+        }
+        count=0;
+       
     }
 
     public void setCommandListener(CommandSolver.MouseCommandListener mcl) {
@@ -71,9 +81,9 @@ public class Award extends GameObject {
     }
 
     public void paint(Graphics g) {
-         for (int i = 0; i < 3; i++) {
-                    awards.get(i).paint(g);
-                }
-        g.drawImage(img, 0, 0, 1920, 1080, 0, 0, 1920, 1080, null);
+        g.drawImage(img, 0, 0, 1920, 1080, null);
+                for (int i = 0; i < 3; i++) {
+            awards.get(i).paint(g);
+        }
     }
 }

@@ -8,6 +8,7 @@ package scene;
 import Controller.ImageResourceController;
 import Controller.PathBuilder;
 import Controller.SceneController;
+import PopUpWindow.Award;
 import gameObject.Button.Button;
 
 import gameObject.Card.Card;
@@ -105,6 +106,7 @@ public class MainScene extends Scene {
     private Crystal crystal;
     private Poison ttt;
     private Hero hero;
+    private Award heroawards;
 
 
     public MainScene(SceneController scenecontroller, MapScene mapScene) {
@@ -126,6 +128,8 @@ public class MainScene extends Scene {
         skillFactory = new SkillFactory();
         this.mapScene = mapScene;
         columns = new BufferedImage[3];
+      
+        
         //測試用暫時留著
         hero = new Hero(-70, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         drawcarddeck = hero.getHeroDeck();
@@ -136,6 +140,7 @@ public class MainScene extends Scene {
         selectedcard = null;
         discardcard = null;
         cardfactory = new CardFactory();
+       
 
         exit = new Button(1700, 460, 108, 40, "EXIT");
         back = new Button(1700, 520, 108, 40, "BACK");
@@ -151,7 +156,7 @@ public class MainScene extends Scene {
         
         
         drawcarddeck = hero.getHeroDeck();
-
+         heroawards = new Award(150,90,1770,990,"AWARD");
 
         orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                 "獸人1", 14, 1, (int) (Math.random() * 8), (int) (Math.random() * 8)); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
@@ -297,7 +302,7 @@ public class MainScene extends Scene {
 //                    }
                 }
 
-                if (state == CommandSolver.MouseState.PRESSED) {
+                if (state == CommandSolver.MouseState.PRESSED ) {
                     System.out.println("PRESS");
                     if (selectedcard == null) {
                         for (int i = 0; i < handdeck.getCards().size(); i++) {
@@ -316,7 +321,7 @@ public class MainScene extends Scene {
 
                 if (state == CommandSolver.MouseState.DRAGGED) {
                     if (selectedcard != null) {
-
+          System.out.println("dragg");
                         selectedcard.setX(e.getX() - xdelta);
                         selectedcard.setY(e.getY() - ydelta);
                         System.out.print(selectedcard.getX());
@@ -499,7 +504,8 @@ public class MainScene extends Scene {
                 monsters.remove(monsters.get(i));
                 i--;
                 if (monsters.size() == 0) {
-                    hero.setState(new MoveHeroLeave());
+//                    hero.setState(new MoveHeroLeave());
+                    gameWin = true;
                 }
             }
         }
@@ -587,6 +593,8 @@ public class MainScene extends Scene {
 
     @Override
     public void paint(Graphics g) {
+        
+  
 
 //        g.setFont(font1);
 //        g.drawString("14pt bold & italic times Roman", 5, 92);
@@ -620,6 +628,9 @@ public class MainScene extends Scene {
         discarddeck.paint(g);
 
         crystal.paint(g);
+         if(gameWin){
+            heroawards.paint(g);
+        }
 //            g.drawImage(number, 200, 200, 300, 300, null);
 //        if (gameWin) {    
 //            g.drawImage(winImage, 0, 0, 1920, 1080, null);

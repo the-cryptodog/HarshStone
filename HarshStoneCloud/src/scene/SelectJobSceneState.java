@@ -55,11 +55,10 @@ public interface SelectJobSceneState {
 
         @Override
         public void action(SelectJobScene scene) {
-            Hero npc = scene.getHeros()[2];
-            if (npc.getX() > 1440) {
-                npc.setX(npc.getX() - 20);
-            }
-
+//            Hero npc = scene.getHeros()[2];
+//            if (npc.getX() > 1440) {
+//                npc.setX(npc.getX() - 20);
+//            }
         }
     }
     
@@ -67,8 +66,6 @@ public interface SelectJobSceneState {
 
         @Override
         public void action(SelectJobScene scene) {
-            
-            
 
         }
     }

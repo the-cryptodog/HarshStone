@@ -31,7 +31,7 @@ public interface CardMoveState {
         @Override
         public void move(Card card) {
             if(card.getLeft()){    
-                int tempx = card.getX() + 30;
+                int tempx = card.getX() + 60;
                 
                 if(tempx <= card.getOrginalX()){
                     card.setX(tempx);
@@ -41,7 +41,7 @@ public interface CardMoveState {
                 }
             }
             else{
-                int tempx = card.getX() - 30;
+                int tempx = card.getX() - 60;
                 
                 if(tempx >= card.getOrginalX()){
                     card.setX(tempx);
@@ -51,7 +51,7 @@ public interface CardMoveState {
                 }
             }
             if(card.getUP()){
-                int tempy = card.getY() + 30;
+                int tempy = card.getY() + 60;
                 
                 if(tempy <= card.getOrginalY()){
                     card.setY(tempy);
@@ -61,7 +61,7 @@ public interface CardMoveState {
                 }
             }
             else{
-                int tempy = card.getY() - 30;
+                int tempy = card.getY() - 60;
                 
                 if(tempy >= card.getOrginalY()){
                     card.setY(tempy);

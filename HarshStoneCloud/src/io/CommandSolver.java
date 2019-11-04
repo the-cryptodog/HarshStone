@@ -290,13 +290,22 @@ public class CommandSolver extends Thread {
 
         private void trig(MouseEvent e, MouseState state) {
             currentEvent = e; 
-            if(currentState == MouseState.RELEASED && state == MouseState.MOVED){
-                return;
+   
+//            if(currentState == MouseState.RELEASED  || currentState == MouseState.CLICKED){
+//                  if(state == MouseState.MOVED){
+//                  return;
+//            }
+            if(currentState == MouseState.RELEASED  && state == MouseState.MOVED){
+//                  if(state == MouseState.MOVED){
+                  return;
             }
-    
+            if(currentState == MouseState.PRESSED  && state == MouseState.DRAGGED){
+//                  if(state == MouseState.MOVED){
+                  return;
+            }
             currentState = state;
-            
-        }
+            }
+//        }
 
         // 將當前的指令存入recorder並刷新(滑鼠暫時不刷新)指令集
         private void record(long time) {

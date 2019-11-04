@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package PopOutWindow;
+package PopUpWindow;
 
 import Controller.PathBuilder;
 import Controller.SceneController;
@@ -30,12 +30,11 @@ public class Incidence extends GameObject {
     protected CommandSolver.MouseCommandListener mousecommandlistener;
     private BufferedImage img;
     private Button exit;
-    private boolean startPressed;
 
     public Incidence(int x, int y , int width, int height, String name) {
         super(x,y,width,height,name);
         img = irc.tryGetImage(PathBuilder.getIncidence("/"+name+".png"));
-        exit = new Button(900, 450, 108, 40, "BACK");
+        exit = new Button(x+50, y+250, 108, 40, "BACK");
 
 
     }

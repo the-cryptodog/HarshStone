@@ -82,7 +82,7 @@ public interface HeroState {
         public void action(Hero hero) {
             int tempx;
             
-            tempx = hero.getX() + Global.HEROMOVERANGE;
+            tempx = hero.getX() + Global.HEROMOVERANGE+10;
             if(hero.getX() <= Global.JWIDTH ){
                 hero.setX(tempx);
             }

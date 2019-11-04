@@ -27,63 +27,62 @@ import utils.Global;
  * @author frank61003
  */
 //為何不能靜態
-public class CardFactory implements Serializable{
-    private class CardData{
+public class CardFactory implements Serializable {
+
+    private class CardData {
+
         protected String description;
         protected int cost;
         protected BufferedImage image;
         protected String path;
         protected String name;
         protected int serialnumber;
-    
-    
+
     }
-    
+
     private BufferedReader br;
     private ArrayList<String> carddata;
-    
-    
-    public CardFactory(){
-       carddata = readCardData();
-    
+    private ArrayList<String> rareCardData;
+
+    public CardFactory() {
+        carddata = readCardData();
+        rareCardData = readRareCardData();
+
     }
-    
-    
-    public ArrayList<String> readRareCardData(){
+
+    public ArrayList<String> readRareCardData() {
         ArrayList<String> str = new ArrayList<String>();
         try {
             BufferedReader br = new BufferedReader(new FileReader("RareCardData.txt"));
-            
-            while(br.ready()){
+
+            while (br.ready()) {
                 str.add(br.readLine());
             }
             br.close();
         } catch (FileNotFoundException ex) {
-            
+
         } catch (IOException ex) {
 //            Logger.getLogger(JavaApplication40Filemanage.class.getName()).log(Level.SEVERE, null, ex);
         }
         return str;
     }
-    public ArrayList<String> readCardData(){
+
+    public ArrayList<String> readCardData() {
         ArrayList<String> str = new ArrayList<String>();
         try {
             BufferedReader br = new BufferedReader(new FileReader("CardData.txt"));
-            
-            while(br.ready()){
+
+            while (br.ready()) {
                 str.add(br.readLine());
             }
             br.close();
         } catch (FileNotFoundException ex) {
-            
+
         } catch (IOException ex) {
 //            Logger.getLogger(JavaApplication40Filemanage.class.getName()).log(Level.SEVERE, null, ex);
         }
         return str;
     }
-    
-
-    
 
 //    public ArrayList<CardData> spiltCardData(ArrayList<String> str){
 //        ArrayList<CardData> carddata = new ArrayList<CardData>();
@@ -96,32 +95,32 @@ public class CardFactory implements Serializable{
 //        
 //        return carddata;
 //    }
-
-    
-    
     //generate card
-    public Card genCard(int serialnumber){
-        
-        String[] temp = carddata.get(serialnumber).split(",");
-        
-        Card card = new Card(0,0,Global.CARDWIDTH,Global.CARDHEIGHT,temp[1],Integer.valueOf(temp[3]));
+    public Card genCard(int serialnumber, boolean rare) {
+        String[] temp;
+        if (rare) {
+            temp = rareCardData.get(serialnumber).split(",");
+        } else {
+            temp = carddata.get(serialnumber).split(",");
+        }
+        Card card = new Card(0, 0, Global.CARDWIDTH, Global.CARDHEIGHT, temp[1], Integer.valueOf(temp[3]));
         card.setSkill(Integer.valueOf(temp[2]));
-        if(Integer.valueOf(temp[4]) != 0){
+        if (Integer.valueOf(temp[4]) != 0) {
             card = new DamageEffect(card, Integer.valueOf(temp[4]));
         }
-        if(Integer.valueOf(temp[5]) != 0){
+        if (Integer.valueOf(temp[5]) != 0) {
             card = new DefenceEffect(card, Integer.valueOf(temp[5]));
         }
-        if(Integer.valueOf(temp[6]) != 0){
+        if (Integer.valueOf(temp[6]) != 0) {
             card = new WeakEffect(card, Integer.valueOf(temp[6]));
         }
-        if(Integer.valueOf(temp[7]) != 0){
+        if (Integer.valueOf(temp[7]) != 0) {
             card = new PoisonEffect(card, Integer.valueOf(temp[7]));
         }
-        if(Integer.valueOf(temp[8]) != 0){
+        if (Integer.valueOf(temp[8]) != 0) {
             card = new FrozenEffect(card, Integer.valueOf(temp[8]));
         }
-        if(Integer.valueOf(temp[9]) != 0){
+        if (Integer.valueOf(temp[9]) != 0) {
             card = new HealEffect(card, Integer.valueOf(temp[9]));
         }
         card.setAttack(Integer.valueOf(temp[4]));
@@ -130,9 +129,8 @@ public class CardFactory implements Serializable{
         card.setPoison(Integer.valueOf(temp[7]));
         card.setFrozen(Integer.valueOf(temp[8]));
         card.setHeal(Integer.valueOf(temp[9]));
-        
-        card.setCardIconHelper(new CardIconHelper(card));
 
+        card.setCardIconHelper(new CardIconHelper(card));
 
         System.out.println("攻擊力為 = " + card.getAttack());
         System.out.println("防禦力為 = " + card.getDefense());
@@ -140,10 +138,9 @@ public class CardFactory implements Serializable{
         System.out.println("中毒為 = " + card.getPoison());
         System.out.println("冰凍為 = " + card.getFrozen());
         System.out.println("治療為 = " + card.getHeal());
-        
 
         return card;
-       
+
     }
-    
+
 }
