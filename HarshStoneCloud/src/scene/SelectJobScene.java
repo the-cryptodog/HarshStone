@@ -69,7 +69,8 @@ public class SelectJobScene extends Scene {
 
         jobSelected = false;
         back = new Button(1800, 1000, 85, 50, "BACK");
-
+        next = new Button(750, 550, 220, 50, "CONTINUE");
+        
 //        actor = new Actor(450, 0, 128, 128, 0, "巫師");
 //        actor2 = new Actor(1150, 0, 128, 128, 0, "戰士");
         job1 = new Hero(Global.JOB1X, Global.JOBY, 128, 128, "Actor1", 0, 0);
@@ -92,7 +93,7 @@ public class SelectJobScene extends Scene {
 
         job1screen = new Button(350, 250, 391, 506, "JOB1SCREEN");
         job2screen = new Button(1150, 250, 391, 506, "JOB2SCREEN");
-        next = new Button(750, 550, 54, 20, "EXIT");
+        
 
         sx1 = 480;
         sy1 = 270;
@@ -156,6 +157,7 @@ public class SelectJobScene extends Scene {
 //                      startPressed = true;
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
                     }
+
                     if (jobSelected & next.isCollision(e.getX(), e.getY())) {
                         if (selectjobscenestate instanceof beginTalk1) {
                             selectjobscenestate = new beginTalk2();
@@ -167,10 +169,13 @@ public class SelectJobScene extends Scene {
                             selectjobscenestate = new talkEnd();
                         }
 
+
+                        
                     }
 
-                    if (state == CommandSolver.MouseState.PRESSED) {
-                        if (job1.isCollision(e.getX(), e.getY())) {
+
+                if (state == CommandSolver.MouseState.PRESSED) {
+                    if (job1.isCollision(e.getX(), e.getY())) {
 
                         }
                     }
