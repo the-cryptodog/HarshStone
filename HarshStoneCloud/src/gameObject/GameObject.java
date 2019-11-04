@@ -69,7 +69,15 @@ public abstract class GameObject implements Serializable{
         this.height=height;
     }
     
+     public ImageResourceController getImageResourceController(){
+        return irc;
+    }
     
+    public void setImageResourceController(){
+       irc = ImageResourceController.getInstance();
+    }
+     
+     
     public boolean isCollision(int x, int y){
         if(x < this.x || x > this.x + width){
             return false;

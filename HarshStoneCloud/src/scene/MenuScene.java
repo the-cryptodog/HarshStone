@@ -101,10 +101,13 @@ public class MenuScene extends Scene {
 
                     if(buttons.get(3).isCollision(e.getX(),e.getY())){
                         Global.hero = Hero.loadHeroRecord();
-                        CardDeckRecord temp = new CardDeckRecord();
-                        Global.hero.setHeroDeck(temp.getCardDeck());
-                        scenecontroller.changeScene(new MapScene(scenecontroller));
-                    
+                        CardDeckRecord temp1 = new CardDeckRecord();
+                        Global.hero.setHeroDeck(temp1.getCardDeck());
+                        MapScene temp2 = new MapScene(scenecontroller);
+                        temp2.loadRedCrossList();
+                        temp2.loadCurrentRedCross();
+                        scenecontroller.changeScene(temp2);
+                        
 
                     }
 

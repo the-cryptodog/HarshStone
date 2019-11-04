@@ -50,6 +50,13 @@ public class redCross extends GameObject implements Serializable{
         return false;
     }
 
+    public void setRedCross(){
+        this.redCross = irc.getInstance().tryGetImage(PathBuilder.getMap("/" + name + ".png"));
+    }
+    
+    
+    
+    
     public void paint(Graphics g) {
         if (isclicked) {
             g.drawImage(redCross, x, y, width, height, null);
