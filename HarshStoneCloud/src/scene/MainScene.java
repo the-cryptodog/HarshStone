@@ -28,6 +28,7 @@ import gameObject.Monster.Monster;
 
 import gameObject.Monster.MonsterState;
 import gameObject.Monster.MonsterState.DecideMove;
+import gameObject.Monster.MonsterState.EndMove;
 import gameObject.Monster.Poison;
 import gameObject.NumberIcon;
 import gameObject.Skill.Skill;
@@ -531,6 +532,7 @@ public class MainScene extends Scene {
                     temp.setMoved(false);
                     temp.setMonsterState(new DecideMove());
                     temp.move();
+                    
                 }
                 next.setIsClicked(false);
                 if(!useheroskill){

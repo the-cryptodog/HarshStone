@@ -7,6 +7,8 @@ package scene;
 
 import Controller.SceneController;
 import gameObject.Button.Button;
+import gameObject.Card.CardDeck;
+import gameObject.Card.CardDeck.WarriorDeck;
 import gameObject.Hero.Hero;
 import gameObject.MapIcon.MapPath;
 import gameObject.MapIcon.redCross;
@@ -117,24 +119,28 @@ public class MapScene extends Scene {
                     }
                     
                     if(save.isCollision(e.getX(), e.getY())){
-                         FileOutputStream fos;
-                        try{
-                            fos = new FileOutputStream("Hero.ser");
-                            ObjectOutputStream oos = new ObjectOutputStream(fos);
-                            oos.writeObject(hero);
-                            fos.close();
-                            oos.close();
-                        }catch(FileNotFoundException ex){
-                            System.out.println("1");
-                            ex.printStackTrace();
-                        }catch(IOException ex){
-                            System.out.println("2");
-                            ex.printStackTrace();
-                            
-                        }
-                    
-                    
-                    
+//                         FileOutputStream fos;
+//                        try{
+//                            fos = new FileOutputStream("Hero.ser");
+//                            ObjectOutputStream oos = new ObjectOutputStream(fos);
+//                            oos.writeObject(hero);
+//                            fos.close();
+//                            oos.close();
+//                        }catch(FileNotFoundException ex){
+//                            System.out.println("1");
+//                            ex.printStackTrace();
+//                        }catch(IOException ex){
+//                            System.out.println("2");
+//                            ex.printStackTrace();
+//                        }
+                        
+                        
+//                        WarriorDeck ss = new WarriorDeck(0,0,0,0,"3");
+//                        ss.createCardRecord();
+                        Global.hero.getHeroDeck().createCardRecord();
+                        Global.hero.saveHeroRecord();
+//                        CardDeck carddeck = hero.getHeroDeck();
+//                        carddeck.createCardRecord();
                     }
                     
 

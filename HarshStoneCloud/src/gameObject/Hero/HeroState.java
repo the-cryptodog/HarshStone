@@ -14,7 +14,7 @@ import utils.Global;
  *
  * @author User
  */
-public interface HeroState {
+public interface HeroState extends Serializable{
 
     public void action(Hero hero);
 
@@ -51,14 +51,14 @@ public interface HeroState {
 //        }
 //    }
 
-    public class NoMove implements HeroState, Serializable{
-
+    public class NoMove implements HeroState{
+        
         @Override
         public void action(Hero hero) {
         }
     }
 
-    public class MoveHeroRight implements HeroState, Serializable {
+    public class MoveHeroRight implements HeroState{
 
         @Override
         public void action(Hero hero) {
@@ -76,7 +76,7 @@ public interface HeroState {
         }
     }
     
-    public class MoveHeroLeave implements HeroState, Serializable {
+    public class MoveHeroLeave implements HeroState{
 
         @Override
         public void action(Hero hero) {

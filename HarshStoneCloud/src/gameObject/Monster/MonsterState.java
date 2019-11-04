@@ -41,6 +41,7 @@ public interface MonsterState {
             
             for(int i = 0;i < size; i++){
                 temp1.get(i).action(monster, hero);
+                System.out.println(temp1.get(i).getClass().getName());
             }
             for(int i = 0;i < temp1.size(); i++){
                 if(temp1.get(i).getContinueTurn() == 0){

@@ -12,6 +12,9 @@ import gameObject.GameObject;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import values.ImagePath;
@@ -95,6 +98,26 @@ public class CardDeck extends GameObject implements Serializable{
             cards.remove(0);
         }
     }
+    
+    public void createCardRecord(){
+        
+        try{
+                BufferedWriter bw = new BufferedWriter(new FileWriter("CardDeckData.txt"));
+                int temp = cards.size();
+                for(int i = 0;i < temp; i++){
+                    bw.write("" + cards.get(i).serialnumber);
+                    bw.newLine();
+                }
+                bw.flush();
+                bw.close();
+        }   
+        catch(IOException ex){
+            ex.printStackTrace();
+        };
+    }
+    
+    
+    
     
     
     public String toString(){
