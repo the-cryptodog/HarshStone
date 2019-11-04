@@ -166,8 +166,8 @@ public class Global {
      public static final int DIGIT4X= (( CARDWIDTH/4)*3);
 
 
-
-    
+     //戰鬥畫面配置參數
+    public static final int DISCARDDECKX = 1700;
     
 
 }

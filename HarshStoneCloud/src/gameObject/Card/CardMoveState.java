@@ -88,13 +88,13 @@ public interface CardMoveState {
             int y = card.getY();
             int tempx = card.getX() + 30;
             int tempy = card.getY() + 30;
-            if(x <= 1300 || y < 700){    
+            if(x <= Global.DISCARDDECKX || y < 700){    
  
-                if(tempx <= 1300){
+                if(tempx <= Global.DISCARDDECKX){
                     card.setX(tempx);
                 }
                 else{
-                    card.setX(1300);
+                    card.setX(Global.DISCARDDECKX);
                 }
                 if(tempy < 700){                    
                     card.setY(tempy); 
@@ -141,11 +141,11 @@ public interface CardMoveState {
         @Override
         public void move(Card card) {
             int tempx = card.getX() + 30;
-            if(tempx <= 1300){
+            if(tempx <= Global.DISCARDDECKX){
                 card.setX(tempx);
             }
             else{
-                card.setX(1300);
+                card.setX(Global.DISCARDDECKX);
             }
             
         }

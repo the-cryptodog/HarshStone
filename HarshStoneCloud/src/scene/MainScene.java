@@ -130,7 +130,7 @@ public class MainScene extends Scene {
         hero = new Hero(-70, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
         drawcarddeck = hero.getHeroDeck();
 //        drawcarddeck = new CardDeck(1400,690,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"抽牌推");
-        discarddeck = new CardDeck(1640, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "棄牌推");
+        discarddeck = new CardDeck(Global.DISCARDDECKX, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "棄牌推");
         handdeck = new CardDeck(40, 490, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "手牌");
 
         selectedcard = null;
@@ -337,10 +337,9 @@ public class MainScene extends Scene {
                 drawcarddeck.getCards().add(discarddeck.getCards().get(i));
             }
 
-//        //確認每張牌都被刪掉
-            for (int i = 0; i < temp; i++) {
-                discarddeck.getCards().remove(0);
-            }
+//        //確認每張牌都被刪掉    
+            discarddeck.cardRemove();
+            
 
         }
 

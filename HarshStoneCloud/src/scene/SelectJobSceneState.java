@@ -55,14 +55,7 @@ public interface SelectJobSceneState {
 
         @Override
         public void action(SelectJobScene scene) {
-            Hero npc = scene.getHeros()[2];
-            if (npc.getX() > 1440) {
-                npc.setX(npc.getX() - 20);
-            }
-            if(npc.getX() <= 1440){
-                scene.setSelectJobSceneState(new beginTalk2());
             
-            }
         }
     }
     
@@ -99,8 +92,8 @@ public interface SelectJobSceneState {
                 Hero job = scene.getHeroSelected();
                 job.changeDirection(Global.RIGHT);
             }else{
-             scene.setStoryEnd(true);
-             scene.setSelectJobSceneState(new goToMap());
+                scene.setStoryEnd(true);
+                scene.setSelectJobSceneState(new goToMap());
             }
         }
     }

@@ -89,6 +89,14 @@ public class CardDeck extends GameObject implements Serializable{
         return cards;
     }
     
+    public void cardRemove(){
+        int temp = cards.size();
+        for (int i = 0; i < temp; i++){
+            cards.remove(0);
+        }
+    }
+    
+    
     public String toString(){
         if(cards.size()==0){
             return "牌堆沒牌";
