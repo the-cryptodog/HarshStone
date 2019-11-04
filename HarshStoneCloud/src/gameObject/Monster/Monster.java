@@ -309,7 +309,7 @@ public class Monster extends GameObject implements Cloneable{
             lasthealth = health;
             recordhealth = false;
         }
-
+        
         monsterstate.action(this, hero);
         if (attack > 0) {
             number1.setNumber(attack / 10);

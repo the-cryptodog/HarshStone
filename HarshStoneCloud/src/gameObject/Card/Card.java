@@ -46,7 +46,7 @@ public class Card extends GameObject{
   
 
     
-    public Card(int x, int y, int width, int height, String name, int cost) {
+    public Card(int x, int y, int width, int height, String name,int serialnumber,int cost) {
         super(x, y, width, height, name);
         originalx = x;
         originaly = y;
@@ -54,12 +54,12 @@ public class Card extends GameObject{
         description= "";
         clicked = false;
         cardmovestate = new MoveStop();
+        this.serialnumber = serialnumber;
         image = irc.getInstance().tryGetImage(PathBuilder.getImage("/"+name+".png"));
         defense = 0;
         attack = 0;
         //1~5為手牌位置
         handdeckpoisition = 0;
-
         weak = 0;
         frozen = 0;
         poison = 0;
@@ -130,7 +130,6 @@ public class Card extends GameObject{
     }
     
     
-    
     public void setOrginalX(int originalx){
             this.originalx = originalx;
     }
@@ -152,6 +151,14 @@ public class Card extends GameObject{
     
     public int getCost(){
         return cost;
+    }
+    
+     public void setSerialNumber(int serialnumber){
+        this.serialnumber = serialnumber;
+    }
+    
+    public int getSerialNumber(){
+        return serialnumber;
     }
     
     

@@ -12,6 +12,12 @@ import gameObject.Card.CardDeck.WarriorDeck;
 import gameObject.GameObject;
 import gameObject.Hero.HeroState.*;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+>>>>>>> 5adb17ab0a3d80c971135ab5c48b115e4c314028
 import java.io.Serializable;
 import utils.DelayCounter;
 import utils.Global;
@@ -22,10 +28,11 @@ import values.ImagePath;
  * @author frank61003
  */
 public class Hero extends GameObject implements Serializable{
-
+    private static final long serialVersionUID = 44444;
     protected int health;
     private static final int[] ACT = {0, 1, 2, 1};
     protected int direction;
+    protected int actor;
     protected int act;
     protected int originalx;
     protected int originaly;
@@ -39,7 +46,7 @@ public class Hero extends GameObject implements Serializable{
     private boolean recordhealth;
     private HeroState heroState;
 
-    public Hero(int x, int y, int width, int height, String name, int health, int act) {
+    public Hero(int x, int y, int width, int height, String name, int health, int actor) {
 
         super(x, y, width, height, name);
         this.health = health;
@@ -47,12 +54,13 @@ public class Hero extends GameObject implements Serializable{
         defense = 0;
         originalx = x;
         originaly = y;
+        this.actor = actor;
         moved = false;
         image = irc.tryGetImage(PathBuilder.getHero(ImagePath.ACTOR1));
 //        herodeck = new WarriorDeck(x, y, width, height, name);
 
         herodeck = new WarriorDeck(40, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "牌組");
-        herohelper = new HeroHelper(act);
+        herohelper = new HeroHelper(actor);
 
         delaycounter = new DelayCounter(10, new DelayCounter.Action() {
 
@@ -63,6 +71,7 @@ public class Hero extends GameObject implements Serializable{
             }
         });
         heroState = new NoMove();
+//        Global.hero = this;
     }
 
     public Hero(int x, int y, int width, int height, String name, int health) {
@@ -101,6 +110,27 @@ public class Hero extends GameObject implements Serializable{
     public void setHeroDeck(CardDeck herodeck) {
         this.herodeck = herodeck;
     }
+    
+    public void saveCardDeckRecord() {
+        herodeck.createCardRecord();
+    }
+    
+    public void saveHeroRecord(){
+        
+        try{
+                BufferedWriter bw = new BufferedWriter(new FileWriter("HeroRecord.txt"));
+                bw.write("" + health);
+                bw.newLine();
+                bw.write("" + actor);
+                bw.flush();
+                bw.close();
+        }   
+        catch(IOException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    
     
     
     public int gethealth() {

@@ -134,6 +134,7 @@ public class SelectJobScene extends Scene {
 
                         job1screen.setIsClicked(true);
                         heroSelected = job1;
+                        Global.hero = job1;
                         heros[1] = null;
                         jobSelected = true;
                         storyBegin = true;
@@ -147,6 +148,8 @@ public class SelectJobScene extends Scene {
 
                         job2screen.setIsClicked(true);
                         heroSelected = job2;
+
+                        Global.hero = job2;
                         heros[0] = null;
                         storyBegin = true;
                         jobSelected = true;

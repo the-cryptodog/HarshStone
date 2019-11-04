@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import static java.util.Arrays.stream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.scene.media.AudioClip;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
@@ -47,7 +48,7 @@ public class MenuScene extends Scene {
     private SelectJobSceneState menuscenestate;
     private boolean startPressed;
     private Incidence incidence;
-    private Clip background;
+    private AudioClip background;
 
     private Clip clip;
     
@@ -61,8 +62,8 @@ public class MenuScene extends Scene {
         
         
 //        clip = arc.tryGetAudio("/resources/Audio/This.wav");
-        background = arc.tryGetAudio("/resources/Audio/This.wav");
-        background.start();
+        background = acrc.tryGetAudioClip("/resources/Audio/This.wav");
+        background.play();
 //        clip.start();
         
         
@@ -97,7 +98,7 @@ public class MenuScene extends Scene {
                 if (state == CommandSolver.MouseState.CLICKED) {
                     System.out.println("CLick");
                     if (buttons.get(0).isCollision(e.getX(), e.getY())) {
-                        background.start();
+                        background.play();
                         scenecontroller.changeScene(new SelectJobScene(scenecontroller));
                     }
                     if (buttons.get(1).isCollision(e.getX(), e.getY())) {

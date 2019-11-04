@@ -17,7 +17,7 @@ public abstract class CardEffect extends Card{
     
     protected Card card;
     public CardEffect(Card card) {
-        super(card.getX(), card.getY(), card.getWidth(), card.getHeight(), card.getName(), card.cost);
+        super(card.getX(), card.getY(), card.getWidth(), card.getHeight(), card.getName(), card.getSerialNumber(), card.cost);
         this.card = card;  
     }
     

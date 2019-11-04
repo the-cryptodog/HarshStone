@@ -96,6 +96,7 @@ public class CardFactory implements Serializable {
 //        return carddata;
 //    }
     //generate card
+
     public Card genCard(int serialnumber, boolean rare) {
         String[] temp;
         if (rare) {
@@ -103,7 +104,8 @@ public class CardFactory implements Serializable {
         } else {
             temp = carddata.get(serialnumber).split(",");
         }
-        Card card = new Card(0, 0, Global.CARDWIDTH, Global.CARDHEIGHT, temp[1], Integer.valueOf(temp[3]));
+        Card card = new Card(0, 0, Global.CARDWIDTH, Global.CARDHEIGHT, temp[1],Integer.valueOf(temp[0]),Integer.valueOf(temp[3]));
+
         card.setSkill(Integer.valueOf(temp[2]));
         if (Integer.valueOf(temp[4]) != 0) {
             card = new DamageEffect(card, Integer.valueOf(temp[4]));
