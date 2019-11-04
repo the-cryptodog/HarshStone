@@ -99,6 +99,14 @@ public class CardDeck extends GameObject implements Serializable{
         }
     }
     
+    public void cardTransform(CardDeck carddeck){
+        int temp = cards.size();
+        for (int i = 0; i < temp; i++){
+            carddeck.getCards().add(cards.get(i));
+        }
+        this.cardRemove();
+    }
+   
     public void createCardRecord(){
         
         try{

@@ -39,6 +39,8 @@ public class FrozenEffect extends CardEffect{
         if(monster.getFrozen() == 0){
             monster.getMonsterAbnormalStates().add(new Frozen(0,0,32,32,"",frozenstate));
             monster.setFrozen(frozenstate);
+            monster.setAttack(0);
+            monster.setDefense(0);
             monster.setMonsterState(new EndMove());
         }
         else{
@@ -53,6 +55,8 @@ public class FrozenEffect extends CardEffect{
                     }
                     temp1.setContinueTurn(temp2);
                     monster.setFrozen(temp2);
+                    monster.setAttack(0);
+                    monster.setDefense(0);
                     monster.setMonsterState(new EndMove());
                     break;
                 }
