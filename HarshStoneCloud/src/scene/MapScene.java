@@ -112,7 +112,7 @@ public class MapScene extends Scene {
 
                             currentRedCross = redCrossList.get(i).getTagList().get(0);
                             redCrossList.get(i).setIsClicked(true);
-                             stagePassed = false;
+                            stagePassed = false;
                             scenecontroller.changeScene(new MainScene(scenecontroller, getThis()));
 
                         }
@@ -139,6 +139,7 @@ public class MapScene extends Scene {
 //                        ss.createCardRecord();
                         Global.hero.getHeroDeck().createCardRecord();
                         Global.hero.saveHeroRecord();
+                        saveRedCrossList();
 //                        CardDeck carddeck = hero.getHeroDeck();
 //                        carddeck.createCardRecord();
                     }
@@ -177,6 +178,31 @@ public class MapScene extends Scene {
 //    public Hero getHero(){
 //        return hero;
 //    }
+    
+    
+    public void saveRedCrossList(){
+       
+    
+        FileOutputStream fos;
+        try{
+            fos = new FileOutputStream("RedCrossList.ser");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(redCrossList);
+            fos.close();
+            oos.close();
+        }catch(FileNotFoundException ex){
+            ex.printStackTrace();
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    
+    
+    
+    
+    
+    
     
     
     @Override

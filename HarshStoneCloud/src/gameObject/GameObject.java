@@ -22,8 +22,8 @@ public abstract class GameObject implements Serializable{
     protected int height;
     protected int width;
     protected String name;
-    protected ImageResourceController irc;
-    protected BufferedImage image;
+    protected transient ImageResourceController irc;
+    protected transient BufferedImage image;
     
     
     public GameObject(int x, int y, int width, int height, String name){
