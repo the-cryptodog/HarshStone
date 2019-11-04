@@ -160,5 +160,20 @@ public interface CardMoveState {
 //            System.out.print(card.getY());
         }
     }
+    
+     public class DiscardRareCard implements CardMoveState{
+
+
+        @Override
+        public void move(Card card) {
+
+//            int x = card.getX();
+//            int y = card.getY();
+//            int tempx = card.getX() + 200;
+            int tempy = card.getY() + 100;
+             card.setY(tempy);
+             
+        }
+    }
    
 }

@@ -6,6 +6,7 @@
 package PopUpWindow;
 
 import Controller.PathBuilder;
+import gameObject.Button.Button;
 import gameObject.Card.Card;
 import gameObject.Card.CardFactory;
 import gameObject.GameObject;
@@ -27,17 +28,25 @@ public class Award extends GameObject {
     private ArrayList<Card> awards;
     private int count;
     private int[] rareCardIndex;
+    private Button backToMap;
+    private boolean cardSelected;
+    private float awardSize;
 
     public Award(int x, int y, int width, int height, String name) {
         super(x, y, width, height, name);
+
         img = irc.tryGetImage(PathBuilder.getIncidence("/" + name + ".png"));
         awards = new ArrayList<>();
         rareCardFactory = new CardFactory();
         rareCardFactory.readRareCardData();
         rareCardIndex = new int[3];
         count = 0;
-        System.out.print("目前關卡="+Global.CURRENTSTAGE+")");
-        
+        awardSize = 1.8f;
+        backToMap = new Button(1400, 860, 108, 40, "EXIT");
+        cardSelected = false;
+
+        System.out.print("目前關卡=" + Global.CURRENTSTAGE + ")");
+
         switch (Global.CURRENTSTAGE) {
             case 1:
                 for (int i = 0; i < 3; i++) {
@@ -56,34 +65,55 @@ public class Award extends GameObject {
                 }
             case 4:
                 for (int i = 9; i < 12; i++) {
-                    System.out.println("count = "+count);
-                    System.out.println("長度 = "+rareCardIndex.length);
+                    System.out.println("count = " + count);
+                    System.out.println("長度 = " + rareCardIndex.length);
                     rareCardIndex[0] = i;
                     break;
                 }
-                
+
         }
         for (int i = 0; i < 3; i++) {
             System.out.print(awards.size());
-            awards.add(rareCardFactory.genCard(rareCardIndex[i],true));
-            awards.get(i).setX(300+(i*600));
-            awards.get(i).setY(540);
+            awards.add(rareCardFactory.genCard(rareCardIndex[i], true));
 
-            awards.get(i).setY(540);
+            awards.get(i).setWidth((int) (Global.CARDWIDTH * awardSize));
+            awards.get(i).setHeight((int) (Global.CARDHEIGHT * awardSize));
+            awards.get(i).getCardIconHelper().setAf(awardSize);
+            awards.get(i).setX(400 + i * 400);
+            awards.get(i).setY(350);
+
 //                    awards.get(i).setX();
         }
-        count=0;
-       
+        count = 0;
+
     }
 
     public void setCommandListener(CommandSolver.MouseCommandListener mcl) {
         this.mousecommandlistener = mcl;
     }
 
+    public ArrayList<Card> getAward() {
+        return awards;
+    }
+    public void setSelected(boolean  setSelected) {
+        this.cardSelected=setSelected;
+    }
+        public Button getButton(){
+        return backToMap;
+      
+    }
+ 
+    
+    
+
     public void paint(Graphics g) {
-        g.drawImage(img, 0, 0, 1920, 1080, null);
-                for (int i = 0; i < 3; i++) {
+        g.drawImage(img, (1920 - Global.AWARDWIDTH) / 2, (1080 - Global.AWARDHEIGHT) / 2,
+                Global.AWARDWIDTH, Global.AWARDHEIGHT, null);
+        for (int i = 0; i < 3; i++) {
             awards.get(i).paint(g);
+        }
+        if(cardSelected){
+        backToMap.paint(g);
         }
     }
 }

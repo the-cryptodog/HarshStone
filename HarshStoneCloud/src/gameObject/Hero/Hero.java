@@ -176,9 +176,16 @@ public class Hero extends GameObject implements Serializable{
     public void changeDirection(int direction) {
         this.direction = direction;
     }
+
+    /**
+     *
+     * @param width
+     */
+    @Override
     public void setWidth(int width) {
         this.width = width;
     }
+    @Override
     public void setHeight(int height) {
         this.height = height;
     }
