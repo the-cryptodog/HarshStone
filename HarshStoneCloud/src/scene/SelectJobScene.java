@@ -157,37 +157,36 @@ public class SelectJobScene extends Scene {
 //                        scenecontroller.changeScene(new MainScene(scenecontroller));
                     }
                     if (jobSelected & next.isCollision(e.getX(), e.getY())) {
-                        selectjobscenestate = new talkEnd();
-//                      startPressed = true;
-//                        scenecontroller.changeScene(new MainScene(scenecontroller));
-                    }
-                    if (selectjobscenestate instanceof beginTalk1) {
-                        selectjobscenestate = new beginTalk2();
-                    }
-
-                    if (selectjobscenestate instanceof beginTalk2) {
-                        selectjobscenestate = new beginTalk3();
-
-                    }
-
-                }
-
-                if (state == CommandSolver.MouseState.PRESSED) {
-                    if (job1.isCollision(e.getX(), e.getY())) {
+                        if (selectjobscenestate instanceof beginTalk1) {
+                            selectjobscenestate = new beginTalk2();
+                        }
+                        if (selectjobscenestate instanceof beginTalk2) {
+                            selectjobscenestate = new beginTalk3();
+                        }
+                        if (selectjobscenestate instanceof beginTalk3) {
+                            selectjobscenestate = new talkEnd();
+                        }
 
                     }
-                }
-                if (state == CommandSolver.MouseState.MOVED) {
-                    if (job2.isCollision(e.getX(), e.getY())) {
 
+                    if (state == CommandSolver.MouseState.PRESSED) {
+                        if (job1.isCollision(e.getX(), e.getY())) {
+
+                        }
                     }
-                }
+                    if (state == CommandSolver.MouseState.MOVED) {
+                        if (job2.isCollision(e.getX(), e.getY())) {
 
-                if (state == CommandSolver.MouseState.DRAGGED) {
+                        }
+                    }
+
+                    if (state == CommandSolver.MouseState.DRAGGED) {
+                    }
                 }
             }
-        };
-    }
+        };}
+    
+                
 
     public Hero getHeroSelected() {
         return heroSelected;
@@ -226,9 +225,6 @@ public class SelectJobScene extends Scene {
                 scenecontroller.changeScene(new MapScene(scenecontroller));
                 Global.hero.sethealth(100);
             }
-
-
-
 
         }
     }

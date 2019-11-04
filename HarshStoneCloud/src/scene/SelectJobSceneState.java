@@ -59,10 +59,10 @@ public interface SelectJobSceneState {
             if (npc.getX() > 1440) {
                 npc.setX(npc.getX() - 20);
             }
-            if(npc.getX() <= 1440){
-                scene.setSelectJobSceneState(new beginTalk2());
-            
-            }
+//            if(npc.getX() <= 1440){
+//                scene.setSelectJobSceneState(new beginTalk2());
+//            
+//            }
         }
     }
     
