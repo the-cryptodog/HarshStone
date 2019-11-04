@@ -36,12 +36,14 @@ public class CardDeckRecord {
     
     private BufferedReader br;
     private ArrayList<String> carddeckdata;
-    private ArrayList<Card> carddeck;
-    
+    private ArrayList<Card> cards;
+    private CardDeck carddeck;
     
     public CardDeckRecord(){
        carddeckdata = readCardDeckData();
-       carddeck = genCardDeck();
+       cards = new ArrayList<Card>();
+       cards = genCardDeck();
+       carddeck = new CardDeck(40,700,Global.CARDDECKWIDTH,Global.CARDDECKHEIGHT,"抽牌推", cards);
     }
     
     
@@ -93,11 +95,13 @@ public class CardDeckRecord {
 //        return carddata;
 //    }
 
-    public ArrayList<Card> getCardDeck(){
-        return carddeck;
+    public ArrayList<Card> getCards(){
+        return cards;
     }
     
-    
+    public CardDeck getCardDeck(){
+        return carddeck;
+    }
     
     
     
@@ -111,9 +115,9 @@ public class CardDeckRecord {
         String[] temp2 = new String[temp1];
         for (int i = 0; i < temp1; i++){
            temp2[i] = carddeckdata.get(i);
-            carddeck.add(cardfactory.genCard(Integer.valueOf(temp2[i]),false));            
+           cards.add(cardfactory.genCard(Integer.valueOf(temp2[i]),false));            
         }
-        return carddeck;
+        return cards;
     }
     
     

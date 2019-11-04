@@ -144,7 +144,7 @@ public class Global {
     public static final int SKILLACT6 = 20;
     public static final int SKILLACT7 = 20;
     public static final int SKILLACT8 = 25;
-    public static final int SKILLACT9= 30;
+    public static final int SKILLACT9 = 30;
     public static final int SKILLACT10 = 20;
 
     //背景圖長寬
