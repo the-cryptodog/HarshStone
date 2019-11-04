@@ -17,7 +17,6 @@ import java.awt.event.ActionListener;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
->>>>>>> 5adb17ab0a3d80c971135ab5c48b115e4c314028
 import java.io.Serializable;
 import utils.DelayCounter;
 import utils.Global;
@@ -152,9 +151,16 @@ public class Hero extends GameObject implements Serializable{
     public void changeDirection(int direction) {
         this.direction = direction;
     }
+
+    /**
+     *
+     * @param width
+     */
+    @Override
     public void setWidth(int width) {
         this.width = width;
     }
+    @Override
     public void setHeight(int height) {
         this.height = height;
     }

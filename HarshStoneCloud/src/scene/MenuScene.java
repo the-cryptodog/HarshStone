@@ -36,7 +36,6 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import utils.Global;
 import values.ImagePath;
 
-
 /**
  *
  * @author User
@@ -51,29 +50,17 @@ public class MenuScene extends Scene {
     private AudioClip background;
 
     private Clip clip;
-    
-
-
 
     //開始遊戲(進入選角畫面)
     //結束遊戲(關閉視窗)
     public MenuScene(SceneController scenecontroller) {
         super(scenecontroller);
-        
-        
+
 //        clip = arc.tryGetAudio("/resources/Audio/This.wav");
         background = acrc.tryGetAudioClip("/resources/Audio/This.wav");
         background.play();
 //        clip.start();
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         startPressed = false;
         Global.CURRENTSTAGE = 1;
 //        start = new StartButton(690, 300, 200, 100, "開始遊戲");
@@ -84,8 +71,6 @@ public class MenuScene extends Scene {
         buttons.add(new Button(50, 230, 220, 50, "CONTINUE"));
         img = irc.tryGetImage("/resources/Background/MENU.png");
 
-        
-        
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
@@ -98,30 +83,31 @@ public class MenuScene extends Scene {
                 if (state == CommandSolver.MouseState.CLICKED) {
                     System.out.println("CLick");
                     if (buttons.get(0).isCollision(e.getX(), e.getY())) {
-                        background.play();
+//                        background.play();
                         scenecontroller.changeScene(new SelectJobScene(scenecontroller));
                     }
                     if (buttons.get(1).isCollision(e.getX(), e.getY())) {
-                               incidence = new Incidence(384, 216, 1152, 648, "AWARD");
-                               incidence.setCommandListener(mousecommandlistener);
+
+                        incidence = new Incidence(384, 216, 1152, 648, "AWARD");
+                        incidence.setCommandListener(mousecommandlistener);
                         if (incidence.getButton().isCollision(e.getX(), e.getY())) {
-                           incidence = null;
+                            incidence = null;
                         }
                     }
 //上面兩行為測試用，按CONTINUE可以直接進入戰鬥
-                    if(buttons.get(3).isCollision(e.getX(),e.getY())){
+                    if (buttons.get(3).isCollision(e.getX(), e.getY())) {
                         FileInputStream fis;
-                        try{
+                        try {
                             fis = new FileInputStream("Hero.ser");
                             ObjectInputStream ois = new ObjectInputStream(fis);
-                            Hero herosaved = (Hero)ois.readObject();
+                            Hero herosaved = (Hero) ois.readObject();
                             fis.close();
                             ois.close();
                             MapScene save = new MapScene(scenecontroller);
                             Global.hero = herosaved;
                             scenecontroller.changeScene(save);
-                        }catch(FileNotFoundException ex){
-                            System.out.println("1");        
+                        } catch (FileNotFoundException ex) {
+                            System.out.println("1");
                             ex.printStackTrace();
                         } catch (IOException ex) {
                             System.out.println("2");
@@ -130,13 +116,9 @@ public class MenuScene extends Scene {
                             System.out.println("3");
                             ex.printStackTrace();
                         }
-                        
-                    
-                    
-                    
+
                     }
-                    
-                    
+
                 }
 
                 if (state == CommandSolver.MouseState.PRESSED) {
@@ -154,8 +136,8 @@ public class MenuScene extends Scene {
                 }
                 if (state == CommandSolver.MouseState.EXITED) {
 
-                    }
-                
+                }
+
                 if (state == CommandSolver.MouseState.MOVED) {
                     for (int i = 0; i < buttons.size(); i++) {
                         if (buttons.get(i).isCollision(e.getX(), e.getY())) {
@@ -171,8 +153,7 @@ public class MenuScene extends Scene {
     @Override
 
     public void sceneBegin() {
-        
-        
+
 //        clip.start();
     }
 
@@ -191,7 +172,7 @@ public class MenuScene extends Scene {
         for (int i = 0; i < buttons.size(); i++) {
             buttons.get(i).paint(g);
         }
-        if(incidence!=null){
+        if (incidence != null) {
             incidence.paint(g);
         }
     }

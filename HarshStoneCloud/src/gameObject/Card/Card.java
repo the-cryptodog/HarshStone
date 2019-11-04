@@ -67,6 +67,9 @@ public class Card extends GameObject{
        
     }
     
+
+
+    
     public void setCardIconHelper(CardIconHelper cardIconHelper){
         this.cardIconHelper = cardIconHelper;
     }
@@ -232,6 +235,10 @@ public class Card extends GameObject{
         cardIconHelper.paint(g, x, y, width, height);
 
     }
+        public CardIconHelper  getCardIconHelper(){
+        return cardIconHelper;
+    }
+    
     
     
     public Card getThis(){

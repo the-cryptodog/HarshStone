@@ -169,5 +169,9 @@ public class Global {
      //戰鬥畫面配置參數
     public static final int DISCARDDECKX = 1700;
     
+     //獎勵面板長寬
+    public static final int AWARDWIDTH = 1317;
+    public static final int AWARDHEIGHT = 848;
+
 
 }

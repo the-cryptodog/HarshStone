@@ -62,6 +62,12 @@ public abstract class GameObject implements Serializable{
     public String getName(){
         return name;
     }
+    public void setWidth(int width){
+        this.width=width;
+    }
+    public void setHeight(int height){
+        this.height=height;
+    }
     
     
     public boolean isCollision(int x, int y){
