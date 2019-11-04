@@ -110,6 +110,7 @@ public class MainScene extends Scene {
     private Poison ttt;
     private Hero hero;
     private Award heroawards;
+    private Card selectedRareCard;
 
     public MainScene(SceneController scenecontroller, MapScene mapScene) {
         super(scenecontroller);
@@ -131,9 +132,8 @@ public class MainScene extends Scene {
         this.mapScene = mapScene;
         columns = new BufferedImage[3];
 
-      
         hero = Global.hero;
-        Global.hero.setX(-70); 
+        Global.hero.setX(-70);
         Global.hero.setY(Global.HEROY);
         Global.hero.setWidth(Global.HEROWIDTH);
         Global.hero.setHeight(Global.HEROXHEIGHT);
@@ -154,7 +154,6 @@ public class MainScene extends Scene {
         next = new Button(1700, 580, 184, 42, "ROUNDSTART");
         backtothefuture = new Button(1700, 650, 184, 42, "ROUNDSTART");
 
-
         hero = Global.hero;
         Global.hero.setX(-70);
         Global.hero.setY(Global.HEROY);
@@ -163,7 +162,6 @@ public class MainScene extends Scene {
 
         drawcarddeck = hero.getHeroDeck();
         heroawards = new Award(150, 90, 1770, 990, "AWARD");
-
 
         orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                 "獸人1", 14, 1, (int) (Math.random() * 8), (int) (Math.random() * 8)); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
@@ -291,9 +289,9 @@ public class MainScene extends Scene {
                     if (gameWin) {
                         for (int i = 0; i < heroawards.getAward().size(); i++) {
                             if (heroawards.getAward().get(i).isCollision(e.getX(), e.getY())) {
-                                heroawards.getAward().get(i).setClicked(true);
-                                heroawards.getAward().get(i).getCardIconHelper().setAf(1);
-                                Global.hero.getHeroDeck().getCards().add(heroawards.getAward().get(i));
+                                selectedRareCard = heroawards.getAward().get(i);
+                                selectedRareCard.setClicked(true);
+
                                 System.out.print("選定卡片!");
 
                                 for (int j = 0; j < heroawards.getAward().size(); j++) {
@@ -306,12 +304,18 @@ public class MainScene extends Scene {
 //                            System.out.print("選定卡片!");
                                 //                        Global.CURRENTSTAGE++;
 //                        scenecontroller.changeScene(mapScene);
-                            }      
-                        }                   
+                            }
+                        }
                     }
-                     if (heroawards.getButton().isCollision(e.getX(), e.getY())){
-                              scenecontroller.changeScene(new MapScene(scenecontroller));
-                     }
+                    if (heroawards.getButton().isCollision(e.getX(), e.getY())) {
+                        Global.CURRENTSTAGE++;
+                        scenecontroller.changeScene(mapScene);
+                        selectedRareCard.getCardIconHelper().setAf(1);
+                        selectedRareCard.setWidth(Global.CARDWIDTH);
+                        selectedRareCard.setHeight(Global.CARDHEIGHT);
+                        Global.hero.getHeroDeck().getCards().add(selectedRareCard);
+
+                    }
 
                     if (exit.isCollision(e.getX(), e.getY())) {
 //                        gameOver = true;
@@ -508,8 +512,6 @@ public class MainScene extends Scene {
             }
             hero.setHeroDeck(drawcarddeck);
 
-            Global.CURRENTSTAGE++;
-            scenecontroller.changeScene(mapScene);
         }
 
         if (delaycounter.delayupdate()) {
@@ -525,7 +527,6 @@ public class MainScene extends Scene {
                 heroawards.getAward().get(i).move();
             }
         }
-        
 
         for (int i = 0; i < monsters.size(); i++) {
 
@@ -574,10 +575,10 @@ public class MainScene extends Scene {
                     copyTurnStartMonsters();
                 }
                 discardCard(drawcarddeck, handdeck, discarddeck, 5);
-                System.out.println();    
-                System.out.println("棄牌堆"+discarddeck.getCards().size()+"張牌,抽牌堆" + drawcarddeck.getCards().size()+"張牌,手牌堆"+handdeck.getCards().size()+"張牌");    
+                System.out.println();
+                System.out.println("棄牌堆" + discarddeck.getCards().size() + "張牌,抽牌堆" + drawcarddeck.getCards().size() + "張牌,手牌堆" + handdeck.getCards().size() + "張牌");
                 drawCard(drawcarddeck, handdeck, discarddeck, 5);
-                System.out.println("棄牌堆"+discarddeck.getCards().size()+"張牌,抽牌堆" + drawcarddeck.getCards().size()+"張牌,手牌堆"+handdeck.getCards().size()+"張牌");  
+                System.out.println("棄牌堆" + discarddeck.getCards().size() + "張牌,抽牌堆" + drawcarddeck.getCards().size() + "張牌,手牌堆" + handdeck.getCards().size() + "張牌");
                 crystal.setNumberIcon(3);
             }
 
