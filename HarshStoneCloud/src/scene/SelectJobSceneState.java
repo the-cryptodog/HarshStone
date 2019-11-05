@@ -43,7 +43,7 @@ public interface SelectJobSceneState {
                 scene.downY -= 30;
             }
             Hero npc = scene.getHeros()[2];
-            if (npc.getX() > 1440) {
+            if (npc.getX() > 1350) {
                 npc.setX(npc.getX() - 10);
             } else {
                 scene.setSelectJobSceneState(new beginTalk1());
@@ -79,7 +79,63 @@ public interface SelectJobSceneState {
         }
     }
     
+    public class beginTalk4 implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+           
+
+        }
+    }
     
+    public class beginTalk5 implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+           
+
+        }
+    }
+    public class beginTalk6 implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+           
+
+        }
+    }
+    public class beginTalk7 implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+           
+
+        }
+    }
+    public class beginTalk8 implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+           
+
+        }
+    }
+    public class beginTalk9 implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+           
+
+        }
+    }
+    public class beginTalk10 implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+           
+
+        }
+    }
     
 
     public class talkEnd implements SelectJobSceneState {
@@ -89,7 +145,7 @@ public interface SelectJobSceneState {
             Hero npc = scene.getHeros()[2];
             if (npc.getX() < 2000) {
                 npc.changeDirection(Global.RIGHT);
-                npc.setX(npc.getX() + 10);
+                npc.setX(npc.getX() + 20);
                 Hero job = scene.getHeroSelected();
                 job.changeDirection(Global.RIGHT);
             }else{
