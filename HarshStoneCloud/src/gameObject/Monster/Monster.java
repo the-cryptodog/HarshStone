@@ -50,9 +50,10 @@ public class Monster extends GameObject implements Cloneable{
     private int frozen;
     private int poison;
     private int actnumber;
+    private boolean isboss;
     
     
-    public Monster(int x, int y, int width, int height, String name, int health, int yPosition, int actnumber, int skillIndex) {
+    public Monster(int x, int y, int width, int height, String name, int health, int yPosition, int actnumber, int skillIndex, Boolean isboss) {
         super(x, y, width, height, name);
         this.health = health;
         originalhealth = health;
@@ -66,8 +67,13 @@ public class Monster extends GameObject implements Cloneable{
         poison = 0;
         moved = false;
         useskill = false;
+        this.isboss = isboss;
         this.actnumber = actnumber;
-        image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
+        if(isboss == false){
+            image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
+        }else{
+            image = irc.tryGetImage(PathBuilder.getMonster(ImagePath.EVIL));
+        } 
         recordhealth = false;
         this.yPosition = yPosition;
         this.skillIndex = skillIndex;
@@ -193,6 +199,18 @@ public class Monster extends GameObject implements Cloneable{
         return frozen;
     }
     
+    public void setIsBoss(Boolean isboss){
+        this.isboss = isboss;
+    }
+    
+    public boolean getIsBoss(){
+        return isboss;
+    }
+    
+    public int getActNumber(){
+        return actnumber;
+    }
+    
     public void setMonsterState(MonsterState monsterstate) {
         this.monsterstate = monsterstate;
     }
@@ -225,7 +243,7 @@ public class Monster extends GameObject implements Cloneable{
     
     public Monster clone() {
     
-        Monster clone = new Monster(x, y, width, height, name, health, yPosition, actnumber, skillIndex);
+        Monster clone = new Monster(x, y, width, height, name, health, yPosition, actnumber, skillIndex, isboss);
         clone.attack = this.attack;
         clone.defense = this.defense;
         clone.hero = hero;
@@ -233,11 +251,6 @@ public class Monster extends GameObject implements Cloneable{
         clone.weak = this.weak;
         clone.frozen = this.frozen;
         clone.poison = this.poison;
-        
-        
-        
-        
-        
         
         
         
@@ -257,17 +270,8 @@ public class Monster extends GameObject implements Cloneable{
             }
             else if(temp instanceof Weak){
                 clone.monsterabnormalstates.add(new Weak(0,0,32,32," ",temp.continueturn));
-            }
-        
-        
+            }  
         }
-            
-            
-    
-    
-    
-        
-    
     
         return clone;
     }
@@ -353,9 +357,9 @@ public class Monster extends GameObject implements Cloneable{
     }
 
     public void paint(Graphics g) {
-        if (act == 5) {
-            g.drawImage(image, x, y, width, height, null);
-        } else {
+//        if (act == 5) {
+//            g.drawImage(image, x, y, width, height, null);
+//        } else {
             monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth, attack, defense, monsterabnormalstates, poison);
             number1.setX(x + width);
             number2.setX(x + width + 40);
@@ -367,7 +371,7 @@ public class Monster extends GameObject implements Cloneable{
             if (monsterstate instanceof MonsterState.Attack) {
                 selfSkill.paint(g);//畫出攻擊技能
             }
-        }
+//        }
     update();
     }
 }

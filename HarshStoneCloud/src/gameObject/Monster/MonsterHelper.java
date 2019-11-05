@@ -38,11 +38,11 @@ public class MonsterHelper {
     
     private BufferedImage getMonster(int monster){
         ImageResourceController irc = ImageResourceController.getInstance();
-        if(monster >= 0 || monster < 8){
+        if(monster < 8){
             return irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER1));
         }
-        if(monster >= 8 || monster < 16){
-            return irc.tryGetImage(PathBuilder.getMonster(ImagePath.MONSTER2));
+        if(monster < 16){
+            return irc.tryGetImage(PathBuilder.getMonster(ImagePath.EVIL));
         }
         
         return null;

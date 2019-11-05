@@ -51,7 +51,6 @@ public class MenuScene extends Scene {
     private boolean startPressed;
     private Incidence incidence;
     private AudioClip background;
-
     private Clip clip;
 
     //開始遊戲(進入選角畫面)
@@ -73,7 +72,6 @@ public class MenuScene extends Scene {
         buttons.add(new Button(50, 170, 85, 50, "EXIT"));
         buttons.add(new Button(50, 230, 220, 50, "CONTINUE"));
         img = irc.tryGetImage("/resources/Background/MENU.png");
-
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {

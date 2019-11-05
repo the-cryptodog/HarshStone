@@ -169,19 +169,31 @@ public class MainScene extends Scene {
 
         drawcarddeck = hero.getHeroDeck();
         heroawards = new Award(150, 90, 1770, 990, "AWARD");
-
-        orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
-                "獸人1", 14, 1, (int) (Math.random() * 8), (int) (Math.random() * 8)); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
-        cultist = new Monster(Global.MONSTERX, Global.MONSTERY2, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
-                "獸人2", 10, 2, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第二隻怪物\
-        monster1 = new Monster(Global.MONSTERX, Global.MONSTERY3, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
-                "獸人3", 17, 3, (int) (Math.random() * 8), (int) (Math.random() * 8));// 創建第三隻怪物\
-
         turnstartmonsters = new ArrayList();
         monsters = new ArrayList();
-        monsters.add(orc);
-        monsters.add(cultist);
-        monsters.add(monster1);
+        
+        //若不是魔王關創三隻怪
+        if(Global.CURRENTSTAGE < 1){
+            orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
+                "獸人1", 14, 1, (int) (Math.random() * 8), (int) (Math.random() * 8), false); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
+            cultist = new Monster(Global.MONSTERX, Global.MONSTERY2, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
+                "獸人2", 10, 2, (int) (Math.random() * 8), (int) (Math.random() * 8), false);// 創建第二隻怪物\
+            monster1 = new Monster(Global.MONSTERX, Global.MONSTERY3, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
+                "獸人3", 17, 3, (int) (Math.random() * 8), (int) (Math.random() * 8), false);// 創建第三隻怪物\
+            monsters.add(orc);
+            monsters.add(cultist);
+            monsters.add(monster1);
+        }
+        
+        if(Global.CURRENTSTAGE >= 1){
+            orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, 
+                    "獸人1", 14, 1, 13, (int) (Math.random() * 8), true); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
+            System.out.println("orc:" + orc.getIsBoss() + orc.getActNumber());
+            monsters.add(orc);
+        }
+        
+        
+        
 
         //下段可用迴圈新增(此段為將技能新增至怪物技能列(總數3))  (技能由技能工廠產生)
         for (int i = 0; i < monsters.size(); i++) {
@@ -194,10 +206,6 @@ public class MainScene extends Scene {
         for (int i = 0; i < skillboard.getMonsterSkillList().size(); i++) {
             monsters.get(i).setSkill(skillboard.getMonsterSkillList().get(i));
         }
-
-        System.out.print(orc.toString());
-        System.out.print(cultist.toString());
-        System.out.print(monster1.toString());
 
         System.out.println(drawcarddeck.toString());
         System.out.println(handdeck.toString());
@@ -307,7 +315,6 @@ public class MainScene extends Scene {
                     System.out.println("clicked");
                     if (next.isCollision(e.getX(), e.getY()) &&  !(handdeck.getCards().get(4).getCardMoveState() instanceof MoveToHandDeck)) {
                         next.setIsClicked(true);
-
                         int temp = handdeck.getCards().size();
                         for (int i = 0; i < temp; i++) {
                             handdeck.getCards().get(i).setCardMoveState(new EndTurnMove());
@@ -348,6 +355,7 @@ public class MainScene extends Scene {
                         selectedRareCard.setWidth(Global.CARDWIDTH);
                         selectedRareCard.setHeight(Global.CARDHEIGHT);
                         Global.hero.getHeroDeck().getCards().add(selectedRareCard);
+                        arrangeDeck();
 
                     }
 
@@ -530,7 +538,20 @@ public class MainScene extends Scene {
         }
 
     }
-
+    //把牌組整理好帶回map 判斷條件原為人物往右走出畫面(hero.getX() > Global.JWIDTH)
+    public void arrangeDeck() {
+        int temp = handdeck.getCards().size();
+        discardCard(drawcarddeck, handdeck, discarddeck, temp);
+        temp = discarddeck.getCards().size();
+        for (int i = 0; i < temp; i++) {
+            drawcarddeck.getCards().add(discarddeck.getCards().get(i));
+        }
+        for (int i = 0; i < temp; i++) {
+            discarddeck.getCards().remove(0);
+        }
+        hero.setHeroDeck(drawcarddeck);
+    }
+    
     @Override
     public void sceneBegin() {
         hero.setState(new MoveHeroRight());
@@ -562,18 +583,6 @@ public class MainScene extends Scene {
 
         hero.move();
         //把牌組整理好帶回map 判斷條件原為人物往右走出畫面(hero.getX() > Global.JWIDTH)
-        if (monsters.size() == 0) {
-            int temp = handdeck.getCards().size();
-            discardCard(drawcarddeck, handdeck, discarddeck, temp);
-            temp = discarddeck.getCards().size();
-            for (int i = 0; i < temp; i++) {
-                drawcarddeck.getCards().add(discarddeck.getCards().get(i));
-            }
-            for (int i = 0; i < temp; i++) {
-                discarddeck.getCards().remove(0);
-            }
-            hero.setHeroDeck(drawcarddeck);
-        }
 
         if (delaycounter.delayupdate()) {
             int temp = handdeck.getCards().size();
@@ -695,7 +704,6 @@ public class MainScene extends Scene {
         for (int i = 0; i < monsters.size(); i++) {
             monsters.get(i).paint(g);
         }
-        
         crystal.paint(g);
 
 //        g.setColor(Color.red);
@@ -738,5 +746,11 @@ public class MainScene extends Scene {
                 }
             }
         }
+        
+        
+        
+        
+        
+        
     }
 }
