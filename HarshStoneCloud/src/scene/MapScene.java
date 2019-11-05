@@ -5,6 +5,7 @@
  */
 package scene;
 
+import Controller.ImageResourceController;
 import Controller.SceneController;
 import gameObject.Button.Button;
 import gameObject.Card.CardDeck;
@@ -16,9 +17,15 @@ import io.CommandSolver;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import utils.Global;
@@ -110,6 +117,7 @@ public class MapScene extends Scene {
                         if (redCrossList.get(i).isCollision(e.getX(), e.getY())
                                 && redCrossList.get(currentRedCross).checkTag(i)) {
                             currentRedCross = redCrossList.get(i).getTagList().get(0);
+
                             redCrossList.get(i).setIsClicked(true);               
                             scenecontroller.changeScene(new MainScene(scenecontroller, getThis()));
                             stagePassed = true;
@@ -137,6 +145,8 @@ public class MapScene extends Scene {
 //                        ss.createCardRecord();
                         Global.hero.getHeroDeck().createCardRecord();
                         Global.hero.saveHeroRecord();
+                        saveRedCrossList();
+                        saveCurrentRedCross();
 //                        CardDeck carddeck = hero.getHeroDeck();
 //                        carddeck.createCardRecord();
                     }
@@ -175,6 +185,85 @@ public class MapScene extends Scene {
 //    public Hero getHero(){
 //        return hero;
 //    }
+    
+    
+    public void saveRedCrossList(){
+        FileOutputStream fos;
+        try{
+            fos = new FileOutputStream("RedCrossList.ser");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(redCrossList);
+            fos.close();
+            oos.close();
+        }catch(FileNotFoundException ex){
+            ex.printStackTrace();
+        }catch(IOException ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    public void loadRedCrossList(){
+       
+    
+        FileInputStream fis;
+        try{
+            fis = new FileInputStream("RedCrossList.ser");
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            redCrossList = (ArrayList<redCross>) ois.readObject();
+            int temp = redCrossList.size();
+            for(int i = 0; i < temp; i++){
+                redCrossList.get(i).setImageResourceController();
+                redCrossList.get(i).setRedCross();
+            }
+            fis.close();
+            ois.close();
+        }catch(FileNotFoundException ex){
+            ex.printStackTrace();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+    }
+    
+    
+    public void saveCurrentRedCross(){
+         try{
+                BufferedWriter bw = new BufferedWriter(new FileWriter("CurrentRedCross.txt"));
+                bw.write("" + currentRedCross);
+                bw.flush();
+                bw.close();
+        }   
+        catch(IOException ex){
+            ex.printStackTrace();
+        }
+       
+    }
+    
+    public void loadCurrentRedCross(){
+        try {
+            BufferedReader br = new BufferedReader(new FileReader("CurrentRedCross.txt"));
+            String str = "";
+            while(br.ready()){
+                str += br.readLine();
+            }
+            currentRedCross = Integer.valueOf(str);
+            br.close();
+        } catch (FileNotFoundException ex) {
+//            Logger.getLogger(JavaApplication40Filemanage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+//            Logger.getLogger(JavaApplication40Filemanage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    
+
+    
+    
+    
+    
+    
+    
     
     
     @Override

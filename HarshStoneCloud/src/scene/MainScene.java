@@ -328,8 +328,10 @@ public class MainScene extends Scene {
                     if (backtothefuture.isCollision(e.getX(), e.getY()) && useheroskill == false) {
                         useheroskill = true;
                         crystal.getNumberIcon().setNumber(3);
-
                         transformTurnStartMonsters();
+                        handdeck.cardTransform(drawcarddeck);
+                        drawCard(drawcarddeck,  handdeck,discarddeck, 5);
+                        
                     }
 
 //                    if (exit2.isCollision(e.getX(), e.getY())) {
@@ -354,7 +356,6 @@ public class MainScene extends Scene {
                                 xdelta = temp.getDeltaX(e.getX());
                                 ydelta = temp.getDeltaY(e.getY());
                                 temp.setClicked(true);
-//                                sceneEnd();
                             }
                         }
                     }

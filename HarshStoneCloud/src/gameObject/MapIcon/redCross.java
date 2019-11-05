@@ -22,7 +22,7 @@ public class redCross extends GameObject implements Serializable{
     private static final long serialVersionUID = -671958543348052007L;
     ArrayList<Integer> tagList;
     private boolean isclicked;
-    transient protected BufferedImage redCross;
+    protected transient BufferedImage redCross;
 
     public redCross(int x, int y, int width, int height, String name) {
         super(x, y, width, height, name);
@@ -50,6 +50,13 @@ public class redCross extends GameObject implements Serializable{
         return false;
     }
 
+    public void setRedCross(){
+        this.redCross = irc.getInstance().tryGetImage(PathBuilder.getMap("/" + name + ".png"));
+    }
+    
+    
+    
+    
     public void paint(Graphics g) {
         if (isclicked) {
             g.drawImage(redCross, x, y, width, height, null);
