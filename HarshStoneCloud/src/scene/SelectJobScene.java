@@ -8,13 +8,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 import scene.MapScene;
 import scene.MenuScene;
 import scene.Scene;
 import scene.SelectJobSceneState;
-import scene.SelectJobSceneState.beginTalk1;
-import scene.SelectJobSceneState.beginTalk2;
-import scene.SelectJobSceneState.beginTalk3;
+import scene.SelectJobSceneState.*;
 import scene.SelectJobSceneState.normal;
 import scene.SelectJobSceneState.selectJob;
 import scene.SelectJobSceneState.talkEnd;
@@ -40,7 +39,16 @@ public class SelectJobScene extends Scene {
     private BufferedImage talkchart1;
     private BufferedImage talkchart2;
     private BufferedImage talkchart3;
+    private BufferedImage talkchart4;
+    private BufferedImage talkchart5;
+    private BufferedImage talkchart6;
+    private BufferedImage talkchart7;
+    private BufferedImage talkchart8;
+    private BufferedImage talkchart9;
+    private BufferedImage talkchart10;
     private DelayCounter delaycounter;
+    private ArrayList<BufferedImage> npctalkcharts;
+    private ArrayList<BufferedImage> herotalkcharts;
     private DelayCounter delayForEffect;
     private int sx1, sy1, sx2, sy2;
 
@@ -115,8 +123,24 @@ public class SelectJobScene extends Scene {
         DARKEN4 = irc.tryGetImage("/resources/Incidence/DARKEN4.png");
         
         talkchart1 = irc.tryGetImage("/resources/Incidence/TALK1.png");
-        talkchart2 = irc.tryGetImage("/resources/Incidence/TALKL.png");
-        talkchart3 = irc.tryGetImage("/resources/Incidence/TALK4.png");
+        talkchart2 = irc.tryGetImage("/resources/Incidence/TALK2.png");
+        talkchart3 = irc.tryGetImage("/resources/Incidence/TALK3.png");
+        talkchart4 = irc.tryGetImage("/resources/Incidence/TALK4.png");
+        talkchart5 = irc.tryGetImage("/resources/Incidence/TALK5.png");
+        talkchart6 = irc.tryGetImage("/resources/Incidence/TALK6.png");
+        talkchart7 = irc.tryGetImage("/resources/Incidence/TALK7.png");
+        talkchart8 = irc.tryGetImage("/resources/Incidence/TALK8.png");
+        talkchart9 = irc.tryGetImage("/resources/Incidence/TALK9.png");
+        
+        npctalkcharts = new ArrayList<BufferedImage>();
+        herotalkcharts = new ArrayList<BufferedImage>();
+        npctalkcharts.add(talkchart1);
+        herotalkcharts.add(talkchart2);
+        npctalkcharts.add(talkchart3);
+        herotalkcharts.add(talkchart4);
+        
+        
+        
         
         img = irc.tryGetImage("/resources/Map/mapOrigin.png");
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
@@ -170,17 +194,56 @@ public class SelectJobScene extends Scene {
                             selectjobscenestate = new beginTalk2();
                             return;
                         }
-                    }
-                    if (jobSelected & next.isCollision(e.getX(), e.getY())) {
-                        if (selectjobscenestate instanceof beginTalk2) {
+                    
+                        else if (selectjobscenestate instanceof beginTalk2) {
                             System.out.print("事件2發生!!!");
                             selectjobscenestate = new beginTalk3();
                             return;
                         }
-                    }
-                    if (jobSelected & next.isCollision(e.getX(), e.getY())) {
-                        if (selectjobscenestate instanceof beginTalk3) {
+                    
+                        else if (selectjobscenestate instanceof beginTalk3) {
                             System.out.print("事件3發生!!!");
+                            selectjobscenestate = new beginTalk4();
+                            return;
+                        }
+                    
+                   
+                        else if (selectjobscenestate instanceof beginTalk4) {
+                            System.out.print("事件4發生!!!");
+                            selectjobscenestate = new beginTalk5();
+                            return;
+                        }
+                    
+                   
+                        else if (selectjobscenestate instanceof beginTalk5) {
+                            System.out.print("事件5發生!!!");
+                            selectjobscenestate = new beginTalk6();
+                            return;
+                        }
+                    
+                   
+                        else if (selectjobscenestate instanceof beginTalk6) {
+                            System.out.print("事件6發生!!!");
+                            selectjobscenestate = new beginTalk7();
+                            return;
+                        }
+                    
+                    
+                        else if (selectjobscenestate instanceof beginTalk7) {
+                            System.out.print("事件7發生!!!");
+                            selectjobscenestate = new beginTalk8();
+                            return;
+                        }
+                    
+                    
+                        else if (selectjobscenestate instanceof beginTalk8) {
+                            System.out.print("事件8發生!!!");
+                            selectjobscenestate = new beginTalk9();
+                            return;
+                        }
+                        
+                        else if (selectjobscenestate instanceof beginTalk9) {
+                            System.out.print("事件9發生!!!");
                             selectjobscenestate = new talkEnd();
                             return;
                         }
@@ -308,13 +371,36 @@ public class SelectJobScene extends Scene {
             g.drawImage(talkchart1, 1000, 150, 337, 245, null);
             next.paint(g);
         }
-
-        if (selectjobscenestate instanceof beginTalk2) {
+        else if (selectjobscenestate instanceof beginTalk2) {
             g.drawImage(talkchart2, 620, 150, 337, 245, null);
             next.paint(g);
         }
-        if (selectjobscenestate instanceof beginTalk3) {
+        else if (selectjobscenestate instanceof beginTalk3) {
             g.drawImage(talkchart3, 1000, 150, 337, 245, null);
+            next.paint(g);
+        }
+        else if (selectjobscenestate instanceof beginTalk4) {
+            g.drawImage(talkchart4, 1000, 150, 337, 245, null);
+            next.paint(g);
+        }
+        else if (selectjobscenestate instanceof beginTalk5) {
+            g.drawImage(talkchart5, 1000, 150, 337, 245, null);
+            next.paint(g);
+        }
+        else if (selectjobscenestate instanceof beginTalk6) {
+            g.drawImage(talkchart6, 1000, 150, 337, 245, null);
+            next.paint(g);
+        }
+        else if (selectjobscenestate instanceof beginTalk7) {
+            g.drawImage(talkchart7, 1000, 150, 337, 245, null);
+            next.paint(g);
+        }
+        else if (selectjobscenestate instanceof beginTalk8) {
+            g.drawImage(talkchart8, 1000, 150, 337, 245, null);
+            next.paint(g);
+        }
+        else if (selectjobscenestate instanceof beginTalk9) {
+            g.drawImage(talkchart9, 1000, 150, 337, 245, null);
             next.paint(g);
         }
     }

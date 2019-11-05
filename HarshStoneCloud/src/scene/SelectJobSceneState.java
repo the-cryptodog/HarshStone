@@ -79,7 +79,61 @@ public interface SelectJobSceneState {
         }
     }
     
+    public class beginTalk4 implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+           
+
+        }
+    }
     
+    public class beginTalk5 implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+           
+
+        }
+    }
+    public class beginTalk6 implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+           
+
+        }
+    }
+    public class beginTalk7 implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+           
+
+        }
+    }
+    public class beginTalk8 implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+           
+
+        }
+    }public class beginTalk9 implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+           
+
+        }
+    }public class beginTalk10 implements SelectJobSceneState {
+
+        @Override
+        public void action(SelectJobScene scene) {
+           
+
+        }
+    }
     
 
     public class talkEnd implements SelectJobSceneState {
