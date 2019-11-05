@@ -186,9 +186,8 @@ public class MainScene extends Scene {
         }
         
         if(Global.CURRENTSTAGE >= 1){
-            orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT, 
-                    "獸人1", 14, 1, 13, (int) (Math.random() * 8), true); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
-            System.out.println("orc:" + orc.getIsBoss() + orc.getActNumber());
+            orc = new Monster(Global.BOSSX, Global.BOSSY, Global.BOSSWIDTH, Global.BOSSHEIGHT, 
+                    "獸人1", 70, 4, 13, (int) (Math.random() * 8), true); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
             monsters.add(orc);
         }
         

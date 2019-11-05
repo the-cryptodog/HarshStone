@@ -179,4 +179,14 @@ public class Global {
      //卡片放大後長寬
      public static final int INSPECTCARDWIDTH = (int)(INSPECTSIZE*CARDWIDTH);
      public static final int INSPECTCARDHEIGHT =(int)(INSPECTSIZE*CARDHEIGHT);
+     
+     
+    //Boss位置參數
+     public static final float BOSSRATE = 1.3f;
+     public static final int BOSSX = 1400;
+     public static final int BOSSY = 100;
+     public static final int BOSSWIDTH = (int)(MONSTERWIDTH*BOSSRATE);
+     public static final int BOSSHEIGHT = (int)(MONSTERHEIGHT*BOSSRATE);
+     
+     
 }
