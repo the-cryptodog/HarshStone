@@ -12,74 +12,63 @@ import utils.Global;
  * @author frank61003
  */
 public interface CardMoveState {
-    public void move(Card card);
-    
-    
-    public class Movable implements CardMoveState{
 
+    public void move(Card card);
+
+    public class Movable implements CardMoveState {
 
         @Override
         public void move(Card card) {
-            
+
         }
     }
-    
-    
-    
-    public class MoveBack implements CardMoveState{
+
+    public class MoveBack implements CardMoveState {
 
         @Override
         public void move(Card card) {
-            if(card.getLeft()){    
+            if (card.getLeft()) {
                 int tempx = card.getX() + 60;
-                
-                if(tempx <= card.getOrginalX()){
+
+                if (tempx <= card.getOrginalX()) {
                     card.setX(tempx);
-                }
-                else{
+                } else {
                     card.setX(card.getOrginalX());
                 }
-            }
-            else{
+            } else {
                 int tempx = card.getX() - 60;
-                
-                if(tempx >= card.getOrginalX()){
+
+                if (tempx >= card.getOrginalX()) {
                     card.setX(tempx);
-                }
-                else{
+                } else {
                     card.setX(card.getOrginalX());
                 }
             }
-            if(card.getUP()){
+            if (card.getUP()) {
                 int tempy = card.getY() + 60;
-                
-                if(tempy <= card.getOrginalY()){
+
+                if (tempy <= card.getOrginalY()) {
                     card.setY(tempy);
-                }
-                else{
+                } else {
                     card.setY(card.getOrginalY());
                 }
-            }
-            else{
+            } else {
                 int tempy = card.getY() - 60;
-                
-                if(tempy >= card.getOrginalY()){
+
+                if (tempy >= card.getOrginalY()) {
                     card.setY(tempy);
-                }
-                else{
+                } else {
                     card.setY(card.getOrginalY());
                 }
-            
+
             }
-            if(card.getX() == card.getOrginalX() && card.getY() == card.getOrginalY()){
+            if (card.getX() == card.getOrginalX() && card.getY() == card.getOrginalY()) {
                 card.setCardMoveState(new MoveStop());
             }
         }
     }
-    
-    
-    public class MoveToDiscard implements CardMoveState{
 
+    public class MoveToDiscard implements CardMoveState {
 
         @Override
         public void move(Card card) {
@@ -88,33 +77,28 @@ public interface CardMoveState {
             int y = card.getY();
             int tempx = card.getX() + 30;
             int tempy = card.getY() + 30;
-            if(x <= Global.DISCARDDECKX || y < 700){    
- 
-                if(tempx <= Global.DISCARDDECKX){
+            if (x <= Global.DISCARDDECKX || y < 700) {
+
+                if (tempx <= Global.DISCARDDECKX) {
                     card.setX(tempx);
-                }
-                else{
+                } else {
                     card.setX(Global.DISCARDDECKX);
                 }
-                if(tempy < 700){                    
-                    card.setY(tempy); 
-                }              
-                else{
+                if (tempy < 700) {
+                    card.setY(tempy);
+                } else {
                     card.setY(700);
                 }
             }
-            
-            else{
-                card.cardmovestate = new MoveStop();
-                   
-            }
-       
-        
+
+//            else{
+//                card.cardmovestate = new MoveStop();
+//                   
+//            }
         }
     }
-    
-    public class MoveToHandDeck implements CardMoveState{
 
+    public class MoveToHandDeck implements CardMoveState {
 
         @Override
         public void move(Card card) {
@@ -123,37 +107,37 @@ public interface CardMoveState {
             int limit = 300 + (Global.CARDWIDTH + 100) * (card.getHandDeckPoisition() - 1);
 //            System.out.println("1." + card.originalx);
 //            System.out.println("2." + 300 + (Global.CARDWIDTH + 100) * (card.getHandDeckPoisition() - 1));
-            
-            if(x <= limit){    
- 
-                if(tempx <= limit){
+
+            if (x < limit) {
+
+                if (tempx <= limit) {
                     card.setX(tempx);
-                }
-                else{
+                } else {
                     card.setX(limit);
-                }  
+                }
+            } else {
+                card.cardmovestate = new MoveStop();
+
             }
+
         }
     }
-    
-    
-    public class EndTurnMove implements CardMoveState{
 
+    public class EndTurnMove implements CardMoveState {
 
         @Override
         public void move(Card card) {
             int tempx = card.getX() + 30;
-            if(tempx <= Global.DISCARDDECKX){
+            if (tempx <= Global.DISCARDDECKX) {
                 card.setX(tempx);
-            }
-            else{
+            } else {
                 card.setX(Global.DISCARDDECKX);
             }
-            
+
         }
     }
-    
-    public class MoveStop implements CardMoveState{
+
+    public class MoveStop implements CardMoveState {
 
         @Override
         public void move(Card card) {
@@ -163,9 +147,8 @@ public interface CardMoveState {
 //            System.out.print(card.getY());
         }
     }
-    
-     public class DiscardRareCard implements CardMoveState{
 
+    public class DiscardRareCard implements CardMoveState {
 
         @Override
         public void move(Card card) {
@@ -174,9 +157,9 @@ public interface CardMoveState {
 //            int y = card.getY();
 //            int tempx = card.getX() + 200;
             int tempy = card.getY() + 100;
-             card.setY(tempy);
-             
+            card.setY(tempy);
+
         }
     }
-   
+
 }

@@ -20,6 +20,7 @@ import gameObject.Card.CardMoveState.DiscardRareCard;
 import gameObject.Card.CardMoveState.EndTurnMove;
 import gameObject.Card.CardMoveState.Movable;
 import gameObject.Card.CardMoveState.MoveBack;
+import gameObject.Card.CardMoveState.MoveStop;
 import gameObject.Card.CardMoveState.MoveToDiscard;
 import gameObject.Card.CardMoveState.MoveToHandDeck;
 import gameObject.Crystal;
@@ -343,7 +344,7 @@ public class MainScene extends Scene {
                     System.out.println("PRESS");
                     if (selectedcard == null) {
                         for (int i = 0; i < handdeck.getCards().size(); i++) {
-                            if (!(handdeck.getCards().get(i).getCardMoveState() instanceof  MoveToDiscard )&&
+                            if (handdeck.getCards().get(i).getCardMoveState() instanceof  MoveStop &&
                                     handdeck.getCards().get(i).isCollision(e.getX(), e.getY())) {
                                 Card temp = handdeck.getCards().get(i);
                                 selectedcard = temp;
@@ -374,8 +375,7 @@ public class MainScene extends Scene {
                 if (state == CommandSolver.MouseState.MOVED ) {
 //                    if (selectedcard == null) {
                         for (int i = 0; i < handdeck.getCards().size(); i++) {
-                            if (!(handdeck.getCards().get(i).getCardMoveState() instanceof  MoveToDiscard) &&
-                                    !(handdeck.getCards().get(i).getCardMoveState() instanceof  MoveBack)
+                            if (handdeck.getCards().get(i).getCardMoveState() instanceof  MoveStop
                                     && handdeck.getCards().get(i).isCollision(e.getX(), e.getY())) {
                                 handdeck.getCards().get(i).getCardIconHelper().setAf(1.4f);
                                 handdeck.getCards().get(i).setY(600);
