@@ -15,6 +15,7 @@ import gameObject.Button.Button;
 import gameObject.Card.Card;
 import gameObject.Card.CardDeck;
 import gameObject.Card.CardFactory;
+import gameObject.Card.CardMoveState;
 import gameObject.Card.CardMoveState.DiscardRareCard;
 import gameObject.Card.CardMoveState.EndTurnMove;
 import gameObject.Card.CardMoveState.Movable;
@@ -225,6 +226,8 @@ public class MainScene extends Scene {
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
                 if (state != null) {
                     System.out.println(state);
+                } else {
+                    System.out.println("沒狀態");
                 }
                 if (state == CommandSolver.MouseState.RELEASED) {
 
@@ -338,9 +341,15 @@ public class MainScene extends Scene {
                     System.out.println("PRESS");
                     if (selectedcard == null) {
                         for (int i = 0; i < handdeck.getCards().size(); i++) {
-                            if (handdeck.getCards().get(i).isCollision(e.getX(), e.getY())) {
+                            if (!(handdeck.getCards().get(i).getCardMoveState() instanceof  MoveToDiscard )&&
+                                    handdeck.getCards().get(i).isCollision(e.getX(), e.getY())) {
                                 Card temp = handdeck.getCards().get(i);
                                 selectedcard = temp;
+                                selectedcard.setX(selectedcard.getOrginalX());
+                                selectedcard.setY(selectedcard.getOrginalY());
+                                selectedcard.getCardIconHelper().setAf(1);
+                                selectedcard.setWidth(Global.CARDWIDTH);
+                                selectedcard.setHeight(Global.CARDHEIGHT);
 
                                 xdelta = temp.getDeltaX(e.getX());
                                 ydelta = temp.getDeltaY(e.getY());
@@ -354,14 +363,35 @@ public class MainScene extends Scene {
                 if (state == CommandSolver.MouseState.DRAGGED) {
                     if (selectedcard != null) {
                         System.out.println("dragg");
+
                         selectedcard.setX(e.getX() - xdelta);
                         selectedcard.setY(e.getY() - ydelta);
                         System.out.print(selectedcard.getX());
                         System.out.print(selectedcard.getY());
                     }
                 }
-            }
+                if (state == CommandSolver.MouseState.MOVED ) {
+//                    if (selectedcard == null) {
+                        for (int i = 0; i < handdeck.getCards().size(); i++) {
+                            if (!(handdeck.getCards().get(i).getCardMoveState() instanceof  MoveToDiscard) &&
+                                    !(handdeck.getCards().get(i).getCardMoveState() instanceof  MoveBack)
+                                    && handdeck.getCards().get(i).isCollision(e.getX(), e.getY())) {
+                                handdeck.getCards().get(i).getCardIconHelper().setAf(1.4f);
+                                handdeck.getCards().get(i).setY(600);
+                                handdeck.getCards().get(i).setWidth(Global.INSPECTCARDWIDTH);
+                                handdeck.getCards().get(i).setHeight(Global.INSPECTCARDHEIGHT);
+//                                sceneEnd();
+                            } else {
+                                handdeck.getCards().get(i).setY(700);
+                                handdeck.getCards().get(i).getCardIconHelper().setAf(1);
+                                handdeck.getCards().get(i).setWidth(Global.CARDWIDTH);
+                                handdeck.getCards().get(i).setHeight(Global.CARDHEIGHT);
+                            }
 
+                        }
+//                    }
+                }
+            }
         };
     }
 
@@ -511,7 +541,6 @@ public class MainScene extends Scene {
                 discarddeck.getCards().remove(0);
             }
             hero.setHeroDeck(drawcarddeck);
-
         }
 
         if (delaycounter.delayupdate()) {
@@ -619,7 +648,7 @@ public class MainScene extends Scene {
 
     @Override
     public void paint(Graphics g) {
-
+        
 //        g.setFont(font1);
 //        g.drawString("14pt bold & italic times Roman", 5, 92);
         g.drawImage(img, 0, 0, 1920, 1080, null);
@@ -627,7 +656,8 @@ public class MainScene extends Scene {
         for (int i = 0; i < monsters.size(); i++) {
             monsters.get(i).paint(g);
         }
-
+         crystal.paint(g);
+        
 //        g.setColor(Color.red);
 //        g.drawRect(800,500,300,25);
 //        g.fillRect(800, 500, (int)temp1, 25);
@@ -644,14 +674,14 @@ public class MainScene extends Scene {
         for (int i = 0; i < handdeck.getCards().size(); i++) {
             handdeck.getCards().get(i).paint(g);
         }
-
+            
         back.paint(g);
         exit.paint(g);
         backtothefuture.paint(g);
         drawcarddeck.paint(g);
         discarddeck.paint(g);
 
-        crystal.paint(g);
+ 
         if (gameWin) {
             heroawards.paint(g);
         }

@@ -16,6 +16,7 @@ import gameObject.Skill.Skill;
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import utils.Global;
 import values.ImagePath;
 
 /**
@@ -150,7 +151,17 @@ public class Card extends GameObject{
     public int getOrginalY(){
         return originaly;
     }
+    
       
+    
+    public void cancelinspect(){
+        this.width /= Global.AWARDSIZE;
+        this.height/= Global.AWARDSIZE;
+    }
+    public void inspect(){
+        this.width *= Global.AWARDSIZE;
+        this.height*= Global.AWARDSIZE;
+    }
     
     public int getCost(){
         return cost;

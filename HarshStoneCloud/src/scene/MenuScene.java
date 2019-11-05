@@ -77,14 +77,20 @@ public class MenuScene extends Scene {
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
+                  if (state != null) {
+                    System.out.println(state);
+                }else{
+                    System.out.println("沒狀態");
+            }
+                
                 if (state == CommandSolver.MouseState.RELEASED) {
-                    System.out.println("release");
+
 //                    startPressed = false;
 
                 }
 
                 if (state == CommandSolver.MouseState.CLICKED) {
-                    System.out.println("CLick");
+
                     if (buttons.get(0).isCollision(e.getX(), e.getY())) {
 //                        background.play();
                         scenecontroller.changeScene(new SelectJobScene(scenecontroller));
@@ -118,7 +124,7 @@ public class MenuScene extends Scene {
                 }
 
                 if (state == CommandSolver.MouseState.DRAGGED) {
-                    System.out.print(" drag!!!!");
+
                 }
                 if (state == CommandSolver.MouseState.ENTERED) {
 
@@ -130,8 +136,8 @@ public class MenuScene extends Scene {
                 if (state == CommandSolver.MouseState.MOVED) {
                     for (int i = 0; i < buttons.size(); i++) {
                         if (buttons.get(i).isCollision(e.getX(), e.getY())) {
-//                            System.out.println("hover!!!!!!!");
-//                            buttons.get(i).hover(e.getX(), e.getY());
+                            System.out.println("hover!!!!!!!");
+                            buttons.get(i).hover(e.getX(), e.getY());
                         }
                     }
                 }
@@ -148,6 +154,7 @@ public class MenuScene extends Scene {
 
     @Override
     public void sceneUpdate() {
+        
     }
 
     @Override

@@ -123,6 +123,8 @@ public class CardIconHelper {
             if (atr.get(0) < 10) {
                 digit.setX((int) (x + (Global.DIGIT3X) * af));
                 digit.setY((int) (y + ((Global.CARDHEIGHT / 2) + 38) * af));
+                digit.setWidth((int) (44 * af));
+                digit.setHeight((int) (52 * af));
                 digit.setNumber(atr.get(0));
                 digit.paint(g);
             } else {

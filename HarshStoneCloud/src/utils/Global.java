@@ -172,6 +172,9 @@ public class Global {
      //獎勵面板長寬
     public static final int AWARDWIDTH = 1317;
     public static final int AWARDHEIGHT = 848;
-
-
+     //卡片放大檢視係數
+     public static final float AWARDSIZE =1.4f;
+     //卡片放大後長寬
+     public static final int INSPECTCARDWIDTH = (int)(AWARDSIZE*CARDWIDTH);
+     public static final int INSPECTCARDHEIGHT =(int)(AWARDSIZE*CARDHEIGHT);
 }

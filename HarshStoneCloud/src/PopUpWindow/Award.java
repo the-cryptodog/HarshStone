@@ -41,7 +41,7 @@ public class Award extends GameObject {
         rareCardFactory.readRareCardData();
         rareCardIndex = new int[3];
         count = 0;
-        awardSize = 1.8f;
+        awardSize = Global.AWARDSIZE;
         backToMap = new Button(1400, 860, 108, 40, "EXIT");
         cardSelected = false;
 

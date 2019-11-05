@@ -109,12 +109,10 @@ public class MapScene extends Scene {
                     for (int i = 0; i < redCrossList.size(); i++) {
                         if (redCrossList.get(i).isCollision(e.getX(), e.getY())
                                 && redCrossList.get(currentRedCross).checkTag(i)) {
-
                             currentRedCross = redCrossList.get(i).getTagList().get(0);
-                            redCrossList.get(i).setIsClicked(true);
-                             stagePassed = false;
+                            redCrossList.get(i).setIsClicked(true);               
                             scenecontroller.changeScene(new MainScene(scenecontroller, getThis()));
-
+                            stagePassed = true;
                         }
                     }
                     
@@ -203,7 +201,7 @@ public class MapScene extends Scene {
         for (int i = 0; i < redCrossList.size(); i++) {
 //                     System.out.print(i);
             if (stagePassed) {
-                redCrossList.get(i).paint(g);
+                 redCrossList.get(i).paint(g);
             }
         }
 //        if (y > 500 || y < 400) {
