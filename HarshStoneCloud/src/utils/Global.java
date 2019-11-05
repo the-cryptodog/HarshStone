@@ -53,7 +53,7 @@ public class Global {
 
     //主角位置參數
     public static final int HEROX = 300;
-    public static final int HEROY = 400;
+    public static final int HEROY = 180;
     public static final int HEROWIDTH = 160;
     public static final int HEROXHEIGHT = 160;
     

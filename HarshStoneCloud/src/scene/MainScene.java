@@ -123,7 +123,7 @@ public class MainScene extends Scene {
         super(scenecontroller);
 //        System.out.println(PathBuilder.getNumber(ImagePath.NUMBER2));
 //        number = ImageResourceController.getInstance().tryGetImage("/resources/Number/Number2.png");
-        crystal = new Crystal(240, 600, 80, 80, "tt");
+        crystal = new Crystal(Global.HEROX-32, Global.HEROY+192, 80, 80, "tt");
         gameWin = false;
         gameOver = false;
         font1 = new Font("TimesRoman", Font.BOLD + Font.ITALIC, 14);
@@ -282,6 +282,7 @@ public class MainScene extends Scene {
                                         skillboard.getCardSkill(selectedcard.getSkilltype()).setY(monsters.get(i).getY());
                                         skillboard.getCardSkill(selectedcard.getSkilltype()).setSkillend(false);
                                     } else {
+                                                System.out.print("vvvvvv"+selectedcard.getSkilltype()+"vvvvvv");
                                         Skill tmp = skillFactory.genSkill(selectedcard.getSkilltype());
                                         skillboard.addCardSkill(tmp);
                                         tmp.setY(monsters.get(i).getY());
@@ -412,7 +413,8 @@ public class MainScene extends Scene {
                             handdeck.getCards().get(i).setHeight(Global.INSPECTCARDHEIGHT);
 //                                sceneEnd();
                         } else {
-//                            handdeck.getCards().get(i).setY(700);
+                            if(handdeck.getCards().get(i).getCardMoveState() instanceof MoveStop)
+                            handdeck.getCards().get(i).setY(700);
                             handdeck.getCards().get(i).getCardIconHelper().setAf(1);
                             handdeck.getCards().get(i).setWidth(Global.CARDWIDTH);
                             handdeck.getCards().get(i).setHeight(Global.CARDHEIGHT);
@@ -553,7 +555,7 @@ public class MainScene extends Scene {
 
     @Override
     public void sceneUpdate() {
-
+        
         if (hero.gethealth() < 0) {
             scenecontroller.changeScene(new EndScene(scenecontroller));
         }
@@ -693,6 +695,7 @@ public class MainScene extends Scene {
         for (int i = 0; i < monsters.size(); i++) {
             monsters.get(i).paint(g);
         }
+        
         crystal.paint(g);
 
 //        g.setColor(Color.red);

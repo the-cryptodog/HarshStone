@@ -106,7 +106,8 @@ public class CardFactory implements Serializable {
         }
         Card card = new Card(0, 0, Global.CARDWIDTH, Global.CARDHEIGHT, temp[1],Integer.valueOf(temp[0]),Integer.valueOf(temp[3]));
 
-        card.setSkill(Integer.valueOf(temp[2]));
+      
+               System.out.println("技能為 = " + card.getSkilltype());
         if (Integer.valueOf(temp[4]) != 0) {
             card = new DamageEffect(card, Integer.valueOf(temp[4]));
         }
@@ -125,6 +126,7 @@ public class CardFactory implements Serializable {
         if (Integer.valueOf(temp[9]) != 0) {
             card = new HealEffect(card, Integer.valueOf(temp[9]));
         }
+        card.setSkill(Integer.valueOf(temp[2]));
         card.setAttack(Integer.valueOf(temp[4]));
         card.setDefense(Integer.valueOf(temp[5]));
         card.setWeak(Integer.valueOf(temp[6]));
@@ -134,6 +136,7 @@ public class CardFactory implements Serializable {
 
         card.setCardIconHelper(new CardIconHelper(card));
 
+//        System.out.println("技能為 = " + card.getSkilltype());
         System.out.println("攻擊力為 = " + card.getAttack());
         System.out.println("防禦力為 = " + card.getDefense());
         System.out.println("虛弱為 = " + card.getWeak());
