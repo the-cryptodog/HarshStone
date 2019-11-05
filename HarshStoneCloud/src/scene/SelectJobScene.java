@@ -123,7 +123,7 @@ public class SelectJobScene extends Scene {
         DARKEN4 = irc.tryGetImage("/resources/Incidence/DARKEN4.png");
         
         talkchart1 = irc.tryGetImage("/resources/Incidence/TALK1.png");
-        talkchart2 = irc.tryGetImage("/resources/Incidence/TALK2.png");
+        talkchart2 = irc.tryGetImage("/resources/Incidence/TALK99.png");
         talkchart3 = irc.tryGetImage("/resources/Incidence/TALK3.png");
         talkchart4 = irc.tryGetImage("/resources/Incidence/TALK4.png");
         talkchart5 = irc.tryGetImage("/resources/Incidence/TALK5.png");
@@ -368,39 +368,39 @@ public class SelectJobScene extends Scene {
         }
 
         if (selectjobscenestate instanceof beginTalk1) {
-            g.drawImage(talkchart1, 1000, 150, 337, 245, null);
+            g.drawImage(talkchart1, 1060, 170, 337, 230, null);
             next.paint(g);
         }
         else if (selectjobscenestate instanceof beginTalk2) {
-            g.drawImage(talkchart2, 620, 150, 337, 245, null);
+            g.drawImage(talkchart2, 400, 170, 337, 230, null);
             next.paint(g);
         }
         else if (selectjobscenestate instanceof beginTalk3) {
-            g.drawImage(talkchart3, 1000, 150, 337, 245, null);
+            g.drawImage(talkchart3, 1060, 170, 337, 230, null);
             next.paint(g);
         }
         else if (selectjobscenestate instanceof beginTalk4) {
-            g.drawImage(talkchart4, 1000, 150, 337, 245, null);
+            g.drawImage(talkchart4, 400, 170, 337, 230, null);
             next.paint(g);
         }
         else if (selectjobscenestate instanceof beginTalk5) {
-            g.drawImage(talkchart5, 1000, 150, 337, 245, null);
+            g.drawImage(talkchart5, 1060, 150, 337, 230, null);
             next.paint(g);
         }
         else if (selectjobscenestate instanceof beginTalk6) {
-            g.drawImage(talkchart6, 1000, 150, 337, 245, null);
+            g.drawImage(talkchart6, 1060, 150, 337, 230, null);
             next.paint(g);
         }
         else if (selectjobscenestate instanceof beginTalk7) {
-            g.drawImage(talkchart7, 1000, 150, 337, 245, null);
+            g.drawImage(talkchart7, 400, 150, 337, 230, null);
             next.paint(g);
         }
         else if (selectjobscenestate instanceof beginTalk8) {
-            g.drawImage(talkchart8, 1000, 150, 337, 245, null);
+            g.drawImage(talkchart8, 1060, 150, 337, 230, null);
             next.paint(g);
         }
         else if (selectjobscenestate instanceof beginTalk9) {
-            g.drawImage(talkchart9, 1000, 150, 337, 245, null);
+            g.drawImage(talkchart9, 400, 150, 337, 230, null);
             next.paint(g);
         }
     }
