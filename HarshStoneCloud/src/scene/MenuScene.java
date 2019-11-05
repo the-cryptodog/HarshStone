@@ -60,6 +60,7 @@ public class MenuScene extends Scene {
 //        clip = arc.tryGetAudio("/resources/Audio/This.wav");
 
         background = acrc.tryGetAudioClip("/resources/Audio/MENU.mp3");
+ 
         background.play();
 //        clip.start();
 
@@ -70,7 +71,7 @@ public class MenuScene extends Scene {
         buttons.add(new Button(50, 50, 220, 50, "NEWGAME"));
         buttons.add(new Button(50, 110, 220, 50, "CONTINUE"));
         buttons.add(new Button(50, 170, 85, 50, "EXIT"));
-        buttons.add(new Button(50, 230, 220, 50, "CONTINUE"));
+
         img = irc.tryGetImage("/resources/Background/MENU.png");
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
             @Override
@@ -88,22 +89,28 @@ public class MenuScene extends Scene {
                 }
 
                 if (state == CommandSolver.MouseState.CLICKED) {
-
+     
                     if (buttons.get(0).isCollision(e.getX(), e.getY())) {
 //                        background.play();
                         scenecontroller.changeScene(new SelectJobScene(scenecontroller));
+                         
                     }
-                    if (buttons.get(1).isCollision(e.getX(), e.getY())) {
-
-                        incidence = new Incidence(384, 216, 1152, 648, "AWARD");
-                        incidence.setCommandListener(mousecommandlistener);
-                        if (incidence.getButton().isCollision(e.getX(), e.getY())) {
-                            incidence = null;
-                        }
-                    }
+//                    if (buttons.get(2).isCollision(e.getX(), e.getY())) {
+////                        background.play();
+//                        scenecontroller.changeScene(new MainScene(scenecontroller,new MapScene(scenecontroller)));
+//                         
+//                    }
+//                    if (buttons.get(1).isCollision(e.getX(), e.getY())) {
+//
+//                        incidence = new Incidence(384, 216, 1152, 648, "AWARD");
+//                        incidence.setCommandListener(mousecommandlistener);
+//                        if (incidence.getButton().isCollision(e.getX(), e.getY())) {
+//                            incidence = null;
+//                        }
+//                    }
 //上面兩行為測試用，按CONTINUE可以直接進入戰鬥
 
-                    if(buttons.get(3).isCollision(e.getX(),e.getY())){
+                    if(buttons.get(1).isCollision(e.getX(),e.getY())){
                         Global.hero = Hero.loadHeroRecord();
                         CardDeckRecord temp1 = new CardDeckRecord();
                         Global.hero.setHeroDeck(temp1.getCardDeck());
@@ -160,7 +167,7 @@ public class MenuScene extends Scene {
 
     @Override
     public void sceneEnd() {
-        background.stop();
+       
     }
 
     @Override

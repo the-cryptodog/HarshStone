@@ -151,7 +151,7 @@ public class MainScene extends Scene {
         winGameCount = 0;
 
         hero = Global.hero;
-        Global.hero.setX(-70);
+//        Global.hero.setX(-70);
         Global.hero.setY(Global.HEROY);
         Global.hero.setWidth(Global.HEROWIDTH);
         Global.hero.setHeight(Global.HEROXHEIGHT);
@@ -170,13 +170,13 @@ public class MainScene extends Scene {
         exit = new Button(1700, 460, 108, 40, "EXIT");
         back = new Button(1700, 520, 108, 40, "BACK");
         next = new Button(1700, 580, 184, 42, "ROUNDSTART");
-        backtothefuture = new Button(1700, 650, 184, 42, "ROUNDSTART");
+        backtothefuture = new Button(70, 640, 234, 42, "HARSHSTONE");
 
-        hero = Global.hero;
-        Global.hero.setX(-70);
-        Global.hero.setY(Global.HEROY);
-        Global.hero.setWidth(Global.HEROWIDTH);
-        Global.hero.setHeight(Global.HEROXHEIGHT);
+//        hero = Global.hero;
+//        Global.hero.setX(-70);
+//        Global.hero.setY(Global.HEROY);
+//        Global.hero.setWidth(Global.HEROWIDTH);
+//        Global.hero.setHeight(Global.HEROXHEIGHT);
 
         drawcarddeck = hero.getHeroDeck();
         heroawards = new Award(150, 90, 1770, 990, "AWARD");
@@ -184,7 +184,7 @@ public class MainScene extends Scene {
         monsters = new ArrayList();
         
         //若不是魔王關創三隻怪
-        if(Global.CURRENTSTAGE < 1){
+        if(Global.CURRENTSTAGE < 0){
             orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                 "獸人1", 14, 1, (int) (Math.random() * 8), (int) (Math.random() * 8), false); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
             cultist = new Monster(Global.MONSTERX, Global.MONSTERY2, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
@@ -320,6 +320,10 @@ public class MainScene extends Scene {
                                         Skill tmp = skillFactory.genSkill(selectedcard.getSkillIndex());
                                         skillboard.addCardSkill(tmp);
                                         tmp.setY(monsters.get(i).getY());
+                                        if(monsters.get(i).getIsBoss()){
+                                            tmp.setWidth(Global.BOSSWIDTH);
+                                            tmp.setHeight(Global.BOSSHEIGHT);
+                                        }
                                         tmp.setSkillend(false);
                                         tmp.getEffectSound().play();
                                     }//檢測MainScene的卡片技能區，如已有實體則使用，如無則新增//                                                              

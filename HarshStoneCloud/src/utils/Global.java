@@ -53,7 +53,7 @@ public class Global {
 
     //主角位置參數
     public static final int HEROX = 300;
-    public static final int HEROY = 180;
+    public static final int HEROY = 280;
     public static final int HEROWIDTH = 160;
     public static final int HEROXHEIGHT = 160;
     
@@ -182,9 +182,9 @@ public class Global {
      
      
     //Boss位置參數
-     public static final float BOSSRATE = 1.3f;
+     public static final float BOSSRATE = 1.5f;
      public static final int BOSSX = 1400;
-     public static final int BOSSY = 100;
+     public static final int BOSSY = 200;
      public static final int BOSSWIDTH = (int)(MONSTERWIDTH*BOSSRATE);
      public static final int BOSSHEIGHT = (int)(MONSTERHEIGHT*BOSSRATE);
      

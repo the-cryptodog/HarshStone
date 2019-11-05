@@ -286,7 +286,7 @@ public class MapScene extends Scene {
     public void paint(Graphics g) {
 
         g.drawImage(map, 0, 0, 1932, 1078, null);
-        save.paint(g);
+//        save.paint(g);
         for (int i = 0; i < redCrossList.size(); i++) {
 //                     System.out.print(i);
             if (stagePassed) {
