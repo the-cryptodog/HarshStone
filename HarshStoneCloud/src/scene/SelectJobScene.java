@@ -115,8 +115,8 @@ public class SelectJobScene extends Scene {
         DARKEN4 = irc.tryGetImage("/resources/Incidence/DARKEN4.png");
         
         talkchart1 = irc.tryGetImage("/resources/Incidence/TALK1.png");
-        talkchart2 = irc.tryGetImage("/resources/Incidence/TALK2.png");
-        talkchart3 = irc.tryGetImage("/resources/Incidence/TALK3.png");
+        talkchart2 = irc.tryGetImage("/resources/Incidence/TALKL.png");
+        talkchart3 = irc.tryGetImage("/resources/Incidence/TALK4.png");
         
         img = irc.tryGetImage("/resources/Map/mapOrigin.png");
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
