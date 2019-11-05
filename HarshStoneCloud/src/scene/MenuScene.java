@@ -5,8 +5,7 @@
  */
 package scene;
 
-import Controller.AudioResourceController;
-import Controller.PathBuilder;
+
 import Controller.SceneController;
 import PopUpWindow.Incidence;
 import gameObject.Button.Button;
@@ -60,6 +59,7 @@ public class MenuScene extends Scene {
         super(scenecontroller);
 
 //        clip = arc.tryGetAudio("/resources/Audio/This.wav");
+        background = acrc.tryGetAudioClip("/resources/Audio/This.wav");
         background = acrc.tryGetAudioClip("/resources/Audio/This.wav");
         background.play();
 //        clip.start();
