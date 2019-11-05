@@ -116,7 +116,7 @@ public class CardDeckRecord {
         for (int i = 0; i < temp1; i++){
            temp2[i] = carddeckdata.get(i);
 
-           cards.add(cardfactory.genCard(Integer.valueOf(temp2[i]),false));            
+           cards.add(cardfactory.genCard(Integer.valueOf(temp2[i])));            
 
         }
         return cards;

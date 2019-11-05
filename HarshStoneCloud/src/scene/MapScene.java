@@ -117,9 +117,10 @@ public class MapScene extends Scene {
                         if (redCrossList.get(i).isCollision(e.getX(), e.getY())
                                 && redCrossList.get(currentRedCross).checkTag(i)) {
                             currentRedCross = redCrossList.get(i).getTagList().get(0);
-                            redCrossList.get(i).setIsClicked(true);               
+        
                             scenecontroller.changeScene(new MainScene(scenecontroller, getThis()));
 //                            stagePassed = true;
+                            redCrossList.get(i).setIsClicked(true);       
                         }
                     }
                     
@@ -269,7 +270,7 @@ public class MapScene extends Scene {
     public void sceneBegin() {
 //        if(Global.CURRENTSTAGE>0)
         stagePassed = true;
-
+//顯示已經點過的叉叉
     }
 
     @Override

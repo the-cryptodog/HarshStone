@@ -75,8 +75,8 @@ public interface CardMoveState {
 
             int x = card.getX();
             int y = card.getY();
-            int tempx = card.getX() + 30;
-            int tempy = card.getY() + 30;
+            int tempx = card.getX() + 80;
+            int tempy = card.getY() + 80;
             if (x <= Global.DISCARDDECKX || y < 700) {
 
                 if (tempx <= Global.DISCARDDECKX) {
@@ -103,8 +103,8 @@ public interface CardMoveState {
         @Override
         public void move(Card card) {
             int x = card.getX();
-            int tempx = card.getX() + 30;
-            int limit = 300 + (Global.CARDWIDTH + 100) * (card.getHandDeckPoisition() - 1);
+            int tempx = card.getX() + 80;
+            int limit = 300 + (Global.CARDWIDTH + 60) * (card.getHandDeckPoisition() - 1);
 //            System.out.println("1." + card.originalx);
 //            System.out.println("2." + 300 + (Global.CARDWIDTH + 100) * (card.getHandDeckPoisition() - 1));
 
@@ -127,7 +127,7 @@ public interface CardMoveState {
 
         @Override
         public void move(Card card) {
-            int tempx = card.getX() + 30;
+            int tempx = card.getX() + 80;
             if (tempx <= Global.DISCARDDECKX) {
                 card.setX(tempx);
             } else {

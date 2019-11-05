@@ -49,33 +49,35 @@ public class Award extends GameObject {
 
         switch (Global.CURRENTSTAGE) {
             case 1:
-                for (int i = 0; i < 3; i++) {
+                for (int i = 50; i < 53; i++) {
                     rareCardIndex[count++] = i;
-                    break;
+
                 }
+                break;
             case 2:
-                for (int i = 3; i < 6; i++) {
+                for (int i = 53; i < 56; i++) {
                     rareCardIndex[count++] = i;
-                    break;
+
                 }
+                break;
             case 3:
-                for (int i = 6; i < 9; i++) {
+                for (int i = 56; i < 59; i++) {
                     rareCardIndex[count++] = i;
-                    break;
+
                 }
+                break;
             case 4:
-                for (int i = 9; i < 12; i++) {
+                for (int i = 59; i < 62; i++) {
                     System.out.println("count = " + count);
                     System.out.println("長度 = " + rareCardIndex.length);
-                    rareCardIndex[0] = i;
-                    break;
+                    rareCardIndex[count++] = i;
                 }
-
+                break;
         }
         for (int i = 0; i < 3; i++) {
             System.out.print(awards.size());
-            awards.add(rareCardFactory.genCard(rareCardIndex[i], true));
-
+            System.out.print("rareCardIndex[i] = " + rareCardIndex[i]);
+            awards.add(rareCardFactory.genCard(rareCardIndex[i]));
             awards.get(i).setWidth((int) (Global.CARDWIDTH * awardSize));
             awards.get(i).setHeight((int) (Global.CARDHEIGHT * awardSize));
             awards.get(i).getCardIconHelper().setAf(awardSize);
@@ -95,16 +97,15 @@ public class Award extends GameObject {
     public ArrayList<Card> getAward() {
         return awards;
     }
-    public void setSelected(boolean  setSelected) {
-        this.cardSelected=setSelected;
+
+    public void setSelected(boolean setSelected) {
+        this.cardSelected = setSelected;
     }
-        public Button getButton(){
+
+    public Button getButton() {
         return backToMap;
-      
+
     }
- 
-    
-    
 
     public void paint(Graphics g) {
         g.drawImage(img, (1920 - Global.AWARDWIDTH) / 2, (1080 - Global.AWARDHEIGHT) / 2,
@@ -112,8 +113,8 @@ public class Award extends GameObject {
         for (int i = 0; i < 3; i++) {
             awards.get(i).paint(g);
         }
-        if(cardSelected){
-        backToMap.paint(g);
+        if (cardSelected) {
+            backToMap.paint(g);
         }
     }
 }

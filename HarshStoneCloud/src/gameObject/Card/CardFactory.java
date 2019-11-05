@@ -97,10 +97,10 @@ public class CardFactory implements Serializable {
 //    }
     //generate card
 
-    public Card genCard(int serialnumber, boolean rare) {
+    public Card genCard(int serialnumber) {
         String[] temp;
-        if (rare) {
-            temp = rareCardData.get(serialnumber).split(",");
+        if(serialnumber>=50){ 
+            temp = rareCardData.get(serialnumber-50).split(",");
         } else {
             temp = carddata.get(serialnumber).split(",");
         }

@@ -73,6 +73,11 @@ public class MainScene extends Scene {
     private SkillList skillboard; // 技能板
     private SkillFactory skillFactory;
     private BufferedImage img;
+    private BufferedImage img2;
+    private BufferedImage img3;
+    private BufferedImage img4;
+    private BufferedImage img5;
+    private BufferedImage currentImg;
     private int x1;
     private int y1;
     private int xdelta;
@@ -209,7 +214,31 @@ public class MainScene extends Scene {
         columns[2] = column3;
 
         endImage = irc.tryGetImage("/resources/Background/ENDSCENE.png");
-        img = irc.tryGetImage("/resources/Background/BACKGROUND3.jpg");
+
+        img = irc.tryGetImage("/resources/Background/BACKGROUND1.jpg");
+        img2 = irc.tryGetImage("/resources/Background/BACKGROUND2.jpg");
+        img3 = irc.tryGetImage("/resources/Background/BACKGROUND3.jpg");
+        img4 = irc.tryGetImage("/resources/Background/BACKGROUND4.jpg");
+        img5 = irc.tryGetImage("/resources/Background/BACKGROUND5.jpg");
+
+        switch (Global.CURRENTSTAGE) {
+            case 1:
+                currentImg = img;
+                break;
+            case 2:
+                currentImg = img2;
+                break;
+            case 3:
+                currentImg = img3;
+                break;
+            case 4:
+                currentImg = img4;
+                break;
+            case 5:
+                currentImg = img5;
+
+        }
+
         selectedmonster = 0;
 
         delaycounter = new DelayCounter(5, new DelayCounter.Action() {
@@ -312,7 +341,7 @@ public class MainScene extends Scene {
                         }
                     }
                     if (heroawards.getButton().isCollision(e.getX(), e.getY())) {
-                        Global.CURRENTSTAGE++;
+
                         scenecontroller.changeScene(mapScene);
                         selectedRareCard.getCardIconHelper().setAf(1);
                         selectedRareCard.setWidth(Global.CARDWIDTH);
@@ -331,8 +360,8 @@ public class MainScene extends Scene {
                         crystal.getNumberIcon().setNumber(3);
                         transformTurnStartMonsters();
                         handdeck.cardTransform(drawcarddeck);
-                        drawCard(drawcarddeck,  handdeck,discarddeck, 5);
-                        
+                        drawCard(drawcarddeck, handdeck, discarddeck, 5);
+
                     }
 
 //                    if (exit2.isCollision(e.getX(), e.getY())) {
@@ -344,8 +373,8 @@ public class MainScene extends Scene {
                     System.out.println("PRESS");
                     if (selectedcard == null) {
                         for (int i = 0; i < handdeck.getCards().size(); i++) {
-                            if (handdeck.getCards().get(i).getCardMoveState() instanceof  MoveStop &&
-                                    handdeck.getCards().get(i).isCollision(e.getX(), e.getY())) {
+                            if (handdeck.getCards().get(i).getCardMoveState() instanceof MoveStop
+                                    && handdeck.getCards().get(i).isCollision(e.getX(), e.getY())) {
                                 Card temp = handdeck.getCards().get(i);
                                 selectedcard = temp;
                                 selectedcard.setX(selectedcard.getOrginalX());
@@ -372,24 +401,24 @@ public class MainScene extends Scene {
                         System.out.print(selectedcard.getY());
                     }
                 }
-                if (state == CommandSolver.MouseState.MOVED ) {
+                if (state == CommandSolver.MouseState.MOVED) {
 //                    if (selectedcard == null) {
-                        for (int i = 0; i < handdeck.getCards().size(); i++) {
-                            if (handdeck.getCards().get(i).getCardMoveState() instanceof  MoveStop
-                                    && handdeck.getCards().get(i).isCollision(e.getX(), e.getY())) {
-                                handdeck.getCards().get(i).getCardIconHelper().setAf(1.4f);
-                                handdeck.getCards().get(i).setY(600);
-                                handdeck.getCards().get(i).setWidth(Global.INSPECTCARDWIDTH);
-                                handdeck.getCards().get(i).setHeight(Global.INSPECTCARDHEIGHT);
+                    for (int i = 0; i < handdeck.getCards().size(); i++) {
+                        if (handdeck.getCards().get(i).getCardMoveState() instanceof MoveStop
+                                && handdeck.getCards().get(i).isCollision(e.getX(), e.getY())) {
+                            handdeck.getCards().get(i).getCardIconHelper().setAf(Global.INSPECTSIZE);
+                            handdeck.getCards().get(i).setY(600);
+                            handdeck.getCards().get(i).setWidth(Global.INSPECTCARDWIDTH);
+                            handdeck.getCards().get(i).setHeight(Global.INSPECTCARDHEIGHT);
 //                                sceneEnd();
-                            } else {
-                                handdeck.getCards().get(i).setY(700);
-                                handdeck.getCards().get(i).getCardIconHelper().setAf(1);
-                                handdeck.getCards().get(i).setWidth(Global.CARDWIDTH);
-                                handdeck.getCards().get(i).setHeight(Global.CARDHEIGHT);
-                            }
-
+                        } else {
+//                            handdeck.getCards().get(i).setY(700);
+                            handdeck.getCards().get(i).getCardIconHelper().setAf(1);
+                            handdeck.getCards().get(i).setWidth(Global.CARDWIDTH);
+                            handdeck.getCards().get(i).setHeight(Global.CARDHEIGHT);
                         }
+
+                    }
 //                    }
                 }
             }
@@ -492,7 +521,7 @@ public class MainScene extends Scene {
 //            temp.setCardMoveState(new Movable());
             temp.setX(0);
             temp.setY(Global.CARDDECKBOTTOM);
-            temp.setOrginalX(300 + (Global.CARDWIDTH + 100) * i);
+            temp.setOrginalX(300 + (Global.CARDWIDTH + 60) * i);
             temp.setOrginalY(Global.CARDDECKBOTTOM);
             temp.setHandDeckPoisition(i + 1);
             temp.setCardMoveState(new MoveToHandDeck());
@@ -617,7 +646,9 @@ public class MainScene extends Scene {
 
     @Override
     public void sceneEnd() {
-
+        if(monsters.size()==0){
+            Global.CURRENTSTAGE++;
+        }
 //        try {
 //            Robot robot = new Robot();
 //            BufferedImage image = robot.createScreenCapture(new Rectangle(1920, 1080));
@@ -649,25 +680,25 @@ public class MainScene extends Scene {
 
     @Override
     public void paint(Graphics g) {
-        
+
 //        g.setFont(font1);
 //        g.drawString("14pt bold & italic times Roman", 5, 92);
-        g.drawImage(img, 0, 0, 1920, 1080, null);
+        g.drawImage(currentImg, 0, 0, 1920, 1080, null);
         hero.paint(g);
         for (int i = 0; i < monsters.size(); i++) {
             monsters.get(i).paint(g);
         }
-         crystal.paint(g);
-        
+        crystal.paint(g);
+
 //        g.setColor(Color.red);
 //        g.drawRect(800,500,300,25);
 //        g.fillRect(800, 500, (int)temp1, 25);
         next.paint(g);
-        g.setColor(Color.red);
-        for (int i = 0; i < cardlimit; i++) {
-            g.drawRect(300 + (Global.CARDWIDTH + 50) * i, Global.CARDDECKBOTTOM, Global.CARDWIDTH, Global.CARDHEIGHT);
-
-        }
+//        g.setColor(Color.red);
+//        for (int i = 0; i < cardlimit; i++) {
+//            g.drawRect(300 + (Global.CARDWIDTH + 50) * i, Global.CARDDECKBOTTOM, Global.CARDWIDTH, Global.CARDHEIGHT);
+//
+//        }
 
         for (int i = 0; i < skillboard.getCardSkillList().size(); i++) {
             skillboard.getCardSkillList().get(i).paint(g);
@@ -675,14 +706,13 @@ public class MainScene extends Scene {
         for (int i = 0; i < handdeck.getCards().size(); i++) {
             handdeck.getCards().get(i).paint(g);
         }
-            
+
         back.paint(g);
         exit.paint(g);
         backtothefuture.paint(g);
         drawcarddeck.paint(g);
         discarddeck.paint(g);
 
- 
         if (gameWin) {
             heroawards.paint(g);
         }
@@ -692,13 +722,13 @@ public class MainScene extends Scene {
 //             exit2.paint(g);
 //        }
 
-//        for (int i = 0; i < monsters.size(); i++) {
-//            if (selectedcard != null) {
-//                if (selectedcard.isCollision(monsters.get(i))) {
-//                    g.drawImage(columns[i], monsters.get(i).getX(), monsters.get(i).getY(), null);
-//                    break;
-//                }
-//            }
-//        }
+        for (int i = 0; i < monsters.size(); i++) {
+            if (selectedcard != null) {
+                if (selectedcard.isCollision(monsters.get(i))) {
+                    g.drawImage(columns[i], monsters.get(i).getX(), monsters.get(i).getY(), null);
+                    break;
+                }
+            }
+        }
     }
 }

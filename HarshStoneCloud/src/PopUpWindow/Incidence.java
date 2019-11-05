@@ -6,19 +6,12 @@
 package PopUpWindow;
 
 import Controller.PathBuilder;
-import Controller.SceneController;
 import gameObject.Button.Button;
 import gameObject.GameObject;
 import io.CommandSolver;
-import io.CommandSolver.MouseCommandListener;
 import java.awt.Graphics;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
-import scene.MapScene;
-import scene.MenuScene;
-import scene.Scene;
-import scene.SelectJobSceneState;
-import values.ImagePath;
+
 
 /**
  *
