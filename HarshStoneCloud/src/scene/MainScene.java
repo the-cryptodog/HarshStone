@@ -306,7 +306,7 @@ public class MainScene extends Scene {
 
                 if (state == CommandSolver.MouseState.CLICKED) {
                     System.out.println("clicked");
-                    if (next.isCollision(e.getX(), e.getY())) {
+                    if (next.isCollision(e.getX(), e.getY()) &&  !(handdeck.getCards().get(4).getCardMoveState() instanceof MoveToHandDeck)) {
                         next.setIsClicked(true);
 
                         int temp = handdeck.getCards().size();
@@ -577,8 +577,12 @@ public class MainScene extends Scene {
         }
 
         if (delaycounter.delayupdate()) {
-            for (int i = 0; i < handdeck.getCards().size(); i++) {
+            int temp = handdeck.getCards().size();
+            for (int i = 0; i < temp; i++) {
                 handdeck.getCards().get(i).move();
+                if(handdeck.getCards().get(temp-1).getX() == handdeck.getCards().get(temp-1).getOrginalX()){
+                    
+                }
             }
             for (int i = 0; i < discarddeck.getCards().size(); i++) {
                 discarddeck.getCards().get(i).move();
@@ -631,7 +635,7 @@ public class MainScene extends Scene {
                     temp.move();
 
                 }
-                next.setIsClicked(false);
+                
                 if (!useheroskill) {
                     removeTurnStartMonsters();
                     copyTurnStartMonsters();
@@ -642,6 +646,7 @@ public class MainScene extends Scene {
                 drawCard(drawcarddeck, handdeck, discarddeck, 5);
                 System.out.println("棄牌堆" + discarddeck.getCards().size() + "張牌,抽牌堆" + drawcarddeck.getCards().size() + "張牌,手牌堆" + handdeck.getCards().size() + "張牌");
                 crystal.setNumberIcon(3);
+                next.setIsClicked(false);
             }
 
         }
