@@ -91,7 +91,7 @@ public class Card extends GameObject{
         this.defense = defense;
     
     }
-    public void setSkill(int skillIndex){
+    public void setSkillIndex(int skillIndex){
        this.skillIndex = skillIndex;
     
     }
@@ -138,7 +138,7 @@ public class Card extends GameObject{
             this.originalx = originalx;
     }
     
-    public int getSkilltype(){
+    public int getSkillIndex(){
         return skillIndex;
     }
     

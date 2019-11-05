@@ -55,6 +55,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import javafx.scene.media.AudioClip;
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 import utils.DelayCounter;
@@ -108,6 +109,7 @@ public class MainScene extends Scene {
     private boolean gameOver;
     private boolean gameWin;
     private boolean useheroskill;
+    private int winGameCount;
     private BufferedImage endImage;
     private BufferedImage columns[];
     private BufferedImage column1;
@@ -118,12 +120,20 @@ public class MainScene extends Scene {
     private Hero hero;
     private Award heroawards;
     private Card selectedRareCard;
+    private AudioClip currentSountrack;
+    private AudioClip soundtrack1;
+    private AudioClip soundtrack2;
+    private AudioClip soundtrack3;
+    private AudioClip soundtrack4;
+    private AudioClip soundtrack5;
+    private AudioClip gameWinSound;
+    private AudioClip gameOverSound;
 
     public MainScene(SceneController scenecontroller, MapScene mapScene) {
         super(scenecontroller);
 //        System.out.println(PathBuilder.getNumber(ImagePath.NUMBER2));
 //        number = ImageResourceController.getInstance().tryGetImage("/resources/Number/Number2.png");
-        crystal = new Crystal(Global.HEROX-32, Global.HEROY+192, 80, 80, "tt");
+        crystal = new Crystal(Global.HEROX - 32, Global.HEROY + 192, 80, 80, "tt");
         gameWin = false;
         gameOver = false;
         font1 = new Font("TimesRoman", Font.BOLD + Font.ITALIC, 14);
@@ -138,6 +148,7 @@ public class MainScene extends Scene {
         skillFactory = new SkillFactory();
         this.mapScene = mapScene;
         columns = new BufferedImage[3];
+        winGameCount = 0;
 
         hero = Global.hero;
         Global.hero.setX(-70);
@@ -225,21 +236,35 @@ public class MainScene extends Scene {
         switch (Global.CURRENTSTAGE) {
             case 1:
                 currentImg = img;
+                soundtrack1 = acrc.tryGetAudioClip("/resources/Audio/Battle_01.wav");
+                currentSountrack = soundtrack1;
                 break;
             case 2:
                 currentImg = img2;
+                soundtrack2 = acrc.tryGetAudioClip("/resources/Audio/Battle_02.wav");
+                currentSountrack = soundtrack2;
                 break;
             case 3:
                 currentImg = img3;
+                soundtrack3 = acrc.tryGetAudioClip("/resources/Audio/Battle_03.wav");
+                currentSountrack = soundtrack3;
                 break;
             case 4:
                 currentImg = img4;
+                soundtrack4 = acrc.tryGetAudioClip("/resources/Audio/Battle_04.wav");
+                currentSountrack = soundtrack4;
                 break;
             case 5:
                 currentImg = img5;
+                soundtrack5 = acrc.tryGetAudioClip("/resources/Audio/Battle_05.mp3");
+                currentSountrack = soundtrack5;
 
         }
+        gameWinSound = acrc.tryGetAudioClip("/resources/Audio/WIN.wav");
+        gameOverSound = acrc.tryGetAudioClip("/resources/Audio/DEAD.mp3");
 
+        currentSountrack.play();
+        currentSountrack.setVolume(0.1);
         selectedmonster = 0;
 
         delaycounter = new DelayCounter(5, new DelayCounter.Action() {
@@ -279,15 +304,17 @@ public class MainScene extends Scene {
                                     System.out.print(selectedcard.toString());
                                     // 卡排放到怪物上的動畫
                                     Monster temp1 = monsters.get(i);
-                                    if (skillboard.skillCheck(selectedcard.getSkilltype())) {
-                                        skillboard.getCardSkill(selectedcard.getSkilltype()).setY(monsters.get(i).getY());
-                                        skillboard.getCardSkill(selectedcard.getSkilltype()).setSkillend(false);
+                                    if (skillboard.skillCheck(selectedcard.getSkillIndex())) {
+                                        skillboard.getCardSkill(selectedcard.getSkillIndex()).setY(monsters.get(i).getY());
+                                        skillboard.getCardSkill(selectedcard.getSkillIndex()).setSkillend(false);
+                                        skillboard.getCardSkill(selectedcard.getSkillIndex()).getEffectSound().play();
                                     } else {
-                                                System.out.print("vvvvvv"+selectedcard.getSkilltype()+"vvvvvv");
-                                        Skill tmp = skillFactory.genSkill(selectedcard.getSkilltype());
+                                        System.out.print("vvvvvv" + selectedcard.getSkillIndex() + "vvvvvv");
+                                        Skill tmp = skillFactory.genSkill(selectedcard.getSkillIndex());
                                         skillboard.addCardSkill(tmp);
                                         tmp.setY(monsters.get(i).getY());
                                         tmp.setSkillend(false);
+                                        tmp.getEffectSound().play();
                                     }//檢測MainScene的卡片技能區，如已有實體則使用，如無則新增//                                                              
                                     selectedcard.action(hero, temp1);
                                     temp1.updateNumberIcon();
@@ -306,7 +333,7 @@ public class MainScene extends Scene {
 
                 if (state == CommandSolver.MouseState.CLICKED) {
                     System.out.println("clicked");
-                    if (next.isCollision(e.getX(), e.getY()) &&  !(handdeck.getCards().get(4).getCardMoveState() instanceof MoveToHandDeck)) {
+                    if (next.isCollision(e.getX(), e.getY()) && !(handdeck.getCards().get(4).getCardMoveState() instanceof MoveToHandDeck)) {
                         next.setIsClicked(true);
 
                         int temp = handdeck.getCards().size();
@@ -343,7 +370,7 @@ public class MainScene extends Scene {
                         }
                     }
                     if (heroawards.getButton().isCollision(e.getX(), e.getY())) {
-
+                        currentSountrack.stop();
                         scenecontroller.changeScene(mapScene);
                         selectedRareCard.getCardIconHelper().setAf(1);
                         selectedRareCard.setWidth(Global.CARDWIDTH);
@@ -414,8 +441,9 @@ public class MainScene extends Scene {
                             handdeck.getCards().get(i).setHeight(Global.INSPECTCARDHEIGHT);
 //                                sceneEnd();
                         } else {
-                            if(handdeck.getCards().get(i).getCardMoveState() instanceof MoveStop)
-                            handdeck.getCards().get(i).setY(700);
+                            if (handdeck.getCards().get(i).getCardMoveState() instanceof MoveStop) {
+                                handdeck.getCards().get(i).setY(700);
+                            }
                             handdeck.getCards().get(i).getCardIconHelper().setAf(1);
                             handdeck.getCards().get(i).setWidth(Global.CARDWIDTH);
                             handdeck.getCards().get(i).setHeight(Global.CARDHEIGHT);
@@ -556,9 +584,14 @@ public class MainScene extends Scene {
 
     @Override
     public void sceneUpdate() {
-        
+//        if(winGameCount==1){
+//            currentSountrack.stop();
+//            gameWinSound.play();
+//        }
+
         if (hero.gethealth() < 0) {
             scenecontroller.changeScene(new EndScene(scenecontroller));
+            gameOverSound.play();
         }
 
         hero.move();
@@ -574,14 +607,15 @@ public class MainScene extends Scene {
                 discarddeck.getCards().remove(0);
             }
             hero.setHeroDeck(drawcarddeck);
+
         }
 
         if (delaycounter.delayupdate()) {
             int temp = handdeck.getCards().size();
             for (int i = 0; i < temp; i++) {
                 handdeck.getCards().get(i).move();
-                if(handdeck.getCards().get(temp-1).getX() == handdeck.getCards().get(temp-1).getOrginalX()){
-                    
+                if (handdeck.getCards().get(temp - 1).getX() == handdeck.getCards().get(temp - 1).getOrginalX()) {
+
                 }
             }
             for (int i = 0; i < discarddeck.getCards().size(); i++) {
@@ -602,6 +636,9 @@ public class MainScene extends Scene {
                 if (monsters.size() == 0) {
 //                    hero.setState(new MoveHeroLeave());
                     gameWin = true;
+                    currentSountrack.stop();
+                    gameWinSound.play();
+
                 }
             }
         }
@@ -635,7 +672,7 @@ public class MainScene extends Scene {
                     temp.move();
 
                 }
-                
+
                 if (!useheroskill) {
                     removeTurnStartMonsters();
                     copyTurnStartMonsters();
@@ -654,7 +691,8 @@ public class MainScene extends Scene {
 
     @Override
     public void sceneEnd() {
-        if(monsters.size()==0){
+        if (monsters.size() == 0) {
+            gameWinSound.stop();
             Global.CURRENTSTAGE++;
         }
 //        try {
@@ -696,7 +734,7 @@ public class MainScene extends Scene {
         for (int i = 0; i < monsters.size(); i++) {
             monsters.get(i).paint(g);
         }
-        
+
         crystal.paint(g);
 
 //        g.setColor(Color.red);
@@ -723,6 +761,10 @@ public class MainScene extends Scene {
         discarddeck.paint(g);
 
         if (gameWin) {
+            int count = 0;
+            while (count < 99999) {
+                count++;
+            }
             heroawards.paint(g);
         }
 //            g.drawImage(number, 200, 200, 300, 300, null);

@@ -8,6 +8,7 @@ package gameObject.Skill;
 import Controller.PathBuilder;
 import gameObject.GameObject;
 import java.awt.Graphics;
+import javafx.scene.media.AudioClip;
 import utils.DelayCounter;
 import utils.Global;
 import values.ImagePath;
@@ -24,14 +25,18 @@ public class Skill extends GameObject {
 //    protected int[] Act = {0,1,2,3,4,5};
     protected boolean skillend;
     protected DelayCounter delaycounter;
+    private AudioClip effectSound;
 
-    public Skill(int x, int y, int width, int height, String name, int act) {
+
+    public Skill(int x, int y, int width, int height, String name, int act, String audio) {
         super(x, y, width, height, name);
+
         image = irc.tryGetImage(PathBuilder.getSkill("/" + name + ".png"));
+        effectSound = acrc.tryGetAudioClip(PathBuilder.getAudio("/" + audio + ".mp3"));
         this.act = 0;
         totalAct = act;
         skillend = false;
-        delaycounter = new DelayCounter(5, new DelayCounter.Action() {
+        delaycounter = new DelayCounter(3, new DelayCounter.Action() {
 
             @Override
             public void action() {
@@ -67,13 +72,19 @@ public class Skill extends GameObject {
         return name;
     }
 
-    public void setIndex(int skillIndex) {
+    public void setSkillIndex(int skillIndex) {
         this.skillIndex = skillIndex;
     }
 
-    public int getIndex() {
+    public int getSkillIndex() {
         return this.skillIndex;
     }
+    
+    public AudioClip  getEffectSound() {
+        return effectSound;
+    }
+
+
 
     @Override
     public void setX(int x) {
@@ -89,7 +100,7 @@ public class Skill extends GameObject {
         int dx = act % 5;
         int dy = act / 5;
         update();
-        if (skillend == false) {
+        if (skillend == false) { 
             g.drawImage(image, x, y, x + width, y + height,
                     dx * Global.SKILLIMG_X_OFFSET, dy * Global.SKILLIMG_Y_OFFSET,
                     dx * Global.SKILLIMG_X_OFFSET + 192, dy * Global.SKILLIMG_Y_OFFSET + 192, null);

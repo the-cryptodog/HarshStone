@@ -59,8 +59,8 @@ public class MenuScene extends Scene {
         super(scenecontroller);
 
 //        clip = arc.tryGetAudio("/resources/Audio/This.wav");
-        background = acrc.tryGetAudioClip("/resources/Audio/This.wav");
-        background = acrc.tryGetAudioClip("/resources/Audio/This.wav");
+
+        background = acrc.tryGetAudioClip("/resources/Audio/MENU.mp3");
         background.play();
 //        clip.start();
 
@@ -162,6 +162,7 @@ public class MenuScene extends Scene {
 
     @Override
     public void sceneEnd() {
+        background.stop();
     }
 
     @Override
