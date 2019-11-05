@@ -7,6 +7,7 @@ package gameObject;
  */
 
 
+import Controller.AudioClipResourceController;
 import Controller.ImageResourceController;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
@@ -23,6 +24,7 @@ public abstract class GameObject implements Serializable{
     protected int width;
     protected String name;
     protected transient ImageResourceController irc;
+    protected transient AudioClipResourceController acrc;
     protected transient BufferedImage image;
     
     
@@ -33,6 +35,7 @@ public abstract class GameObject implements Serializable{
         this.height = height;
         this.name = name;
         irc = ImageResourceController.getInstance();
+        acrc = AudioClipResourceController.getInstance();
     }
     
     public void setX(int x){

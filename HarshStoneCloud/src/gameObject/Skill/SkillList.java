@@ -41,7 +41,7 @@ public class SkillList {
 
     public boolean skillCheck(int skillIndex) {//傳入卡片自帶的技能編號
         for (int i = 0; i < cardSkillList.size(); i++) {
-            if (cardSkillList.get(i).getIndex()== skillIndex) {
+            if (cardSkillList.get(i).getSkillIndex()== skillIndex) {
                 return true;
             }
         }
@@ -50,7 +50,7 @@ public class SkillList {
     
     public Skill getCardSkill(int skillIndex) {//傳入卡片自帶的技能編號
         for (int i = 0; i < cardSkillList.size(); i++) {
-            if (cardSkillList.get(i).getIndex()== skillIndex) {
+            if (cardSkillList.get(i).getSkillIndex()== skillIndex) {
                return cardSkillList.get(i) ;
             }
         }

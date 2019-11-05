@@ -50,7 +50,9 @@ public class Monster extends GameObject implements Cloneable{
     private int frozen;
     private int poison;
     private int actnumber;
+    private int voiceCount;
     private boolean isboss;
+
     
     
     public Monster(int x, int y, int width, int height, String name, int health, int yPosition, int actnumber, int skillIndex, Boolean isboss) {
@@ -67,6 +69,7 @@ public class Monster extends GameObject implements Cloneable{
         poison = 0;
         moved = false;
         useskill = false;
+        voiceCount = 0;
         this.isboss = isboss;
         this.actnumber = actnumber;
         if(isboss == false){
@@ -369,6 +372,10 @@ public class Monster extends GameObject implements Cloneable{
                 number2.paint(g);
             }
             if (monsterstate instanceof MonsterState.Attack) {
+                voiceCount ++;
+                if(voiceCount==1){
+                    selfSkill.getEffectSound().play();
+                }
                 selfSkill.paint(g);//畫出攻擊技能
             }
 //        }
