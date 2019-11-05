@@ -199,6 +199,7 @@ public class MainScene extends Scene {
         for (int i = 0; i < monsters.size(); i++) {
             System.out.println("gggggggg = " + monsters.size());
             skillboard.addMonsterSkill(skillFactory.genSkill(monsters.get(i).getskillIndex()));
+            skillboard.getMonsterSkillList().get(i).setY(Global.HEROY);
             System.out.println(i + "=" + monsters.get(i).getskillIndex());
 
         }
