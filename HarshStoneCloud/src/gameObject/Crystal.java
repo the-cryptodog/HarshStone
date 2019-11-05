@@ -25,6 +25,7 @@ public class Crystal extends GameObject{
     
     public Crystal(int x, int y, int width, int height, String name){
         super(x, y, width, height, name);
+
         image = irc.tryGetImage(PathBuilder.getIcon(ImagePath.CRYSTALICON));
         numbericon = new NumberIcon(x + width+20, y,width,height,name,3);
          empty = irc.tryGetImage(PathBuilder.getIcon(ImagePath.CRYSTALEMPTY));
@@ -45,11 +46,11 @@ public class Crystal extends GameObject{
     public NumberIcon getNumberIcon(){
         return numbericon;
     }
-    
-    
-    
-    public void paint(Graphics g){
 
+    
+
+    public void paint(Graphics g){
+        
 
         numbericon.paint(g);   
         if(numbericon.getNumber()==0){

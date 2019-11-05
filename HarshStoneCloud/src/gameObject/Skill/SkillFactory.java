@@ -42,7 +42,7 @@ public class SkillFactory {
     }
 
     public ArrayList<String> readSkillData() {
-        
+
         ArrayList<String> str = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader("SkillData.txt"));
@@ -73,17 +73,11 @@ public class SkillFactory {
     //generate card
     public Skill genSkill(int serialnumber) {
         String[] temp = skilldata.get(serialnumber).split(",");
-        try {
-            Skill tmp = new Skill(0, 0, Global.SKILLHEIGHT, Global.SKILLWIDTH,
-                    String.valueOf(temp[1]), Integer.valueOf(temp[2]));
-         
-            tmp.setIndex(Integer.valueOf(temp[0]));
-            
-            return tmp;
-        } catch (Exception e) {
+        Skill tmp = new Skill(0, 0, Global.SKILLHEIGHT, Global.SKILLWIDTH,
+        String.valueOf(temp[1]), Integer.valueOf(temp[2]));
+        tmp.setIndex(Integer.valueOf(temp[0]));
+        return tmp;
 
-        }
-        return null;
     }
-
 }
+

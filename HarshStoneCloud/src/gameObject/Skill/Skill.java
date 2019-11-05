@@ -87,7 +87,7 @@ public class Skill extends GameObject{
         int dy = act / 5;
         update();
         if(skillend == false){
-            g.drawImage(image, x, y, x + width, y + height, 
+            g.drawImage(image, Global.HEROX, Global.HEROY, Global.HEROX + width, Global.HEROY + height, 
                     dx * Global.SKILLIMG_X_OFFSET,  dy * Global.SKILLIMG_Y_OFFSET,
                     dx * Global.SKILLIMG_X_OFFSET + 192, dy * Global.SKILLIMG_Y_OFFSET + 192, null);
         }
