@@ -20,6 +20,8 @@ public abstract class GameObject implements Serializable{
     
     protected int x;
     protected int y;
+    protected int orginalx;
+    protected int orginaly;
     protected int height;
     protected int width;
     protected String name;
@@ -31,6 +33,8 @@ public abstract class GameObject implements Serializable{
     public GameObject(int x, int y, int width, int height, String name){
         this.x = x;
         this.y = y;
+        orginalx = x;
+        orginaly =y;
         this.width = width;
         this.height = height;
         this.name = name;
@@ -71,6 +75,15 @@ public abstract class GameObject implements Serializable{
     public void setHeight(int height){
         this.height=height;
     }
+    
+    public void setOrginalx(int orginalx){
+        this.orginalx = width;
+    }
+    
+    
+    
+    
+    
     
      public ImageResourceController getImageResourceController(){
         return irc;

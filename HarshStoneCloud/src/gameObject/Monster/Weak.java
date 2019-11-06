@@ -19,7 +19,7 @@ public class Weak extends MonsterAbnormalState{
         public Weak(int x,int y, int width, int height, String name,int continueturn){
             super(x,y,width,height,name,continueturn);
             image = irc.tryGetImage("/resources/Icon/Weak1.png");
-            numbericon = new NumberIcon(x+width,y,width,height," ",continueturn);
+            numbericon = new NumberIcon(x+width,y," ",continueturn, 0.25f);
         }
         
         @Override
