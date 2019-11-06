@@ -178,7 +178,7 @@ public class Global {
      public static final float INSPECTSIZE =1.3f;
      //卡片獎勵放大
      public static final float AWARDSIZE =1.8f;
-     //卡片放大後長寬
+     //卡片放大檢視長寬
      public static final int INSPECTCARDWIDTH = (int)(INSPECTSIZE*CARDWIDTH);
      public static final int INSPECTCARDHEIGHT =(int)(INSPECTSIZE*CARDHEIGHT);
      

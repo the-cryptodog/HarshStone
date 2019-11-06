@@ -23,6 +23,7 @@ import gameObject.Card.CardMoveState.MoveBack;
 import gameObject.Card.CardMoveState.MoveStop;
 import gameObject.Card.CardMoveState.MoveToDiscard;
 import gameObject.Card.CardMoveState.MoveToHandDeck;
+import gameObject.Column;
 import gameObject.Crystal;
 import gameObject.DamageEffect;
 import gameObject.DefenceEffect;
@@ -89,7 +90,8 @@ public class MainScene extends Scene {
     private Monster orc;
     private Monster cultist;
     private Monster monster1;
-    private Monster monster4;
+    private Monster forHeal;
+
     private Timer timer;
     private DelayCounter delaycounter;
     private int selectedmonster;
@@ -111,10 +113,7 @@ public class MainScene extends Scene {
     private boolean useheroskill;
     private int winGameCount;
     private BufferedImage endImage;
-    private BufferedImage columns[];
-    private BufferedImage column1;
-    private BufferedImage column2;
-    private BufferedImage column3;
+    private Column column;
     private Crystal crystal;
     private Poison ttt;
     private Hero hero;
@@ -147,7 +146,6 @@ public class MainScene extends Scene {
         skillboard = new SkillList();
         skillFactory = new SkillFactory();
         this.mapScene = mapScene;
-        columns = new BufferedImage[3];
         winGameCount = 0;
 
         hero = Global.hero;
@@ -177,33 +175,32 @@ public class MainScene extends Scene {
 //        Global.hero.setY(Global.HEROY);
 //        Global.hero.setWidth(Global.HEROWIDTH);
 //        Global.hero.setHeight(Global.HEROXHEIGHT);
-
         drawcarddeck = hero.getHeroDeck();
         heroawards = new Award(150, 90, 1770, 990, "AWARD");
         turnstartmonsters = new ArrayList();
         monsters = new ArrayList();
-        
+        forHeal = new Monster(0, 0, 0, 0, "專門吃治療", 0, 0, 0, 0, true);
+
         //若不是魔王關創三隻怪
-        if(Global.CURRENTSTAGE < 0){
+        if (Global.CURRENTSTAGE < 1) {
             orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
-                "獸人1", 14, 1, (int) (Math.random() * 8), (int) (Math.random() * 8), false); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
+                    "獸人1", 14, 1, (int) (Math.random() * 8), (int) (Math.random() * 8), false); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
             cultist = new Monster(Global.MONSTERX, Global.MONSTERY2, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
-                "獸人2", 10, 2, (int) (Math.random() * 8), (int) (Math.random() * 8), false);// 創建第二隻怪物\
+                    "獸人2", 10, 2, (int) (Math.random() * 8), (int) (Math.random() * 8), false);// 創建第二隻怪物\
             monster1 = new Monster(Global.MONSTERX, Global.MONSTERY3, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
-                "獸人3", 17, 3, (int) (Math.random() * 8), (int) (Math.random() * 8), false);// 創建第三隻怪物\
+                    "獸人3", 17, 3, (int) (Math.random() * 8), (int) (Math.random() * 8), false);// 創建第三隻怪物\
             monsters.add(orc);
             monsters.add(cultist);
             monsters.add(monster1);
         }
-        
-        if(Global.CURRENTSTAGE >= 1){
-            orc = new Monster(Global.BOSSX, Global.BOSSY, Global.BOSSWIDTH, Global.BOSSHEIGHT, 
+
+        if (Global.CURRENTSTAGE >= 0) {
+            orc = new Monster(Global.BOSSX, Global.BOSSY, Global.BOSSWIDTH, Global.BOSSHEIGHT,
                     "獸人1", 70, 4, 13, (int) (Math.random() * 8), true); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
             monsters.add(orc);
         }
-        
-        
-        
+
+        column = new Column(0, 0, 0, 0, "Column");
 
         //下段可用迴圈新增(此段為將技能新增至怪物技能列(總數3))  (技能由技能工廠產生)
         for (int i = 0; i < monsters.size(); i++) {
@@ -224,13 +221,6 @@ public class MainScene extends Scene {
         for (Monster monster : monsters) {
             monster.setHero(hero);
         }
-
-        column1 = irc.tryGetImage("/resources/Monster/COLUMN.png");
-        column2 = irc.tryGetImage("/resources/Monster/COLUMN.png");
-        column3 = irc.tryGetImage("/resources/Monster/COLUMN.png");
-        columns[0] = column1;
-        columns[1] = column2;
-        columns[2] = column3;
 
         endImage = irc.tryGetImage("/resources/Background/ENDSCENE.png");
 
@@ -305,6 +295,30 @@ public class MainScene extends Scene {
                         //                            crystal.setNumberIcon(temp - selectedcard.getCost());
                         //                        }
                         else if (!(selectedcard.getCardMoveState() instanceof MoveToDiscard)) {
+                            /*治療*/ if (selectedcard.getY() < 490 && selectedcard.getHeal() != 0) {
+                                if (skillboard.skillCheck(selectedcard.getSkillIndex())) {
+                                    System.out.print("vvvvvv" + "治療發生" + "vvvvvv");
+                                    Skill tempSkill = skillboard.getCardSkill(selectedcard.getSkillIndex());
+                                    tempSkill.setX(hero.getX());
+                                    tempSkill.setY(hero.getY());
+                                    tempSkill.setSkillend(false);
+                                    tempSkill.getEffectSound().play();
+                                } else {
+                                    Skill tmp = skillFactory.genSkill(selectedcard.getSkillIndex());
+                                    System.out.print(hero.getX() + " == x");
+                                    tmp.positionSetter(hero);
+                                    tmp.setX(hero.getX());
+                                    tmp.setY(hero.getY());
+                                    skillboard.addCardSkill(tmp);
+                                    tmp.setSkillend(false);
+                                    tmp.getEffectSound().play();
+                                }
+                                selectedcard.action(hero, forHeal);
+                                selectedcard.setCardMoveState(new MoveToDiscard());
+                                crystal.setNumberIcon(temp - selectedcard.getCost());   
+                                selectedcard = null;
+                                return;
+                            }
                             for (int i = 0; i < monsters.size(); i++) {
                                 System.out.println(selectedcard.toString());
                                 if (monsters.get(i).isCollision(selectedcard)) {
@@ -312,18 +326,16 @@ public class MainScene extends Scene {
                                     // 卡排放到怪物上的動畫
                                     Monster temp1 = monsters.get(i);
                                     if (skillboard.skillCheck(selectedcard.getSkillIndex())) {
-                                        skillboard.getCardSkill(selectedcard.getSkillIndex()).setY(monsters.get(i).getY());
-                                        skillboard.getCardSkill(selectedcard.getSkillIndex()).setSkillend(false);
-                                        skillboard.getCardSkill(selectedcard.getSkillIndex()).getEffectSound().play();
+                                        Skill tempSkill = skillboard.getCardSkill(selectedcard.getSkillIndex());
+                                        tempSkill.setY(monsters.get(i).getY());
+                                        tempSkill.positionSetter(temp1);
+                                        tempSkill.setSkillend(false);
+                                        tempSkill.getEffectSound().play();
                                     } else {
                                         System.out.print("vvvvvv" + selectedcard.getSkillIndex() + "vvvvvv");
                                         Skill tmp = skillFactory.genSkill(selectedcard.getSkillIndex());
+                                        tmp.positionSetter(temp1);
                                         skillboard.addCardSkill(tmp);
-                                        tmp.setY(monsters.get(i).getY());
-                                        if(monsters.get(i).getIsBoss()){
-                                            tmp.setWidth(Global.BOSSWIDTH);
-                                            tmp.setHeight(Global.BOSSHEIGHT);
-                                        }
                                         tmp.setSkillend(false);
                                         tmp.getEffectSound().play();
                                     }//檢測MainScene的卡片技能區，如已有實體則使用，如無則新增//                                                              
@@ -336,7 +348,7 @@ public class MainScene extends Scene {
                                 if (i == monsters.size() - 1) {
                                     selectedcard.setCardMoveState(new MoveBack());
                                 }
-                            }
+                            }                           
                         }
                         selectedcard = null;
                     }
@@ -570,6 +582,7 @@ public class MainScene extends Scene {
         }
 
     }
+
     //把牌組整理好帶回map 判斷條件原為人物往右走出畫面(hero.getX() > Global.JWIDTH)
     public void arrangeDeck() {
         int temp = handdeck.getCards().size();
@@ -583,7 +596,7 @@ public class MainScene extends Scene {
         }
         hero.setHeroDeck(drawcarddeck);
     }
-    
+
     @Override
     public void sceneBegin() {
         hero.setState(new MoveHeroRight());
@@ -617,11 +630,9 @@ public class MainScene extends Scene {
             scenecontroller.changeScene(new EndScene(scenecontroller));
             gameOverSound.play();
         }
-
+        column.move();
         hero.move();
         //把牌組整理好帶回map 判斷條件原為人物往右走出畫面(hero.getX() > Global.JWIDTH)
-
-
 
         if (delaycounter.delayupdate()) {
             int temp = handdeck.getCards().size();
@@ -789,16 +800,12 @@ public class MainScene extends Scene {
         for (int i = 0; i < monsters.size(); i++) {
             if (selectedcard != null) {
                 if (selectedcard.isCollision(monsters.get(i))) {
-                    g.drawImage(columns[i], monsters.get(i).getX(), monsters.get(i).getY(), null);
+                    column.positionSetter(monsters.get(i));
+                    column.paint(g);
                     break;
                 }
             }
         }
-        
-        
-        
-        
-        
-        
+
     }
 }

@@ -125,8 +125,8 @@ public class CardIconHelper {
 
         if (twoEffect.size() < 2) { //單效果
             g.drawImage(twoEffect.get(0), x + (int) ((Global.DIGIT1X + 25) * af), y + (int) ((125 * Global.LARGEN) * af),
-                    (int) (((50 * Global.LARGEN) - 10) * af),
-                    (int) (((50 * Global.LARGEN) - 10) * af), null);
+                    (int) (((50 * Global.LARGEN) - 20) * af),
+                    (int) (((50 * Global.LARGEN) - 20) * af), null);
             if (atr.get(0) < 10) {
                 digit.setX((int) (x + (Global.DIGIT3X) * af));
                 digit.setY((int) (y + ((Global.CARDHEIGHT / 2) + 38) * af));

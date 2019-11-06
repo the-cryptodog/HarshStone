@@ -27,12 +27,12 @@ public class Skill extends GameObject {
     protected DelayCounter delaycounter;
     private AudioClip effectSound;
 
-
     public Skill(int x, int y, int width, int height, String name, int act, String audio) {
         super(x, y, width, height, name);
 
         image = irc.tryGetImage(PathBuilder.getSkill("/" + name + ".png"));
         effectSound = acrc.tryGetAudioClip(PathBuilder.getAudio("/" + audio + ".mp3"));
+
         this.act = 0;
         totalAct = act;
         skillend = false;
@@ -79,12 +79,18 @@ public class Skill extends GameObject {
     public int getSkillIndex() {
         return this.skillIndex;
     }
-    
-    public AudioClip  getEffectSound() {
+
+    public AudioClip getEffectSound() {
         return effectSound;
     }
 
+    public void positionSetter(GameObject gameobject) {
+        this.x = gameobject.getX() - 15;
+        this.y = gameobject.getY() - 15;
+        this.width = gameobject.getWidth() + 15;
+        this.height = gameobject.getHeight() + 15;
 
+    }
 
     @Override
     public void setX(int x) {
@@ -100,7 +106,7 @@ public class Skill extends GameObject {
         int dx = act % 5;
         int dy = act / 5;
         update();
-        if (skillend == false) { 
+        if (skillend == false) {
             g.drawImage(image, x, y, x + width, y + height,
                     dx * Global.SKILLIMG_X_OFFSET, dy * Global.SKILLIMG_Y_OFFSET,
                     dx * Global.SKILLIMG_X_OFFSET + 192, dy * Global.SKILLIMG_Y_OFFSET + 192, null);

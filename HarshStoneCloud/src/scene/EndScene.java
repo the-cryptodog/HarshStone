@@ -6,6 +6,7 @@
 package scene;
 
 
+import Controller.PathBuilder;
 import Controller.SceneController;
 import gameObject.Button.Button;
 import io.CommandSolver;
@@ -13,6 +14,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import javafx.scene.media.AudioClip;
 
 /**
  *
@@ -24,14 +26,18 @@ public class EndScene extends Scene{
     private Button backToMenu;
     private SelectJobSceneState menuscenestate;
     private boolean startPressed;
+    private AudioClip sound;
 
 
     public EndScene(SceneController scenecontroller){
           super(scenecontroller);
           img = irc.tryGetImage("/resources/Background/ENDSCENE.png");
-          backToMenu = new Button(900, 860, 108, 40, "BACK");
+          backToMenu = new Button(800, 860, 108, 40, "BACK");
+          sound = acrc.tryGetAudioClip(PathBuilder.getAudio("/Delusion.mp3"));
+                    sound.play();
+          
           mousecommandlistener = new CommandSolver.MouseCommandListener(){
-
+    
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
                 if(state == CommandSolver.MouseState.CLICKED){

@@ -22,9 +22,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
+import javafx.scene.media.AudioClip;
 import utils.DelayCounter;
 import utils.Global;
 import values.ImagePath;
+
 
 /**
  *
@@ -48,6 +50,7 @@ public class Hero extends GameObject implements Serializable{
     private int lasthealth;
     private boolean recordhealth;
     private HeroState heroState;
+    private AudioClip steps;
 
     public Hero(int x, int y, int width, int height, String name, int health, int actor) {
 
@@ -61,10 +64,10 @@ public class Hero extends GameObject implements Serializable{
         moved = false;
         image = irc.tryGetImage(PathBuilder.getHero(ImagePath.ACTOR1));
 //        herodeck = new WarriorDeck(x, y, width, height, name);
-
+        steps = acrc.tryGetAudioClip(PathBuilder.getAudio("/steps.mp3"));
         herodeck = new WarriorDeck(40, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "牌組");
         herohelper = new HeroHelper(actor);
-
+        
         delaycounter = new DelayCounter(10, new DelayCounter.Action() {
 
             @Override
@@ -196,7 +199,7 @@ public class Hero extends GameObject implements Serializable{
             act = ++act % 4;
         }
     }
-
+    
     public void move() {
 //        int tempx;
 //        if(!moved){

@@ -100,6 +100,7 @@ public class MenuScene extends Scene {
                     
                     if (buttons.get(0).isCollision(e.getX(), e.getY())) {
 //                        background.play();
+                        background.stop();
                         scenecontroller.changeScene(new SelectJobScene(scenecontroller));
                          
                     }

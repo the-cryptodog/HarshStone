@@ -152,6 +152,11 @@ public class Card extends GameObject{
         return originaly;
     }
     
+    
+    public int getButton(){
+        return y+height;
+    }
+    
       
     
     public void cancelinspect(){
