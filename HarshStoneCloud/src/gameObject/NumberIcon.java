@@ -25,7 +25,7 @@ public class NumberIcon extends GameObject{
     protected NumberIconMoveState numbericonmovestate;
     
     public NumberIcon(int x, int y, String name, int number,float rate){
-        super(x, y, (int)((2 * Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX) * rate), (int)(Global.NUMBER_Y_OFFSET *rate), name);
+        super(x, y, (int)((2 * Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX) * rate ), (int)(Global.NUMBER_Y_OFFSET *rate ), name);
 //        image = irc.tryGetImage(PathBuilder.getNumber(ImagePath.NUMBER));
         image = irc.tryGetImage("/resources/Number/Number4.png");
         this.number = number;
@@ -58,7 +58,10 @@ public class NumberIcon extends GameObject{
     public void setNumber(int number){
          this.number = number;
     }
-    
+    public void setRate(float rate){
+         this.rate = rate;
+        
+    }
    
     
     public void paint(Graphics g){
@@ -66,9 +69,10 @@ public class NumberIcon extends GameObject{
         int dx = digits % 10;
         int dy = digits / 10;
         if(tendigits == 0){
-            g.drawImage(image, x + (int)((Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX) / 2 * rate), y, x + (int)(((Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX) / 2 + Global.NUMBER_X_OFFSET) * rate), y + height, 
-            dx * Global.NUMBER_X_OFFSET,  dy * Global.NUMBER_Y_OFFSET,
-            dx * Global.NUMBER_X_OFFSET + 110, dy * Global.NUMBER_Y_OFFSET + 130, null);
+            g.drawImage(image, x + (int)((Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX) / 2 * rate), y,
+                                   x + (int)(((Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX) / 2 + Global.NUMBER_X_OFFSET) * rate), y +(int)(Global.NUMBER_Y_OFFSET*rate), 
+                                   dx * Global.NUMBER_X_OFFSET,  dy * Global.NUMBER_Y_OFFSET,
+                                   dx * Global.NUMBER_X_OFFSET + 110, dy * Global.NUMBER_Y_OFFSET + 130, null);
          
         }
         
@@ -76,12 +80,12 @@ public class NumberIcon extends GameObject{
             int dx1 = tendigits % 10;
             int dy1 = tendigits / 10;
             
-            g.drawImage(image, x, y, x + (int)(Global.NUMBER_X_OFFSET * rate), y + height, 
+            g.drawImage(image, x, y, x + (int)(Global.NUMBER_X_OFFSET * rate), y  +(int)(Global.NUMBER_Y_OFFSET*rate), 
             dx1 * Global.NUMBER_X_OFFSET,  dy1 * Global.NUMBER_Y_OFFSET,
             dx1 * Global.NUMBER_X_OFFSET + 110, dy1 * Global.NUMBER_Y_OFFSET + 130, null);
         
         
-            g.drawImage(image, x + (int)((Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX) * rate), y, x + (int)((2 * Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX) * rate), y + height, 
+            g.drawImage(image, x + (int)((Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX) * rate), y, x + (int)((2 * Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX) * rate), y  + (int)(Global.NUMBER_Y_OFFSET*rate), 
             dx * Global.NUMBER_X_OFFSET,  dy * Global.NUMBER_Y_OFFSET,
             dx * Global.NUMBER_X_OFFSET + 110, dy * Global.NUMBER_Y_OFFSET + 130, null);
         
