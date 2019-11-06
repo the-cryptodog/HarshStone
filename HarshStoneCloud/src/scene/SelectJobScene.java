@@ -1,5 +1,6 @@
 package scene;
 
+import Controller.PathBuilder;
 import Controller.SceneController;
 import gameObject.Button.Button;
 import gameObject.Hero.Hero;
@@ -9,6 +10,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import javafx.scene.media.AudioClip;
 import scene.MapScene;
 import scene.MenuScene;
 import scene.Scene;
@@ -68,6 +70,9 @@ public class SelectJobScene extends Scene {
     private SelectJobSceneState selectjobscenestate;
     private Hero[] heros;
 
+
+    
+    
     public SelectJobScene(SceneController scenecontroller) {
         super(scenecontroller);
         
@@ -139,7 +144,7 @@ public class SelectJobScene extends Scene {
         npctalkcharts.add(talkchart3);
         herotalkcharts.add(talkchart4);
         
-        
+  
         
         
         img = irc.tryGetImage("/resources/Map/mapOrigin.png");
@@ -163,6 +168,7 @@ public class SelectJobScene extends Scene {
                         jobSelected = true;
                         storyBegin = true;
                         selectjobscenestate = new selectJob();
+                        
 
 //                        scenecontroller.changeScene(new MapScene(scenecontroller));
 //                      startPressed = true;
@@ -289,6 +295,8 @@ public class SelectJobScene extends Scene {
 
     @Override
     public void sceneUpdate() {
+        
+
 
 //        if (jobSelected & !storyEnd) {//所選角色往回走就定位開啟對話
 //            if(heroSelected.getX()<307){

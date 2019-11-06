@@ -34,7 +34,6 @@ public class SkillList {
     
     public void addCardSkill(Skill skill) { 
         // 卡片的技能光影集合,共三有十種技能光影 ;
-        skill.setX(Global.MONSTERX);
         cardSkillList.add(skill);
     }
 

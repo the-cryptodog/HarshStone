@@ -5,8 +5,10 @@
  */
 package gameObject.Hero;
 
+import Controller.PathBuilder;
 import gameObject.Monster.MonsterState;
 import java.io.Serializable;
+import javafx.scene.media.AudioClip;
 import scene.MapScene;
 import utils.Global;
 
@@ -59,7 +61,9 @@ public interface HeroState extends Serializable{
     }
 
     public class MoveHeroRight implements HeroState{
+        
 
+        
         @Override
         public void action(Hero hero) {
             int tempx;
@@ -68,6 +72,7 @@ public interface HeroState extends Serializable{
             hero.direction = 2;
             if(tempx >= Global.HEROX ){
                 hero.setX( Global.HEROX);    
+                
                 hero.setState(new NoMove());
             }
             else{
