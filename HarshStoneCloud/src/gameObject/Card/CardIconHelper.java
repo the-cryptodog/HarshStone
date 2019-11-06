@@ -109,12 +109,12 @@ public class CardIconHelper {
     public void paint(Graphics g, int x, int y, int width, int height) {
 
         if (twoEffect.size() < 2) { //單效果
-            g.drawImage(twoEffect.get(0), x + (int) ((Global.DIGIT1X + 25) * af), y + (int) ((125 * Global.LARGEN) * af),
-                    (int) (((50 * Global.LARGEN) - 20) * af),
-                    (int) (((50 * Global.LARGEN) - 20) * af), null);
-            digit.setY((int) (y + (180 * af)));
-            digit.setX((int) (x + (Global.DIGIT3X) * af));
-            digit.setRate(af/2);
+            g.drawImage(twoEffect.get(0), x + (int) ((Global.DIGIT1X + 20) * af), y + (int) ((135 * Global.LARGEN) * af),
+                    (int) (((50 * Global.LARGEN) - 27) * af),
+                    (int) (((50 * Global.LARGEN) - 27) * af), null);
+            digit.setY((int) (y + (180 * af))-15);
+            digit.setX((int) (x + (Global.DIGIT2X) * af)-15);
+            digit.setRate(af/2.3f);
             digit.paint(g);
         }
         if (twoEffect.size() >= 2) {//雙效果的情形 
@@ -126,11 +126,11 @@ public class CardIconHelper {
                     (int) (((26 * Global.LARGEN) - 5) * af), null);
             digit.setY((int) (y + (180 * af)));
             digit.setX((int) (x + (Global.DIGIT1X) * af));
-            digit.setRate(af/2);
+            digit.setRate(af/2.5f);
             digit.paint(g);
             digit2.setY((int) (y + (180 * af)));
-            digit2.setX((int) (x + (Global.DIGIT3X) * af));
-            digit2.setRate(af/2);
+            digit2.setX((int) (x + (Global.DIGIT2X) * af));
+            digit2.setRate(af/2.5f);
             digit2.paint(g);
         }
     }

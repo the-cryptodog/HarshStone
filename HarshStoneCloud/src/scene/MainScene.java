@@ -126,7 +126,7 @@ public class MainScene extends Scene {
     private AudioClip soundtrack4;
     private AudioClip soundtrack5;
     private AudioClip gameWinSound;
-    private AudioClip gameOverSound;
+    private AudioClip shield;
 
     public MainScene(SceneController scenecontroller, MapScene mapScene) {
         super(scenecontroller);
@@ -182,7 +182,7 @@ public class MainScene extends Scene {
         forHeal = new Monster(0, 0, 0, 0, "專門吃治療", 0, 0, 0, 0, true);
 
         //若不是魔王關創三隻怪
-        if (Global.CURRENTSTAGE < 1) {
+        if (Global.CURRENTSTAGE < 5) {
             orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                     "獸人1", 14, 1, (int) (Math.random() * 8), (int) (Math.random() * 8), false); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
             cultist = new Monster(Global.MONSTERX, Global.MONSTERY2, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
@@ -194,7 +194,7 @@ public class MainScene extends Scene {
             monsters.add(monster1);
         }
 
-        if (Global.CURRENTSTAGE >= 0) {
+        if (Global.CURRENTSTAGE >= 5) {
             orc = new Monster(Global.BOSSX, Global.BOSSY, Global.BOSSWIDTH, Global.BOSSHEIGHT,
                     "獸人1", 70, 100, 13, (int) (Math.random() * 8), true); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
             monsters.add(orc);
@@ -258,7 +258,7 @@ public class MainScene extends Scene {
 
         }
         gameWinSound = acrc.tryGetAudioClip("/resources/Audio/WIN.wav");
-        gameOverSound = acrc.tryGetAudioClip("/resources/Audio/DEAD.mp3");
+        shield = acrc.tryGetAudioClip("/resources/Audio/12.mp3");
 
         currentSountrack.play();
         currentSountrack.setVolume(0.1);
@@ -295,188 +295,199 @@ public class MainScene extends Scene {
                         //                            crystal.setNumberIcon(temp - selectedcard.getCost());
                         //                        }
                         else if (!(selectedcard.getCardMoveState() instanceof MoveToDiscard)) {
-                            /*治療*/ if (selectedcard.getY() < 490 && selectedcard.getHeal() != 0) {
-                                if (skillboard.skillCheck(selectedcard.getSkillIndex())) {
-                                    System.out.print("vvvvvv" + "治療發生" + "vvvvvv");
-                                    Skill tempSkill = skillboard.getCardSkill(selectedcard.getSkillIndex());
-                                    tempSkill.setX(hero.getX());
-                                    tempSkill.setY(hero.getY());
-                                    tempSkill.setSkillend(false);
-                                    tempSkill.getEffectSound().play();
-                                } else {
-                                    Skill tmp = skillFactory.genSkill(selectedcard.getSkillIndex());
-                                    System.out.print(hero.getX() + " == x");
-                                    tmp.positionSetter(hero);
-                                    tmp.setX(hero.getX());
-                                    tmp.setY(hero.getY());
-                                    skillboard.addCardSkill(tmp);
-                                    tmp.setSkillend(false);
-                                    tmp.getEffectSound().play();
-                                }
-                                selectedcard.action(hero, forHeal);
-                                selectedcard.setCardMoveState(new MoveToDiscard());
-                                crystal.setNumberIcon(temp - selectedcard.getCost());   
-                                selectedcard = null;
-                                return;
-                            }
-                            for (int i = 0; i < monsters.size(); i++) {
-                                System.out.println(selectedcard.toString());
-                                if (monsters.get(i).isCollision(selectedcard)) {
-                                    System.out.print(selectedcard.toString());
-                                    // 卡排放到怪物上的動畫
-                                    Monster temp1 = monsters.get(i);
+                            if (selectedcard.getY() < 590) {
+                                if (selectedcard.getHeal() != 0) {
                                     if (skillboard.skillCheck(selectedcard.getSkillIndex())) {
+                                        System.out.print("vvvvvv" + "治療發生" + "vvvvvv");
                                         Skill tempSkill = skillboard.getCardSkill(selectedcard.getSkillIndex());
-                                        tempSkill.setY(monsters.get(i).getY());
-                                        tempSkill.positionSetter(temp1);
+//                                        tempSkill.setX(hero.getX());
+//                                        tempSkill.setY(hero.getY());
                                         tempSkill.setSkillend(false);
                                         tempSkill.getEffectSound().play();
                                     } else {
-                                        System.out.print("vvvvvv" + selectedcard.getSkillIndex() + "vvvvvv");
                                         Skill tmp = skillFactory.genSkill(selectedcard.getSkillIndex());
-                                        tmp.positionSetter(temp1);
+                                        System.out.print(hero.getX() + " == x");
+                                        tmp.positionSetter(hero);
+//                                        tmp.setX(hero.getX());
+//                                        tmp.setY(hero.getY());
                                         skillboard.addCardSkill(tmp);
                                         tmp.setSkillend(false);
                                         tmp.getEffectSound().play();
-                                    }//檢測MainScene的卡片技能區，如已有實體則使用，如無則新增//                                                              
-                                    selectedcard.action(hero, temp1);
-                                    temp1.updateNumberIcon();
+                                    }
+                                    if (selectedcard.getDefense() != 0) {
+                                         shield.play();
+                                    }
+                                    selectedcard.action(hero, forHeal);
                                     selectedcard.setCardMoveState(new MoveToDiscard());
                                     crystal.setNumberIcon(temp - selectedcard.getCost());
-                                    break;
-                                }
-                                if (i == monsters.size() - 1) {
-                                    selectedcard.setCardMoveState(new MoveBack());
-                                }
-                            }                           
-                        }
-                        selectedcard = null;
-                    }
-                }
-
-                if (state == CommandSolver.MouseState.CLICKED) {
-                    System.out.println("clicked");
-                    if (next.isCollision(e.getX(), e.getY()) && !(handdeck.getCards().get(4).getCardMoveState() instanceof MoveToHandDeck)) {
-                        next.setIsClicked(true);
-                        int temp = handdeck.getCards().size();
-                        for (int i = 0; i < temp; i++) {
-                            handdeck.getCards().get(i).setCardMoveState(new EndTurnMove());
-                        }
-                    }
-                    if (back.isCollision(e.getX(), e.getY())) {
-                        gameWin = true;
-//                        Global.CURRENTSTAGE++;
-//                        scenecontroller.changeScene(mapScene);
-                        heroawards = new Award(0, 0, 0, 0, "AWARD");
-                        heroawards.setCommandListener(mousecommandlistener);
-                    }
-                    if (gameWin) {
-                        for (int i = 0; i < heroawards.getAward().size(); i++) {
-                            if (heroawards.getAward().get(i).isCollision(e.getX(), e.getY())) {
-                                selectedRareCard = heroawards.getAward().get(i);
-                                selectedRareCard.setClicked(true);
-
-                                System.out.print("選定卡片!");
-
-                                for (int j = 0; j < heroawards.getAward().size(); j++) {
-                                    if (!heroawards.getAward().get(j).getClicked()) {
-                                        System.out.print("丟棄卡片!");
-                                        heroawards.getAward().get(j).setCardMoveState(new DiscardRareCard());
-                                        heroawards.setSelected(true);
+                                    selectedcard = null;
+                                    return;
+                                }              
+                            }
+                                for (int i = 0; i < monsters.size(); i++) {
+                                    System.out.println(selectedcard.toString());
+                                    if (monsters.get(i).isCollision(selectedcard)) {
+                                        System.out.print(selectedcard.toString());
+                                        // 卡排放到怪物上的動畫
+                                        Monster temp1 = monsters.get(i);
+                                        if (skillboard.skillCheck(selectedcard.getSkillIndex())) {
+                                            Skill tempSkill = skillboard.getCardSkill(selectedcard.getSkillIndex());
+                                            tempSkill.setY(monsters.get(i).getY());
+                                            tempSkill.positionSetter(temp1);
+                                            tempSkill.setSkillend(false);
+                                            tempSkill.getEffectSound().play();
+                                        } else {
+                                            System.out.print("vvvvvv" + selectedcard.getSkillIndex() + "vvvvvv");
+                                            Skill tmp = skillFactory.genSkill(selectedcard.getSkillIndex());
+                                            tmp.positionSetter(temp1);
+                                            skillboard.addCardSkill(tmp);
+                                            tmp.setSkillend(false);
+                                            tmp.getEffectSound().play();
+                                        }//檢測MainScene的卡片技能區，如已有實體則使用，如無則新增//                                                              
+                                        selectedcard.action(hero, temp1);
+                                        temp1.updateNumberIcon();
+                                        if (selectedcard.getDefense() != 0) {
+                                         shield.play();
+                                          System.out.print("vvvvvv盾牌vvvvvv");
+                                         }
+                                        
+                                        selectedcard.setCardMoveState(new MoveToDiscard());
+                                        crystal.setNumberIcon(temp - selectedcard.getCost());
+                                        break;
+                                    }
+                                    if (i == monsters.size() - 1) {
+                                        selectedcard.setCardMoveState(new MoveBack());
                                     }
                                 }
-//                            System.out.print("選定卡片!");
-                                //                        Global.CURRENTSTAGE++;
-//                        scenecontroller.changeScene(mapScene);
                             }
+                            selectedcard = null;
                         }
                     }
-                    if (heroawards.getButton().isCollision(e.getX(), e.getY())) {
-                        currentSountrack.stop();
-                        scenecontroller.changeScene(mapScene);
-                        selectedRareCard.getCardIconHelper().setAf(1);
-                        selectedRareCard.setWidth(Global.CARDWIDTH);
-                        selectedRareCard.setHeight(Global.CARDHEIGHT);
-                        Global.hero.getHeroDeck().getCards().add(selectedRareCard);
-                        arrangeDeck();
 
-                    }
+                    if (state == CommandSolver.MouseState.CLICKED) {
+                        System.out.println("clicked");
+                        if (next.isCollision(e.getX(), e.getY()) && !(handdeck.getCards().get(4).getCardMoveState() instanceof MoveToHandDeck)) {
+                            next.setIsClicked(true);
+                            int temp = handdeck.getCards().size();
+                            for (int i = 0; i < temp; i++) {
+                                handdeck.getCards().get(i).setCardMoveState(new EndTurnMove());
+                            }
+                        }
+                        if (back.isCollision(e.getX(), e.getY())) {
+                            gameWin = true;
+//                        Global.CURRENTSTAGE++;
+//                        scenecontroller.changeScene(mapScene);
+                            heroawards = new Award(0, 0, 0, 0, "AWARD");
+                            heroawards.setCommandListener(mousecommandlistener);
+                        }
+                        if (gameWin) {
+                            for (int i = 0; i < heroawards.getAward().size(); i++) {
+                                if (heroawards.getAward().get(i).isCollision(e.getX(), e.getY())) {
+                                    selectedRareCard = heroawards.getAward().get(i);
+                                    selectedRareCard.setClicked(true);
 
-                    if (exit.isCollision(e.getX(), e.getY())) {
+                                    System.out.print("選定卡片!");
+
+                                    for (int j = 0; j < heroawards.getAward().size(); j++) {
+                                        if (!heroawards.getAward().get(j).getClicked()) {
+                                            System.out.print("丟棄卡片!");
+                                            heroawards.getAward().get(j).setCardMoveState(new DiscardRareCard());
+                                            heroawards.setSelected(true);
+                                        }
+                                    }
+//                            System.out.print("選定卡片!");
+                                    //                        Global.CURRENTSTAGE++;
+//                        scenecontroller.changeScene(mapScene);
+                                }
+                            }
+                        }
+                        if (heroawards.getButton().isCollision(e.getX(), e.getY())) {
+                            currentSountrack.stop();
+                            scenecontroller.changeScene(mapScene);
+                            selectedRareCard.getCardIconHelper().setAf(1);
+                            selectedRareCard.setWidth(Global.CARDWIDTH);
+                            selectedRareCard.setHeight(Global.CARDHEIGHT);
+                            Global.hero.getHeroDeck().getCards().add(selectedRareCard);
+                            arrangeDeck();
+
+                        }
+
+                        if (exit.isCollision(e.getX(), e.getY())) {
 //                        gameOver = true;
-                        scenecontroller.changeScene(new EndScene(scenecontroller));
-                    }
+                            scenecontroller.changeScene(new EndScene(scenecontroller));
+                        }
 
-                    if (backtothefuture.isCollision(e.getX(), e.getY()) && useheroskill == false) {
-                        useheroskill = true;
-                        crystal.getNumberIcon().setNumber(3);
-                        transformTurnStartMonsters();
-                        handdeck.cardTransform(drawcarddeck);
-                        drawCard(drawcarddeck, handdeck, discarddeck, 5);
+                        if (backtothefuture.isCollision(e.getX(), e.getY()) && useheroskill == false) {
+                            useheroskill = true;
+                            crystal.getNumberIcon().setNumber(3);
+                            transformTurnStartMonsters();
+                            handdeck.cardTransform(drawcarddeck);
+                            drawCard(drawcarddeck, handdeck, discarddeck, 5);
 
-                    }
+                        }
 
 //                    if (exit2.isCollision(e.getX(), e.getY())) {
 //                        scenecontroller.changeScene(new MenuScene(scenecontroller));
 //                    }
-                }
+                    }
 
-                if (state == CommandSolver.MouseState.PRESSED) {
-                    System.out.println("PRESS");
-                    if (selectedcard == null) {
+                    if (state == CommandSolver.MouseState.PRESSED) {
+                        System.out.println("PRESS");
+                        if (selectedcard == null) {
+                            for (int i = 0; i < handdeck.getCards().size(); i++) {
+                                if (handdeck.getCards().get(i).getCardMoveState() instanceof MoveStop
+                                        && handdeck.getCards().get(i).isCollision(e.getX(), e.getY())) {
+                                    Card temp = handdeck.getCards().get(i);
+                                    selectedcard = temp;
+                                    selectedcard.setX(selectedcard.getOrginalX());
+                                    selectedcard.setY(selectedcard.getOrginalY());
+                                    selectedcard.getCardIconHelper().setAf(1);
+                                    selectedcard.setWidth(Global.CARDWIDTH);
+                                    selectedcard.setHeight(Global.CARDHEIGHT);
+
+                                    xdelta = temp.getDeltaX(e.getX());
+                                    ydelta = temp.getDeltaY(e.getY());
+                                    temp.setClicked(true);
+                                }
+                            }
+                        }
+                    }
+
+                    if (state == CommandSolver.MouseState.DRAGGED) {
+                        if (selectedcard != null) {
+                            System.out.println("dragg");
+
+                            selectedcard.setX(e.getX() - xdelta);
+                            selectedcard.setY(e.getY() - ydelta);
+                            System.out.print(selectedcard.getX());
+                            System.out.print(selectedcard.getY());
+                        }
+                    }
+                    if (state == CommandSolver.MouseState.MOVED) {
+//                    if (selectedcard == null) {
                         for (int i = 0; i < handdeck.getCards().size(); i++) {
                             if (handdeck.getCards().get(i).getCardMoveState() instanceof MoveStop
                                     && handdeck.getCards().get(i).isCollision(e.getX(), e.getY())) {
-                                Card temp = handdeck.getCards().get(i);
-                                selectedcard = temp;
-                                selectedcard.setX(selectedcard.getOrginalX());
-                                selectedcard.setY(selectedcard.getOrginalY());
-                                selectedcard.getCardIconHelper().setAf(1);
-                                selectedcard.setWidth(Global.CARDWIDTH);
-                                selectedcard.setHeight(Global.CARDHEIGHT);
-
-                                xdelta = temp.getDeltaX(e.getX());
-                                ydelta = temp.getDeltaY(e.getY());
-                                temp.setClicked(true);
-                            }
-                        }
-                    }
-                }
-
-                if (state == CommandSolver.MouseState.DRAGGED) {
-                    if (selectedcard != null) {
-                        System.out.println("dragg");
-
-                        selectedcard.setX(e.getX() - xdelta);
-                        selectedcard.setY(e.getY() - ydelta);
-                        System.out.print(selectedcard.getX());
-                        System.out.print(selectedcard.getY());
-                    }
-                }
-                if (state == CommandSolver.MouseState.MOVED) {
-//                    if (selectedcard == null) {
-                    for (int i = 0; i < handdeck.getCards().size(); i++) {
-                        if (handdeck.getCards().get(i).getCardMoveState() instanceof MoveStop
-                                && handdeck.getCards().get(i).isCollision(e.getX(), e.getY())) {
-                            handdeck.getCards().get(i).getCardIconHelper().setAf(Global.INSPECTSIZE);
-                            handdeck.getCards().get(i).setY(600);
-                            handdeck.getCards().get(i).setWidth(Global.INSPECTCARDWIDTH);
-                            handdeck.getCards().get(i).setHeight(Global.INSPECTCARDHEIGHT);
+                                handdeck.getCards().get(i).getCardIconHelper().setAf(Global.INSPECTSIZE);
+                                handdeck.getCards().get(i).setY(600);
+                                handdeck.getCards().get(i).setWidth(Global.INSPECTCARDWIDTH);
+                                handdeck.getCards().get(i).setHeight(Global.INSPECTCARDHEIGHT);
 //                                sceneEnd();
-                        } else {
-                            if (handdeck.getCards().get(i).getCardMoveState() instanceof MoveStop) {
-                                handdeck.getCards().get(i).setY(700);
+                            } else {
+                                if (handdeck.getCards().get(i).getCardMoveState() instanceof MoveStop) {
+                                    handdeck.getCards().get(i).setY(700);
+                                }
+                                handdeck.getCards().get(i).getCardIconHelper().setAf(1);
+                                handdeck.getCards().get(i).setWidth(Global.CARDWIDTH);
+                                handdeck.getCards().get(i).setHeight(Global.CARDHEIGHT);
                             }
-                            handdeck.getCards().get(i).getCardIconHelper().setAf(1);
-                            handdeck.getCards().get(i).setWidth(Global.CARDWIDTH);
-                            handdeck.getCards().get(i).setHeight(Global.CARDHEIGHT);
-                        }
 
-                    }
+                        }
 //                    }
+                    }
                 }
             }
-        };
+        ;
     }
 
     //抽n張卡
