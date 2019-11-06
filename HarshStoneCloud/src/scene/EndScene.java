@@ -34,7 +34,7 @@ public class EndScene extends Scene{
           img = irc.tryGetImage("/resources/Background/ENDSCENE.png");
           backToMenu = new Button(800, 860, 108, 40, "BACK");
           sound = acrc.tryGetAudioClip(PathBuilder.getAudio("/Delusion.mp3"));
-                    sound.play();
+          sound.play();
           
           mousecommandlistener = new CommandSolver.MouseCommandListener(){
     

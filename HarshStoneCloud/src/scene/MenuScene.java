@@ -60,7 +60,7 @@ public class MenuScene extends Scene {
 //        clip = arc.tryGetAudio("/resources/Audio/This.wav");
 
         background = acrc.tryGetAudioClip("/resources/Audio/MENU.mp3");
- 
+        background.setVolume(0.05d);
         background.play();
 //        clip.start();
 

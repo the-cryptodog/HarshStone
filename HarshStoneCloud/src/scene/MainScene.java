@@ -196,7 +196,7 @@ public class MainScene extends Scene {
 
         if (Global.CURRENTSTAGE >= 0) {
             orc = new Monster(Global.BOSSX, Global.BOSSY, Global.BOSSWIDTH, Global.BOSSHEIGHT,
-                    "獸人1", 70, 4, 13, (int) (Math.random() * 8), true); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
+                    "獸人1", 70, 100, 13, (int) (Math.random() * 8), true); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
             monsters.add(orc);
         }
 
@@ -628,7 +628,7 @@ public class MainScene extends Scene {
 
         if (hero.gethealth() < 0) {
             scenecontroller.changeScene(new EndScene(scenecontroller));
-            gameOverSound.play();
+            currentSountrack.stop();
         }
         column.move();
         hero.move();
