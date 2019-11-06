@@ -27,7 +27,7 @@ public class Crystal extends GameObject{
         super(x, y, width, height, name);
 
         image = irc.tryGetImage(PathBuilder.getIcon(ImagePath.CRYSTALICON));
-        numbericon = new NumberIcon(x + width+20, y,width,height,name,3);
+        numbericon = new NumberIcon(x + width+20, y, name, 3,1);
          empty = irc.tryGetImage(PathBuilder.getIcon(ImagePath.CRYSTALEMPTY));
         delaycounter = new DelayCounter(10, new DelayCounter.Action() {
        

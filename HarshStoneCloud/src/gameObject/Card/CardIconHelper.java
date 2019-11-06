@@ -100,13 +100,20 @@ public class CardIconHelper {
 
         digitX = (int) (card.getX() + (Global.CARDWIDTH / 2) * af);
         digitY = (int) (card.getY() + (Global.CARDHEIGHT / 2) * af);
-
-        digit = new NumberIcon(digitX, digitY, (int) (44 * af), (int) (52 * af), "個位數", 0);
-        tenDigit3 = new NumberIcon(digitX, digitY, (int) (44 * af), (int) (52 * af), "個位數", 0);
-        digit2 = new NumberIcon(digitX, digitY + (int) (32 * af), (int) (55 * af), (int) (35 * af), "個位數", 0);
-        digit2 = new NumberIcon(digitX, digitY + (int) (32 * af), (int) (55 * af), (int) (35 * af), "個位數", 0);
-        tenDigit = new NumberIcon(digitX - (int) (40 * af), digitY, (int) (55 * af), (int) (65 * af), "十位數", 1);
-        tenDigit2 = new NumberIcon(digitX - (int) (40 * af), digitY, (int) (55 * af), (int) (65 * af), "十位數", 1);
+        int temp1 = (int) (44 * af);
+        int temp2 = (int) (52 * af);
+        digit = new NumberIcon(digitX, digitY, "個位數", 0, 1);
+        tenDigit3 = new NumberIcon(digitX, digitY, "個位數", 0, 1);
+        int temp3 = (int) (32 * af);
+        int temp4 = (int) (55 * af);
+        int temp5 = (int) (35 * af);
+        digit2 = new NumberIcon(digitX, digitY + temp3, "個位數", 0, 1);
+        digit2 = new NumberIcon(digitX, digitY + temp3, "個位數", 0, 1);
+        int temp6 = (int) (40 * af);
+        int temp7 = (int) (55 * af);
+        int temp8 = (int) (65 * af);
+        tenDigit = new NumberIcon(digitX - temp6, digitY, "十位數", 1, 1);
+        tenDigit2 = new NumberIcon(digitX - temp6, digitY, "十位數", 1, 1);
 
     }
 

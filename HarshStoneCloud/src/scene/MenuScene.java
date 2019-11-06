@@ -11,6 +11,7 @@ import PopUpWindow.Incidence;
 import gameObject.Button.Button;
 import gameObject.Card.CardDeckRecord;
 import gameObject.Hero.Hero;
+import gameObject.NumberIcon;
 import io.CommandSolver;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -51,6 +52,9 @@ public class MenuScene extends Scene {
     private Incidence incidence;
     private AudioClip background;
     private Clip clip;
+    private NumberIcon aa;
+    private NumberIcon bb;
+    private NumberIcon cc;
 
     //開始遊戲(進入選角畫面)
     //結束遊戲(關閉視窗)
@@ -60,7 +64,11 @@ public class MenuScene extends Scene {
 //        clip = arc.tryGetAudio("/resources/Audio/This.wav");
 
         background = acrc.tryGetAudioClip("/resources/Audio/MENU.mp3");
-        background.setVolume(0.05d);
+        background.setVolume(0.05d);      
+        aa = new NumberIcon(500,10,"",88, 0.5f);
+        bb = new NumberIcon(500,200,"",8, 0.5f);
+        cc = new NumberIcon(200,500,"",10, 1);
+
         background.play();
 //        clip.start();
 
@@ -76,11 +84,11 @@ public class MenuScene extends Scene {
         mousecommandlistener = new CommandSolver.MouseCommandListener() {
             @Override
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
-                  if (state != null) {
-                    System.out.println(state);
-                }else{
-                    System.out.println("沒狀態");
-            }
+//                  if (state != null) {
+//                    System.out.println(state);
+//                }else{
+//                    System.out.println("沒狀態");
+//            }
                 
                 if (state == CommandSolver.MouseState.RELEASED) {
 
@@ -89,7 +97,7 @@ public class MenuScene extends Scene {
                 }
 
                 if (state == CommandSolver.MouseState.CLICKED) {
-     
+                    
                     if (buttons.get(0).isCollision(e.getX(), e.getY())) {
 //                        background.play();
                         background.stop();
@@ -126,6 +134,7 @@ public class MenuScene extends Scene {
                 }
 
                 if (state == CommandSolver.MouseState.PRESSED) {
+                    System.out.println("按到座標" + e.getX());
                     if (buttons.get(0).isCollision(e.getX(), e.getY())) {
                         startPressed = true;
                         System.out.println(startPressed);
@@ -174,6 +183,7 @@ public class MenuScene extends Scene {
     @Override
     public void paint(Graphics g) {
 
+        
         g.drawImage(img, 0, 0, 1920, 1050, null);
         for (int i = 0; i < buttons.size(); i++) {
             buttons.get(i).paint(g);
@@ -181,5 +191,21 @@ public class MenuScene extends Scene {
         if (incidence != null) {
             incidence.paint(g);
         }
+        
+        System.out.println( 20 );
+        System.out.println( 20 + ((Global.NUMBER_X_OFFSET) * 1));
+        System.out.println( 20 + ((Global.NUMBER_X_OFFSET + Global.NUMBER_DELTAX) * 1));
+        System.out.println( 20 + ((2 * Global.NUMBER_X_OFFSET + Global.NUMBER_DELTAX) * 1));
+        
+        
+        System.out.println( Global.NUMBER_X_OFFSET);
+        System.out.println( Global.NUMBER_DELTAX);
+        System.out.println("d" + (20 + (int)((Global.NUMBER_X_OFFSET + Global.NUMBER_DELTAX) * 1)));
+        
+        System.out.println("f" + (20 + (int)((2 * Global.NUMBER_X_OFFSET + Global.NUMBER_DELTAX) * 1)));
+        bb.paint(g);
+        aa.paint(g);
+        cc.paint(g);
+        
     }
 }

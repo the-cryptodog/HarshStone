@@ -93,8 +93,8 @@ public class Monster extends GameObject implements Cloneable{
         });
 
         monsterstate = new MonsterState.DecideMove();
-        number1 = new NumberIcon(x + width, y + 100, 50, 50, "", 0);
-        number2 = new NumberIcon(x + width + 40, y + 100, 50, 50, "", 0);
+        number1 = new NumberIcon(x + width, y + 100, "", 0, 0.4f);
+        number2 = new NumberIcon(x + width + 40, y + 100, "", 0, 0.4f);
     }
 
     //10/22

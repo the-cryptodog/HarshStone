@@ -19,7 +19,7 @@ public class Poison extends MonsterAbnormalState{
         public Poison(int x,int y, int width, int height, String name,int continueturn){
             super(x,y,width,height,name,continueturn);
             image = irc.tryGetImage("/resources/Icon/Poison.png");
-            numbericon = new NumberIcon(x+width,y,width,height," ",continueturn);
+            numbericon = new NumberIcon(x+width,y," ",continueturn,0.25f);
         }
         
     //0可能有問題

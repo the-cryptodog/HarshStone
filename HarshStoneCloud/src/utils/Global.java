@@ -114,6 +114,8 @@ public class Global {
     //Numberimage
     public static final int NUMBER_X_OFFSET = 110;
     public static final int NUMBER_Y_OFFSET = 130;
+    public static final int NUMBER_DELTAX = 30;
+    
 
     //MonsterStateIcon
     public static final int ICON_X_OFFSET = 60;
