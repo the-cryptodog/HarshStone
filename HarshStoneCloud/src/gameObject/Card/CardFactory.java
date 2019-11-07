@@ -8,7 +8,7 @@ package gameObject.Card;
 import gameObject.Card.Card;
 import Controller.ImageResourceController;
 import gameObject.DamageEffect;
-import gameObject.DefenceEffect;
+import gameObject.DefenseEffect;
 import gameObject.FrozenEffect;
 import gameObject.HealEffect;
 import gameObject.PoisonEffect;
@@ -112,7 +112,7 @@ public class CardFactory implements Serializable {
             card = new DamageEffect(card, Integer.valueOf(temp[4]));
         }
         if (Integer.valueOf(temp[5]) != 0) {
-            card = new DefenceEffect(card, Integer.valueOf(temp[5]));
+            card = new DefenseEffect(card, Integer.valueOf(temp[5]));
         }
         if (Integer.valueOf(temp[6]) != 0) {
             card = new WeakEffect(card, Integer.valueOf(temp[6]));

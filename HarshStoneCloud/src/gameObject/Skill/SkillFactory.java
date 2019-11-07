@@ -7,7 +7,7 @@ package gameObject.Skill;
 
 import gameObject.Card.Card;
 import gameObject.DamageEffect;
-import gameObject.DefenceEffect;
+import gameObject.DefenseEffect;
 import gameObject.WeakEffect;
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;

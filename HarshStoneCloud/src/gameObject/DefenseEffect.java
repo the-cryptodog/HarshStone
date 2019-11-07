@@ -14,11 +14,11 @@ import gameObject.Monster.Monster;
  *
  * @author frank61003
  */
-public class DefenceEffect extends CardEffect{
+public class DefenseEffect extends CardEffect{
     private Card card;
     protected int defense; 
     
-    public DefenceEffect(Card card, int defence) {
+    public DefenseEffect(Card card, int defense) {
         super(card);
         this.card = super.card;
         this.defense = defense;
@@ -33,7 +33,8 @@ public class DefenceEffect extends CardEffect{
     public void action(Hero hero, Monster monster) {
         card.action(hero, monster);
         hero.setDefense(hero.getDefense() + defense);
-        
-        System.out.println("獲得防禦力" + hero.getDefense());
+        System.out.println("1.獲得防禦力" + defense);
+        System.out.println("2.英雄防禦力" + hero.getDefense());
+        System.out.println("2.英雄姓名" + hero.getName());
     }
 }

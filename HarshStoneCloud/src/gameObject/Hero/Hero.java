@@ -221,9 +221,6 @@ public class Hero extends GameObject implements Serializable{
 //            heroState.action(this);
 //            System.out.println("英雄往右移");
         }
-        healthnumber.setNumber(health);
-        healthnumber.setX(x + (int)((Global.HEROWIDTH - ((2*Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX)*healthnumber.getRate()))/2));
-        healthnumber.setY(Global.HEROY+Global.HEROHEIGHT-2);
     }
     
     public void move() {
@@ -242,7 +239,9 @@ public class Hero extends GameObject implements Serializable{
             attackedanimation.setY(temp2);
             attackedanimation.setOrginaly(temp2);
         }
-        
+        healthnumber.setNumber(health);
+        healthnumber.setX(x + (int)((Global.HEROWIDTH - ((2*Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX)*healthnumber.getRate()))/2));
+        healthnumber.setY(Global.HEROY+Global.HEROHEIGHT-2);
         
         
     }
@@ -264,6 +263,6 @@ public class Hero extends GameObject implements Serializable{
         if(health != 0){
             healthnumber.paint(g);
         }
-        
+        update();
     }
 }

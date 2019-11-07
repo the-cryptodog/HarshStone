@@ -303,6 +303,9 @@ public class SelectJobScene extends Scene {
 //                  selectjobscenestate= new beginTalk1();
 //            }
 //        }
+        
+        
+        
         if (delaycounter.delayupdate()) {
             selectjobscenestate.action(this);
         }

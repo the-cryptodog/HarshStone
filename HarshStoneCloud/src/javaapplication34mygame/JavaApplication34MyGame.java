@@ -7,7 +7,7 @@ package javaapplication34mygame;
 
 import gameObject.Card.Card;
 import gameObject.DamageEffect;
-import gameObject.DefenceEffect;
+import gameObject.DefenseEffect;
 import gameObject.Hero.Hero;
 import gameObject.WeakEffect;
 import io.CommandSolver;

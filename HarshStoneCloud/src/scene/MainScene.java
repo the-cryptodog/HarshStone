@@ -26,7 +26,7 @@ import gameObject.Card.CardMoveState.MoveToHandDeck;
 import gameObject.Column;
 import gameObject.Crystal;
 import gameObject.DamageEffect;
-import gameObject.DefenceEffect;
+import gameObject.DefenseEffect;
 import gameObject.Hero.Hero;
 import gameObject.Hero.HeroState.MoveHeroLeave;
 import gameObject.Hero.HeroState.MoveHeroRight;
@@ -636,7 +636,6 @@ public class MainScene extends Scene {
 //            gameWinSound.play();
 //        }
         hero.move();
-        hero.update();
         if (hero.gethealth() < 0) {
             scenecontroller.changeScene(new EndScene(scenecontroller));
             currentSountrack.stop();

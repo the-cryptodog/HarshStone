@@ -8,7 +8,7 @@ package gameObject.Card;
 import Controller.ImageResourceController;
 import Controller.PathBuilder;
 import gameObject.DamageEffect;
-import gameObject.DefenceEffect;
+import gameObject.DefenseEffect;
 import gameObject.FrozenEffect;
 import gameObject.GameObject;
 import gameObject.HealEffect;
