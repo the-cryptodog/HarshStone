@@ -32,7 +32,7 @@ public class EndScene extends Scene{
     public EndScene(SceneController scenecontroller){
           super(scenecontroller);
           img = irc.tryGetImage("/resources/Background/ENDSCENE.png");
-          backToMenu = new Button(800, 860, 108, 40, "BACK");
+          backToMenu = new Button(900, 860, 210, 52, "BACKTOMENU");
           sound = acrc.tryGetAudioClip(PathBuilder.getAudio("/Delusion.mp3"));
           sound.play();
           
