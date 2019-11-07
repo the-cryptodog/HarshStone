@@ -162,10 +162,9 @@ public class Global {
     
     
     //卡片數值X常數
-    public static final int DIGIT1X=  ( CARDWIDTH/5-CARDWIDTH/8);
-     public static final int DIGIT2X= ( CARDWIDTH/5);
-     public static final int DIGIT3X= (( CARDWIDTH/5)*3-CARDWIDTH/8);
-     public static final int DIGIT4X= (( CARDWIDTH/5)*3);
+    public static final int DIGIT1X=  (CARDWIDTH/5)- (CARDWIDTH/10);
+    public static final int DIGIT2X= ( CARDWIDTH/5)*3- (CARDWIDTH/8);
+
 
 
      //戰鬥畫面配置參數
