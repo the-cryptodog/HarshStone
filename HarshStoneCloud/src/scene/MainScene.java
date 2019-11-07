@@ -25,6 +25,7 @@ import gameObject.Card.CardMoveState.MoveToDiscard;
 import gameObject.Card.CardMoveState.MoveToHandDeck;
 import gameObject.Column;
 import gameObject.Crystal;
+import gameObject.Curtain;
 import gameObject.DamageEffect;
 import gameObject.DefenseEffect;
 import gameObject.Hero.Hero;
@@ -80,8 +81,7 @@ public class MainScene extends Scene {
     private BufferedImage img4;
     private BufferedImage img5;
     private BufferedImage currentImg;
-    private int x1;
-    private int y1;
+    private Curtain  curtains;
     private int xdelta;
     private int ydelta;
     private boolean cardclicked;
@@ -224,7 +224,10 @@ public class MainScene extends Scene {
         for (Monster monster : monsters) {
             monster.setHero(hero);
         }
+        
 
+        
+        
         endImage = irc.tryGetImage("/resources/Background/ENDSCENE.png");
 
         img = irc.tryGetImage("/resources/Background/BACKGROUND1.jpg");
@@ -434,12 +437,12 @@ public class MainScene extends Scene {
                     }
 
                     if (backtothefuture.isCollision(e.getX(), e.getY()) && useheroskill == false) {
+                        
                         useheroskill = true;
                         crystal.getNumberIcon().setNumber(3);
                         transformTurnStartMonsters();
                         handdeck.cardTransform(drawcarddeck);
                         drawCard(drawcarddeck, handdeck, discarddeck, 5);
-
                     }
 
 //                    if (exit2.isCollision(e.getX(), e.getY())) {

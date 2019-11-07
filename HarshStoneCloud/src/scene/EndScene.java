@@ -43,7 +43,7 @@ public class EndScene extends Scene{
                 if(state == CommandSolver.MouseState.CLICKED){
                        if(backToMenu.isCollision(e.getX(), e.getY())){
                            sound.stop();
-                            scenecontroller.changeScene(new MenuScene(scenecontroller));
+                           scenecontroller.changeScene(new MenuScene(scenecontroller));
                        }
                 }
             }
