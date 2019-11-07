@@ -11,6 +11,8 @@ import gameObject.Card.CardDeck;
 import gameObject.Card.CardDeck.WarriorDeck;
 import gameObject.GameObject;
 import gameObject.Hero.HeroState.*;
+import gameObject.NumberIcon;
+import gameObject.NumberIconMoveState.NumberMoveStop;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,6 +52,7 @@ public class Hero extends GameObject implements Serializable{
     private int lasthealth;
     private boolean recordhealth;
     private HeroState heroState;
+    private NumberIcon attackedanimation;
     private AudioClip steps;
 
     public Hero(int x, int y, int width, int height, String name, int health, int actor) {
@@ -67,6 +70,8 @@ public class Hero extends GameObject implements Serializable{
         steps = acrc.tryGetAudioClip(PathBuilder.getAudio("/steps.mp3"));
         herodeck = new WarriorDeck(40, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "牌組");
         herohelper = new HeroHelper(actor);
+        attackedanimation = new NumberIcon(x + (int)(Math.random()*width), y + (int)(Math.random() * height),"攻擊動畫", 0, 0.3f);
+        attackedanimation.setNumberIconMoveState(new NumberMoveStop());
         
         delaycounter = new DelayCounter(10, new DelayCounter.Action() {
 
@@ -180,10 +185,19 @@ public class Hero extends GameObject implements Serializable{
         this.direction = direction;
     }
 
+    public void setAttackedAnimation(NumberIcon attackedanimation) {
+        this.attackedanimation = attackedanimation;
+    }
+    
+    public NumberIcon getAttackedAnimation() {
+        return attackedanimation;
+    }
+    
     /**
      *
      * @param width
      */
+    
     @Override
     public void setWidth(int width) {
         this.width = width;
@@ -229,13 +243,20 @@ public class Hero extends GameObject implements Serializable{
         if (delaycounter.delayupdate()) {
             heroState.action(this);
         }
+        attackedanimation.move();
+        //應該有其他更好的判斷條件
+        if(attackedanimation.getNumberIconMoveState() instanceof NumberMoveStop){
+            int temp1 = x + (int)(Math.random()*width);
+            int temp2 = y + (int)(Math.random()*height);
+            attackedanimation.setX(temp1);
+            attackedanimation.setOrginalx(temp1);
+            attackedanimation.setY(temp2);
+            attackedanimation.setOrginaly(temp2);
+            
+        }
         
         
-//        if (recordhealth == false) {
-//            lasthealth = health;
-//            recordhealth = false;
-//        }
-
+        
     }
 
     public void setMoved(boolean moved) {
@@ -249,6 +270,6 @@ public class Hero extends GameObject implements Serializable{
     public void paint(Graphics g) {
         update();
         herohelper.paint(g, x, y, width, height, ACT[act], direction, health);
-        
+        attackedanimation.paint(g);
     }
 }

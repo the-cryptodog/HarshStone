@@ -315,7 +315,10 @@ public class MainScene extends Scene {
                                 }
                                 selectedcard.action(hero, forHeal);
                                 selectedcard.setCardMoveState(new MoveToDiscard());
-                                crystal.setNumberIcon(temp - selectedcard.getCost());   
+                                crystal.setNumberIcon(temp - selectedcard.getCost());
+                                System.out.println("水晶數" + temp);
+                                System.out.println("牌花費"+selectedcard.getCost());
+                                System.out.println("水晶數" +  crystal.getNumberIcon().getNumber());
                                 selectedcard = null;
                                 return;
                             }
@@ -751,8 +754,6 @@ public class MainScene extends Scene {
     @Override
     public void paint(Graphics g) {
 
-//        g.setFont(font1);
-//        g.drawString("14pt bold & italic times Roman", 5, 92);
         g.drawImage(currentImg, 0, 0, 1920, 1080, null);
         hero.paint(g);
         for (int i = 0; i < monsters.size(); i++) {
@@ -760,10 +761,6 @@ public class MainScene extends Scene {
         }
 
         crystal.paint(g);
-
-//        g.setColor(Color.red);
-//        g.drawRect(800,500,300,25);
-//        g.fillRect(800, 500, (int)temp1, 25);
         next.paint(g);
 //        g.setColor(Color.red);
 //        for (int i = 0; i < cardlimit; i++) {

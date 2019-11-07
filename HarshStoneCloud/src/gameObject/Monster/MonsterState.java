@@ -6,6 +6,7 @@
 package gameObject.Monster;
 
 import gameObject.Hero.Hero;
+import gameObject.NumberIconMoveState.NumberDecideMove;
 import java.util.ArrayList;
 import utils.Global;
 
@@ -108,6 +109,8 @@ public interface MonsterState {
                 if(temp > 0){
                     hero.setDefense(temp);
                 }else{
+                    hero.getAttackedAnimation().setNumberIconMoveState(new NumberDecideMove());
+                    hero.getAttackedAnimation().setNumber(0 - temp);
                     hero.sethealth(hero.gethealth() + temp);
                     hero.setDefense(0);
                     monster.setAttack(0);

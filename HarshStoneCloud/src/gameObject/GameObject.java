@@ -80,7 +80,9 @@ public abstract class GameObject implements Serializable{
         this.orginalx = width;
     }
     
-    
+    public void setOrginaly(int orginaly){
+        this.orginaly = orginaly;
+    }
     
     
     
