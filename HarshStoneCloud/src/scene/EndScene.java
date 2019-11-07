@@ -42,6 +42,7 @@ public class EndScene extends Scene{
             public void mouseTrig(MouseEvent e, CommandSolver.MouseState state, long trigTime) {
                 if(state == CommandSolver.MouseState.CLICKED){
                        if(backToMenu.isCollision(e.getX(), e.getY())){
+                           sound.stop();
                             scenecontroller.changeScene(new MenuScene(scenecontroller));
                        }
                 }
