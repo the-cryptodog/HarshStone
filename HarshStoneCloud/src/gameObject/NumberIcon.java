@@ -24,6 +24,7 @@ public class NumberIcon extends GameObject{
     protected int digits;
     protected float rate;
     protected DelayCounter delaycounter;
+    protected int speedy;
     protected NumberIconMoveState numbericonmovestate;
     
     public NumberIcon(int x, int y, String name, int number,float rate){
@@ -31,6 +32,7 @@ public class NumberIcon extends GameObject{
 //        image = irc.tryGetImage(PathBuilder.getNumber(ImagePath.NUMBER));
         image = irc.tryGetImage("/resources/Number/Number4.png");
         this.number = number;
+        speedy = -1000;
         tendigits = number / 10;
         digits = number % 10;
         this.rate = rate;
@@ -65,6 +67,13 @@ public class NumberIcon extends GameObject{
     }
     public void setRate(float rate){
          this.rate = rate;    
+    }
+    
+    public void setSpeedy(int speedy){
+        this.speedy = speedy;
+    }
+    public int getSpeedy(){
+         return speedy;    
     }
    
     

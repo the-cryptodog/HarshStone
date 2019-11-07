@@ -9,6 +9,8 @@ import Controller.PathBuilder;
 import gameObject.GameObject;
 import gameObject.Hero.Hero;
 import gameObject.NumberIcon;
+import gameObject.NumberIconMoveState;
+import gameObject.NumberIconMoveState.NumberMoveStop;
 import gameObject.Skill.Skill;
 import java.awt.Graphics;
 import java.util.ArrayList;
@@ -42,6 +44,7 @@ public class Monster extends GameObject implements Cloneable{
     protected int attack;
     protected NumberIcon number1;
     protected NumberIcon number2;
+    protected NumberIcon attackedanimation;
     private int yPosition;
     private int skillIndex;
     private Skill selfSkill;
@@ -95,6 +98,8 @@ public class Monster extends GameObject implements Cloneable{
         monsterstate = new MonsterState.DecideMove();
         number1 = new NumberIcon(x + width, y + 100, "", 0, 0.4f);
         number2 = new NumberIcon(x + width + 40, y + 100, "", 0, 0.4f);
+        attackedanimation = new NumberIcon(x + (int)(Math.random()*width), y + (int)(Math.random() * height),"攻擊動畫", 0, 0.3f);
+        attackedanimation.setNumberIconMoveState(new NumberIconMoveState.NumberMoveStop());
     }
 
     //10/22
@@ -226,6 +231,15 @@ public class Monster extends GameObject implements Cloneable{
     public ArrayList<MonsterAbnormalState> getMonsterAbnormalStates() {
         return monsterabnormalstates;
     }
+    
+    public void setAttackedAnimation(NumberIcon attackedanimation) {
+        this.attackedanimation = attackedanimation;
+    }
+    
+    public NumberIcon getAttackedAnimation() {
+        return attackedanimation;
+    }
+    
       
     public void changeDirection(int direction) {
         this.direction = direction;
@@ -236,11 +250,19 @@ public class Monster extends GameObject implements Cloneable{
             act = ++act % 4;
         }
         
-//        if(poison != 0){
-//            monsterabnormalstates.add(new Poison(0,0,30,30,"",poison));
-//        }
+//      受傷害數字移動更新
         
-
+        if(attackedanimation.getNumberIconMoveState() instanceof NumberMoveStop){
+            int temp1 = x + (int)(Math.random()*width);
+            int temp2 = y + (int)(Math.random()*height);
+            attackedanimation.setX(temp1);
+            attackedanimation.setOrginalx(temp1);
+            attackedanimation.setY(temp2);
+            attackedanimation.setOrginaly(temp2);
+        }
+        
+        attackedanimation.move();
+        
     }
     
     
@@ -327,7 +349,7 @@ public class Monster extends GameObject implements Cloneable{
             number2.setNumber(defense % 10);
 
         }
-
+                
     }
 
     public void setMoved(boolean moved) {
@@ -379,6 +401,7 @@ public class Monster extends GameObject implements Cloneable{
                 selfSkill.paint(g);//畫出攻擊技能
             }
 //        }
-    update();
+            attackedanimation.paint(g);
+
     }
 }

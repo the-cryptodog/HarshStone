@@ -244,7 +244,7 @@ public class Hero extends GameObject implements Serializable{
             heroState.action(this);
         }
         attackedanimation.move();
-        //應該有其他更好的判斷條件
+        //應該有其他更好的判斷條件attackedanimation.getNumberIconMoveState() instanceof NumberMoveStop
         if(attackedanimation.getNumberIconMoveState() instanceof NumberMoveStop){
             int temp1 = x + (int)(Math.random()*width);
             int temp2 = y + (int)(Math.random()*height);

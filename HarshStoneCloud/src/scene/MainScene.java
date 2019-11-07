@@ -1,4 +1,4 @@
-ㄡ/*
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -643,6 +643,9 @@ public class MainScene extends Scene {
         }
         column.move();
         hero.move();
+        for (Monster monster : monsters) {
+            monster.update();
+        }
         //把牌組整理好帶回map 判斷條件原為人物往右走出畫面(hero.getX() > Global.JWIDTH)
 
         if (delaycounter.delayupdate()) {
