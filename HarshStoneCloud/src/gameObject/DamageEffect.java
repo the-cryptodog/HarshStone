@@ -9,6 +9,7 @@ import gameObject.Card.CardEffect;
 import gameObject.Card.Card;
 import gameObject.Hero.Hero;
 import gameObject.Monster.Monster;
+import gameObject.NumberIconMoveState.NumberDecideMove;
 
 /**
  *
@@ -36,6 +37,8 @@ public class DamageEffect extends CardEffect {
         System.out.println("最初血量" + monster.gethealth());
         int temp =  monster.getDefense() - damage;
        //怪物護甲還有剩,血量不用動
+        monster.getAttackedAnimation().setNumberIconMoveState(new NumberDecideMove());
+        monster.getAttackedAnimation().setNumber(damage);
         if(temp>0){
             monster.setDefense(temp);
         }else{

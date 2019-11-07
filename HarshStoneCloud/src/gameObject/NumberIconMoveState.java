@@ -5,6 +5,8 @@
  */
 package gameObject;
 
+import utils.Global;
+
 /**
  *
  * @author frank61003
@@ -19,16 +21,25 @@ public interface NumberIconMoveState {
         @Override
         public void action(NumberIcon numbericon) {
             int temp=(int)(Math.random()*3);
+            numbericon.speedy = -1000;
+            
+            
             switch(temp){
                 case 1:
-                numbericon.numbericonmovestate = new NumberMoveStyle1();
-                
+                    numbericon.numbericonmovestate = new NumberMoveStyle1();
+                    System.out.println("NumberMoveStyle1");
+                    numbericon.speedy = 30;
+                    break;
                 case 2:
-                numbericon.numbericonmovestate = new NumberMoveStyle2();
-                                    
+                    numbericon.numbericonmovestate = new NumberMoveStyle2();
+                    System.out.println("NumberMoveStyle2");
+                    numbericon.speedy = 40;
+                    break;
                 case 3:
-                numbericon.numbericonmovestate = new NumberMoveStyle3();
-               
+                    numbericon.numbericonmovestate = new NumberMoveStyle3();
+                    System.out.println("NumberMoveStyle3");
+                    numbericon.speedy = 30;
+                    break;
             
 
             }
@@ -39,19 +50,22 @@ public interface NumberIconMoveState {
 
         @Override
         public void action(NumberIcon numbericon) {
-
-            numbericon.x += 12;
+//            if(numbericon.speedy < -50){
+//                numbericon.speedy = 50;
+//            }
+            System.out.println("NumberMoveStyle1");
+            System.out.println(numbericon.speedy);
+            numbericon.x += 8;
             
-            if( numbericon.x - numbericon.orginalx < 500){
-                numbericon.y -= 22;
-            }
-            else{
-                numbericon.y += 22;
+                numbericon.y -= numbericon.speedy;
+                numbericon.speedy -= 5;
+            
+
                 if(numbericon.y - numbericon.orginaly > 0){
                     numbericon.setNumberIconMoveState(new NumberMoveStop());
                 }
-            }
-                    
+            
+                
                     
             
         }
@@ -61,17 +75,19 @@ public interface NumberIconMoveState {
 
         @Override
         public void action(NumberIcon numbericon) {
-            numbericon.x += 15;
+//            if(numbericon.speedy < -60){
+//                numbericon.speedy = 60;
+//            }
+            System.out.println("NumberMoveStyle2");
+            System.out.println(numbericon.speedy);
+            numbericon.x += 8;
+                     
+            numbericon.y -= numbericon.speedy;
+            numbericon.speedy -= 10;
+            if(numbericon.y - numbericon.orginaly > 0){
+                numbericon.setNumberIconMoveState(new NumberMoveStop());
+            }
             
-            if( numbericon.x - numbericon.orginalx < 450){
-                numbericon.y -= 15;
-            }
-            else{
-                numbericon.y += 15;
-                if(numbericon.y - numbericon.orginaly > 0){
-                    numbericon.setNumberIconMoveState(new NumberMoveStop());
-                }
-            }
            
         }
     }
@@ -80,16 +96,19 @@ public interface NumberIconMoveState {
 
         @Override
         public void action(NumberIcon numbericon) {
-            numbericon.x += 13;
+//            if(numbericon.speedy < -30){
+//                numbericon.speedy = 30;
+//            }
             
-            if( numbericon.x - numbericon.orginalx < 450){
-                numbericon.y -= 19;
-            }
-            else{
-                numbericon.y += 30;
-                if(numbericon.y - numbericon.orginaly > 0){
-                    numbericon.setNumberIconMoveState(new NumberMoveStop());
-                }
+            numbericon.x += 7;
+            System.out.println("NumberMoveStyle3");
+            System.out.println(numbericon.speedy);
+            
+            numbericon.y -= numbericon.speedy;
+            numbericon.speedy -= 5;
+
+            if(numbericon.y - numbericon.orginaly > 0){
+                numbericon.setNumberIconMoveState(new NumberMoveStop());
             }
             
         }
