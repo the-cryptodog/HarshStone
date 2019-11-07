@@ -7,6 +7,7 @@ package utils;
 
 import gameObject.Card.CardDeck;
 import gameObject.Hero.Hero;
+import javafx.scene.media.AudioClip;
 
 /**
  *
@@ -110,6 +111,8 @@ public class Global {
 
     //HeroDeck
     public static CardDeck HERODECK;
+    
+    public  static AudioClip background;
 
     //Numberimage
     public static final int NUMBER_X_OFFSET = 110;

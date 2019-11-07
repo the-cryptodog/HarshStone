@@ -35,8 +35,8 @@ public class Skill extends GameObject {
 
         this.act = 0;
         totalAct = act;
-        skillend = false;
-        delaycounter = new DelayCounter(3, new DelayCounter.Action() {
+        skillend = true;
+        delaycounter = new DelayCounter(4, new DelayCounter.Action() {
 
             @Override
             public void action() {

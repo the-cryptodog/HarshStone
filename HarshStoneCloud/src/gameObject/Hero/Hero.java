@@ -9,6 +9,7 @@ import Controller.ImageResourceController;
 import Controller.PathBuilder;
 import gameObject.Card.Card;
 import gameObject.Card.CardDeck;
+import gameObject.Card.CardDeck.SocererDeck;
 import gameObject.Card.CardDeck.WarriorDeck;
 import gameObject.GameObject;
 import gameObject.Hero.HeroState.*;
@@ -72,7 +73,12 @@ public class Hero extends GameObject implements Serializable{
         image = irc.tryGetImage(PathBuilder.getHero(ImagePath.ACTOR1));
 //        herodeck = new WarriorDeck(x, y, width, height, name);
         steps = acrc.tryGetAudioClip(PathBuilder.getAudio("/steps.mp3"));
+        if(name.equals("Actor1")){
         herodeck = new WarriorDeck(40, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "牌組");
+        }else{
+        herodeck = new SocererDeck(40, 700, Global.CARDDECKWIDTH, Global.CARDDECKHEIGHT, "牌組");
+        }
+        
         herohelper = new HeroHelper(actor);
         attackedanimation = new NumberIcon(x + (int)(Math.random()*width), y + (int)(Math.random() * height),"攻擊動畫", 0, 0.3f);
         attackedanimation.setNumberIconMoveState(new NumberMoveStop());

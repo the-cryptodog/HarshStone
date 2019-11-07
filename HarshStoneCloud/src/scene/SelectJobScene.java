@@ -88,8 +88,8 @@ public class SelectJobScene extends Scene {
 //        actor = new Actor(450, 0, 128, 128, 0, "巫師");
 //        actor2 = new Actor(1150, 0, 128, 128, 0, "戰士");
         job1 = new Hero(Global.JOB1X, Global.JOBY, 128, 128, "Actor1", 0, 0);
-        job2 = new Hero(Global.JOB2X, Global.JOBY, 128, 128, "Actor1", 0, 7);
-        npc = new Hero(Global.NPCX, Global.JOBY, 128, 128, "Actor1", 0, 4);
+        job2 = new Hero(Global.JOB2X, Global.JOBY, 128, 128, "Actor2", 0, 7);
+        npc = new Hero(Global.NPCX, Global.JOBY, 128, 128, "Actor3", 0, 4);
 
         heros = new Hero[3];
         heros[0] = job1;
@@ -314,6 +314,7 @@ public class SelectJobScene extends Scene {
                 Global.hero = heroSelected;
                 scenecontroller.changeScene(new MapScene(scenecontroller));
                 Global.hero.sethealth(99);
+
             }
         }
     }

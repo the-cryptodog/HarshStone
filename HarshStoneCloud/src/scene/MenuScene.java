@@ -50,7 +50,6 @@ public class MenuScene extends Scene {
     private SelectJobSceneState menuscenestate;
     private boolean startPressed;
     private Incidence incidence;
-    private AudioClip background;
     private Clip clip;
     private NumberIcon aa;
     private NumberIcon bb;
@@ -63,13 +62,13 @@ public class MenuScene extends Scene {
 
 //        clip = arc.tryGetAudio("/resources/Audio/This.wav");
 
-        background = acrc.tryGetAudioClip("/resources/Audio/MENU.mp3");
-        background.setVolume(0.05d);      
+        Global.background = acrc.tryGetAudioClip("/resources/Audio/MENU.mp3");
+        Global.background .setVolume(0.2d);      
         aa = new NumberIcon(500,10,"",8, 1f);
         bb = new NumberIcon(500,200,"",8, 0.5f);
         cc = new NumberIcon(200,500,"",10, 1);
 
-        background.play();
+         Global.background .play();
 //        clip.start();
 
         startPressed = false;
@@ -100,7 +99,7 @@ public class MenuScene extends Scene {
                     
                     if (buttons.get(0).isCollision(e.getX(), e.getY())) {
 //                        background.play();
-                        background.stop();
+                     
                         scenecontroller.changeScene(new SelectJobScene(scenecontroller));
                          
                     }
@@ -163,7 +162,10 @@ public class MenuScene extends Scene {
         };
     }
 
-    @Override
+
+    
+
+            
 
     public void sceneBegin() {
 
