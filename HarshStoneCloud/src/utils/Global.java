@@ -55,7 +55,7 @@ public class Global {
     public static final int HEROX = 300;
     public static final int HEROY = 180;
     public static final int HEROWIDTH = 160;
-    public static final int HEROXHEIGHT = 160;
+    public static final int HEROHEIGHT = 160;
     
     //主角初始位置參數(選角畫面)
     public static final int JOB1X = 485;

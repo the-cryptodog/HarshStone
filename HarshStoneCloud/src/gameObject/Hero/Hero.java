@@ -5,6 +5,7 @@
  */
 package gameObject.Hero;
 
+import Controller.ImageResourceController;
 import Controller.PathBuilder;
 import gameObject.Card.Card;
 import gameObject.Card.CardDeck;
@@ -16,6 +17,7 @@ import gameObject.NumberIconMoveState.NumberMoveStop;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -53,7 +55,9 @@ public class Hero extends GameObject implements Serializable{
     private boolean recordhealth;
     private HeroState heroState;
     private NumberIcon attackedanimation;
+    private NumberIcon healthnumber;
     private AudioClip steps;
+    private BufferedImage defenseicon;
 
     public Hero(int x, int y, int width, int height, String name, int health, int actor) {
 
@@ -72,6 +76,9 @@ public class Hero extends GameObject implements Serializable{
         herohelper = new HeroHelper(actor);
         attackedanimation = new NumberIcon(x + (int)(Math.random()*width), y + (int)(Math.random() * height),"攻擊動畫", 0, 0.3f);
         attackedanimation.setNumberIconMoveState(new NumberMoveStop());
+        float healthrate = 0.2f;
+        healthnumber = new NumberIcon(x + (int)((Global.HEROWIDTH - ((2*Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX)*healthrate))/2), y + Global.HEROHEIGHT - 2, "", health, 0.2f);
+        defenseicon = ImageResourceController.getInstance().tryGetImage(PathBuilder.getIcon(ImagePath.DEFENSEICON));
         
         delaycounter = new DelayCounter(10, new DelayCounter.Action() {
 
@@ -211,37 +218,19 @@ public class Hero extends GameObject implements Serializable{
     public void update() {
         if (delaycounter.delayupdate()) {
             act = ++act % 4;
+//            heroState.action(this);
+//            System.out.println("英雄往右移");
         }
+        healthnumber.setNumber(health);
+        healthnumber.setX(x + (int)((Global.HEROWIDTH - ((2*Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX)*healthnumber.getRate()))/2));
+        healthnumber.setY(Global.HEROY+Global.HEROHEIGHT-2);
     }
     
     public void move() {
-//        int tempx;
-//        if(!moved){
-//            if(direction == 1){    
-//                tempx = x - 30;
-//                if(tempx <= 180){
-//                    x = 180;
-//                    direction = 2;
-//                }
-//                else{
-//                    x = tempx;
-//                }
-//            }
-//            else{
-//                tempx = x + 30;
-//                if(tempx >= originalx){
-//                    x = originalx;
-//                    direction = 1;
-//                    moved = true;
-//                }
-//                else{
-//                    x = tempx;
-//                }
-//            }
-//    
-//        }
+
         if (delaycounter.delayupdate()) {
             heroState.action(this);
+            System.out.println("英雄往右移");
         }
         attackedanimation.move();
         //應該有其他更好的判斷條件attackedanimation.getNumberIconMoveState() instanceof NumberMoveStop
@@ -252,7 +241,6 @@ public class Hero extends GameObject implements Serializable{
             attackedanimation.setOrginalx(temp1);
             attackedanimation.setY(temp2);
             attackedanimation.setOrginaly(temp2);
-            
         }
         
         
@@ -268,8 +256,14 @@ public class Hero extends GameObject implements Serializable{
     }
 
     public void paint(Graphics g) {
-        update();
         herohelper.paint(g, x, y, width, height, ACT[act], direction, health);
+        if(defense > 0){
+            g.drawImage(defenseicon, x - Global.ICON_X_OFFSET, y, Global.ICON_X_OFFSET, Global.ICON_Y_OFFSET, null);
+        }
         attackedanimation.paint(g);
+        if(health != 0){
+            healthnumber.paint(g);
+        }
+        
     }
 }

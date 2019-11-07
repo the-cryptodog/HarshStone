@@ -33,8 +33,8 @@ public class HealEffect extends CardEffect{
     public void action(Hero hero, Monster monster) {
         card.action(hero, monster);
         hero.sethealth(hero.gethealth()+ heal);
-        if(hero.gethealth()>100){
-        hero.sethealth(100);    
+        if(hero.gethealth() > 99){
+        hero.sethealth(99);    
         }
         
         System.out.println("獲得治癒" + heal);

@@ -69,6 +69,10 @@ public class NumberIcon extends GameObject{
          this.rate = rate;    
     }
     
+    public float getRate(){
+        return rate;    
+    }
+    
     public void setSpeedy(int speedy){
         this.speedy = speedy;
     }

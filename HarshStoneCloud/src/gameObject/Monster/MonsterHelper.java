@@ -81,9 +81,9 @@ public class MonsterHelper {
         
         
         g.setColor(Color.red);
-        g.drawRect(x - Global.HEALTHX , y+height, width + 2*Global.HEALTHX,25);
+        g.drawRoundRect(x - Global.HEALTHX , y+height, width + 2*Global.HEALTHX, 25, 15, 15);
         float temp1 = (float)health/originalhealth * (width + 2 * Global.HEALTHX);
-        g.fillRect(x - Global.HEALTHX , y+height, (int)temp1, 25);    
+        g.fillRoundRect(x - Global.HEALTHX , y+height, (int)temp1, 25, 15, 15);    
                 
     
     }

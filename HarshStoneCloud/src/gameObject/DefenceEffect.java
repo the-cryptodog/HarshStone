@@ -34,6 +34,6 @@ public class DefenceEffect extends CardEffect{
         card.action(hero, monster);
         hero.setDefense(hero.getDefense() + defense);
         
-        System.out.println("獲得防禦力" + defense);
+        System.out.println("獲得防禦力" + hero.getDefense());
     }
 }
