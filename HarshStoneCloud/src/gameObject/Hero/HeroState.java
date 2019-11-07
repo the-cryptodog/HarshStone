@@ -77,6 +77,7 @@ public interface HeroState extends Serializable{
             }
             else{
                 hero.setX(tempx);
+                System.out.println("往右移"+tempx);
             }
         }
     }

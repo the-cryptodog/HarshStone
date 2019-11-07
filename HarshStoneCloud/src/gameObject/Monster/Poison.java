@@ -7,6 +7,7 @@ package gameObject.Monster;
 
 import gameObject.Hero.Hero;
 import gameObject.NumberIcon;
+import gameObject.NumberIconMoveState;
 import java.awt.Graphics;
 
 /**
@@ -25,6 +26,8 @@ public class Poison extends MonsterAbnormalState{
     //0可能有問題
         @Override
         public void action(Monster monster, Hero hero) {
+            monster.getAttackedAnimation().setNumberIconMoveState(new NumberIconMoveState.NumberDecideMove());
+            monster.getAttackedAnimation().setNumber(continueturn);
             monster.health -= continueturn;
             continueturn--;
             monster.setPoison(continueturn);

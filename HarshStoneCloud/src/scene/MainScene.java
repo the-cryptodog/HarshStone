@@ -137,7 +137,6 @@ public class MainScene extends Scene {
         crystal = new Crystal(Global.HEROX - 32, Global.HEROY + 192, 80, 80, "tt");
         gameWin = false;
         gameOver = false;
-        font1 = new Font("TimesRoman", Font.BOLD + Font.ITALIC, 14);
         xdelta = 0;
         ydelta = 0;
         cardclicked = false;
@@ -151,10 +150,10 @@ public class MainScene extends Scene {
         winGameCount = 0;
 
         hero = Global.hero;
-//        Global.hero.setX(-70);
+        Global.hero.setX(Global.HEROX);
         Global.hero.setY(Global.HEROY);
         Global.hero.setWidth(Global.HEROWIDTH);
-        Global.hero.setHeight(Global.HEROXHEIGHT);
+        Global.hero.setHeight(Global.HEROHEIGHT);
 
         //測試用暫時留著
 //        hero = new Hero(-70, Global.HEROY, Global.HEROWIDTH, Global.HEROXHEIGHT, " ", 100, 5);
@@ -173,7 +172,7 @@ public class MainScene extends Scene {
         backtothefuture = new Button(70, 640, 234, 42, "HARSHSTONE");
 
 //        hero = Global.hero;
-//        Global.hero.setX(-70);
+//        Global.hero.setX();
 //        Global.hero.setY(Global.HEROY);
 //        Global.hero.setWidth(Global.HEROWIDTH);
 //        Global.hero.setHeight(Global.HEROXHEIGHT);
@@ -652,13 +651,14 @@ public class MainScene extends Scene {
 //            currentSountrack.stop();
 //            gameWinSound.play();
 //        }
-
+        hero.move();
+        hero.update();
         if (hero.gethealth() < 0) {
             scenecontroller.changeScene(new EndScene(scenecontroller));
             currentSountrack.stop();
         }
         column.move();
-        hero.move();
+       
         for (Monster monster : monsters) {
             monster.update();
         }

@@ -310,8 +310,8 @@ public class SelectJobScene extends Scene {
             if (heroSelected.getWidth() < 50) {
                 Global.hero = heroSelected;
                 scenecontroller.changeScene(new MapScene(scenecontroller));
-                Global.hero.sethealth(100);
-         
+                Global.hero.sethealth(99);
+
             }
         }
     }
