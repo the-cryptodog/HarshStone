@@ -19,7 +19,7 @@ import values.ImagePath;
  * @author User
  */
 public class redCross extends GameObject implements Serializable{
-    private static final long serialVersionUID = -671958543348052007L;
+    private static final long serialVersionUID = 555555555;
     ArrayList<Integer> tagList;
     private boolean isclicked;
     protected transient BufferedImage redCross;

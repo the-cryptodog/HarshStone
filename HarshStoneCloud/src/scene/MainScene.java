@@ -134,7 +134,7 @@ public class MainScene extends Scene {
 //        System.out.println(PathBuilder.getNumber(ImagePath.NUMBER2));
 //        number = ImageResourceController.getInstance().tryGetImage("/resources/Number/Number2.png");
         Global.background.stop();
-        crystal = new Crystal(Global.HEROX - 32, Global.HEROY + 192, 80, 80, "tt");
+        crystal = new Crystal(Global.HEROX - 32, Global.HEROY + 192, 80, 80, "水晶");
         gameWin = false;
         gameOver = false;
         xdelta = 0;
@@ -150,7 +150,7 @@ public class MainScene extends Scene {
         winGameCount = 0;
 
         hero = Global.hero;
-        Global.hero.setX(Global.HEROX);
+        Global.hero.setX(-400);
         Global.hero.setY(Global.HEROY);
         Global.hero.setWidth(Global.HEROWIDTH);
         Global.hero.setHeight(Global.HEROHEIGHT);
@@ -435,6 +435,7 @@ public class MainScene extends Scene {
 
                     if (backtothefuture.isCollision(e.getX(), e.getY()) && useheroskill == false) {
                         useheroskill = true;
+                        Global.hero.setDefense(0);
                         crystal.getNumberIcon().setNumber(3);
                         transformTurnStartMonsters();
                         handdeck.cardTransform(drawcarddeck);
@@ -736,6 +737,7 @@ public class MainScene extends Scene {
                 drawCard(drawcarddeck, handdeck, discarddeck, 5);
                 System.out.println("棄牌堆" + discarddeck.getCards().size() + "張牌,抽牌堆" + drawcarddeck.getCards().size() + "張牌,手牌堆" + handdeck.getCards().size() + "張牌");
                 crystal.setNumberIcon(3);
+                
                 next.setIsClicked(false);
             }
 
@@ -748,33 +750,6 @@ public class MainScene extends Scene {
             gameWinSound.stop();
             Global.CURRENTSTAGE++;
         }
-//        try {
-//            Robot robot = new Robot();
-//            BufferedImage image = robot.createScreenCapture(new Rectangle(1920, 1080));
-//            image = image.getSubimage(0, 0, 1728, 972);
-//            ImageIO.write(image, "png", new File("C:/Users/User/Documents/期中專案/HarshStoneCloud/src/resources/1.png"));
-//            endImage = image;
-//        } catch (AWTException e) {
-//            e.printStackTrace();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//            
-//        }
-//        if (hero.getX() > Global.JWIDTH) {
-//            int temp = handdeck.getCards().size();
-//            discardCard(drawcarddeck, handdeck, discarddeck, temp);
-//            temp = discarddeck.getCards().size();
-//            for(int i = 0; i < temp; i++){
-//                drawcarddeck.getCards().add(discarddeck.getCards().get(i));
-//            }
-//            for(int i = 0; i < temp; i++){
-//                discarddeck.getCards().remove(0);
-//            }
-//            hero.setHeroDeck(drawcarddeck);
-//            
-//            Global.CURRENTSTAGE++;
-//            scenecontroller.changeScene(mapScene);
-//        }
     }
 
     @Override

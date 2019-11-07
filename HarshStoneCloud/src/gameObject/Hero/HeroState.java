@@ -68,16 +68,14 @@ public interface HeroState extends Serializable{
         public void action(Hero hero) {
             int tempx;
             
-            tempx = hero.getX() + Global.HEROMOVERANGE;
+            tempx = hero.getX() + Global.HEROMOVERANGE -10;
             hero.direction = 2;
             if(tempx >= Global.HEROX ){
-                hero.setX( Global.HEROX);    
-                
+                hero.setX(Global.HEROX);    
                 hero.setState(new NoMove());
             }
             else{
                 hero.setX(tempx);
-                System.out.println("往右移"+tempx);
             }
         }
     }

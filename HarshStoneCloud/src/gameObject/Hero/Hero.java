@@ -57,6 +57,7 @@ public class Hero extends GameObject implements Serializable{
     private HeroState heroState;
     private NumberIcon attackedanimation;
     private NumberIcon healthnumber;
+    private NumberIcon defensenumber;
     private AudioClip steps;
     private BufferedImage defenseicon;
 
@@ -80,11 +81,13 @@ public class Hero extends GameObject implements Serializable{
         }
         
         herohelper = new HeroHelper(actor);
-        attackedanimation = new NumberIcon(x + (int)(Math.random()*width), y + (int)(Math.random() * height),"攻擊動畫", 0, 0.3f);
+        attackedanimation = new NumberIcon(x + (int)(Math.random()*width), y + (int)(Math.random() * height),"攻擊動畫", 0, 0.4f);
         attackedanimation.setNumberIconMoveState(new NumberMoveStop());
         float healthrate = 0.2f;
         healthnumber = new NumberIcon(x + (int)((Global.HEROWIDTH - ((2*Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX)*healthrate))/2), y + Global.HEROHEIGHT - 2, "", health, 0.2f);
         defenseicon = ImageResourceController.getInstance().tryGetImage(PathBuilder.getIcon(ImagePath.DEFENSEICON));
+        
+        defensenumber = new NumberIcon(x - Global.ICON_X_OFFSET, y + Global.ICON_Y_OFFSET, "防禦數值",0, 0.4f);
         
         delaycounter = new DelayCounter(10, new DelayCounter.Action() {
 
@@ -206,18 +209,11 @@ public class Hero extends GameObject implements Serializable{
         return attackedanimation;
     }
     
-    /**
-     *
-     * @param width
-     */
-    
-    @Override
-    public void setWidth(int width) {
-        this.width = width;
-    }
-    @Override
-    public void setHeight(int height) {
-        this.height = height;
+    public void updateNumberIcon() {  
+        defensenumber.setX(x - Global.ICON_X_OFFSET);
+        defensenumber.setY(y + Global.ICON_X_OFFSET);
+        defensenumber.setNumber(defense);
+        
     }
 
 
@@ -233,7 +229,6 @@ public class Hero extends GameObject implements Serializable{
 
         if (delaycounter.delayupdate()) {
             heroState.action(this);
-            System.out.println("英雄往右移");
         }
         attackedanimation.move();
         //應該有其他更好的判斷條件attackedanimation.getNumberIconMoveState() instanceof NumberMoveStop
@@ -264,6 +259,8 @@ public class Hero extends GameObject implements Serializable{
         herohelper.paint(g, x, y, width, height, ACT[act], direction, health);
         if(defense > 0){
             g.drawImage(defenseicon, x - Global.ICON_X_OFFSET, y, Global.ICON_X_OFFSET, Global.ICON_Y_OFFSET, null);
+            updateNumberIcon();
+            defensenumber.paint(g);
         }
         attackedanimation.paint(g);
         if(health != 0){

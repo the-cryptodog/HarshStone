@@ -51,25 +51,15 @@ public class MenuScene extends Scene {
     private boolean startPressed;
     private Incidence incidence;
     private Clip clip;
-    private NumberIcon aa;
-    private NumberIcon bb;
-    private NumberIcon cc;
 
     //開始遊戲(進入選角畫面)
     //結束遊戲(關閉視窗)
     public MenuScene(SceneController scenecontroller) {
         super(scenecontroller);
 
-//        clip = arc.tryGetAudio("/resources/Audio/This.wav");
-
         Global.background = acrc.tryGetAudioClip("/resources/Audio/MENU.mp3");
         Global.background .setVolume(0.2d);      
-        aa = new NumberIcon(500,10,"",8, 1f);
-        bb = new NumberIcon(500,200,"",8, 0.5f);
-        cc = new NumberIcon(200,500,"",10, 1);
-
-         Global.background .play();
-//        clip.start();
+        Global.background .play();
 
         startPressed = false;
         Global.CURRENTSTAGE = 1;
@@ -169,7 +159,6 @@ public class MenuScene extends Scene {
 
     public void sceneBegin() {
 
-//        clip.start();
     }
 
     @Override
@@ -205,12 +194,6 @@ public class MenuScene extends Scene {
         System.out.println("d" + (20 + (int)((Global.NUMBER_X_OFFSET + Global.NUMBER_DELTAX) * 1)));
         
         System.out.println("f" + (20 + (int)((2 * Global.NUMBER_X_OFFSET + Global.NUMBER_DELTAX) * 1)));
-        bb.paint(g);
-        bb.setRate(2);
-        bb.setX(1000);
-        bb.paint(g);
-        aa.paint(g);
-        cc.paint(g);
         
     }
 }

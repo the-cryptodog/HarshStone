@@ -106,10 +106,12 @@ public interface MonsterState {
             if(monster.getSelfSkill().getSkillend()){
                 int temp =  hero.getDefense() - monster.getAttack();
                 //人物護甲還有剩,血量不用動
+                System.out.println("怪物"+monster.getName()+ "攻擊" + monster.getAttack());
                 hero.getAttackedAnimation().setNumberIconMoveState(new NumberDecideMove());
                 hero.getAttackedAnimation().setNumber(monster.getAttack());
                 if(temp > 0){
                     hero.setDefense(temp);
+                    monster.monsterstate = new MoveRight();
                 }else{
                     
                     hero.sethealth(hero.gethealth() + temp);

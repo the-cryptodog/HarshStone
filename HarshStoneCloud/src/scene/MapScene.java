@@ -56,7 +56,7 @@ public class MapScene extends Scene {
     private int coverx;
     private Hero hero;
     private Scene incidence;
-    private Button save;
+    private Button back;
 //    private int y;
 //    private int speed;
 
@@ -85,7 +85,7 @@ public class MapScene extends Scene {
         redCrossList.get(5).getTagList().add(7);
         redCrossList.get(6).getTagList().add(8);
         redCrossList.get(7).getTagList().add(8);
-        save = new Button(50, 230, 220, 50, "CONTINUE");
+        back = new Button(50, 230, 220, 50, "BACK");
         System.out.println(redCrossList.get(0).toString());
         System.out.print(redCrossList.get(0) instanceof redCross);
         System.out.print("Global.CURRENTSTAGE = " + Global.CURRENTSTAGE);
@@ -124,7 +124,7 @@ public class MapScene extends Scene {
                         }
                     }
                     
-                    if(save.isCollision(e.getX(), e.getY())){
+                    if(back.isCollision(e.getX(), e.getY())){
 //                         FileOutputStream fos;
 //                        try{
 //                            fos = new FileOutputStream("Hero.ser");
@@ -147,6 +147,7 @@ public class MapScene extends Scene {
                         Global.hero.saveHeroRecord();
                         saveRedCrossList();
                         saveCurrentRedCross();
+                        scenecontroller.changeScene(new MenuScene(scenecontroller));
 //                        CardDeck carddeck = hero.getHeroDeck();
 //                        carddeck.createCardRecord();
                     }
@@ -286,7 +287,7 @@ public class MapScene extends Scene {
     public void paint(Graphics g) {
 
         g.drawImage(map, 0, 0, 1932, 1078, null);
-//        save.paint(g);
+        back.paint(g);
         for (int i = 0; i < redCrossList.size(); i++) {
 //                     System.out.print(i);
             if (stagePassed) {

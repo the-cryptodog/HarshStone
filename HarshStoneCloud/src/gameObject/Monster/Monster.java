@@ -98,7 +98,7 @@ public class Monster extends GameObject implements Cloneable{
 
         monsterstate = new MonsterState.DecideMove();
         number1 = new NumberIcon(x + width, y + 100, "", 0, 0.4f);
-        attackedanimation = new NumberIcon(x + (int)(Math.random()*width), y + (int)(Math.random() * height),"攻擊動畫", 0, 0.3f);
+        attackedanimation = new NumberIcon(x + (int)(Math.random()*width), y + (int)(Math.random() * height),"攻擊動畫", 0, 0.4f);
         attackedanimation.setNumberIconMoveState(new NumberIconMoveState.NumberMoveStop());
         float healthrate = 0.2f;
         healthnumber = new NumberIcon(x + (int)((Global.MONSTERWIDTH - ((2*Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX)*healthrate))/2), y + Global.MONSTERHEIGHT - 2, "", health, 0.2f);
@@ -365,6 +365,7 @@ public class Monster extends GameObject implements Cloneable{
     }
     //怪物受到傷害更新護甲
     public void updateNumberIcon() {  
+        number1.setX(x + width);
         if(attack == 0){
             number1.setNumber(defense);
         }
@@ -384,7 +385,6 @@ public class Monster extends GameObject implements Cloneable{
 //            g.drawImage(image, x, y, width, height, null);
 //        } else {
             monsterhelper.paint(g, x, y, width, height, ACT[act], direction, health, originalhealth, attack, defense, monsterabnormalstates, poison);
-            number1.setX(x + width);
             updateNumberIcon();
             if(number1.getNumber() != 0){
                 number1.paint(g);
