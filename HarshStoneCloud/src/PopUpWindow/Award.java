@@ -111,9 +111,11 @@ public class Award extends GameObject {
         g.drawImage(img, (1920 - Global.AWARDWIDTH) / 2, (1080 - Global.AWARDHEIGHT) / 2,
                 Global.AWARDWIDTH, Global.AWARDHEIGHT, null);
         for (int i = 0; i < 3; i++) {
-            awards.get(i).paint(g);
+            if (Global.CURRENTSTAGE != 5) {
+                awards.get(i).paint(g);
+            }
         }
-        if (cardSelected) {
+        if (cardSelected ||Global.CURRENTSTAGE == 5) {
             backToMap.paint(g);
         }
     }

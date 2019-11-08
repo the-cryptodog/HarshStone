@@ -223,23 +223,25 @@ public class LastScene extends Scene{
 
     @Override
     public void sceneBegin() {
-        
+
     }
 
     @Override
     public void sceneUpdate() {
+
         if(delaycounter.delayupdate()){
             lastscenestate.action(this);
         }
+
     }
 
     @Override
     public void sceneEnd() {
-       
     }
 
     @Override
     public void paint(Graphics g) {
+
         
         g.drawImage(background1, 0, 0, 1920, 1080, null);
                 

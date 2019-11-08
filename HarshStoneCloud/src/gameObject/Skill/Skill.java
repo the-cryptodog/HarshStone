@@ -81,7 +81,7 @@ public class Skill extends GameObject {
     }
 
     public AudioClip getEffectSound() {
-        return effectSound;
+        return this.effectSound;
     }
 
     public void positionSetter(GameObject gameobject) {
