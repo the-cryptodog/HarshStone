@@ -190,7 +190,7 @@ public class MainScene extends Scene {
 
 
         //若不是魔王關創三隻怪
-        if (Global.CURRENTSTAGE < 5) {
+        if (Global.CURRENTSTAGE == 0) {
             orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                     "獸人1", 14, 1, (int) (Math.random() * 8), (int) (Math.random() * 8), false); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
             cultist = new Monster(Global.MONSTERX, Global.MONSTERY2, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
@@ -202,7 +202,7 @@ public class MainScene extends Scene {
             monsters.add(monster1);
         }
 
-        if (Global.CURRENTSTAGE >= 5) {
+        if (Global.CURRENTSTAGE >= 1) {
             orc = new Monster(Global.BOSSX, Global.BOSSY, Global.BOSSWIDTH, Global.BOSSHEIGHT,
                     "獸人1", 70, 100, 13, (int) (Math.random() * 8), true); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
             monsters.add(orc);
@@ -425,6 +425,14 @@ public class MainScene extends Scene {
 //                        scenecontroller.changeScene(mapScene);
                             }
                         }
+                        if(Global.CURRENTSTAGE == 1){
+                            scenecontroller.changeScene(new LastScene(scenecontroller));
+                        
+                        
+                        }
+                        
+                        
+                        
                     }
                     if (heroawards.getButton().isCollision(e.getX(), e.getY())) {
                         currentSountrack.stop();

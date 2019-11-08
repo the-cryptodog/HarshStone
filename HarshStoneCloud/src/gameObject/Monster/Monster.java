@@ -101,7 +101,19 @@ public class Monster extends GameObject implements Cloneable{
         attackedanimation = new NumberIcon(x + (int)(Math.random()*width), y + (int)(Math.random() * height),"攻擊動畫", 0, 0.4f);
         attackedanimation.setNumberIconMoveState(new NumberIconMoveState.NumberMoveStop());
         float healthrate = 0.2f;
-        healthnumber = new NumberIcon(x + (int)((Global.MONSTERWIDTH - ((2*Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX)*healthrate))/2), y + Global.MONSTERHEIGHT - 2, "", health, 0.2f);
+        if(isboss == false){
+            healthnumber = new NumberIcon(x + (int)((Global.MONSTERWIDTH - ((2*Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX)*healthrate))/2), y + Global.MONSTERHEIGHT - 2, "", health, 0.2f);
+        }
+        else{
+            float temp1 = Global.MONSTERWIDTH * Global.BOSSRATE;
+            System.out.println("temp1" + temp1);
+            float temp2 = (2 * Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX) * healthrate;
+            System.out.println("temp2" + temp2);
+            System.out.println("temp3" + (int)((temp1-temp2)/2));
+            System.out.println("temp4" + x);
+            healthnumber = new NumberIcon(x + (int)((temp1-temp2)/2), y + (int)(Global.MONSTERHEIGHT * Global.BOSSRATE - 2), "", health, 0.2f);
+        
+        }
     }
 
     //10/22
@@ -265,7 +277,14 @@ public class Monster extends GameObject implements Cloneable{
         
         attackedanimation.move();
         healthnumber.setNumber(health);
-        healthnumber.setX(x + (int)((Global.MONSTERWIDTH - ((2*Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX)*healthnumber.getRate()))/2));
+        if(!isboss){
+            healthnumber.setX(x + (int)((Global.MONSTERWIDTH - ((2*Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX)*healthnumber.getRate()))/2));
+        }
+        else{
+            healthnumber.setX(x + (int)((Global.MONSTERWIDTH * Global.BOSSRATE- ((2*Global.NUMBER_X_OFFSET - Global.NUMBER_DELTAX)*healthnumber.getRate()))/2));
+
+        }
+        
     }
     
     
@@ -337,10 +356,6 @@ public class Monster extends GameObject implements Cloneable{
 //            }
 //    
 //        } 
-        if (recordhealth == false) {
-            lasthealth = health;
-            recordhealth = false;
-        }
         
         monsterstate.action(this, hero);
         if (attack > 0) {

@@ -138,6 +138,11 @@ public class Hero extends GameObject implements Serializable{
         this.herodeck = herodeck;
     }
     
+    public void setDirection(int direction){
+        this.direction = direction;
+    }
+    
+    
     public void saveCardDeckRecord() {
         herodeck.createCardRecord();
     }

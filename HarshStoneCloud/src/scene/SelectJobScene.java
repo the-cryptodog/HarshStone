@@ -352,7 +352,7 @@ public class SelectJobScene extends Scene {
                 sy1 -= Global.YSPEED;
                 sx2 += Global.XSPEED;
                 sy2 += Global.YSPEED;
-                System.out.println(sx1 + " " + sy1 + " " + sx2 + " " + sy2 + " ");
+
             }
         }
 
@@ -376,6 +376,7 @@ public class SelectJobScene extends Scene {
         for (Hero temp : heros) {
             if (temp != null) {
                 temp.paint(g);
+                System.out.println("英雄y座標"+ temp.getY());
             }
         }
 
