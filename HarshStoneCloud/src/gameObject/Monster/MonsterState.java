@@ -22,6 +22,7 @@ public interface MonsterState {
 
         @Override
         public void action(Monster monster, Hero hero) { 
+            monster.setAttack(0);
             monster.setDefense(0);
             int temp;
             temp = (int)(Math.random()*10);
@@ -29,12 +30,12 @@ public interface MonsterState {
             int size = temp1.size();
             
             if(temp >= 4){
-                temp = (int)(Math.random() * 10 + 5);
+                temp = (int)(5 + 3 * Global.CURRENTSTAGE +(int)(Math.random() * 3));
                 monster.setAttack(temp);
                 monster.monsterstate = new MoveLeft();
             }
             else{
-                temp = (int)(Math.random() * 6 + 3);
+                temp = (int)(2 + 3 * Global.CURRENTSTAGE +(int)(Math.random() * 3));
                 monster.setDefense(temp);
                 monster.moved = true;
                 monster.monsterstate = new EndMove();
