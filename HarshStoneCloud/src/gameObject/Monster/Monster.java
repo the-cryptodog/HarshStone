@@ -405,11 +405,13 @@ public class Monster extends GameObject implements Cloneable{
                 number1.paint(g);
             }
             if (monsterstate instanceof MonsterState.Attack) {
-                voiceCount ++;
-                if(voiceCount==1){
-                    selfSkill.getEffectSound().play();
-                }
+//                 voiceCount++;
+//                if(voiceCount==1){
+//                    selfSkill.getEffectSound().play();
+//                        voiceCount=0;  
+//                }
                 selfSkill.paint(g);//畫出攻擊技能
+   
             }
 //        }
             attackedanimation.paint(g);

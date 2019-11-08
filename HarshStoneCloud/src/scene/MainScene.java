@@ -183,7 +183,9 @@ public class MainScene extends Scene {
         monsters = new ArrayList();
         forHeal = new Monster(0, 0, 0, 0, "專門吃治療", 0, 0, 0, 0, true);
         defense = skillFactory.genSkill(11);
+        defense.setSkillend(true);
         harshStone = skillFactory.genSkill(12);
+       harshStone.setSkillend(true);
 
 
 
@@ -310,8 +312,7 @@ public class MainScene extends Scene {
                                     if (skillboard.skillCheck(selectedcard.getSkillIndex())) {
                                         System.out.print("vvvvvv" + "治療發生" + "vvvvvv");
                                         Skill tempSkill = skillboard.getCardSkill(selectedcard.getSkillIndex());
-                                        tempSkill.positionSetter(hero);
-                                        
+                                        tempSkill.positionSetter(hero);                                   
                                         tempSkill.setSkillend(false);
                                         tempSkill.getEffectSound().play();
                                     } else {              

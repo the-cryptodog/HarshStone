@@ -65,6 +65,7 @@ public interface MonsterState {
             monster.direction = 1;
             if(tempx <= Global.HEROX +Global.HEROWIDTH + 2 * Global.HEALTHX){                  
                 monster.setX( Global.HEROX + Global.HEROWIDTH +2 * Global.HEALTHX);    
+                monster.getSelfSkill().getEffectSound().play();
                 monster.monsterstate = new Attack();
             }
             else{
