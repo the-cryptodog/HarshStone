@@ -419,6 +419,14 @@ public class MainScene extends Scene {
 //                        scenecontroller.changeScene(mapScene);
                             }
                         }
+                        if(Global.CURRENTSTAGE == 1){
+                            scenecontroller.changeScene(new LastScene(scenecontroller));
+                        
+                        
+                        }
+                        
+                        
+                        
                     }
                     if (heroawards.getButton().isCollision(e.getX(), e.getY())) {
                         currentSountrack.stop();
