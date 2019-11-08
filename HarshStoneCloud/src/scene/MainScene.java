@@ -190,11 +190,11 @@ public class MainScene extends Scene {
         //若不是魔王關創三隻怪
         if (Global.CURRENTSTAGE < 5) {
             orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
-                    "獸人1", 14, 1, (int) (Math.random() * 8), (int) (Math.random() * 8), false); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
+                    "獸人1", 8 + 3 * Global.CURRENTSTAGE +(int)(Math.random() * 3), 1, (int) (Math.random() * 8), (int) (Math.random() * 8), false); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
             cultist = new Monster(Global.MONSTERX, Global.MONSTERY2, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
-                    "獸人2", 10, 2, (int) (Math.random() * 8), (int) (Math.random() * 8), false);// 創建第二隻怪物\
+                    "獸人2", 8 + 3 * Global.CURRENTSTAGE +(int)(Math.random() * 3), 2, (int) (Math.random() * 8), (int) (Math.random() * 8), false);// 創建第二隻怪物\
             monster1 = new Monster(Global.MONSTERX, Global.MONSTERY3, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
-                    "獸人3", 17, 3, (int) (Math.random() * 8), (int) (Math.random() * 8), false);// 創建第三隻怪物\
+                    "獸人3", 9 + 3 * Global.CURRENTSTAGE +(int)(Math.random() * 3), 3, (int) (Math.random() * 8), (int) (Math.random() * 8), false);// 創建第三隻怪物\
             monsters.add(orc);
             monsters.add(cultist);
             monsters.add(monster1);
@@ -202,7 +202,7 @@ public class MainScene extends Scene {
 
         if (Global.CURRENTSTAGE >= 5) {
             orc = new Monster(Global.BOSSX, Global.BOSSY, Global.BOSSWIDTH, Global.BOSSHEIGHT,
-                    "獸人1", 70, 100, 13, (int) (Math.random() * 8), true); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
+                    "獸人1", 80+(int)(Math.random()*10), 100, 13, (int) (Math.random() * 8), true); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
             monsters.add(orc);
         }
 
