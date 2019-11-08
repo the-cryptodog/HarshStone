@@ -113,6 +113,7 @@ public class Global {
     public static CardDeck HERODECK;
     
     public  static AudioClip background;
+    public  static AudioClip endSound;
 
     //Numberimage
     public static final int NUMBER_X_OFFSET = 110;

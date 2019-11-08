@@ -81,7 +81,7 @@ public class MainScene extends Scene {
     private BufferedImage img4;
     private BufferedImage img5;
     private BufferedImage currentImg;
-    private Curtain  curtains;
+    private Curtain curtains;
     private int xdelta;
     private int ydelta;
     private boolean cardclicked;
@@ -185,12 +185,10 @@ public class MainScene extends Scene {
         defense = skillFactory.genSkill(11);
         defense.setSkillend(true);
         harshStone = skillFactory.genSkill(12);
-       harshStone.setSkillend(true);
-
-
+        harshStone.setSkillend(true);
 
         //若不是魔王關創三隻怪
-        if (Global.CURRENTSTAGE == 0) {
+        if (Global.CURRENTSTAGE < 5) {
             orc = new Monster(Global.MONSTERX, Global.MONSTERY, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
                     "獸人1", 14, 1, (int) (Math.random() * 8), (int) (Math.random() * 8), false); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
             cultist = new Monster(Global.MONSTERX, Global.MONSTERY2, Global.MONSTERWIDTH, Global.MONSTERHEIGHT,
@@ -202,7 +200,7 @@ public class MainScene extends Scene {
             monsters.add(monster1);
         }
 
-        if (Global.CURRENTSTAGE >= 1) {
+        if (Global.CURRENTSTAGE >= 5) {
             orc = new Monster(Global.BOSSX, Global.BOSSY, Global.BOSSWIDTH, Global.BOSSHEIGHT,
                     "獸人1", 70, 100, 13, (int) (Math.random() * 8), true); // 創建第一隻怪物 // 最後兩個參數為腳色變換跟技能光影挑選
             monsters.add(orc);
@@ -229,10 +227,7 @@ public class MainScene extends Scene {
         for (Monster monster : monsters) {
             monster.setHero(hero);
         }
-        
 
-        
-        
         endImage = irc.tryGetImage("/resources/Background/ENDSCENE.png");
 
         img = irc.tryGetImage("/resources/Background/BACKGROUND1.jpg");
@@ -307,27 +302,27 @@ public class MainScene extends Scene {
                         //                            crystal.setNumberIcon(temp - selectedcard.getCost());
                         //                        }
                         else if (!(selectedcard.getCardMoveState() instanceof MoveToDiscard)) {
-                              if (selectedcard.getY() < 590 ){
-                                if (selectedcard.getHeal() != 0 )  {
+                            if (selectedcard.getY() < 590) {
+                                if (selectedcard.getHeal() != 0) {
                                     if (skillboard.skillCheck(selectedcard.getSkillIndex())) {
                                         System.out.print("vvvvvv" + "治療發生" + "vvvvvv");
                                         Skill tempSkill = skillboard.getCardSkill(selectedcard.getSkillIndex());
-                                        tempSkill.positionSetter(hero);                                   
+                                        tempSkill.positionSetter(hero);
                                         tempSkill.setSkillend(false);
                                         tempSkill.getEffectSound().play();
-                                    } else {              
-                                        Skill tmp = skillFactory.genSkill(selectedcard.getSkillIndex()-1);
+                                    } else {
+                                        Skill tmp = skillFactory.genSkill(selectedcard.getSkillIndex() - 1);
                                         System.out.print(hero.getX() + " == x");
                                         tmp.positionSetter(hero);
-                                        
+
                                         skillboard.addCardSkill(tmp);
                                         tmp.setSkillend(false);
                                         tmp.getEffectSound().play();
                                     }
-                                    if (selectedcard.getDefense() != 0) {     
-                                         defense.positionSetter(hero);
-                                         defense.setSkillend(false);
-                                         shield.play();
+                                    if (selectedcard.getDefense() != 0) {
+                                        defense.positionSetter(hero);
+                                        defense.setSkillend(false);
+                                        shield.play();
                                     }
                                     selectedcard.action(hero, forHeal);
                                     selectedcard.setCardMoveState(new MoveToDiscard());
@@ -335,7 +330,7 @@ public class MainScene extends Scene {
                                     selectedcard = null;
                                     return;
                                 }
-                                if (selectedcard.getDefense() != 0 && selectedcard.getSkillIndex() == 12) {                                             
+                                if (selectedcard.getDefense() != 0 && selectedcard.getSkillIndex() == 12) {
                                     {
                                         defense.positionSetter(hero);
                                         defense.setSkillend(false);
@@ -406,6 +401,12 @@ public class MainScene extends Scene {
                         heroawards.setCommandListener(mousecommandlistener);
                     }
                     if (gameWin) {
+                        if (Global.CURRENTSTAGE >= 5) {
+                            currentSountrack.stop();
+                            scenecontroller.changeScene(new LastScene(scenecontroller));       
+                            return;
+                        }
+
                         for (int i = 0; i < heroawards.getAward().size(); i++) {
                             if (heroawards.getAward().get(i).isCollision(e.getX(), e.getY())) {
                                 selectedRareCard = heroawards.getAward().get(i);
@@ -424,15 +425,9 @@ public class MainScene extends Scene {
                                 //                        Global.CURRENTSTAGE++;
 //                        scenecontroller.changeScene(mapScene);
                             }
+
                         }
-                        if(Global.CURRENTSTAGE == 1){
-                            scenecontroller.changeScene(new LastScene(scenecontroller));
-                        
-                        
-                        }
-                        
-                        
-                        
+
                     }
                     if (heroawards.getButton().isCollision(e.getX(), e.getY())) {
                         currentSountrack.stop();
@@ -680,7 +675,7 @@ public class MainScene extends Scene {
             currentSountrack.stop();
         }
         column.move();
-       
+
         for (Monster monster : monsters) {
             monster.update();
         }
@@ -759,7 +754,7 @@ public class MainScene extends Scene {
                 drawCard(drawcarddeck, handdeck, discarddeck, 5);
                 System.out.println("棄牌堆" + discarddeck.getCards().size() + "張牌,抽牌堆" + drawcarddeck.getCards().size() + "張牌,手牌堆" + handdeck.getCards().size() + "張牌");
                 crystal.setNumberIcon(3);
-                
+
                 next.setIsClicked(false);
             }
 
@@ -776,13 +771,13 @@ public class MainScene extends Scene {
 
     @Override
     public void paint(Graphics g) {
-    
+
         g.drawImage(currentImg, 0, 0, 1920, 1080, null);
         hero.paint(g);
         for (int i = 0; i < monsters.size(); i++) {
             monsters.get(i).paint(g);
         }
-          
+
         crystal.paint(g);
         next.paint(g);
 //        g.setColor(Color.red);
@@ -790,7 +785,7 @@ public class MainScene extends Scene {
 //            g.drawRect(300 + (Global.CARDWIDTH + 50) * i, Global.CARDDECKBOTTOM, Global.CARDWIDTH, Global.CARDHEIGHT);
 //
 //        }
-       
+
         for (int i = 0; i < skillboard.getCardSkillList().size(); i++) {
             skillboard.getCardSkillList().get(i).paint(g);
         }
@@ -804,7 +799,7 @@ public class MainScene extends Scene {
         drawcarddeck.paint(g);
         discarddeck.paint(g);
 
-        if (gameWin) {
+        if (gameWin && Global.CURRENTSTAGE <5) {
             int count = 0;
             while (count < 99999) {
                 count++;
@@ -826,7 +821,7 @@ public class MainScene extends Scene {
                 }
             }
         }
-         defense.paint(g);
+        defense.paint(g);
 
     }
 }

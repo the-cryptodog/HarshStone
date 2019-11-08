@@ -183,7 +183,7 @@ public interface LastSceneState {
 
         @Override
         public void action(LastScene scene) {
-            
+
         }
     }
 }

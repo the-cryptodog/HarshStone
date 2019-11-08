@@ -1,8 +1,8 @@
-0,Anger,4,0,2,0,0,0,0,0
+0,Anger,4,0,20,0,0,0,0,0
 1,Bash,8,2,12,0,2,0,0,0
-2,PerfectedStrike,2,2,10,0,2,0,0,0
-3,Strike_R,3,1,5,1,0,0,0,0
-4,Thunderclap,7,1,6,0,0,0,0,0
+2,PerfectedStrike,2,2,20,0,2,0,0,0
+3,Strike_R,3,1,20,1,0,0,0,0
+4,Thunderclap,7,1,20,0,0,0,0,0
 5,TwinStrike,6,1,5,2,0,0,0,0
 6,Sentinel,12,1,0,7,0,0,0,0
 7,WildStrike,6,1,4,0,3,0,0,0

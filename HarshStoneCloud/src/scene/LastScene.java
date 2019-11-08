@@ -12,6 +12,7 @@ import io.CommandSolver;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
+import javafx.scene.media.AudioClip;
 import scene.LastSceneState.*;
 import utils.DelayCounter;
 import utils.Global;
@@ -23,6 +24,7 @@ import utils.Global;
 public class LastScene extends Scene{
     protected Hero hero;
     protected Hero npc;
+    protected BufferedImage background0;
     protected BufferedImage background1;
     protected BufferedImage background2;
     protected BufferedImage background3;
@@ -43,7 +45,8 @@ public class LastScene extends Scene{
     private BufferedImage talkchart30;
     private BufferedImage talkchart31;
     private BufferedImage talkchart32;
-    private int blockx;
+    private AudioClip gameWinSound;
+
     
     
     public LastScene(SceneController scenecontroller) {
@@ -53,10 +56,13 @@ public class LastScene extends Scene{
         hero.setX(-100);
         hero.setY(300);
         npc = new Hero(Global.NPCX, Global.JOBY, 128, 128, "Actor3", 0, 4);
+        background0 = irc.tryGetImage("/resources/Incidence/DARKEN0.png");
         background1 = irc.tryGetImage("/resources/Incidence/DARKEN3.png");
         background2 = irc.tryGetImage("/resources/Background/ENDSCENE.png");
         background3 = irc.tryGetImage("/resources/Background/BACKGROUND6.png");
         conclusion = irc.tryGetImage("/resources/Incidence/CONCLUSION.png");
+        gameWinSound=  acrc.tryGetAudioClip("/resources/Audio/WIN.wav");    
+        gameWinSound.play();
         
         next = new Button(750, 550, 220, 50, "CONTINUE");
         backtomenu = new Button(900, 860, 210, 52, "BACKTOMENU");
@@ -218,7 +224,7 @@ public class LastScene extends Scene{
     public void setLastSceneState(LastSceneState lastscenestate){
         this.lastscenestate = lastscenestate;
     }
-    
+
     
 
     @Override
@@ -237,12 +243,13 @@ public class LastScene extends Scene{
 
     @Override
     public void sceneEnd() {
+        
     }
 
     @Override
     public void paint(Graphics g) {
 
-        
+        g.drawImage(background0, 0, 0, 1920, 1080,  null);
         g.drawImage(background1, 0, 0, 1920, 1080, null);
                 
         hero.paint(g);
