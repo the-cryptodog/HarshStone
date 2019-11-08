@@ -30,12 +30,22 @@ public interface MonsterState {
             int size = temp1.size();
             
             if(temp >= 4){
-                temp = (int)(5 + 3 * Global.CURRENTSTAGE +(int)(Math.random() * 3));
+                if(!monster.getIsBoss()){
+                    temp = (int)(5 + 3 * Global.CURRENTSTAGE +(int)(Math.random() * 3));
+                }
+                else{
+                    temp = (int)(7 + 4 * Global.CURRENTSTAGE +(int)(Math.random() * 3 ));
+                }
                 monster.setAttack(temp);
                 monster.monsterstate = new MoveLeft();
             }
             else{
-                temp = (int)(2 + 3 * Global.CURRENTSTAGE +(int)(Math.random() * 3));
+                if(!monster.getIsBoss()){
+                    temp = (int)(2 + 2 * Global.CURRENTSTAGE +(int)(Math.random() * 3));
+                }
+                else{
+                    temp = (int)(2 + 3 * Global.CURRENTSTAGE +(int)(Math.random() * 3));
+                }
                 monster.setDefense(temp);
                 monster.moved = true;
                 monster.monsterstate = new EndMove();
