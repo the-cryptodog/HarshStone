@@ -68,7 +68,7 @@ public class Curtain extends GameObject {
     }
 
     public void move() {
-        if (time < 2) {
+        if (time < 1) {
             if (delaycounter.delayupdate()) {
                 count = ++count % 4;
                 time++;

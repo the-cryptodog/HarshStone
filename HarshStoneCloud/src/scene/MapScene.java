@@ -85,7 +85,7 @@ public class MapScene extends Scene {
         redCrossList.get(5).getTagList().add(7);
         redCrossList.get(6).getTagList().add(8);
         redCrossList.get(7).getTagList().add(8);
-        back = new Button(50, 230, 220, 50, "BACK");
+        back = new Button(750,750, 334, 80, "SAVE");
         System.out.println(redCrossList.get(0).toString());
         System.out.print(redCrossList.get(0) instanceof redCross);
         System.out.print("Global.CURRENTSTAGE = " + Global.CURRENTSTAGE);
@@ -287,7 +287,7 @@ public class MapScene extends Scene {
     public void paint(Graphics g) {
 
         g.drawImage(map, 0, 0, 1932, 1078, null);
-        back.paint(g);
+
         for (int i = 0; i < redCrossList.size(); i++) {
 //                     System.out.print(i);
             if (stagePassed) {
@@ -333,5 +333,6 @@ public class MapScene extends Scene {
                 g.drawImage(cover, coverx, 0, 1932, 1078, coverx, 0, 1932, 1078, null);
                 break;
         }
+                back.paint(g);
     }
 }

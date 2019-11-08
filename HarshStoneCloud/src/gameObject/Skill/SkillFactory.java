@@ -46,7 +46,6 @@ public class SkillFactory {
         ArrayList<String> str = new ArrayList<>();
         try {
             BufferedReader br = new BufferedReader(new FileReader("SkillData.txt"));
-
             while (br.ready()) {
                 str.add(br.readLine());
             }
@@ -75,7 +74,6 @@ public class SkillFactory {
         String[] temp = skilldata.get(serialnumber).split(",");
         Skill tmp = new Skill(Global.HEROX, Global.HEROY, Global.SKILLHEIGHT, Global.SKILLWIDTH,
                 String.valueOf(temp[1]), Integer.valueOf(temp[2]), String.valueOf(temp[3]));
-
         tmp.setSkillIndex(Integer.valueOf(temp[0]));
         return tmp;
 
