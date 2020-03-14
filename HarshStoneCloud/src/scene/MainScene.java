@@ -393,13 +393,13 @@ public class MainScene extends Scene {
                             handdeck.getCards().get(i).setCardMoveState(new EndTurnMove());
                         }
                     }
-                    if (back.isCollision(e.getX(), e.getY())) {
-                        gameWin = true;
-//                        Global.CURRENTSTAGE++;
-//                        scenecontroller.changeScene(mapScene);
-                        heroawards = new Award(0, 0, 0, 0, "AWARD");
-                        heroawards.setCommandListener(mousecommandlistener);
-                    }
+//                    if (back.isCollision(e.getX(), e.getY())) {
+//                        gameWin = true;
+////                        Global.CURRENTSTAGE++;
+////                        scenecontroller.changeScene(mapScene);
+//                        heroawards = new Award(0, 0, 0, 0, "AWARD");
+//                        heroawards.setCommandListener(mousecommandlistener);
+//                    }
                     if (gameWin) {
                         if (Global.CURRENTSTAGE >= 5) {
                             currentSountrack.stop();
@@ -440,10 +440,10 @@ public class MainScene extends Scene {
 
                     }
 
-                    if (exit.isCollision(e.getX(), e.getY())) {
-//                        gameOver = true;
-                        scenecontroller.changeScene(new EndScene(scenecontroller));
-                    }
+//                    if (exit.isCollision(e.getX(), e.getY())) {
+////                        gameOver = true;
+//                        scenecontroller.changeScene(new EndScene(scenecontroller));
+//                    }
 
                     if (backtothefuture.isCollision(e.getX(), e.getY()) && useheroskill == false) {
                         harshStone.setX(450);
@@ -754,7 +754,7 @@ public class MainScene extends Scene {
                 drawCard(drawcarddeck, handdeck, discarddeck, 5);
                 System.out.println("棄牌堆" + discarddeck.getCards().size() + "張牌,抽牌堆" + drawcarddeck.getCards().size() + "張牌,手牌堆" + handdeck.getCards().size() + "張牌");
                 crystal.setNumberIcon(3);
-
+                Global.hero.setDefense(0);
                 next.setIsClicked(false);
             }
 
@@ -793,8 +793,8 @@ public class MainScene extends Scene {
             handdeck.getCards().get(i).paint(g);
         }
         harshStone.paint(g);
-        back.paint(g);
-        exit.paint(g);
+//        back.paint(g);
+//        exit.paint(g);
         backtothefuture.paint(g);
         drawcarddeck.paint(g);
         discarddeck.paint(g);

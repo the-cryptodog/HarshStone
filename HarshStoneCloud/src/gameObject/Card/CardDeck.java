@@ -51,7 +51,8 @@ public class CardDeck extends GameObject implements Serializable{
         public WarriorDeck(int x, int y, int width, int height, String name){
             super(x, y, width, height, name);
             for(int i = 0; i < 12;i++){
-                cards.add(cardfactory.genCard(i));            
+                cards.add(cardfactory.genCard(i)); 
+                cards.add(cardfactory.genCard(i));
             }
             
         }  
@@ -60,7 +61,8 @@ public class CardDeck extends GameObject implements Serializable{
         public SocererDeck(int x, int y, int width, int height, String name){
             super(x, y, width, height, name);
             for(int i = 0; i < 13;i++){
-                cards.add(cardfactory.genCard(12+i));            
+                cards.add(cardfactory.genCard(12+i)); 
+                 cards.add(cardfactory.genCard(12+i)); 
         }  
     }
     }
