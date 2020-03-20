@@ -40,7 +40,7 @@ public class JavaApplication34MyGame {
     public static void main(String[] args) {
         // TODO code application logic here
         JFrame jj = new JFrame();
-        jj.setTitle("爐你所願");
+        jj.setTitle("HarshStone");
         jj.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jj.setSize(1920, 1080);
         GameJPanel jp = new GameJPanel();
@@ -69,9 +69,5 @@ public class JavaApplication34MyGame {
                     jj.repaint();
                 }
         }     
-    }
-    
-    
-    
-    
+    }    
 }
