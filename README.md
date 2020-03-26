@@ -1,3 +1,5 @@
+展示影片 : https://www.youtube.com/watch?v=CMnMwjD8pXI
+
 ## 起始畫面
 
 1. NEWGAME 開始新遊戲
