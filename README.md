@@ -35,10 +35,17 @@
 
 ![image](https://github.com/the-cryptodog/HarshStoneCloud/blob/master/HarshStoneDemoImage/%E5%9C%96%E7%89%876.png?raw=true)
 
-## 起始畫面
+## 獎勵畫面
 
-1. NEWGAME 開始新遊戲
-2. CONTINUE 繼續遊戲(從既有進度開始)
+1. 戰鬥勝利後可以選擇一張強力法術/技能牌，在往後的關卡終將出現在牌堆中
+2. 強力牌只能三選一，不會重複
 
 ![image](https://github.com/the-cryptodog/HarshStoneCloud/blob/master/HarshStoneDemoImage/%E5%9C%96%E7%89%877.png?raw=true)
+
+## 關卡路線
+
+1. 關卡選擇路徑將影響所遭遇之敵人強度
+2. 所有關卡都會通往最後BOSS關
+
+![image](https://github.com/the-cryptodog/HarshStoneCloud/blob/master/HarshStoneDemoImage/%E5%9C%96%E7%89%878.png?raw=true)
 
